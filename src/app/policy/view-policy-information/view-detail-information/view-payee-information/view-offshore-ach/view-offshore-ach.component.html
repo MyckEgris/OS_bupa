@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12 mt-4">
+    <h6 class="mb-2"><strong>{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.TITLE' | translate }}</strong> </h6>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="exampleFormControlSelect1"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.OWNER' | translate }} </label>
+      <p class="font-weight-normal">{{ payeeInformation.accountName }}</p>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="exampleFormControlSelect2"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.ACCOUNT_TYPE' | translate }} </label>
+      <p class="font-weight-normal">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.' | concatenate:payeeInformation.bankAccountType | uppercase | translate }}</p>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="exampleFormControlSelect3"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.ACCOUNT_NUMBER' | translate }} </label>
+      <p class="font-weight-normal">{{ payeeInformation.accountNumber }}</p>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="exampleFormControlSelect4"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ABA' | translate }} </label>
+      <p class="font-weight-normal">{{ payeeInformation.accountCode }}</p>
+    </div>
+  </div>
+</div>

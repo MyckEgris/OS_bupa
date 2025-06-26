@@ -1,0 +1,48 @@
+<section class="ig-wizard ig-wizarsolicitud animated fadeIn" *ngIf="agreementAccepted">
+  <article>
+    <div class="col-md-12">
+
+      <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 1 ? 'btn-primary' : 'btn-defaul'">1</span>
+            <!--<input type="button" class="btn btn-circle" [ngClass]="currentStep === 1 ? 'btn-primary' : 'btn-defaul'" value="1" (click)="goToStep(1)"/>-->
+            <p>{{ 'CLAIMSUBMISSION.STEP1DESC' | translate}}</p>
+          </div>
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 2 ? 'btn-primary' : 'btn-defaul'">2</span>
+            <!--<input type="button" class="btn btn-circle" [disabled]="currentStep < 2 && !wizard.member" [ngClass]="currentStep === 2 ? 'b-->
+            <p>{{ 'CLAIMSUBMISSION.STEP2DESC' | translate}}</p>
+          </div>
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 3 ? 'btn-primary' : 'btn-defaul'">3</span>
+            <!--<input type="button" class="btn btn-circle" [disabled]="currentStep < 3 && wizard.documents.length === 0" [ngClass]="currentStep === 3 ? 'btn-primary' : 'btn-defaul'" value="3" (click)="goToStep(3)" />-->
+            <p>{{ 'CLAIMSUBMISSION.STEP3DESC' | translate}}</p>
+          </div>
+        </div>
+      </div>
+
+      <router-outlet></router-outlet>
+
+      <div class="ig-avisotext">
+
+        <div class="" *ngIf="userAgent">
+          <h6>{{ 'CLAIMSUBMISSION.FOOTERTITLE' | translate}}</h6>
+          <p [innerHTML]="'CLAIMSUBMISSION.FOOTERTEXT_AGENT' | translate"></p>
+        </div>
+
+        <div class="" *ngIf="userMember">
+          <h6>{{ 'CLAIMSUBMISSION.FOOTERTITLE' | translate}}</h6>
+          <p [innerHTML]="'CLAIMSUBMISSION.FOOTERTEXT_MEMBER' | translate"></p>
+        </div>
+
+        <div class="" *ngIf="userProvider">
+          <h6>{{ 'CLAIMSUBMISSION.FOOTERTITLE_PROVIDER' | translate}}</h6>
+          <p [innerHTML]="'CLAIMSUBMISSION.FOOTERTEXT_PROVIDER' | translate"></p>
+        </div>
+
+      </div>
+
+    </div>
+  </article>
+</section>

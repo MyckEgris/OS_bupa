@@ -1,0 +1,17 @@
+<a href="#" class="btn btn-secondary" id="menu-toggle" (click)="toggle($event)">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FAQS.YOU_NEED_HELP' | translate }}</a>
+    <article id="ig-soporte-ayuda">
+      <div id="ig-soporte">
+        <div class="ig-preguntas">
+          <div class="accordion" id="accordionExample">
+            <h4>{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FAQS.TITLE' | translate }}</h4>
+            
+              <app-question-tax-information *ngFor="let item of questions"
+                [id]="item.id"
+                [ask]="item.ask"
+                [answer]="item.answer">
+              </app-question-tax-information>
+            
+          </div>
+        </div>
+      </div>
+    </article>

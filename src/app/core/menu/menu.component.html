@@ -1,0 +1,129 @@
+<section class="ig-navtop">
+    <div class="ig-menutop">
+
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <a class="navbar-brand" href="#"><img src="assets/images/logobuparesponsive.png" alt="" class="img-fluid"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+                aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navbarsExample04" *ngIf="state.userMenus">
+                <ul class="navbar-nav mr-auto " id="navbarSupportedContent">
+                     <li class="nav-item">
+                    <a *ngIf="state.userMenus.length > 0" class="nav-link" [routerLink]="['/']"><i class="material-icons">home</i> {{ 'APP.HOME_TITTLE' | translate }}</a>
+                    </li>
+                    <li class="nav-item" *ngFor="let menuItem of state.menus; let i = index" [ngClass]="{ 'active' : menuItem === currentTab || (menuItem.sons && menuItem.sons.indexOf(currentTab) >= 0) }">
+                        <a id="{{ 'NAV_' +  menuItem.name }}" class="nav-link" href="#" (click)="menuClick($event, menuItem)"
+                        (mouseenter)="menuHover($event, menuItem)" >  {{
+                            'MENUOPTIONS.' + menuItem.name | translate }}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu">
+                <ul class="navbar-nav my-2 my-md-0 ig-menuser align-items-center" id="navbarSupportedContent">
+                    <li class="nav-item dropdown">
+                        <a *ngIf="!isAnonymous" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <span class="nav-link user"> <h6> {{name}} </h6> <p>{{currentUserId}}</p></span>
+                            <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" *ngFor="let menuItem of state.userMenus" href="{{ menuItem.pathURL }}"
+                                (click)="menuClick($event, menuItem)" id="NAV_USER_{{menuItem.name}}">  {{ 'MENUOPTIONS.' + menuItem.name | translate }}</a>
+                            <a   *ngIf="!isAnonymous" class="dropdown-item" href="#" (click)="closeSession($event)" id="NAV_USER_CLOSE">{{ 'APP.CLOSESESSION' |
+                                translate }}</a>
+                        </div>
+                    </li>
+                    <li>|</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu1" aria-labelledby="navbarDropdown">
+                            <div class="ig-selecidioma" *ngFor="let menuItem of state.langMenus">
+                                <a class="nav-link" href="#" (click)="changeLang($event, menuItem)" id="NAV_LANG_{{menuItem.name}}"><img [src]="menuItem.pathIcon"><span></span>
+                                   {{'APP.' + menuItem.name | translate }}</a>
+                            </div>
+                        </div>
+
+                    </li>
+                    <!-- <li>|</li>
+                    <li>
+                        <button class="btn btn-buscar" type="button" data-toggle="collapse" data-target="#multiCollapseExample1"
+                            aria-expanded="false" aria-controls="multiCollapseExample1"><i class="material-icons"> search
+                            </i></button>
+                    </li> -->
+                </ul>
+            </div>
+        </nav>
+        <div class="ig-content-dropw">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="ig-card">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <div class="form">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Recipient's username"
+                                        aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                <div class="ig-card">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <h6 class="animated fadeIn"> {{ 'MENUOPTIONS.SELECTLANGUAGE' | translate }}:</h6>
+
+                            <div class="ig-idioma">
+                                <div class="row animated fadeIn">
+                                    <div class="col-md-3 ig-selecidioma" *ngFor="let menuItem of state.langMenus">
+                                        <a class="nav-link" href="#" (click)="changeLang($event, menuItem)" ><span></span>
+                                            {{'APP.' + menuItem.name | translate }}</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ig-iconoti" *ngIf="validateNotificationView()">
+        <a (click)="notificationClick()">
+            <i class="material-icons">notifications_active</i>
+        </a>
+    </div>
+
+
+</section>
+<div class="ig-navegaciontabs" *ngIf="showTabs"  (mouseleave) ="mainMenuLeave()">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" *ngFor="let tab of tabs">
+                <a class="nav-link" [ngClass]="{ 'active': currentTab === tab }" id="home-tab" data-toggle="tab" (click)="menuClick($event, tab)"
+                href="{{ tab.pathURL }}" role="tab" aria-controls="home" aria-selected="true" id="SUB_NAV_{{tab.name}}">
+                 {{ 'MENUOPTIONS.' + tab.name | translate }} </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        </div>
+    </div>

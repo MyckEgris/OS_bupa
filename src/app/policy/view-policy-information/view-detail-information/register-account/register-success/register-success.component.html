@@ -1,0 +1,72 @@
+<section class="bp-mainpolicy">
+    <div class="row bp-itemcontsect2">
+        <div class="container">
+            <div style="text-align: center;">
+                <h5 style="font-size: 19px;">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.SUCCESS_TITLE' | translate }}
+                </h5>
+            </div>
+            <div class="ajfinal" *ngIf="payeeInformation">
+                <div class="">
+                    <div class="row mt-4 d-grid">
+                        <p class="text-wrap">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.OWNER' | translate }} :
+              </strong> {{payeeInformation.accountName}}
+                        </p>
+                        <!-- <p class="text-wrap">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ACCOUNT_TYPE' | translate }}
+                : </strong> {{'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.' | concatenate:payeeInformation.bankAccountType | uppercase | translate}}
+                        </p> -->
+                        <p class="text-wrap" *ngIf="payeeInformation.accountNumber" style="overflow-wrap: break-word;">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ACCOUNT_NUMBER' | translate }}
+                : </strong> {{ payeeInformation.accountNumber }}
+                        </p>
+                        <p class="text-wrap" *ngIf="payeeInformation.beneficiaryBank">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.BANK_NAME' | translate }}:
+              </strong> {{payeeInformation.beneficiaryBank}}
+                        </p>
+                        <p class="text-wrap" *ngIf="payeeInformation.beneficiaryBankAddress">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.BANK_ADDRESS' | translate }}:
+              </strong> {{payeeInformation.beneficiaryBankAddress}}
+                        </p>
+                        <p class="text-wrap" *ngIf="payeeInformation.accountCode && payeeInformation.type ==='OFFSHOREACH'">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ABA' | translate }} :
+              </strong> {{payeeInformation.accountCode}}
+                        </p>
+                        <p class="text-wrap" *ngIf="payeeInformation.accountCode && payeeInformation.type ==='OFFSHOREWT'">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.SWIFT' | translate }} :
+              </strong> {{payeeInformation.accountCode}}
+                        </p>
+                        <p class="text-wrap" *ngIf="payeeInformation.currencyId">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.CURRENCY' | translate }} :
+              </strong> {{currencyCode}} - {{currencyDescription}}
+                        </p>
+                        <p class="text-wrap" *ngIf="payeeInformation.contactIdentificationTypeId">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.IDENTIFICATION_TYPE' | translate }} :
+              </strong> {{'POLICY.VIEW_POLICY_DETAILS.TABS.DOCUMENT_TYPES.' | concatenate:payeeInformation.contactIdentificationType | uppercase | translate}}
+                        </p>
+                        <p class="text-wrap" *ngIf="payeeInformation.contactIdentificationTypeId">
+                            <strong class="font-weight-bold">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.IDENTIFICATION_NUMBER' | translate }} :
+              </strong> {{payeeInformation.contactIdentificationNumber}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="row align-items-center">
+                <div class="col-md-4 offset-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="bp-btn bp-btnprimary" (click)="finish()">
+                {{'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.EXIT' | translate }}
+              </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

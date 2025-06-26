@@ -1,0 +1,30 @@
+<section class="bp-mainpolicy">
+    <article class="row">
+
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="bp-itemtitle">
+                        <div class="bp-titlenum"> {{currentStep}} </div>
+                        <h2 class="bp-titlepolicy"> {{'POLICY.POLICY_ENROLLMENT.STEP8.TITLE' | translate}} </h2>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <app-breadcrumb-enrollment [currentStep]="currentStep"
+                        [lengthSection]="configStep?.sections?.length" [stepActive]="sectionActive">
+                    </app-breadcrumb-enrollment>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <app-policy-enrollment-info></app-policy-enrollment-info>
+        </div>
+
+    </article>
+</section>
+
+<router-outlet></router-outlet>

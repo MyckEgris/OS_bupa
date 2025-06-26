@@ -1,0 +1,52 @@
+<section class="ig-aproba">
+    <article class="col-md-12">
+        <article class="ig-apromail">
+            <div class="row">
+                <div class="col-md-8" *ngIf="validInformation">
+                    <p>{{'AGENT.APPROVAL.TITLE' | translate }}</p>
+                    <form [formGroup]="mainForm" (ngSubmit)="submit(mainForm.value)" novalidate>
+
+                        <h4>{{'AGENT.APPROVAL.REQUESTER_INFO' | translate }}</h4>
+                        <br>
+
+
+                        <div class="ig-campinfo">
+                            <h6 class="ig-datos">{{'AGENT.APPROVAL.ROLE' | translate }}</h6>
+                            <p>{{role}}</p>
+                        </div>
+
+                        <div class="ig-campinfo">
+                            <h6 class="ig-datos">{{'AGENT.APPROVAL.FULLNAME' | translate }}</h6>
+                            <p>{{fullName}}</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group form-check">
+                                    <input type="radio" formControlName="decision" value="true" name="decision"
+                                        class="form-check-input">
+                                    <label class="form-check-label">{{'AGENT.APPROVAL.APPROVE' | translate }}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group form-check">
+                                    <input type="radio" formControlName="decision" value="false" name="decision"
+                                        class="form-check-input">
+                                    <label class="form-check-label">{{'AGENT.APPROVAL.DENY' | translate }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="ig-botones ig-secundariobtn" [disabled]="mainForm.invalid || alreadyResponded"
+                            [ngClass]="{ 'disabled' : mainForm.invalid, 'btn-link' : (mainForm.get('decision').value == 'false'), 'btn-primary' : (mainForm.get('decision').value != 'false') } ">
+                            {{'AGENT.APPROVAL.' | concatenate: (mainForm.get('decision').value == 'false' ? 'BTN_DENY' : 'BTN_APPROVE') | uppercase | translate}}
+                        </button>
+
+                    </form>
+                </div>
+
+            </div>
+        </article>
+    </article>
+
+</section>

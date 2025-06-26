@@ -1,0 +1,145 @@
+<article *ngIf="wizard.preAuthForm" style="margin-top: 20px">
+  <div class="row" [formGroup]="wizard.preAuthForm.get('contactInformation')">
+    <div class="col-md-12" formArrayName="items">
+      <div class="row align-items-center">
+        <div class="col-md-10">
+          <h6 class="ig-infotil">
+            {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.CONTACT_INSURED' | translate }}
+          </h6>
+        </div>
+        <div class="col-md-2">
+          <button class="ig-principalbtn ig-botones" (click)="addItem()" type="button">
+            <i class="material-icons">add_circle</i> {{ 'CLAIMS.PRE_AUTHORIZATION.ADD' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.MESSAGE.INFO_CONTACT' | translate}} </p>
+        </div>
+      </div>
+
+      <div class="animated fadeInUp"
+        *ngFor="let item of wizard.preAuthForm.get('contactInformation').get('items').controls; let i = index;"
+        style="margin-top: 20px">
+        <div class="row align-items-center" [formGroupName]="i">
+          <div class="col-md-11">
+            <div class="row">
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="" for="inputText">
+                    {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_CONTACT_NAME' | translate }} </label>
+                  <input id="emergencyName" class="form-control" formControlName="emergencyContactName"
+                    placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_CONTACT_NAME' | translate }}"
+                    type="text" maxCharsAllowed="{{MAX_CHARS_NAME}}" autofocus [required]="!isProvider">
+                  <small class="text-danger" 
+                      *ngIf="(wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emergencyContactName').touched 
+                            && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emergencyContactName').invalid)
+                        || (
+                          wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emergencyContactName').invalid
+                            && showValidations
+                        ) ">
+                    {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="" for="inputText">
+                    {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_CONTACT_PHONE' | translate }} </label>
+                  <input id="emergencyPhone" class="form-control" formControlName="emergencyContactPhone"
+                    placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_CONTACT_PHONE' | translate }}"
+                    type="text" maxCharsAllowed="{{MAX_CHARS_PHONE}}">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_IN_COUNTRY' | translate }}
+                  </label>
+                  <input id="phoneCountry" class="form-control" formControlName="phoneInCountry" autofocus [required]="!isProvider"
+                    placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_IN_COUNTRY' | translate }}" type="text" maxCharsAllowed="{{MAX_CHARS_PHONE}}">
+                  <small class="text-danger" 
+                            *ngIf="(wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').touched 
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').invalid
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').errors?.required)
+                                || (wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').invalid
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').errors?.required
+                                  && showValidations)">
+                    {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                  </small>
+                  <small class="text-danger" 
+                            *ngIf="(wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').touched 
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').invalid
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('phoneInCountry').errors?.invalidPhoneNumber)">
+                    {{ 'APP.MESSAGE.WRONG_FORMAT' | translate }}
+                  </small>
+
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_OUT_COUNTRY' | translate }}
+                  </label>
+                  <input id="phoneOutCountry" class="form-control" formControlName="phoneOutCountry"
+                    placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_OUT_COUNTRY' | translate }}" type="text" maxCharsAllowed="{{MAX_CHARS_PHONE}}">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMAIL_ADDRESS' | translate }}
+                  </label>
+                  <input id="emailContact" class="form-control" formControlName="emailAddress"  autofocus
+                    placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMAIL_ADDRESS' | translate }}" type="email" maxCharsAllowed="{{MAX_CHARS_EMAIL}}">
+                  <small class="text-danger" 
+                        *ngIf="(wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emailAddress').touched 
+                                  &&  wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emailAddress').errors?.invalidEmail)">
+                    {{ 'APP.MESSAGE.WRONG_FORMAT' | translate }}
+                  </small>
+
+                  <small class="text-danger" 
+                        *ngIf="(wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emailAddress').touched 
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emailAddress').invalid 
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emailAddress').errors?.required)
+                                || (
+                                  wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emailAddress').invalid 
+                                  && wizard.preAuthForm.get('contactInformation').get('items').controls[i].get('emailAddress').errors?.required
+                                  && showValidations
+                                )">
+                    {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="" for="inputText">
+                    {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_RELATION_CUSTOMER' | translate }} </label>
+                  <input id="relationCustomer" class="form-control" formControlName="emergencyRelationToTheCustomer"
+                    placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_RELATION_CUSTOMER' | translate }}"
+                    type="text" maxCharsAllowed="{{MAX_CHARS_RELATION}}">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-1">
+            <div *ngIf="i !== 0">
+              <button class="ig-icondiagnosminim" (click)="removeItem(i)" style="cursor: pointer;" type="button">
+                <i class="material-icons"> delete_forever </i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <hr>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,103 @@
+/*** utilidades de css **/
+@media screen and (min-width:1200px) {
+  .maxwidth-1200 {
+    max-width: 1200px
+  }
+}
+.maxwidth-90p{
+  max-width: 90%;
+}
+.maxwidth-240{
+  max-width: 240px;
+}
+.maxwidth-160 {
+  max-width: 160px
+}
+/** 
+* border colors
+**/
+.bp-border{
+  border:1px solid $color_grey-medium;
+}
+
+.bp-border-top{
+  border-top:1px solid $color_grey-medium;
+}
+
+.bp-border-bottom{
+  border-bottom:1px solid $color_grey-medium;
+}
+
+.bp-borde-left{
+  border-left:1px solid $color_grey-medium;
+}
+
+.bp-border-right{
+  border:1px solid $color_grey-medium;
+}
+.bp-border{
+  border:1px solid $color_grey-medium;
+}
+
+.bp-border-0        { border: 0 !important; }
+.bp-border-top-0    { border-top: 0 !important; }
+.bp-border-right-0  { border-right: 0 !important; }
+.bp-border-bottom-0 { border-bottom: 0 !important; }
+.bp-border-left-0   { border-left: 0 !important; }
+
+
+$colors: ( // Add colors new to list. The function generate the colors in css
+  "black": $color_universal-black,
+  "danger": $color_danger,
+  "white": $color_universal-white,
+  "primary": $color_bupa,
+  "secondary": $color_navy,
+  "grey-dark": $color_grey-dark,
+  "grey-medium": $color_grey-medium,
+  "grey-light": $color_grey-light);
+
+@each $color,
+$valueColor in $colors {
+
+  //ex. .bp-color-black
+  .bp-border-color_#{$color} {
+    border-color: $valueColor;
+  }
+}
+
+.bp-border-color {
+  border: 1px solid $color_grey-medium;
+}
+
+
+$borderWidth: ( // Add colors new to list. The function generate the colors in css
+  "1px": 1px,
+  "2px": 2px,
+  "3px": 3px,
+  "4px": 4px,
+  "5px": 5px);
+
+@each $key,
+$value in $borderWidth {
+
+  //ex. .bp-color-black
+  .bp-border-width--#{$key} {
+    border-width: $value;
+  }
+
+  .bp-border-width--#{$key}--important {
+    border-width: $value !important;
+  }
+}
+
+
+/** 
+* end border colors
+**/
+
+/** extra css **/
+.overflow-visible{
+  overflow: visible;
+}
+
+/** end utilidades de css **/

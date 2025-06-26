@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "org.mexico.bupa",
+            "sha256_cert_fingerprints": [
+                "49:10:18:EA:DE:7F:29:25:97:1C:3F:16:E6:A8:0F:19:32:87:56:3E:C1:9F:F8:65:B0:F5:50:E6:99:AA:B6:A1"
+            ]
+        }
+    }
+]

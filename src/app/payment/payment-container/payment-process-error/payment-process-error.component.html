@@ -1,0 +1,37 @@
+<div class="container" *ngIf="error">
+
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-6 cardmsg">
+            <div class="row">
+                <div class="col-12">
+                    <figure><img src="assets/images/rechazadov2.png" alt="" style="width: 50%"></figure>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <p class="rechazado">{{ 'PAYMENTS.OK_RESULT.DECLINED' | translate }}</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="text-center">
+                        <p>{{ error.transactionMessage }}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-5 text-center" *ngIf="insurance !== '39'">
+        <p>{{ 'PAYMENTS.OK_RESULT.CONTACT_US' | translate }} <br><br> {{ 'PAYMENTS.OK_RESULT.BUPA' | translate }} </p>
+    </div>
+    <div class="row mt-5 text-center" *ngIf="insurance === '39'">
+        <p>{{ 'PAYMENTS.OK_RESULT.CONTACT_US_ECU' | translate }} <br><br> {{ 'PAYMENTS.OK_RESULT.BUPA' | translate }} </p>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4" (click)="goToBack()"><button class="bp-btn bp-btnprimary m-auto">
+        <span *ngIf="!user.is_anonymous">{{  'PAYMENTS.OK_RESULT.BACK_PAYMENTS' | translate }} </span>
+        <span *ngIf="user.is_anonymous"> {{ 'PAYMENTS.OK_RESULT.BACK_LOGIN' | translate }} </span>
+      </button></div>
+    </div>
+</div>

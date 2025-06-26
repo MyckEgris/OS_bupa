@@ -1,0 +1,48 @@
+<div class="row align-items-start" [formGroup]="formEnrollmentDependents">
+
+  <div class="col-md-11">
+    <h4 class="bp-contentitle">
+      <i class="material-icons" *ngIf="showValidations && formEnrollmentMember.invalid"
+        [ngClass]="{ 'bp-contentitledanger' : showValidations && formEnrollmentMember.invalid}">info</i>
+      {{'POLICY.POLICY_ENROLLMENT.STEP3.DEPENDENT' | translate }} {{ fullNamesDependent }}
+    </h4>
+    <hr>
+
+    <div class="collapse " [ngClass]="{ 'show' : isLastDependent}" id="collapseExample{{numberIndexMember}}"
+      formArrayName="items">
+      <div formGroupName="{{numberIndexMember}}">
+        <app-info-dependent [numberIndexMember]="numberIndexMember" [currentStep]="currentStep"
+          [showValidations]="showValidations" (showContactAddressInfo)="processShowData($event)"
+          (fullNameDependent)="showNameDependent($event)"></app-info-dependent>
+        <div class="row" *ngIf="showContactAddressInfo">
+          <app-info-contact class="col-md-4" [numberIndexMember]="numberIndexMember" [currentStep]="currentStep"
+            [showValidations]="showValidations"></app-info-contact>
+          <app-info-address class="col-md-8" [numberIndexMember]="numberIndexMember" [currentStep]="currentStep"
+            [showValidations]="showValidations"></app-info-address>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-1 align-self-start">
+    <div class="row">
+      <div class="col-md-6" style="padding-left: 0px;">
+        <button class="ig-icondiagnosminim" type="button" data-toggle="collapse"
+          [attr.data-target]="'#collapseExample'+numberIndexMember" aria-expanded="false"
+          [attr.aria-controls]="'#collapseExample'+numberIndexMember">
+          <i class="material-icons">
+            {{handleToggleIcon() ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}
+          </i>
+        </button>
+      </div>
+      <div class="col-md-6" style="padding-left: 0px;">
+        <button class="ig-icondiagnosminim" style="cursor: pointer;" type="button" (click)="delete()">
+          <i class="material-icons">
+            delete_forever
+          </i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

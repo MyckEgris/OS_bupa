@@ -1,0 +1,182 @@
+<section class="ig-validation">
+
+    <div class="">
+        <div class="col-md-6">
+            <div class="ig-title">
+                <h5>{{'CLAIMS.PARENT.TITLE' | translate}}</h5>
+                <p style="display: none;">Aqui en esta sección va un texto de información</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ig-title">
+                <button type="submit" (click)="clickAddTodo()"
+                [ngClass]="{ 'ig-principalbtn ig-botones' : true}">
+                Descargar Reporte
+            </button>
+                
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="claimViewForm" (ngSubmit)="searchClaimView(claimViewForm.value)" novalidate
+        class="ig-searchpolconten">
+
+        <div class="">
+            <div class="col-md-12">
+                <div class="ig-searchpol">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <select id="selectedClaimType" formControlName="selectedClaimType"
+                                    class="custom-select form-control" (change)="clearFields(false);">
+                                    <option value="" disabled selected>
+                                        {{ 'CLAIMS.PARENT.CLAIMS_TYPE_OPTIONS.SELECT' | translate }} </option>
+                                    <option *ngFor="let type of claimTypes" value="{{type.value}}">{{type.description}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input id="firstName" formControlName="firstName" class="form-control"
+                                    placeholder="{{'CLAIMS.PARENT.FIRST_NAME' | translate}}" type="text"
+                                    appOnlyLetters="true">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input id="lastName" formControlName="lastName" class="form-control"
+                                    placeholder="{{'CLAIMS.PARENT.LAST_NAME' | translate}}" type="text"
+                                    appOnlyLetters="true">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input id="bupaClaimNumber" formControlName="bupaClaimNumber" class="form-control"
+                                    placeholder="{{'CLAIMS.PARENT.ADVANCED_OPTIONS.BUPA_CLAIM_NUMBER' | translate}}"
+                                    type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-bottom">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1 ig-second-line">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <!--<app-custom-date-picker formControlName="dateFrom" [minDate]="" [maxDate]="maxDate"></app-custom-date-picker>-->
+                                            <div *ngIf="!resetPicker">
+                                                <app-custom-date-picker-from-to formControlName="dateOfServiceFrom"
+                                                    [placeholderkey]="'APP.DATE_FROM'"></app-custom-date-picker-from-to>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <!--<app-custom-date-picker formControlName="dateTo" [minDate]="" [maxDate]="maxDate"></app-custom-date-picker>-->
+                                            <div *ngIf="!resetPicker">
+                                                <app-custom-date-picker-from-to formControlName="dateOfServiceTo"
+                                                    [placeholderkey]="'APP.DATE_UNTIL'">
+                                                </app-custom-date-picker-from-to>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 col-6">
+                                            <button type="submit"
+                                                [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : !claimViewForm.value.selectedClaimType || claimViewForm.hasError('dateFrom')}">
+                                                <i class="material-icons">search</i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-1 col-6">
+                                            <button type="button" class="ig-principalsegundariobtn ig-botones btnclean"
+                                                (click)="clearFields(true)">
+                                                <i class="material-icons">
+                                                    delete_sweep
+                                                </i>
+
+
+
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row align-items-center">
+                        <div class="col-md-4 offset-md-4">
+                            <small class="text-danger" *ngIf="claimViewForm.hasError('dateFrom')">
+                                {{ 'CLAIMS.PARENT.ERRORS.DATES' | translate}}
+                            </small>
+                        </div>
+                        <!--<div class="col-md-3">
+                            <app-custom-date-picker-from-to formControlName="dateOfService"></app-custom-date-picker-from-to>
+                        </div>-->
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="ig-btnmasopciones" (click)="toggleSlideAdvancedOptions();">
+                                {{'CLAIMS.PARENT.ADVANCED_OPTIONS.TAG_DESCRIPTION' | translate}}<i
+                                    class="material-icons">keyboard_arrow_down</i>
+                            </div>
+                            <div class="ig-textomasopciones" id="ig-textomasopciones">
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input id="accountNumber" formControlName="accountNumber"
+                                                class="form-control"
+                                                placeholder="{{'CLAIMS.PARENT.ADVANCED_OPTIONS.PROVIDER_INVOICE' | translate}}"
+                                                type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input id="amountBilled" formControlName="amountBilled" class="form-control"
+                                                placeholder="{{'CLAIMS.PARENT.ADVANCED_OPTIONS.AMOUNT_BILLED' | translate}}"
+                                                type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input id="policyNumber" formControlName="policyNumber" class="form-control"
+                                                placeholder="{{'CLAIMS.PARENT.ADVANCED_OPTIONS.POLICY_NUMBER' | translate}}"
+                                                type="text">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ig-reclamosconte">
+            <div class="">
+                <div class="col-md-12" *ngIf="onSearch">
+
+                    <div *ngIf="state === 'incomplete'">
+                        <app-claim-view-incomplete [notifier]="searchNotifier"></app-claim-view-incomplete>
+                    </div>
+                    <div *ngIf="state === 'pending'">
+                        <app-claim-view-incomplete [notifier]="searchNotifier"></app-claim-view-incomplete>
+                    </div>
+                    <div *ngIf="state === 'processed'">
+                        <app-claim-view-proccessed [notifier]="searchNotifier"></app-claim-view-proccessed>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+
+
+
+</section>

@@ -1,0 +1,192 @@
+<section class="bp-mainpolicy" *ngIf="wizard.enrollmentForm">
+
+  <form class="form-group" [formGroup]="wizard.enrollmentForm">
+
+    <div formGroupName="{{PRODANDPLAN_STEP}}">
+
+      <article class="row" formGroupName="{{PRODANDPLAN_SECTION}}">
+
+        <div class="col-md-12">
+          <div class="bp-itemtitle">
+            <!-- <div class="bp-titlenum">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP5.TITLE_01' | translate }}
+            </div> -->
+            <h2 class="bp-titlepolicy">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP5.SUBTITLE' | translate }}
+            </h2>
+          </div>
+
+        </div>
+
+        <div class="col-md-12">
+          <app-policy-enrollment-info></app-policy-enrollment-info>
+        </div>
+
+        <div class="col-md-12">
+          <div class="bp-itemcontsect">
+            <div class="row align-items-center">
+
+              <div class="col-md-2">
+                <h4 class="bp-contentitle">
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP5.BANNER_01' | translate }}
+                </h4>
+              </div>
+
+              <div class="col-md-10">
+                <div class="bp-itemsectpoli">
+                  <figure>
+                    <img src="assets/images/001-file.svg" alt="">
+                  </figure>
+                  <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP5.BANNER_02' | translate"> </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+
+          <div class="bp-itemcontsect2">
+            <h4 class="bp-contentitle">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP5.SECTION_TITLE' | translate }}
+            </h4>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP5.SECTION_SUBTITLE' | translate }}
+            </p>
+            <br>
+            <div class="row">
+              <div class="col-md-4" *ngIf="products?.length > 0">
+                <h6>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP5.PRODUCTS_TITLE' | translate }}
+                </h6>
+                <div class="bp-scrollable" style="margin-right: 10px;"
+                  [ngClass]="{ 'border-danger': getControl(PRODUCT_CTRL).invalid && formInvalid }">
+                  <div class="bp-products" *ngFor="let prod of products">
+                    <div class="form-check w-100 mt-3">
+                      <input class="form-check-input" type="radio" id="prod-{{prod.id}}" [value]="prod"
+                        formControlName="{{PRODUCT_CTRL}}" (change)="prevalidateProductChanged(prod)">
+                      <label class="form-check-label" for="prod-{{prod.id}}">
+                        {{prod.name}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4" *ngIf="plans?.length > 0">
+
+                <h6>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP5.PLANS_TITLE' | translate }}
+                </h6>
+                <div class="bp-scrollable" style="margin-right: 10px;"
+                  [ngClass]="{ 'border-danger': getControl(DEDUCT_CTRL).invalid && formInvalid }">
+                  <div class="bp-products" *ngFor="let plan of plans; let i = index">
+                    <div class="form-check w-100 mt-3">
+                      <input class="form-check-input" type="radio" id="plan-{{i}}" [value]="plan"
+                        formControlName="{{DEDUCT_CTRL}}" (change)="prevalidatePlanChanged(plan)">
+                      <label class="form-check-label" for="plan-{{i}}">
+                        {{plan.planDescription}}
+                        | <span> {{plan.benefitCurrencyCode}}
+                          {{(plan.deductibleInCountry ? plan.deductibleInCountry : 0) | number}} </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-4" *ngIf="coverages?.length > 0">
+                <h6>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP5.COVER_TITLE_01' | translate }}
+                </h6>
+                <p>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP5.COVER_TITLE_02' | translate }}
+                </p>
+                <div class="bp-scrollable" style="margin-right: 10px;">
+                  <div class="bp-products" *ngFor="let cover of coverages; let i = index">
+                    <div class="form-check w-100 mt-3">
+                      <input class="form-check-input" type="radio" id="cover-{{i}}" [value]="cover"
+                        (change)="handleCoverChange($event, cover)" [checked]="setChecked(cover)">
+                      <label class="form-check-label" for="cover-{{i}}">
+                        {{cover.spanishDescription}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 mt-2" *ngIf="selectedCoverages?.length > 0">
+                  <div class="bp-alertform">
+                    <div class="card-message2" role="alert">
+                      <i class="material-icons">warning</i>
+                      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP5.COVER_TITLE_03' | translate"> </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <h6>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP5.MODE_PAYMENT_TITLE' | translate }}
+                </h6>
+                <div class="bp-scrollable" style="margin-right: 10px;" [ngClass]="{ 'border-danger': getControl(PAYMENT_MODE).invalid && formInvalid }">
+                  <div class="bp-products" *ngFor="let modeOfPay of modeOfPayments; let i = index">
+                    <div class="form-check w-100 mt-3">
+                      <input class="form-check-input" type="radio" id="{{modeOfPay.id}}" [value]="modeOfPay" formControlName="{{PAYMENT_MODE}}">
+                      <label class="form-check-label" for="{{modeOfPay.id}}">
+                        {{
+                          "POLICY.POLICY_ENROLLMENT.MODE_PAYMENT."
+                            | concatenate: modeOfPay.name
+                            | uppercase
+                            | translate
+                        }}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 mt-3" *ngIf="this.getStepFormGroup(this.PRODANDPLAN_STEP).invalid && formInvalid">
+                <div class="bp-alertform">
+                  <div class="alert alert-danger" role="alert">
+                    <i class="material-icons">info</i>
+                    {{ 'POLICY.POLICY_ENROLLMENT.STEP5.ALERT_COMPLETE_FORM' | translate }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-4 offset-md-4">
+                    <div class="row align-items-center">
+
+                      <div class="col-md-6">
+                        <button class="bp-btn bp-btnsecondary" (click)="back()">
+                          {{ 'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                        </button>
+                      </div>
+
+                      <div class="col-md-6">
+                        <button class="bp-btn bp-btnprimary" (click)="next()">
+                          {{ 'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </form>
+
+</section>

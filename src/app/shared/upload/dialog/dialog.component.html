@@ -1,0 +1,74 @@
+<div class="row setup-content animated fadeIn ig-wizard" id="step-2">
+
+    <div class="col-md-12">
+        <h5>{{ 'UPLOAD_SERVICE.ADD_DOCUMENTS' | translate }}</h5>
+        <p>{{ 'UPLOAD_SERVICE.LEGEND' | translate }}</p>
+
+        <div class="ig-upfile" [ngClass]="{ 'ig-file-dragging': dragging }" (dragover)="dragOver($event)"
+            (drop)="dropFiles($event)" (dragleave)="dragLeave($event)">
+
+            <div class="ig-upfileitem">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>
+                            <i class="material-icons">cloud_upload</i>
+                            {{ 'UPLOAD_SERVICE.LEGEND'.replace('{0}', wizard.documents.length.toString()) | translate }}
+                        </p>
+                    </div>
+                    <div class="col-md-3 offset-md-3 text-right">
+                        <a class="btnclean" href="" (click)="removeAllDocuments($event)">
+                            {{ 'UPLOAD_SERVICE.DELETE_ALL' | translate }}
+                            <i class="material-icons">delete_sweep</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ig-file-scroll">
+                <div class="ig-file animated zoomIn" *ngFor="let document of wizard.documents">
+                    <div class="ig-textofile">
+                        <i class="fa" [ngClass]="document.icon"></i>
+                        <br>
+                        {{ document.file.name }}
+                    </div>
+                    <div class="ig-icofile">
+                        <a href="" [title]="['UPLOAD_SERVICE.POPOVER_DELETE_BTN' | translate]"
+                            (click)="removeDocument(document, $event)">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    </div>
+                    <div class="ig-filesize">{{ getFileSize(document.file) }}</div>
+                </div>
+            </div>
+
+            <div class="ig-fileporcargar" [ngClass]="{ 'ig-file-loaded': wizard.documents.length > 0 }"
+                (click)="showFileDialog()">
+                <span class="ig-textofile">
+                    <span>{{ selectButton | translate }}</span>
+                    <span class="material-icons ig-attach-icon">attach_file</span>
+                </span>
+            </div>
+
+        </div>
+
+        <input type="file" #fileInput class="form-control" multiple="" (change)="manualSelectFiles($event)"
+            accept="{{ allowedTypes }}">
+
+        <div class="ig-infosize">
+            <p>{{ 'UPLOAD_SERVICE.MAX_SIZE_MESSAGE' | translate }} {{ this.maxFileSize }}MB.</p>
+            <p>{{ 'UPLOAD_SERVICE.ACTIONS' | translate }}</p>
+            <!--    <p *ngIf="!customTypes.customTypes">{{ 'UPLOAD_SERVICE.FORMATS' | translate }}</p>
+            <p *ngIf="customTypes.customTypes">{{ 'UPLOAD_SERVICE.FORMATS_EXTENDED' | translate }}</p> -->
+            <p *ngIf="allowedTypes"> {{ 'UPLOAD_SERVICE.FORMATS_ALLOWED' | translate }}
+                {{ this.allowedTypes | uppercase  }} </p>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        <button class="ig-botones ig-principalbtn" [disabled]="!canBeClosed" (click)="closeDialog()">
+            {{ 'UPLOAD_SERVICE.FINISH_BUTTON' | translate }}
+        </button>
+    </div>
+
+</div>

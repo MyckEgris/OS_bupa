@@ -1,0 +1,73 @@
+<form [formGroup]="form" (submit)="registerAccount()">
+
+  <div class="col-md-12">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="owner">
+            {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.OWNER' | translate }} </label>
+          <select class="form-control" formControlName="owner">
+            <option *ngFor="let member of members" [ngValue]="member">{{ member.fullName }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="accountType">
+            {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ACCOUNT_TYPE' | translate }}
+          </label>
+          <select class="form-control" formControlName="accountType" id="accountType">
+            <option *ngFor="let accountType of accountTypes" [ngValue]="accountType">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.' | concatenate:accountType.bankAccountTypeDesc | uppercase | translate }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="abaNumber">
+            {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ABA' | translate }}</label>
+            <app-custom-popover [title]="" [image]="[helpAccount]">
+            </app-custom-popover>
+            <input class="form-control ng-pristine ng-valid ng-touched" formControlName="abaNumber" id="abaNumber"
+            type="text" appRegexInput expression="^[0-9]*$" autocomplete="off" minlength="9" maxlength="9">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="accountNumber">
+            {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ACCOUNT_NUMBER' | translate }}</label>
+          <input class="form-control ng-pristine ng-valid ng-touched" formControlName="accountNumber" id="accountNumber"
+            type="text" appRegexInput expression="^[a-zA-Z0-9]*$" maxlength="35" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="col-md-12 mt-3 mb-2">
+        <div class="form-group form-check">
+          <input class="form-check-input ng-untouched ng-pristine ng-valid" type="checkbox" id="125"
+            formControlName="certified">
+          <label class="form-check-label"
+            for="125">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.CERT_OFFSHORE' | translate }}
+          </label>
+          <span autoclose="'outside'" class="input-group-text-info" container="body" popoverclass="custom-popover"
+            triggers="mouseenter:mouseleave"></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"><button class="bp-btn bp-btnsecondary" type="button" (click)="back()">
+        {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.CANCEL' | translate }} </button>
+    </div>
+    <div class="col-md-3"><button class="bp-btn bp-btnprimary" type="submit"
+        [disabled]="!form.valid || !certified">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.SAVE' | translate }}</button>
+    </div>
+  </div>
+
+</form>

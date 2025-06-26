@@ -1,0 +1,305 @@
+{
+	"policyId": 81472,
+	"legacyNumber": "04180624       ",
+	"policyReference": "VS1-04-028840-VIR",
+	"policyStatus": "Active",
+	"modeOfPayment": "Semi Annual",
+	"policyCountry": "Ecuador",
+	"modeOfPaymentId": 0,
+	"paymentStatus": null,
+	"paymentDate": null,
+	"daysToPay": null,
+	"isGroupPolicy": 1,
+	"amountToPay": 0.64000000000000000,
+	"policyPremium": 0.64000000000000000,
+	"amountUSDToPay": 0.640000000,
+	"groupId": 0,
+	"groupName": "APG HealthCare Plan",
+	"currencySymbol": "$",
+	"currencyId": 192,
+	"exchangeRate": 1.0000000000000000000,
+	"plan": "VS1",
+	"language": "English",
+	"languageId": 1,
+	"paperless": true,
+	"printIdCard": true,
+	"hasGeoBlueIdCard": true,
+	"policyDates": [
+		{
+			"policyDateId": 1,
+			"policyDateName": "applicationReceived",
+			"policyDateValue": "07/14/2017"
+		},
+		{
+			"policyDateId": 2,
+			"policyDateName": "policyIssueDate",
+			"policyDateValue": "08/14/2016"
+		},
+		{
+			"policyDateId": 3,
+			"policyDateName": "renewalDate",
+			"policyDateValue": "09/14/2018"
+		}
+	],
+	"agent": {
+		"agentId": 3751,
+		"agentName": "Eduardo",
+		"agentNumber": "3751",
+		"companyName": "AIC MEXICO SA DE CV",
+		"firstName": "",
+		"middleName": "",
+		"lastName": ""
+	},
+	"specialConditions": [
+		{
+			"limitationName": "Special Agreement ",
+			"effectiveDate": "24/01/2017",
+			"description": "asdasdasda asdadasdasdas"
+		},
+		{
+			"limitationName": "Additional coverage",
+			"effectiveDate": "24/01/2017",
+			"description": "asdasdasda asdadasdasdas"
+		}
+	],
+	"emails": [
+		{
+			"eMailAddress": "jcastillo@bupalatinamerica.com",
+			"type": "PreferredEmail",
+			"emailTypeId": 1
+		}
+	],
+	"addresses": [
+		{
+			"addressTypeId": 1,
+			"type": "Mailing",
+			"addressLine": "AVEINS URGENTES 4017 PTECOLCOLINAS DE SANJERONIMO",
+			"city": "Monterrey",
+			"zipCode": "64630",
+			"state": "NuevoLeón",
+			"countryId": 13,
+			"country": "Mexico",
+			"isoAlpha": "MEX"
+		},
+		{
+			"addressTypeId": 2,
+			"type": "Physical",
+			"addressLine": "BOULEVARD MANUELA VILACAMACHO No.88",
+			"city": "MexicoD.F.",
+			"zipCode": "11000",
+			"state": "MEXICO",
+			"countryId": 13,
+			"country": "Mexico",
+			"isoAlpha": "MEX"
+		}
+	],
+	"phones": [
+		{
+			"phoneNumber": "3123113",
+			"type": "Home",
+			"phoneTypeId": 1000
+		},
+		{
+			"phoneNumber": "56565",
+			"type": "Office",
+			"phoneTypeId": 1001
+		},
+		{
+			"phoneNumber": "32324",
+			"type": "Fax",
+			"phoneTypeId": 1005
+		}
+	],
+	"members": [
+		{
+			"memberId": 194823,
+			"firstName": "SSTCIFP",
+			"middleName": null,
+			"lastName": "LRIGRJ",
+			"fullName": null,
+			"dob": "1987-01-02T00:10:00",
+			"policyId": null,
+			"policyNumber": null,
+			"isGroupPolicy": false,
+			"applicationId": null,
+			"contactBaseId": 0,
+			"memberStatus": "Active",
+			"premiumValue": 1.0000000000000000000,
+			"policyStatus": "Active",
+			"policyCountryId": 0,
+			"policyCountry": null,
+			"insuranceBusinessName": null,
+			"insuranceBusinessId": 0,
+			"relationTypeId": 2,
+			"relationType": "Owner",
+			"genderId": 0,
+			"gender": null,
+			"searchDate": "0001-01-01T00: 00: 00",
+			"referenceNumber": null,
+			"requesterName": null,
+			"transactionId": 0,
+			"deductibleValue": 1.0000000000000000000,
+			"maximumCoverageValue": 1.0000000000000000000,
+			"plan": "VS1",
+			"wWperiod": false,
+			"address": "123HappyRoadatBupa",
+			"email": null,
+			"specialConditions": [
+				{
+					"limitationName": "Extra Premium",
+					"effectiveDate": "24/01/2017",
+					"description": "asdasdasda asdadasdasdas"
+				},
+				{
+					"limitationName": "Increase Coinsurance",
+					"effectiveDate": "24/01/2017",
+					"description": "asdasdasda asdadasdasdas"
+				},
+				{
+					"limitationName": "Rider Restriction",
+					"effectiveDate": "24/01/2017",
+					"description": "asdasdasda asdadasdasdas"
+				}
+			],
+			"eligibilities": [
+				{
+					"eligibilityId": 3226714,
+					"planId": 3665,
+					"description": null,
+					"eligibilityFromDate": "2018-07-15T00:00:00",
+					"eligibilityToDate": null,
+					"currencyId": 192,
+					"currencySymbol": "$",
+					"currencyCode": "USD"
+				},
+				{
+					"eligibilityId": 2997205,
+					"planId": 3665,
+					"description": null,
+					"eligibilityFromDate": "2018-07-15T00:00:00",
+					"eligibilityToDate": "2019-07-14T00:00:00",
+					"currencyId": 192,
+					"currencySymbol": "$",
+					"currencyCode": "USD"
+				}
+			]
+		},
+		{
+			"memberId": 194824,
+			"firstName": "IVAN",
+			"middleName": null,
+			"lastName": "HIDALGO",
+			"fullName": "IVAN ALEJANDRO HIDALGO",
+			"dob": "1986-01-24T00:00:00",
+			"policyId": null,
+			"policyNumber": null,
+			"isGroupPolicy": false,
+			"applicationId": null,
+			"contactBaseId": 0,
+			"memberStatus": "Active",
+			"premiumValue": 3.1000000000000000000,
+			"policyStatus": "Canceled",
+			"policyCountryId": 0,
+			"policyCountry": null,
+			"insuranceBusinessName": null,
+			"insuranceBusinessId": 0,
+			"relationTypeId": 3,
+			"relationType": "Spouse",
+			"genderId": 0,
+			"gender": null,
+			"searchDate": "0001-01-01T00: 00: 00",
+			"referenceNumber": null,
+			"requesterName": null,
+			"transactionId": 0,
+			"deductibleValue": 2.9000000000000000000,
+			"maximumCoverageValue": 2.4000000000000000000,
+			"plan": "VS3",
+			"wWperiod": true,
+			"address": "123HappyRoadatBupa",
+			"email": null,
+			"specialConditions": [
+				{
+					"limitationName": "Extra Premium",
+					"effectiveDate": "24/01/2017",
+					"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+				},
+				{
+					"limitationName": "Increase Coinsurance",
+					"effectiveDate": "24/01/2017",
+					"description": "erase una vez un barco chiquito"
+				},
+				{
+					"limitationName": "Rider Restriction",
+					"effectiveDate": "24/01/2017",
+					"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+				}
+			],
+			"eligibilities": [
+				{
+					"eligibilityId": 3226714,
+					"planId": 3665,
+					"description": "eligibility 1",
+					"eligibilityFromDate": "2019-07-15T00:00:00",
+					"eligibilityToDate": null,
+					"currencyId": 192,
+					"currencySymbol": "$",
+					"currencyCode": "USD"
+				},
+				{
+					"eligibilityId": 2997205,
+					"planId": 3665,
+					"description": "eligibility 2",
+					"eligibilityFromDate": "2002-07-15T00:00:00",
+					"eligibilityToDate": "2002-07-14T00:00:00",
+					"currencyId": 192,
+					"currencySymbol": "$",
+					"currencyCode": "USD"
+				}
+			]
+		}
+	],
+	"payments": [
+		{
+			"amount": 7341.04,
+			"currencySymbol": "$",
+			"paymentDate": "2018-11-19T10:59:48.913",
+			"paymentMethod": "Online Credit Card",
+			"accountNumber": "8004",
+			"confirmationNumber": "247028",
+			"reference": "",
+			"paymentStatus": "Closed",
+			"policyId": 50446,
+			"paymentId": 10489769
+		}
+	],
+	"documents": [
+		{
+			"policyId": 28840,
+			"documentPath": "\\\\BMIADC-ISYNRSIT\\repository policy\\POLICY\\_obj_2_D1512\\_obj_2_D1512_002.pdf",
+			"DocumentType": "Carta de bienvenida",
+			"elegibilityDate": "01/01/2019",
+			"documentLanguage": 2
+		},
+		{
+			"policyId": 28840,
+			"documentPath": "\\\\BMIADC-ISYNRSIT\\repository policy\\POLICY\\_obj_2_D1512\\_obj_2_D1512_002.pdf",
+			"DocumentType": "Welcome Letter",
+			"elegibilityDate": "01/01/2019",
+			"documentLanguage": 1
+		},
+		{
+			"policyId": 28840,
+			"documentPath": "\\\\BMIADC-ISYNRSIT\\repository policy\\POLICY\\_obj_2_D1511\\_obj_2_D1511_933.pdf",
+			"DocumentType": "Renewal(123456)",
+			"elegibilityDate": "01/01/2019",
+			"documentLanguage": 1
+		},
+		{
+			"policyId": 28840,
+			"documentPath": "\\\\BMIADC-ISYNRSIT\\repository policy\\POLICY\\_obj_2_D1511\\_obj_2_D1511_933.pdf",
+			"DocumentType": "Renovación(123456)",
+			"elegibilityDate": "01/01/2019",
+			"documentLanguage": 2
+		}
+	]
+}

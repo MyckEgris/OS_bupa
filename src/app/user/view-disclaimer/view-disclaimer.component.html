@@ -1,0 +1,28 @@
+<article class="ig-agreement">
+    <div class="">
+        <div class="col-md-12">
+            <div class="ig-title">
+                <h5>{{agreementTitle}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="ig-contagreement">
+        <div class="">
+            <div class="col-md-12">
+
+                <div class="ig-textoagreement">
+                    <p [innerHtml]="agreementContent"></p>
+                </div>
+                <div class="col-md-6"><br>
+                    <a><b><p> {{ 'AGENT.PROFILE.READ_ACCEPTED' | translate }} </p></b></a>
+                    <strong>{{ 'AGENT.PROFILE.USER_AGREEMENT' | translate }}:</strong> {{ acceptedOn | dateTranslate: 'APP.DATE_TIME_FORMAT' }}
+                    <div  *appShowIfRole="'Agent,GroupAdmin,AgentAssistant'"><br><strong>{{ 'AGENT.PROFILE.PRODUCER_AGREEMENT' | translate }}:</strong> {{ agentAcceptedOn | dateTranslate: 'APP.DATE_TIME_FORMAT' }}</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</article>

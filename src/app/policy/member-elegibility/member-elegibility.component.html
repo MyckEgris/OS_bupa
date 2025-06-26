@@ -1,0 +1,181 @@
+<section class="ig-validation">
+
+  <div class="">
+
+    <div class="col-md-12">
+
+      <div class="ig-title">
+
+        <h5>{{ 'APP.VOE_TITLE' | translate }}</h5>
+        <p>{{ 'APP.VALIDO_24_HORAS' | translate }}</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="memberElegibilityForm !== undefined">
+
+    <form [formGroup]="memberElegibilityForm" (ngSubmit)="searchMember(memberElegibilityForm.value)" novalidate
+      class="ig-searchpolconten">
+
+      <div class="col-md-12">
+
+        <div class="ig-searchpol">
+
+          <div class="row align-items-start">
+
+            <div class="col-md-3">
+
+              <div class="form-group">
+
+                <select class="custom-select form-control" id="searchMemberType" formControlName="searchMemberType">
+                  <option *ngFor="let searchType of memberSearchType" value="{{searchType.value}}">
+                    {{searchType.description}}
+                  </option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div *ngIf="memberElegibilityForm.value.searchMemberType==memberSearchType[1].value"
+              class="col-md-6 animated fadeIn">
+              <div class="form-group">
+                <input id="policyId" formControlName="policyId" appOnlyNumber="true" class="form-control"
+                  placeholder="{{ 'APP.NUMERO_POLIZA_PLACEHOLDER' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div *ngIf="memberElegibilityForm.value.searchMemberType==memberSearchType[2].value"
+              class="col-md-3 animated fadeIn">
+              <div class="form-group">
+                <input id="firstName" formControlName="firstName" class="form-control"
+                  placeholder="{{ 'APP.NOMBRE' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div *ngIf="memberElegibilityForm.value.searchMemberType==memberSearchType[2].value"
+              class="col-md-3 animated fadeIn">
+              <div class="form-group">
+                <input id="lastName" formControlName="lastName" class="form-control"
+                  placeholder="{{ 'APP.APELLIDO' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div *ngIf="memberElegibilityForm.value.searchMemberType==memberSearchType[3].value"
+              class="col-md-6 animated fadeIn">
+              <div class="form-group">
+                <input id="legacyNumber" formControlName="policyId" class="form-control"
+                  placeholder="{{ 'APP.NUMERO_POLIZA_PLACEHOLDER' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div [style.display]="showDoB?'inline':'none'" class="col-md-2">
+              <app-custom-date-picker formControlName="dob" id="dob" [maxDate]="maxDate" #inputDate [dateValue]="loadedDate">
+              </app-custom-date-picker>
+              <small>{{ 'APP.DATE_FORMAT' | translate}}</small>
+              <app-custom-popover [title]="" [content]="[popoverMsg]" class="pull-right"></app-custom-popover>
+            </div>
+
+            <div class="col-md-1">
+              <button type="submit"
+                [disabled]="memberElegibilityForm.invalid || memberElegibilityForm.value.searchMemberType==memberSearchType[0] || ( memberElegibilityForm.value.dob === null && memberElegibilityForm.value.searchMemberType != memberSearchType[3]) "
+                [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : memberElegibilityForm.invalid || memberElegibilityForm.value.searchMemberType==memberSearchType[0] || memberElegibilityForm.value.dob === null }"><i
+                  class="material-icons">search</i></button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="ig-reclamosconte">
+
+        <div class="">
+
+          <div class="col-md-12">
+
+            <div class="ig-searchresul animated fadeIn" *ngIf="members.length === 0 && searchProccess && !isProviderWithPolicyBGLAOrMexico">
+              <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+              <p>{{ 'APP.NO_RESULTS' | translate }}</p>
+            </div>
+
+            <div class="ig-generic-sticker" *ngIf="isProviderWithPolicyBGLAOrMexico">
+              <h6>{{ 'APP.MESSAGE.MEXICO_SPLIT_NOTIFICATION_TITLE' | translate }}</h6>
+              <small>{{ 'APP.MESSAGE.MEXICO_SPLIT_NOTIFICATION_MESSAGE_ELEGEBILITY' | translate }}  <a href="{{ redirectUrlForSplitMexico }}">link</a></small>
+            </div>
+         
+            <div *ngIf="!isProviderWithPolicyBGLAOrMexico">
+              <div class="ig-resultvalid" *ngIf="members.length > 0">
+                  <div class="ig-resultados ig-elegilidad animated fadeIn"  *ngFor="let member of members">
+
+                    <div class="row align-items-center">
+
+                      <div class="col-md-3 border-right">
+                        <h6 class="titulo">
+                          {{member.fullName}}
+                        </h6>
+                        <p class="textosmall">
+                          {{ 'APP.MIEMBRO' | translate }}
+                        </p>
+                      </div>
+
+                      <div class="col-md-2">
+                        <h6>
+                          {{member.policyId}}
+                        </h6>
+                        <p class="textosmall">
+                          {{ 'APP.NUMERO_POLIZA' | translate }}
+                        </p>
+                      </div>
+
+                      <div class="col-md-1 align-self-end ig-guion">
+                        <i class="material-icons"> maximize </i>
+                      </div>
+
+                      <div class="col-md-3 border-right">
+                        <h6>
+                          {{ member.dob | dateTranslate: 'APP.DATE_FORMAT' }}
+                        </h6>
+                        <p class="textosmall">
+                          {{ 'APP.DOB' | translate }}
+                        </p>
+                      </div>
+
+                      <div class="col-md-3">
+                        <a [routerLink]="['/member-verification-elegibility']" [queryParams]="{
+                                              memberName: member.fullName,
+                                              policyNumber: member.policyId,
+                                              dOf: member.dob,
+                                              voeDate: member.searchDate,
+                                              requesterName: member.requesterName,
+                                              transactionId: member.transactionId,
+                                              memberId: member.memberId,
+                                              memberStatus: member.memberStatus,
+                                              lastEligibilityDate: member.lastEligibilityDate
+                                            }" target="_blank" class="ig-botones ig-principalbtn">
+                          <i class="material-icons">print</i>{{ 'APP.VERIFICAR_ELEGIBILIDAD' | translate }}
+                        </a>
+                      </div>
+
+                    </div>
+
+                  
+              </div>
+          </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</section>

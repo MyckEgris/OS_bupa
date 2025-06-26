@@ -1,0 +1,201 @@
+{
+    "claimDetailId": 2046442,
+    "claimNumber": null,
+    "accountNumber": null,
+    "serviceFrom": null,
+    "serviceTo": null,
+    "exchangeRate": null,
+    "billedAmount": null,
+    "netCoveredAmount": null,
+    "currencyId": null,
+    "currencySymbol": null,
+    "reasonCodeId": null,
+    "reasonDescription": null,
+    "billingProviderId": null,
+    "statusId": null,
+    "statusName": null,
+    "eoBId": null,
+    "insuranceBusinessId": 0,
+    "policy": null,
+    "member": null,
+    "payment": null,
+    "claimLinesDetails": [
+        {
+            "claimLineDetailId": 3513196,
+            "fromDate": "2013-12-11T00:00:00",
+            "toDate": "2013-12-11T00:00:00",
+            "xchangeBilledAmount": 340.0477194,
+            "deductibleAmount": 0,
+            "coInsuranceAmount": 0,
+            "memberLiabilityAmount": 0,
+            "providerLiabilityAmount": 14.76,
+            "netCoveredAmount": 325.29,
+            "serviceProviderId": 36280,
+            "serviceProviderName": "ABC HOSPITAL - BANK",
+            "remarks": [
+                {
+                    "remarkId": 10896349,
+                    "remarkMessageId": 513,
+                    "languageId": 1,
+                    "message": "$14.76 is a discount between the provider and Amedex SA de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896350,
+                    "remarkMessageId": 1527,
+                    "languageId": 2,
+                    "message": "$14.76 representa un descuento entre el proveedor y Amedex SA de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896351,
+                    "remarkMessageId": 21655,
+                    "languageId": 7,
+                    "message": "${1) É um desconto entre o Prestador e a Amedex S/A de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896352,
+                    "remarkMessageId": 390,
+                    "languageId": 1,
+                    "message": "YOU HAVE ACCUMULATED 17375.2 OF YOUR YEARLY MAXIMUM.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896353,
+                    "remarkMessageId": 1404,
+                    "languageId": 2,
+                    "message": "HA CONSUMIDO $ 17375.2 DE SU BENEFICIO MAXIMO ANUAL",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896354,
+                    "remarkMessageId": 598679,
+                    "languageId": 7,
+                    "message": "V.Sa. acumulou $17375.2 do seu benefício máximo anual.",
+                    "claimLineDetailId": 3513196
+                }
+            ],
+            "ineligibleDescription": "Amedex SA de CV Network",
+            "ineligibleAmount": 14.76
+        },
+        {
+            "claimLineDetailId": 3513196,
+            "fromDate": "2013-12-11T00:00:00",
+            "toDate": "2013-12-11T00:00:00",
+            "xchangeBilledAmount": 340.0477194,
+            "deductibleAmount": 0,
+            "coInsuranceAmount": 0,
+            "memberLiabilityAmount": 0,
+            "providerLiabilityAmount": 14.76,
+            "netCoveredAmount": 325.29,
+            "serviceProviderId": 36280,
+            "serviceProviderName": "ABC HOSPITAL - BANK",
+            "remarks": [
+                {
+                    "remarkId": 10896349,
+                    "remarkMessageId": 513,
+                    "languageId": 1,
+                    "message": "$14.76 is a discount between the provider and Amedex SA de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896350,
+                    "remarkMessageId": 1527,
+                    "languageId": 2,
+                    "message": "$14.76 representa un descuento entre el proveedor y Amedex SA de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896351,
+                    "remarkMessageId": 21655,
+                    "languageId": 7,
+                    "message": "${1) É um desconto entre o Prestador e a Amedex S/A de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896352,
+                    "remarkMessageId": 390,
+                    "languageId": 1,
+                    "message": "YOU HAVE ACCUMULATED 17375.2 OF YOUR YEARLY MAXIMUM.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896353,
+                    "remarkMessageId": 1404,
+                    "languageId": 2,
+                    "message": "HA CONSUMIDO $ 17375.2 DE SU BENEFICIO MAXIMO ANUAL",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896354,
+                    "remarkMessageId": 598679,
+                    "languageId": 7,
+                    "message": "V.Sa. acumulou $17375.2 do seu benefício máximo anual.",
+                    "claimLineDetailId": 3513196
+                }
+            ],
+            "ineligibleDescription": "Amedex SA de CV Network",
+            "ineligibleAmount": 14.76
+        },
+        {
+            "claimLineDetailId": 3513196,
+            "fromDate": "2013-12-11T00:00:00",
+            "toDate": "2013-12-11T00:00:00",
+            "xchangeBilledAmount": 340.0477194,
+            "deductibleAmount": 0,
+            "coInsuranceAmount": 0,
+            "memberLiabilityAmount": 0,
+            "providerLiabilityAmount": 14.76,
+            "netCoveredAmount": 325.29,
+            "serviceProviderId": 36280,
+            "serviceProviderName": "ABC HOSPITAL - BANK",
+            "remarks": [
+                {
+                    "remarkId": 10896349,
+                    "remarkMessageId": 513,
+                    "languageId": 1,
+                    "message": "$14.76 is a discount between the provider and Amedex SA de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896350,
+                    "remarkMessageId": 1527,
+                    "languageId": 2,
+                    "message": "$14.76 representa un descuento entre el proveedor y Amedex SA de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896351,
+                    "remarkMessageId": 21655,
+                    "languageId": 7,
+                    "message": "${1) É um desconto entre o Prestador e a Amedex S/A de CV Network.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896352,
+                    "remarkMessageId": 390,
+                    "languageId": 1,
+                    "message": "YOU HAVE ACCUMULATED 17375.2 OF YOUR YEARLY MAXIMUM.",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896353,
+                    "remarkMessageId": 1404,
+                    "languageId": 2,
+                    "message": "HA CONSUMIDO $ 17375.2 DE SU BENEFICIO MAXIMO ANUAL",
+                    "claimLineDetailId": 3513196
+                },
+                {
+                    "remarkId": 10896354,
+                    "remarkMessageId": 598679,
+                    "languageId": 7,
+                    "message": "V.Sa. acumulou $17375.2 do seu benefício máximo anual.",
+                    "claimLineDetailId": 3513196
+                }
+            ],
+            "ineligibleDescription": "Amedex SA de CV Network",
+            "ineligibleAmount": 14.76
+        }
+    ]
+}

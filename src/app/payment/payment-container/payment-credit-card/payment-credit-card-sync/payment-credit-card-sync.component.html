@@ -1,0 +1,230 @@
+<div class="tab-pane fade show active" id="credito" role="tabpanel" aria-labelledby="credito-tab">
+  <div class="row">
+    <div class="col-md-12">
+      <form novalidate (ngSubmit)="payPolicy()" [formGroup]="paymentForm" novalidate>
+        <div class="row align-items-center">
+          <div class="col-md-9">
+            <div class="form-group">
+              <label for="inputPassword" class="">
+                {{ 'PAYMENTS.CC.CARD_TYPE' | translate }}
+              </label>
+              <select class="form-control" id="creditCardType"
+                (change)="buildFormByCardType($event.target.value)">
+                <option value="">{{ 'PAYMENTS.CC.SELECT_CARD_TYPE' | translate }}</option>
+                <option *ngFor="let type of typeCards">{{type}}</option>
+
+              </select>
+
+            </div>
+          </div>
+          <div class="col-md-3">
+            <img [src]="urlImg" alt="" class="img-fluid">
+          </div>
+        </div>
+        <div *ngIf="typeCreditCard">
+          <div class="row" formGroupName="basics">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="firstName" class="">{{ 'PAYMENTS.CC.FIRST_NAME' | translate }} </label>
+                <input id="firstName" class="form-control" placeholder="" type="text" formControlName="firstName">
+                <small class="text-danger"
+                  *ngIf="(basicsControls.firstName.touched && basicsControls.firstName.invalid)">
+                  {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="surnameName" class="">{{ 'PAYMENTS.CC.LAST_NAME' | translate }} </label>
+                <input id="surnameName" class="form-control" placeholder="" type="text" formControlName="surnameName">
+                <small class="text-danger"
+                  *ngIf="(basicsControls.surnameName.touched && basicsControls.surnameName.invalid)">
+                  {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group" formGroupName="basics">
+                <label for="numberCreditCard" class="">{{ 'PAYMENTS.CC.CARD_NUMBER' | translate }}</label>
+                <input id="numberCreditCard" appOnlyNumber="true" formControlName="cardNumber" class="form-control"
+                  placeholder="" maxCharsAllowed="{{maxChars}}" type="text">
+                <small class="text-danger"
+                  *ngIf="(basicsControls.cardNumber.touched && basicsControls.cardNumber.invalid)">
+                  {{ 'PAYMENTS.ERRORS.CC_NOT_VALID' | translate }}
+                </small>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group" *ngIf="showCVC">
+                <label for="cvc" class="">{{ 'PAYMENTS.CC.CVC_NUMBER' | translate }}</label>
+                <input id="cvc" appOnlyNumber="true" class="form-control" placeholder="" maxCharsAllowed="{{maxCVC}}"
+                  formControlName="cvc">
+                <small class="text-danger" *ngIf="(formGroupControls.cvc.touched && formGroupControls.cvc.invalid)">
+                  {{ 'PAYMENTS.ERRORS.CVC_NOT_VALID' | translate }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row" *ngIf="showAdress" formGroupName="amexMx">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="address" class="">{{ 'PAYMENTS.CC.ADDRESS' | translate }}</label>
+                <input id="address" class="form-control" placeholder="" type="text" formControlName="street">
+                <small class="text-danger" *ngIf="(amexMxControls.street.touched && amexMxControls.street.invalid)">
+                  {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="inputPassword" class="">
+                  {{ 'PAYMENTS.CC.STATE' | translate }}
+                </label>
+                <ng-select #citiesSelect [items]="states" [selectOnTab]="true" bindValue="stateId" bindLabel="stateName"
+                  formControlName="state" class="form-control ">
+                </ng-select>
+                <small class="text-danger" *ngIf="(amexMxControls.state.touched 
+                          && amexMxControls.state.invalid)">
+                  {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="inputPassword" class="">
+                  {{ 'PAYMENTS.CC.CITY' | translate }}
+                </label>
+                <ng-select #citiesSelect [items]="cities" [selectOnTab]="true" bindValue="cityId" bindLabel="cityName"
+                  formControlName="city" class="form-control ">
+                </ng-select>
+                <small class="text-danger" *ngIf="(amexMxControls.city.touched 
+                        && amexMxControls.city.invalid)">
+                  {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                </small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="zip" class="">{{ 'PAYMENTS.CC.ZIP_CODE' | translate }}</label>
+                <input id="zip" class="form-control" placeholder="" type="text" formControlName="zip">
+                <small class="text-danger" *ngIf="(amexMxControls.zip.touched && amexMxControls.zip.invalid)">
+                  {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6" formGroupName="basics">
+              <div class="row">
+                <div class="col-12">
+                  <label class="" for="monthExpiration">{{ 'PAYMENTS.CC.DATE' | translate }}</label>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <select class="form-control" id="months" formControlName="monthExpiration">
+                      <option value="">{{ 'PAYMENTS.CC.MONTH' | translate }}</option>
+                      <option *ngFor="let month of listMonths" [value]="month">{{month}}</option>
+                    </select>
+                    <small class="text-danger"
+                      *ngIf="(basicsControls.monthExpiration.touched && basicsControls.monthExpiration.invalid)">
+                      {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                    </small>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <select class="form-control" id="year" formControlName="yearExpiraton">
+                      <option value="">{{ 'PAYMENTS.CC.YEAR' | translate }}</option>
+                      <option *ngFor="let year of listYears" [value]="year">{{year}}</option>
+                    </select>
+                    <small class="text-danger"
+                      *ngIf="(basicsControls.yearExpiraton.touched && basicsControls.yearExpiraton.invalid)">
+                      {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                    </small>
+                  </div>
+                </div>
+                <small class="text-danger" *ngIf="paymentForm.get('basics').errors?.invalidDate">
+                  {{ 'PAYMENTS.ERRORS.DATE_NOT_VALID' | translate }}
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" *ngIf="showAmountMx">
+                <label for="amountInMx" class="">{{ 'PAYMENTS.CC.AMOUNT_MX' | translate }}</label>
+                <input id="amountInMx" class="form-control" formControlName="amountInMx" type="text "
+                  appCurrencyFormatter="MXN" style="border:0">
+              </div>
+            </div>
+          </div>
+          <div class="row" formGroupName="basics" *ngIf="showAmountDolar">
+            <div class="col-md-6" *ngIf="policy">
+              <div class="form-group">
+                <label for="amountToPay" class="">{{ 'PAYMENTS.CC.AMOUNT' | translate }}</label>
+                <input id="amountToPay" formControlName="amountToPay" class="form-control" type="text"
+                  appCurrencyFormatter="USD" appOnlyNumber="true" (change)="changePolicyAmount($event)">
+                <small class="text-danger"
+                  *ngIf="basicsControls.amountToPay.touched && basicsControls.amountToPay.invalid">
+                  {{ 'PAYMENTS.ERRORS.AMOUNT_NOT_VALID' | translate }}
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group" *ngIf="showAmountNonFixedRate">
+                <span>{{ 'PAYMENTS.CC.FIXED_RATE_MSG_1' | translate }}</span><br />
+                <strong> MXN {{policy.amountToPay | number:'1.2-2' }}</strong>
+                <span>{{ 'PAYMENTS.CC.FIXED_RATE_MSG_2' | translate }}</span>
+                <strong>{{1/policy.exchangeRate | number:'1.2-2' }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="handleDisclaimerShowMsg()">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                (change)="changeConfirm($event)">
+              <label class="form-check-label" for="defaultCheck1">
+                <p style="margin-bottom: 0;font-weight:400;font-size: 14px;"
+                  [innerHTML]="disclaimerMessage | translate"></p>
+              </label>
+              <div class="col-md-12">
+                <small class="text-danger" *ngIf="showError && !this.acceptTerms">
+                  {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" formGroupName="basics">
+                <label for="email" class="">
+                  {{ 'PAYMENTS.CC.OPTIONAL_EMAIL' | translate }}</label>
+                <input id="email" class="form-control" type="email" formControlName="email">
+                <small class="text-danger" *ngIf="(basicsControls.email.touched && basicsControls.email.invalid)">
+                  {{ 'PAYMENTS.ERRORS.EMAIL_NOT_VALID' | translate }}
+                </small>
+              </div>
+              <div class="ig-processdetalle">
+                {{ 'PAYMENTS.CC.EMAIL_DISCLAIMER' | translate }}
+              </div>
+            </div>
+            <br>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <a class="btn btnpagar" (click)="goToBack()" style="cursor: pointer;">
+                {{ 'PAYMENTS.CC.CANCEL' | translate }}</a>
+            </div>
+            <div class="col-md-4">
+              <button type='submit' class="btn btnpagar"> {{ 'PAYMENTS.CC.PAY' | translate }} <i
+                  class="material-icons">keyboard_arrow_right</i></button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <br>
+    </div>
+  </div>
+</div>

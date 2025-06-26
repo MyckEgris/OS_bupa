@@ -1,0 +1,71 @@
+<div class="row align-items-center">
+  <div class="col-md-10">
+    <h6 class="ig-infotil">
+      {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.DIAGNOSTICS' | translate }}
+    </h6>
+  </div>
+  <div class="col-md-2">
+    <button class="ig-principalbtn ig-botones" (click)="openModalDiagnostics()">
+      <i class="material-icons">add_circle </i> {{ 'CLAIMS.PRE_AUTHORIZATION.ADD' | translate }}
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <p> {{ 'CLAIMS.PRE_AUTHORIZATION.MESSAGE.INFO_DIAGNOSTICS' | translate}} </p>
+  </div>
+</div>
+
+<div class="col-md-12 ig-diagnosticocontent" *ngIf="wizard.listDiagnosticSelected.length > 0">
+  <div class="row">
+    <div class="col-md-2">
+      <h6 class="ig-titulodiag"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.CODE' | translate }} </h6>
+    </div>
+    <div class="col-md-8">
+      <h6 class="ig-titulodiag"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.NAME_DIAGNOSTIC' | translate }} </h6>
+    </div>
+    <div class="col-md-2">
+      <h6 class="ig-titulodiag"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.ACTION' | translate }} </h6>
+    </div>
+  </div>
+
+
+  <div class="ig-diagnosselec" *ngFor="let diag of pagedItemsDiagnostics">
+    <div class="row">
+      <div class="col-md-2">
+        <h6> {{ diag.code }} </h6>
+      </div>
+      <div class="col-md-8">
+        {{ diag.description }}
+      </div>
+      <div class="col-md-2">
+        <a class="ig-icondiagnosminim" (click)="removeDiagnostics(diag)" style="cursor: pointer;">
+          <i class="material-icons"> delete_forever </i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="ig-paymentnav">
+    <ul *ngIf="pagerDiagnostic.pages && pagerDiagnostic.pages.length" class="pagination">
+      <li [ngClass]="{disabled:pagerDiagnostic.currentPage === 1}">
+        <button type="button" [disabled]="pagerDiagnostic.currentPage === 1" (click)="setPageDiagnostics(1)"><i
+            class="material-icons">first_page</i></button>
+      </li>
+      <li [ngClass]="{disabled:pagerDiagnostic.currentPage === 1}">
+        <button type="button" [disabled]="pagerDiagnostic.currentPage === 1"
+          (click)="setPageDiagnostics(pagerDiagnostic.currentPage - 1)"><i
+            class="material-icons">chevron_left</i></button>
+      </li>
+      <li [ngClass]="{disabled:pagerDiagnostic.currentPage === pagerDiagnostic.totalPages}">
+        <button type="button" [disabled]="pagerDiagnostic.currentPage === pagerDiagnostic.totalPages"
+          (click)="setPageDiagnostics(pagerDiagnostic.currentPage + 1)"><i
+            class="material-icons">chevron_right</i></button>
+      </li>
+      <li [ngClass]="{disabled:pagerDiagnostic.currentPage === pagerDiagnostic.totalPages}">
+        <button type="button" [disabled]="pagerDiagnostic.currentPage === pagerDiagnostic.totalPages"
+          (click)="setPageDiagnostics(pagerDiagnostic.totalPages)"><i class="material-icons">last_page</i></button>
+      </li>
+    </ul>
+  </div>
+</div>

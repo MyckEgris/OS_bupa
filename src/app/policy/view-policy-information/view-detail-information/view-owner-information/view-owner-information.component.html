@@ -1,0 +1,374 @@
+<div class="ig-polidetaleinfo">
+  <h3>
+    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.TITLE' | translate }}
+  </h3>
+</div>
+
+<div class="ig-polidetaleinfoda">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="ig-campinfo">
+            <h6 class="ig-datos">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.OWNER' | translate }}
+            </h6>
+            <p>
+              {{mainMember?.firstName}} {{mainMember?.lastName}}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="ig-campinfo">
+            <h6 class="ig-datos">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.DATE_BIRTH' | translate }}
+            </h6>
+            <p>
+              {{mainMember?.dob |dateTranslate}}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="ig-campinfo">
+            <h6 class="ig-datos">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.HOME_PHONE' | translate }}
+            </h6>
+            <p>
+              {{homePhone?.phoneNumber}}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="ig-campinfo">
+            <h6 class="ig-datos">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.OFFICE_PHONE' | translate }}
+            </h6>
+            <p>
+              {{officePhone?.phoneNumber}}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="ig-campinfo">
+            <h6 class="ig-datos">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.FAX' | translate }}
+            </h6>
+            <p>
+              {{faxPhone?.phoneNumber}}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+
+            <div class="col-md-6 border-right">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.PHYSICAL_ADDRRESS' | translate }}
+                    </h6>
+                    <p>
+                      {{phisicalAddress?.addressLine}}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.ZIP_CODE' | translate }}
+                    </h6>
+                    <p>
+                      {{phisicalAddress?.zipCode}}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.CITY' | translate }}
+                    </h6>
+                    <p>
+                      {{phisicalAddress?.city}}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.STATE' | translate }}
+                    </h6>
+                    <p>
+                      {{phisicalAddress?.state}}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}
+
+                    </h6>
+                    <p>
+                      {{phisicalAddress?.country}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.POSTAL_ADDRRESS' | translate }}
+                    </h6>
+                    <p>
+                      {{postalAddress?.addressLine}}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.ZIP_CODE' | translate }}
+                    </h6>
+                    <p>
+                      {{postalAddress?.zipCode}}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.CITY' | translate }}
+                    </h6>
+                    <p>
+                      {{postalAddress?.city}}
+                    </p>
+
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.STATE' | translate }}
+                    </h6>
+                    <p>
+                      {{postalAddress?.state}}
+                    </p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-campinfo">
+                    <h6 class="ig-datos">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}
+                    </h6>
+                    <p>
+                      {{postalAddress?.country}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="ig-bgprefere">
+        <form [formGroup]="preferencesForm" (onsubmit)="updatePreferences()">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <h6> <b>
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.POLICY_OWNER_PREFERENCES' | translate }}
+                </b></h6>
+            </div>
+            <div class="col-md-6">
+              <ul>
+                <li>
+                  <a id="tool" class="edit" (click)="changeEditing()" data-toggle="tooltip" style="cursor: pointer;"
+                    data-placement="top"
+                    title="{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.UPDATE' | translate }}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li [ngClass]="{disabled: !editing}">
+                  <a id="tool" class="guardar" (click)="updatePreferences()" style="cursor: pointer;"
+                    data-toggle="tooltip" data-placement="top"
+                    title="{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.SAVE' | translate }}">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li [ngClass]="{disabled: !editing}">
+                  <a id="tool" class="delt" (click)="revertChanges()" style="cursor: pointer;" data-toggle="tooltip"
+                    data-placement="top"
+                    title="{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.REMOVE_CHANGES' | translate }}">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+          <div class="row align-items-center">
+            <div class="col-md-10">
+              <div class="ig-campinfo">
+                <h6>
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.PREFERRED_LANGUAGE' | translate }}
+                  <app-custom-popover [title]="" [content]="tooltipPreferLanguaje"></app-custom-popover>
+                </h6>
+                <div class="form-group" *ngIf="!editing">
+                  <p>
+                    {{ 'APP.LANGUAGE.'  | concatenate: policyDto.language | replacespaces: '_' |  uppercase | translate }}
+                  </p>
+                </div>
+                <div class="form-group" *ngIf="editing">
+                  <select class="custom-select" id="languageList" formControlName="listLanguage">
+                    <option *ngFor="let language of listLanguage" value="{{language.id}}">{{'APP.LANGUAGE.'
+                          | concatenate: language.value | uppercase |
+                          translate}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row align-items-center">
+            <div class="col-md-10">
+              <div class="ig-campinfo">
+                <h6>
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.DOCUMENT_SUBMISSION' | translate }}
+                  <app-custom-popover [title]="" [content]="tooltipDocumentSubmission"></app-custom-popover>
+                </h6>
+                <div class="form-group" *ngIf="!editing">
+                  <p>
+                    {{ documentSubmission }}
+                  </p>
+                </div>
+                <div class="form-group" *ngIf="editing">
+                  <select class="custom-select" id="documentSubmissionList" formControlName="documentSubmissionList">
+                    <option *ngFor="let doc of documentSubmissionList" value="{{doc.id}}">
+                      {{'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.' | concatenate: doc.value | uppercase | translate}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row align-items-center" *ngIf="policyDto.paperless">
+            <div class="col-md-10">
+              <div class="ig-campinfo">
+                <h6>
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EMAIL' | translate }}
+                  <app-custom-popover [title]="" [content]="tooltipEmailSubmission"></app-custom-popover>
+                </h6>
+                <div class="form-group">
+                  <p>
+                    {{ mailShow }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row align-items-center" *ngIf="actualRol==6 || actualRol==3">
+            <div class="col-md-10">
+              <div class="ig-campinfo">
+                <h6>
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.ALLOW_DOWNLOAD_DOCUMENTS' | translate }}
+                </h6>
+                <div class="form-group" *ngIf="!editing">
+                  <div class="row">
+                    <div class="col-md-12">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.BOOLEANS.' | concatenate:!policyDto.agentNotAccess| translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group" *ngIf="editing">
+                  <div class="row">
+                    <div class="col-2">
+                      <div class="form-group form-check">
+                        <input type="radio" class="form-check-input" formControlName="allowDownloadDocuments"
+                          [value]=true>
+                        <label class="form-check-label" for="exampleCheck1">
+                          {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.BOOLEANS.true' | translate }}
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group form-check">
+                        <input type="radio" class="form-check-input" formControlName="allowDownloadDocuments"
+                          [value]=false>
+                        <label class="form-check-label" for="exampleCheck2">
+                          {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.BOOLEANS.false' | translate }}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <div class="col-md-12">
+      <div class="ig-numpoliza">
+        <div class="row  align-items-center">
+          <div class="col-md-3">
+            <a style="text-decoration: none" class="ig-detallebtn" data-toggle="collapse" href="#collapseExample"
+              role="button" aria-expanded="false" aria-controls="collapseExample">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.TYPE_LIMITATIONS' | translate }}
+              <i class="material-icons">keyboard_arrow_down</i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapseExample" style="width: 100%">
+
+      <div class="col-md-12" *ngFor="let sc of filterConditions">
+        <div class="ig-detallereclamo" id="">
+          <h5>{{sc.limitationName}}</h5>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="ig-campinfo">
+                <h6 class="ig-datos">
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.EFFECTIVENESS_DATE' | translate }}
+                </h6>
+                <p>
+                  {{sc.effectiveDate | dateTranslate: 'APP.DATE_FORMAT'}}
+                </p>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="ig-campinfo">
+                <h6 class="ig-datos">
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.DESCRIPTION' | translate }}
+                </h6>
+                <p>
+                  {{sc.description}}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12" *ngIf="policyDto.specialConditions.length ===0">
+        <div class="ig-detallereclamo">
+          {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.WITHOUT_LIMITATION_MESSAGE' | translate }}
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

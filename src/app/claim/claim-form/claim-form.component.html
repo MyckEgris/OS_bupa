@@ -1,0 +1,81 @@
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="!inactivityPeriod()">
+  <section class="ig-wizard ig-wizarsolicitud animated fadeIn" *ngIf="wizard">
+    <article class="row justify-items-center">
+      <div class="col-md-12 p-0">
+        <a>Hola Mundo</a>
+        <!--STEPS MODIFIED-->
+        <ul class="wizzard-steps">
+          <li class="wizzard-step"
+            [ngClass]="{'step-active': wizard.currentStep === 1 , 'step-success': wizard.currentStep >= 2 }">
+            <div class="wizzard-step-content">
+              <span class="step-circle">1</span>
+              <span class="step-text">
+                {{ 'CLAIMFORM.STEP1DESC_INSURED' | translate}}
+              </span>
+            </div>
+          </li>
+          <li class="wizzard-step"
+            [ngClass]="{'step-active': wizard.currentStep === 2, 'step-success': wizard.currentStep >= 3 }">
+            <div class="wizzard-step-content">
+              <span class="step-circle">2</span>
+              <span class="step-text">
+                {{ 'CLAIMFORM.STEP1_1DESC' | translate}}
+              </span>
+            </div>
+          </li>
+          <li class="wizzard-step"
+            [ngClass]="{'step-active': wizard.currentStep === 3, 'step-success': wizard.currentStep >= 4 }">
+            <div class="wizzard-step-content">
+              <span class="step-circle">3</span>
+              <span class="step-text">
+                {{ 'CLAIMFORM.STEP2DESC' | translate}}
+              </span>
+            </div>
+          </li>
+          <li class class="wizzard-step"
+            [ngClass]="{'step-active': wizard.currentStep === 4, 'step-success': wizard.currentStep >= 5 }">
+            <div class="wizzard-step-content">
+              <span class="step-circle">4</span>
+              <span class="step-text">
+                {{ 'CLAIMFORM.STEP3DESC' | translate}}
+              </span>
+            </div>
+          </li>
+          <!-- <li class="wizzard-step"
+            [ngClass]="{'step-active': wizard.currentStep === 5, 'step-success': wizard.currentStep >= 6 }">
+            <div class="wizzard-step-content">
+              <span class="step-circle">5</span>
+              <span class="step-text">
+                {{ 'CLAIMFORM.STEP4DESC' | translate}}
+              </span>
+            </div>
+          </li>
+          <li class="wizzard-step" [ngClass]="{'step-active': wizard.currentStep === 6 }">
+            <div class="wizzard-step-content">
+              <span class="step-circle">6</span>
+              <span class="step-text">
+                {{ 'CLAIMFORM.STEP5DESC' | translate}}
+              </span>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+
+      <div class="col-md-12 p-0">
+        <router-outlet></router-outlet>
+      </div>
+
+    </article>
+  </section>
+</section>
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="inactivityPeriod()">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="ig-title">
+        <p style="font-weight: bold;"> {{ 'APP.MESSAGE.MEXICO_INACTIVITY' | translate }} </p>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</section>

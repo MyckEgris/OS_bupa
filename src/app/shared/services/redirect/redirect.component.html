@@ -1,0 +1,12 @@
+<div class="modal-header">
+ 
+</div>
+<div class="modal-body">
+  <p>
+    {{  'REDIRECT_COMPONENT.MESSAGE' | translate }}
+  </p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary btn-sm" (click)="ok()">{{acceptText | translate}}</button>
+  <button type="button" class="btn btn-default btn-sm" (click)="cancel();">{{declineText | translate}}</button>
+</div>

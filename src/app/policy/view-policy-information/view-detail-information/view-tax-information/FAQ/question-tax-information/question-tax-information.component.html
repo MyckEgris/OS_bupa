@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header" id="headingOne">
+    <h5 class="mb-0">                  
+      <a href="#" data-toggle="collapse" [attr.data-target]="'#' + id" aria-expanded="true"
+                       [attr.aria-controls]="id">                    
+        <div class="row align-items-center">
+          <div class="col-md-10 col-10">
+            {{ ask | translate }}
+          </div>
+          <div class="col-md-2 col-2">
+            <i class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+      </a>
+    </h5>
+  </div>
+</div>
+<div [id]="id" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+  <div [innerHTML]="answer | translate" class="card-body">
+    
+  </div>
+</div>

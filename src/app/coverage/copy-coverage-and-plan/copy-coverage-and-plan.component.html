@@ -1,0 +1,142 @@
+<section class="bp-mainpolicy">
+  <article class="row">
+    <div class="col-md-12">
+      <form class="was-validated' : formInvalid" [formGroup]="formCopyCoverageAndPlan" novalidate>
+        <div class="col-md-12">
+          <div class="bp-itemtitle mt-4">
+            <h1 class="bp-contentitle mb-3">
+              {{ 'COVERAGES.COPY_COVERAGES_AND_PLANS.TITLE_01' | translate }}
+            </h1>
+          </div>
+          <p class="mt-2">
+            {{ 'COVERAGES.COPY_COVERAGES_AND_PLANS.TITLE_02' | translate }}
+          </p>
+        </div>
+
+
+        <div class="row bp-itemcontsect2">
+          <div class="col-md-12 my-4" formGroupName="filterCriteriaSource">
+            <h2 class="bp-contentitle mb-2">{{ 'COVERAGES.COPY_COVERAGES_AND_PLANS.PRODUCT_SOURCE' | translate }}</h2>
+            <div class="row align-items-end">
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>{{ 'COVERAGES.COPY_COVERAGES_AND_PLANS.BUSSINESS_CTRL_LBL' | translate }}</label>
+                  <ng-select #selectBussinessId [items]="bussinessSourceList" [selectOnTab]="true" bindValue="id"
+                    bindLabel="name" formControlName="bussinessIdSource" class="form-control"
+                    [ngClass]="{ 
+                        'border-danger': getControl('filterCriteriaSource','bussinessIdSource').invalid && formInvalid }">
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>{{ 'COVERAGES.ADD_PLANS.PRODUCT_CTRL_LBL' | translate }}</label>
+                  <ng-select #selectProductKey [items]="productSourceList" [selectOnTab]="true" bindValue="productKey"
+                    bindLabel="name" formControlName="productSource" class="form-control" [ngClass]="{ 
+                        'border-danger': getControl('filterCriteriaSource','productSource').invalid && formInvalid }">
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label> {{ 'COVERAGES.ADD_PLANS.PLAN_CTRL_LBL' | translate }}</label>
+
+                  <ng-select #selectPlanKey [items]="plansSourceList" [selectOnTab]="true" bindValue="planKey"
+                    bindLabel="planName" formControlName="planSource" class="form-control" [ngClass]="{ 
+                          'border-danger': getControl('filterCriteriaSource','planSource').invalid && formInvalid }"
+                    style="padding:10px 0;">
+                  </ng-select>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-md-12 my-4" formGroupName="filterCriteriaTarget">
+            <div class="row">
+              <div class="col-md-12">
+                <h1 class="bp-contentitle mb-2">{{ 'COVERAGES.COPY_COVERAGES_AND_PLANS.PRODUCT_TARGET' | translate }}
+                </h1>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>{{ 'COVERAGES.ADD_PLANS.BUSSINESS_CTRL_LBL' | translate }}</label>
+                  <ng-select #selectBussinessId [items]="bussinessTargetList" [selectOnTab]="true" bindValue="id"
+                    bindLabel="name" formControlName="bussinessIdTarget" class="form-control"
+                    [ngClass]="{ 
+                        'border-danger': getControl('filterCriteriaTarget','bussinessIdTarget').invalid && formInvalid }">
+                  </ng-select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>{{ 'COVERAGES.ADD_PLANS.PRODUCT_CTRL_LBL' | translate }}</label>
+                  <ng-select #selectProductKey [items]="productTargetList" [selectOnTab]="true" bindValue="productKey"
+                    bindLabel="name" formControlName="productTarget" class="form-control" [ngClass]="{ 
+                        'border-danger': getControl('filterCriteriaTarget','productTarget').invalid && formInvalid }">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 my-4" formArrayName="plansTarget"
+            *ngIf="!getControl('filterCriteriaTarget','productTarget').invalid && plansTargetList.length===0">
+            <div class="bp-alertform">
+              <div class="alert alert-danger text-center">
+                <i class="material-icons">info</i>
+                {{ 'COVERAGES.COPY_COVERAGES_AND_PLANS.NO_PLANS_AVAILABLE' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row align-items-end bp-itemcontsect2" formGroupName="filterCriteriaTarget"
+          *ngIf="plansTargetList && plansTargetList.length>0">
+          <div class="col-md" formArrayName="plansTarget">
+            <div class="form-group" [ngClass]="{ 
+                    'border-danger': this.selectedPlanList.length === 0 && formInvalid }">
+              <label> {{ 'COVERAGES.COPY_COVERAGES_AND_PLANS.PLAN_CTRL_LBL' | translate }}
+                ({{this.plansTargetList.length}})</label>
+              <div class="row" *ngFor="let item of plansTargetList, let i=index">
+                <div class="col-md-1">
+                  <input class="form-check-input" type="checkbox" [formControlName]="i"
+                    (change)="this.handleCheckBoxChange($event, item)">
+                </div>
+                <div class="col-md-11">
+                  {{item.planName}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12" *ngIf="formInvalid && selectedPlanList.length === 0">
+            <div class="bp-alertform">
+              <div class="alert alert-danger text-center">
+                <i class="material-icons">info</i>
+                {{ 'POLICY.POLICY_ENROLLMENT.STEP1.ALERT_COMPLETE_FORM' | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 offset-md-5">
+            <button class="ig-botones ngclass ig-principalbtn" type="button" (click)="continue()">
+              {{ 'COVERAGES.ADD_PLANS.SUBMIT_COVERAGES_BTN' | translate }}
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </article>
+</section>

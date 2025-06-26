@@ -1,0 +1,11 @@
+<div *appShowIfRole="'Provider'">
+  <app-provider-profile></app-provider-profile>
+</div>
+
+<div *appShowIfRole="'Agent,AgentAssistant,GroupAdmin'">
+  <app-agent-profile-view></app-agent-profile-view>
+</div>
+
+<!-- <div *appShowIfRole="'PolicyHolder,GroupPolicyHolder'">
+  <app-policy-holder-profile-view></app-policy-holder-profile-view>
+</div> -->

@@ -1,0 +1,296 @@
+<section class="ig-requestpre setup-content animated fadeIn" id="step-3">
+    <form [formGroup]="wizard.searchForm">
+      <section class="row">
+        <!--Contenido-->
+        <section class="col-12 col-lg-7">
+          <!-- texto intro travel-->
+          <section class="bp-section pl-0 pb-0" *ngIf="this.handleIsTravelPolicy">
+            <p class="mb-0">
+              {{ 'CLAIMFORM.STEP3TITLE_TRV' | translate }} 
+            </p>
+            <p>
+              {{ 'CLAIMFORM.STEP3TITLE_QUESTION' | translate }} <a href="javascript: void(0);" (click)="clickChangeFrameHelp()">{{'CLAIMFORM.STEP3TITLE_FRAME_DIALOG' | translate }}</a>
+            </p>
+          </section>
+          <!-- end texto intro travel-->
+          <!-- texto intro health-->
+          <section class="bp-section pl-0 pb-0" *ngIf="!this.handleIsTravelPolicy">
+            <p class="mb-0">
+              {{ 'CLAIMFORM.STEP3TITLE' | translate }}
+            </p>
+            <p>
+              {{ 'CLAIMFORM.STEP3TITLE_QUESTION' | translate }} <a href="javascript: void(0);" (click)="clickChangeFrameHelp()">{{'CLAIMFORM.STEP3TITLE_FRAME_DIALOG' | translate }}</a>
+            </p>
+          </section>
+          <!-- end texto intro health-->
+          <!-- adjuntar documentos -->
+          <section class="bp-section bp-section_shadow mb-3">
+            <section class="d-md-flex justify-content-md-between align-items-center pb-3">
+              <h5 class="bp-h5 bp-color_secondary">
+                {{ 'CLAIMFORM.STEP3DESCFILE' | translate }}
+              </h5>
+              <div class="upload">
+                <app-upload [typeAttachment]="type2" [fileTypes]="fileTypes" [maxFileSize]="maxFileSize">
+                </app-upload>
+              </div>
+            </section>
+            <section>
+              <!-- lista de documentos -->
+              <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+                <div class="ig-file-scroll">
+                  <div class="row">
+                    <div class="col-md-12" *ngFor="let document of documents">
+                      <div class="inline-text-icon" *ngIf="document.category === type2">
+                        <i class="fa" [ngClass]="document.icon"></i>
+                        <span class="text-list">
+                          {{document.file.name}}
+                          <div class="ig-icofile">
+                            <a href="#" title="Eliminar" (click)="removeDocument(document, $event)">
+                              <i class="material-icons">delete</i>
+                            </a>
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end listado de documentos -->
+            </section>
+            <p class="pt-3">
+              <small>{{ 'CLAIMFORM.UPLOAD_FILES_MSG' | translate }}</small>
+            </p>
+          </section>
+          <!-- end adjuntar -->
+          <!-- valor monto -->
+          <section class="bp-section bp-section_shadow mb-3 ">
+            <div class="row">
+              <div class="col-12 col-sm-6">
+                <!-- form group -->
+                <div class="form-group">
+                  <label class="" for="inputText">
+                    {{ 'CLAIMFORM.STEP3TOTAL' | translate }}</label>
+                  <input type="text" formControlName="amount" appOnlyNumber="true" autocomplete="off" name="otherValue"
+                    class="form-control" placeholder="" appCurrencyFormatter="">
+                </div>
+                <!-- end form group -->
+              </div>
+              <div class="col-12 col-sm-6" *ngIf="currencies">
+                <!-- form group -->
+                <div class="form-group">
+                  <label for="currenciesSearchType">
+                    {{'CLAIMFORM.CURRENCY_TYPE.SELECT_CURRENCY' | translate }}
+                  </label>
+                  <select [(ngModel)]="wizard.currencyId" #currency [ngModelOptions]="{standalone: true}"
+                    class="form-control" id="currenciesSearchType" (change)="selectCurrency($event, currency.value)">
+                    <option *ngFor="let currency of currencies" [value]="currency.currencyId">
+                      {{currency.currencyCode}} - {{currency.description}}
+                    </option>
+                  </select>
+                </div>
+                <!-- end form group -->
+              </div>
+            </div>
+          </section>
+          <!-- end valor monto -->
+        </section>
+        <!--End Contenido-->
+        <!-- cuadro de ayuda -->
+        <section class="col-12 col-lg-5">
+          <section [ngClass]="this.classFrameHelp" id="cuadroAyuda">
+            <h4 class="bp-color_secondary text-center">
+              <span class="bp-color_secondary d-block font-weight-bold mt-2 text-left">{{ 'CLAIMFORM.STEP3TITLE_DOCUMENTS_UPLOAD' | translate }}</span>
+            </h4>
+            <p *ngIf="this.handleIsTravelPolicy">
+              {{ 'CLAIMFORM.STEP3TITLE_DOCUMENTS_DESCRIPTION_TRV' | translate }}
+            </p>
+            <ul *ngIf="!this.handleIsTravelPolicy" >
+              <li>
+                <p>
+                  {{ 'CLAIMFORM.STEP3TITLE_DOCUMENTS_DESCRIPTION' | translate }}
+                </p>
+              </li>
+              <li>
+                <p>
+                  {{ 'CLAIMFORM.STEP3TITLE_DOCUMENTS_DESCRIPTION_1' | translate }}
+                </p>
+              </li>
+              <li>
+                <p>
+                  {{ 'CLAIMFORM.STEP3TITLE_DOCUMENTS_DESCRIPTION_2' | translate }}
+                </p>
+              </li>
+              <li>
+                <p>
+                  {{ 'CLAIMFORM.STEP3TITLE_DOCUMENTS_DESCRIPTION_3' | translate }}
+                </p>
+              </li>
+              <li>
+                <p>
+                  {{ 'CLAIMFORM.STEP3TITLE_DOCUMENTS_DESCRIPTION_4' | translate }}
+                </p>
+              </li>
+            </ul>
+            <!-- Acordeon -->
+            <section *ngIf="this.handleIsTravelPolicy">
+              <div class="bp-accordion bp-accordion-outline bp-accordion-outline--secondary " id="accordionExample">
+                <div class="card">
+                  <div class="card-header card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button (click)="toggleMedicalEvents(changeArrowMedicalEvents)" class="btn btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <strong class="d-flex align-items-center">
+                          {{ 'CLAIMFORM.STEP3TITLE_MEDICAL_EVENTS' | translate }}
+                          <app-custom-popover [title]="" [content]="[]"
+                            [template]="['CLAIMFORM.STEP3TITLE_MEDICAL_EVENTS_TOOLTIP'|translate]">
+                          </app-custom-popover>
+                        </strong>
+                        <span class="material-icons">
+                          {{ this.changeArrowMedicalEvents }}
+                        </span>
+                      </button>
+                    </h2>
+                  </div>
+  
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                      <p>
+                        {{ 'CLAIMFORM.STEP3TITLE_MEDICAL_EVENTS_DESCRIPTION' | translate }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header card-header" id="Titulo2">
+                    <h2 class="mb-0">
+                      <button (click)="toggleNonMedicalEvents(changeArrowNonMedicalEvents)" class="btn btn-block text-left collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <strong class="d-flex align-items-center">
+                          {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS' | translate }}
+                          <app-custom-popover [title]="" [content]="[]"
+                            [template]="['CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_TOOLTIP'|translate]">
+                          </app-custom-popover>
+                        </strong>
+                        <span class="material-icons">
+                          {{ this.changeArrowNonMedicalEvents }}
+                        </span>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="Titulo2" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <ul class="list-unstyled">
+                        <li>
+                          <p>
+                            <strong class="d-block">
+                              {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_THEFTORFIRE' | translate }}
+                            </strong>
+                            {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_THEFTORFIRE_DESCRIPTION' | translate }}
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <strong class="d-block">
+                              {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_FLIGHT_DELAYS' | translate }}
+                            </strong>
+                            {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_FLIGHT_DELAYS_DESCRIPTION' | translate }}
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <strong class="d-block">
+                              {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_AUTOMOBILE_INSURANCE' | translate }}
+                            </strong>
+                            {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_AUTOMOBILE_INSURANCE_DESCRIPTION' | translate }}
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <strong class="d-block">
+                              {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_DAMAGES' | translate }}
+                            </strong>
+                            {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_DAMAGES_DESCRIPTION' | translate }}
+                          </p>
+                        </li>
+                        <li *ngIf="handleIsPolicyMember && handleIsBTIPolicy">
+                          <p>
+                            <strong class="d-block">
+                              {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_REPLACE_EMPLOYEE' | translate }}
+                            </strong>
+                            {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_REPLACE_EMPLOYEE_DESCRIPTION_POLICY_MEMBER' | translate }}
+                          </p>
+                        </li>
+                        <li *ngIf="handleIsAgent && handleIsBTIPolicy">
+                          <p>
+                            <strong class="d-block">
+                              {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_REPLACE_EMPLOYEE' | translate }}
+                            </strong>
+                            {{ 'CLAIMFORM.STEP3TITLE_NO_MEDICAL_EVENTS_REPLACE_EMPLOYEE_DESCRIPTION_AGENT' | translate }}
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header card-header" id="headingThree">
+                    <h2 class="mb-0">
+                      <button (click)="toggleCancelations(changeArrowCancelations)" class="btn btn-block text-left collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <strong class="d-flex align-items-center">
+                          {{ 'CLAIMFORM.STEP3TITLE_CANCELLATIONS' | translate }}
+                          <app-custom-popover [title]="" [content]="[]"
+                            [template]="['CLAIMFORM.STEP3TITLE_CANCELLATIONS_TOOLTIP'|translate]">
+                          </app-custom-popover>
+                        </strong>
+  
+                        <span class="material-icons">
+                          {{ this.changeArrowCancelations }}
+                        </span>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                      <p>
+                        {{ 'CLAIMFORM.STEP3TITLE_CANCELLATIONS_DESCRIPTION' | translate }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- end acordeon -->
+          </section>
+        </section>
+        <!-- end cuadro de ayuda -->
+      </section>
+  
+      <article class="row">
+        <div class="col-md-12">
+  
+          <div class="row justify-content-center align-items-end">
+            <div class="col-md-3 col-12">
+              <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="cancel()">
+                {{ 'CLAIMFORM.BTNS.CANCEL' | translate }}
+              </button>
+            </div>
+            <div class="col-md-3 col-12">
+              <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="back()">
+                {{ 'CLAIMFORM.BTNS.BACK' | translate }}
+              </button>
+            </div>
+  
+            <div class="col-md-3 col-12">
+              <button class="ig-botones ig-principalbtn" type="button"
+              [disabled]="!wizard.currencyId || !wizard.searchForm.value.amount" (click)="next()">
+                {{ 'CLAIMFORM.BTNS.CONTINUE' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+  
+      </article>
+    </form>
+  </section>

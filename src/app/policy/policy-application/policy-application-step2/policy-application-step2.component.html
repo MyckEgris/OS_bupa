@@ -1,0 +1,260 @@
+<div class="row setup-content animated fadeIn" id="step-2">
+  <div class="ig-archivos">
+    <div class="row">
+
+    </div>
+    <div class="row" *ngIf="rules.length > 0">
+      <div class="col-md-12">
+        <form [formGroup]="rulesForm">
+          <div class="row">
+            <div class="col-md-3" *ngFor="let rule of rules">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="{{rule.rulesId}}"
+                  (change)="onRuleCheckboxChange(rule, $event.target.checked)">
+                <label class="form-check-label" for="{{rule.rulesId}}">
+                  {{ rule.ruleDescription }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="add-documents">
+    <div class="row">
+
+      <div class="col-lg-12 col-sm-12">
+        <h6 style="margin: 10px 0 30px 0;font-weight: 400;">
+            {{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT12' | translate }}
+        </h6>
+      </div>
+      <div class="col-lg-6 col-sm-12 botton-div">
+
+        <div class="row align-items-center">
+          <div class="col-md-7">
+            <h5>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.HEALTH' | translate }}</h5>
+          </div>
+          <div class="col-md-5">
+            <div class="upload">
+              <app-upload [typeAttachment]="type1"></app-upload>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+          <div class="ig-file-scroll">
+            <div class="row">
+              <div class="col-md-12" *ngFor="let document of documents">
+                <div class="inline-text-icon" *ngIf="document.category === 'type1'">
+                  <i class="fa" [ngClass]="document.icon"></i>
+                  <span class="text-list">
+                    {{document.file.name}}
+                    <div class="ig-icofile">
+                      <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                          class="material-icons">delete</i></a>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-new-buss">
+          <div class="row align-items-start">
+            <div class="col-md-1 col-auto text-center">
+                <i class="material-icons">info</i>
+            </div>
+            <div class="col-md-11 col-10 p-0">
+                <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT1' | translate }}</p>
+                <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT2' | translate }}</p>
+                <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT3' | translate }}</p>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="col-lg-6 col-sm-12 botton-div">
+
+        <div class="row align-items-center">
+          <div class="col-md-7">
+            <h5>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.PAYMENT' | translate }}</h5>
+          </div>
+          <div class="col-md-5">
+            <div class="upload">
+              <app-upload [typeAttachment]="type2"></app-upload>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+          <div class="ig-file-scroll">
+            <div class="row">
+              <div class="col-lg-12" *ngFor="let document of documents">
+                <div class="inline-text-icon" *ngIf="document.category === 'type2'">
+                  <i class="fa" [ngClass]="document.icon"></i>
+                  <span class="text-list">
+                    {{document.file.name}}
+                    <div class="ig-icofile">
+                      <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                          class="material-icons">delete</i></a>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-new-buss">
+            <div class="row align-items-start">
+              <div class="col-md-1 col-auto text-center">
+                  <i class="material-icons">info</i>
+              </div>
+              <div class="col-md-11 col-10 p-0">
+                  <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT7' | translate }}</p>
+                  <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT8' | translate }}</p>
+                  <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT9' | translate }}</p>
+              </div>
+            </div>
+            
+          </div>
+
+      </div>
+
+      <br>
+
+      <div class="col-lg-6 col-sm-12 botton-div">
+        <div class="row align-items-center">
+          <div class="col-md-7">
+            <h5>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.RECORDS' | translate }}</h5>
+          </div>
+          <div class="col-md-5">
+            <div class="upload">
+              <app-upload [typeAttachment]="type3"></app-upload>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+          <div class="ig-file-scroll">
+            <div class="row">
+              <div class="col-md-12" *ngFor="let document of documents">
+                <div class="inline-text-icon" *ngIf="document.category === 'type3'">
+                  <i class="fa" [ngClass]="document.icon"></i>
+                  <span class="text-list">
+                    {{document.file.name}}
+                    <div class="ig-icofile">
+                      <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                          class="material-icons">delete</i></a>
+                    </div>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ig-new-buss">
+            <div class="row align-items-start">
+              <div class="col-md-1 col-auto text-center">
+                  <i class="material-icons">info</i>
+              </div>
+              <div class="col-md-11 col-10 p-0">
+                  <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT4' | translate }}</p>
+                 
+              </div>
+            </div>
+            
+          </div>
+      </div>
+
+      <br>
+
+      <div class="col-lg-6 col-sm-12 botton-div">
+
+        <div class="row align-items-center">
+          <div class="col-md-7">
+            <h5>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.REGULATORY' | translate }}</h5>
+          </div>
+          <div class="col-md-5">
+            <div class="upload">
+              <app-upload [typeAttachment]="type4"></app-upload>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+          <div class="ig-file-scroll">
+            <div class="row">
+              <div class="col-md-12" *ngFor="let document of documents">
+                <div class="inline-text-icon" *ngIf="document.category === 'type4'">
+                  <i class="fa" [ngClass]="document.icon"></i>
+                  <span class="text-list">
+                    {{document.file.name}}
+                    <div class="ig-icofile">
+                      <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                          class="material-icons">delete</i></a>
+                    </div>
+                  </span>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="ig-new-buss">
+            <div class="row align-items-start">
+              <div class="col-md-1 col-auto text-center">
+                  <i class="material-icons">info</i>
+              </div>
+              <div class="col-md-11 col-10 p-0">
+                  <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT10' | translate }}</p>
+                  <p>{{ 'POLICY.APPLICATION.STEP2.NEWBUSSINES.HELPTEXT11' | translate }}</p>
+              </div>
+            </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<br />
+
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="ig-textosstep">
+
+      <p [innerHtml]="'APP.AUTHORIZATION_TO_COLLECT_HEALTH_INFORMATION.PARAGRAPH_1' | translate"></p>
+      <p [innerHtml]="'APP.AUTHORIZATION_TO_COLLECT_HEALTH_INFORMATION.PARAGRAPH_2' | translate"></p>
+      <p [innerHtml]="'APP.AUTHORIZATION_TO_COLLECT_HEALTH_INFORMATION.PARAGRAPH_3' | translate"></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-6 offset-md-6">
+    <div class="row align-items-center">
+
+      <div class="col-md-6">
+        <button class="ig-principalsegundariobtn ig-botones" type="button" (click)="back()">{{
+          'POLICY.APPLICATION.STEP2.BACK' | translate }}</button>
+      </div>
+      <div class="col-md-6">
+        <button class="ig-botones ig-principalbtn" type="button" (click)="next()"
+          [disabled]="documents.length === 0">{{ 'POLICY.APPLICATION.STEP2.CONTINUE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>

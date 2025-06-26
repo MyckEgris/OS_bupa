@@ -1,0 +1,225 @@
+{
+    "policyId": 123453,
+    "policyReference": null,
+    "policyStatus": null,
+    "paymentFrequency":  null,
+    "paymentFrequencyId":  null,
+    "paymentStatus": null,
+    "nextPaymentDate":  null,
+    "isGroupPolicy": false,
+    "amountToPay": null,
+    "currencySimbol": null,
+    "members": null,
+    "payments": [
+        {
+            "amount": "2381.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Check",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": "Xj4564sff",
+            "paymentStatus": "Closed"
+       },
+       {
+            "amount": "2111.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+       },
+       {
+            "amount": "2222.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Wire Transfer",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "333.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "444.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "5555.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "666.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "7777.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "4444.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "999.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "98989898.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "666665.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "67777775.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "888888.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "99999.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "111222323.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "00000000.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "998877.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "4448877.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "879754654.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        },
+        {
+            "amount": "878787.00",
+            "currencySymbol": "$",
+            "paymentDate": "2017-10-26 00:00:00.000",
+            "paymentMethod": "Credit Card",
+            "accountNumber": 9407,
+            "confirmationNumber": 568360,
+            "reference": null,
+            "paymentStatus": "Closed"
+        }
+    ]
+}

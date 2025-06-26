@@ -1,0 +1,59 @@
+<section class="ig-policyapp ig-wizarsolicitud animated fadeIn">
+  <article>
+    <div class="col-md-12">
+
+      <div class="row ig-userperf p-0 m-0">
+        <div class="col-md-12 ig-user m-0">
+          <h4 class="m-0">
+            <i class="material-icons">account_circle</i>
+            {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.TITLE' | translate }}
+          </h4>
+          <hr>
+        </div>
+      </div>
+
+      <div class="row p-4">
+
+        <div class="col-md-2 p-0">
+          <ul class="nav nav-tabs left-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#lorem-left" data-toggle="tab"
+                (click)="handleRouteMenuOption(this.SUMMARY_OPT)">
+                {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY_OPT' | translate }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#ipsum-left" data-toggle="tab" (click)="handleRouteMenuOption(this.OWNERS_OPT)">
+                {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS_OPT' | translate }} </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-10 bp-itemcontsect2 m-0">
+
+          <router-outlet></router-outlet>
+
+        </div>
+
+      </div>
+
+      <div class="row ig-provider ig-estatus m-0">
+        <div class="col-md-10 offset-md-2 left-content">
+          <div class="row">
+
+            <div class="col-md-3">
+              <p class="ig-itembold">{{ 'USER.PROFILEVIEW.STATUS' | translate }}</p>
+            </div>
+
+            <div class="col-md-9 p-0" *ngIf="this.actualDate">
+              <a href=""> {{ 'USER.PROFILEVIEW.READEDANDACCEPTED' | translate }}</a>
+              {{actualDate | dateTranslate : 'APP.DATE_FORMAT'}}
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</section>

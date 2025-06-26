@@ -1,0 +1,9 @@
+<div class="modal-body" #modalBody style="position: relative;">
+    <img *ngFor="let item of cardsCollection" class="img-fluid" [src]="item" style="width: 50%">
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-sm" (click)="ok()"> {{ 'NOTIFICATION.CLOSE' | translate }}</button>
+    <button type="button" class="btn btn-info btn-sm" (click)="print();">
+        {{ 'NOTIFICATION.PRINT' | translate }}
+    </button>
+</div>

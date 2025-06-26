@@ -1,0 +1,690 @@
+<section class="bp-mainpolicy">
+  <form [formGroup]="wizard.enrollmentForm" (ngSubmit)="next()">
+    <article class="row" formGroupName="policyApplicationBeneficiaries">
+
+      <div class="col-md-12">
+        <div class="bp-itemtitle">
+          <!-- <div class="bp-titlenum">
+            {{currentStep}}
+          </div> -->
+          <h2 class="bp-titlepolicy">
+            {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SUBTITLE' | translate }}
+          </h2>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <app-policy-enrollment-info></app-policy-enrollment-info>
+      </div>
+
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+          <div class="bg-sectmed">
+            <div class="row align-items-end">
+              <div class="col-md-12">
+                <h4 class="bp-contentitle">
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SUB_TITLE' | translate }}
+                </h4>
+                <p>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP6.TEXT_1' | translate }}
+                </p>
+
+                <div class="row" formGroupName="policyAppBeneficiary">
+                  <div class="col-md-12" [ngClass]="{'form-group': true, 'border-danger': showMsgNoQuestionAnswer }">
+                    <p>{{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.QUESTION' | translate }}</p>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" name="question" type="radio" id="question1" value="true"
+                        (change)="handleCheck($event.target.value)" formControlName="question">
+                      <label class="form-check-label" for="question1">{{ 'POLICY.POLICY_ENROLLMENT.STEP6.YES' | translate }}</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" name="question" type="radio" id="question2" value="false"
+                        (change)="handleCheck($event.target.value)" formControlName="question">
+                      <label class="form-check-label" for="question2">{{ 'POLICY.POLICY_ENROLLMENT.STEP6.NO' | translate }}</label>
+                    </div>
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('policyAppBeneficiary','question').errors?.required">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','question', 'required') | uppercase | translate}}
+                  </div>
+                </div>
+
+                <ng-container *ngIf="addingBeneficiary">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="mb-3">{{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.SUB_TEXT' | translate }}</p>
+                    </div>
+                    <div class="col-md-4" formGroupName="policyAppBeneficiary">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h4 class="bp-contentitle">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SUB_TITLE2' | translate }}
+                          </h4>                    
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label
+                              for="firstName">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.FIRST_NAME' | translate }}</label>
+                            <input type="text" class="form-control" id="firstName"
+                              placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_NAME' | translate }}"
+                              [required]="getControl('policyAppBeneficiary', 'firstName').errors?.required"
+                              [maxlength]="getValidatorValue('policyAppBeneficiary','firstName', 'maxLength')"
+                              [pattern]="getValidatorValue('policyAppBeneficiary','firstName', 'pattern')"
+                              [minlength]="getValidatorValue('policyAppBeneficiary','firstName', 'minLength')"
+                              formControlName="firstName">
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','firstName').errors?.pattern">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','firstName', 'pattern') | uppercase | translate}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','firstName').errors?.maxlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','firstName', 'maxLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','firstName').errors?.maxlength.requiredLength}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','firstName').errors?.minlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','firstName', 'minLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','firstName').errors?.minlength.requiredLength}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label
+                              for="secondName">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.LAST_NAME' | translate }}</label>
+                            <input type="text" class="form-control" id="secondName"
+                              placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_LAST_NAME' | translate }}"
+                              [required]="getControl('policyAppBeneficiary', 'secondName').errors?.required"
+                              [maxlength]="getValidatorValue('policyAppBeneficiary','secondName', 'maxLength')"
+                              [pattern]="getValidatorValue('policyAppBeneficiary','secondName', 'pattern')"
+                              [minlength]="getValidatorValue('policyAppBeneficiary','secondName', 'minLength')"
+                              formControlName="secondName">
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','secondName').errors?.pattern">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','secondName', 'pattern') | uppercase | translate}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','secondName').errors?.maxlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','secondName', 'maxLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','secondName').errors?.maxlength.requiredLength}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','secondName').errors?.minlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','secondName', 'minLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','secondName').errors?.minlength.requiredLength}}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label for="surname">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.SURNAME' | translate }} </label>
+                            <input type="text" class="form-control" id="surname"
+                              placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_FATHER_LAST_NAME' | translate }}"
+                              [required]="getControl('policyAppBeneficiary', 'surname').errors?.required"
+                              [maxlength]="getValidatorValue('policyAppBeneficiary','surname', 'maxLength')"
+                              [pattern]="getValidatorValue('policyAppBeneficiary','surname', 'pattern')"
+                              [minlength]="getValidatorValue('policyAppBeneficiary','surname', 'minLength')"
+                              formControlName="surname">
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','surname').errors?.pattern">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','surname', 'pattern') | uppercase | translate}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','surname').errors?.maxlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','surname', 'maxLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','surname').errors?.maxlength.requiredLength}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','surname').errors?.minlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','surname', 'minLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','surname').errors?.minlength.requiredLength}}
+                            </div>
+                          </div>                        
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label
+                              for="secondSurname">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.SURNAME_MOTHER' | translate }}</label>
+                            <input type="text" class="form-control" id="secondSurname"
+                              placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_MOTHER_LAST_NAME' | translate }}"
+                              [required]="getControl('policyAppBeneficiary', 'secondSurname').errors?.required"
+                              [maxlength]="getValidatorValue('policyAppBeneficiary','secondSurname', 'maxLength')"
+                              [pattern]="getValidatorValue('policyAppBeneficiary','secondSurname', 'pattern')"
+                              [minlength]="getValidatorValue('policyAppBeneficiary','secondSurname', 'minLength')"
+                              formControlName="secondSurname">
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','secondSurname').errors?.pattern">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','secondSurname', 'pattern') | uppercase | translate}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','secondSurname').errors?.maxlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','secondSurname', 'maxLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','secondSurname').errors?.maxlength.requiredLength}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiary','secondSurname').errors?.minlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','secondSurname', 'minLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiary','secondSurname').errors?.minlength.requiredLength}}
+                            </div>
+                          </div>
+                        </div>  
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="dob">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.DOB' | translate }}</label>
+                            <app-datepicker-wrapper formControlName="dob"
+                              [hasErrors]="getControl('policyAppBeneficiary','dob').errors"
+                              [showValidations]="showMsgValidation">
+                            </app-datepicker-wrapper>
+                            <small class="text-danger"
+                              *ngIf="getControl('policyAppBeneficiary','dob').errors?.invalidAdultAge && showMsgValidation">
+                              {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.' | concatenate: getValidatorMessage('policyAppBeneficiary','dob', 'isAnAdultAge') | uppercase | translate}}
+                            </small>
+                          </div>
+                        </div>  
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group" [ngClass]="{ 'was-validated' : showMsgValidation}"
+                                *ngIf="getField('typeOfDocument') && getField('typeOfDocument').visible">
+                                <label for="identificationType">
+                                  {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_ID_TYPES' | translate }}
+                                </label>
+                                <ng-select #identificationTypeSelect [items]="identificationsTypes" [selectOnTab]="true"
+                                  bindValue="typeIdentification" bindLabel="value" formControlName="typeOfDocument"
+                                  [required]="getControl('policyAppBeneficiary', 'typeOfDocument').errors?.required"
+                                  class="form-control"
+                                  [placeholder]="getControl('policyAppBeneficiary', 'typeOfDocument').value !== null && getControl('policyAppBeneficiary', 'typeOfDocument').value !== ''
+                                                  ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group" [ngClass]="{ 'was-validated' : showMsgValidation}"
+                                *ngIf="getField('numberOfDocument') && getField('numberOfDocument').visible">
+                                <label for="numberOfDocument">
+                                  {{'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.DOCUMENT' | translate }}
+                                </label>
+                                <input type="text" class="form-control" id="numberOfDocument"
+                                  placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.PH_DOCUMENT' | translate }}"
+                                  formControlName="numberOfDocument"
+                                  [maxlength]="getValidatorValue('policyAppBeneficiary', 'numberOfDocument', 'maxLength')"
+                                  [pattern]="getValidatorValue('policyAppBeneficiary','numberOfDocument', 'pattern')"
+                                  [minlength]="getValidatorValue('policyAppBeneficiary','numberOfDocument', 'minLength')"
+                                  [required]="getControl('policyAppBeneficiary','numberOfDocument').hasError('required')">
+                                <div class="invalid-feedback" *ngIf="getControl('policyAppBeneficiary', 'numberOfDocument').errors?.pattern">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('numberOfDocument', 'pattern') | uppercase | translate}}
+                                </div>
+                                <div class="invalid-feedback" *ngIf="getControl('policyAppBeneficiary', 'numberOfDocument').errors?.maxlength">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('numberOfDocument', 'maxLength') | uppercase | translate}}
+                                  {{getControl('policyAppBeneficiary', 'numberOfDocument').errors?.maxlength.requiredLength}}
+                                </div>
+                                <div class="invalid-feedback" *ngIf="getControl('policyAppBeneficiary', 'numberOfDocument').errors?.minlength">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('numberOfDocument', 'minLength') | uppercase | translate}}
+                                  {{getControl('policyAppBeneficiary', 'numberOfDocument').errors?.minlength.requiredLength}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div> 
+                        <ng-container *ngIf="isControlVisible('relationCustomer', 1)">
+                          <div class="col-md-12">
+                            <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                              <label for="relationCustomer">{{ 'POLICY.POLICY_ENROLLMENT.STEP6.LABEL_OWNER_RELATIONSHIP' | translate }}</label>
+                              <input type="text" class="form-control" id="relationCustomer" formControlName="relationCustomer"
+                                [required]="getControl('policyAppBeneficiary', 'relationCustomer').errors?.required"
+                                [maxlength]="getValidatorValue('policyAppBeneficiary','relationCustomer', 'maxLength')"
+                                [pattern]="getValidatorValue('policyAppBeneficiary','relationCustomer', 'pattern')"
+                                [minlength]="getValidatorValue('policyAppBeneficiary','relationCustomer', 'minLength')"
+                                [placeholder]="'POLICY.POLICY_ENROLLMENT.STEP6.PH_OWNER_RELATIONSHIP' | translate">
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiary','relationCustomer').errors?.pattern">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','relationCustomer', 'pattern') | uppercase | translate}}
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiary','relationCustomer').errors?.maxlength">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','relationCustomer', 'maxLength') | uppercase | translate}}
+                                {{getControl('policyAppBeneficiary','relationCustomer').errors?.maxlength.requiredLength}}
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiary','relationCustomer').errors?.minlength">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiary','relationCustomer', 'minLength') | uppercase | translate}}
+                                {{getControl('policyAppBeneficiary','relationCustomer').errors?.minlength.requiredLength}}
+                              </div>
+                            </div>
+                          </div>
+                        </ng-container>
+                          
+                      </div>
+                    </div>
+
+                    <div class="col-md-4" formGroupName="policyAppBeneficiaryHomeAddress">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h4 class="bp-contentitle">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.CONTENT_TITLE_HOMEADDRESS' | translate }}
+                          </h4>                    
+                        </div>   
+
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label
+                              for="countryHomeAddress">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.COUNTRY' | translate }}</label>
+                            <ng-select #countriesContactPhone [items]="wizard.countries$ | async" [selectOnTab]="true"
+                              bindValue="countryId" bindLabel="countryName" formControlName="countryHomeAddress"
+                              class="form-control"
+                              [required]="getControl('policyAppBeneficiaryHomeAddress', 'countryHomeAddress').errors?.required"
+                              (change)="handleCountryChangeHomeAddress($event)" [placeholder]="getControl('policyAppBeneficiaryHomeAddress', 'countryHomeAddress').value !== null
+                                  && getControl('policyAppBeneficiaryHomeAddress', 'countryHomeAddress').value !== ''
+                                  ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                            </ng-select>
+                          </div>                      
+                        </div>  
+
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label for="state">{{ 'POLICY.POLICY_ENROLLMENT.STEP6.STATE' | translate }}</label>
+                            <input type="text" class="form-control" id="state" formControlName="state"
+                              [required]="getControl('policyAppBeneficiaryHomeAddress', 'state').errors?.required"
+                              [maxlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','state', 'maxLength')"
+                              [pattern]="getValidatorValue('policyAppBeneficiaryHomeAddress','state', 'pattern')"
+                              [minlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','state', 'minLength')"
+                              placeholder="Ej: Herrera">
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiaryHomeAddress','state').errors?.pattern">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','state', 'pattern') | uppercase | translate}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiaryHomeAddress','state').errors?.maxlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','state', 'maxLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiaryHomeAddress','state').errors?.maxlength.requiredLength}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiaryHomeAddress','state').errors?.minlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','state', 'minLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiaryHomeAddress','state').errors?.minlength.requiredLength}}
+                            </div>
+                          </div>                      
+                        </div> 
+
+                        <ng-container *ngIf="!isMexicoCountry">
+                          <div class="col-md-12">
+                            <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                              <label for="cityHomeAddress">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.CITY' | translate }}</label>
+                              <ng-select #citiesHomePhone [items]="citiesHomeAddress$ | async" [selectOnTab]="true"
+                                bindValue="cityId" bindLabel="cityName" formControlName="cityHomeAddress"
+                                class="form-control"
+                                [required]="getControl('policyAppBeneficiaryHomeAddress', 'cityHomeAddress').errors?.required"
+                                [placeholder]="getControl('policyAppBeneficiaryHomeAddress', 'cityHomeAddress').value !== null
+                                  && getControl('policyAppBeneficiaryHomeAddress', 'cityHomeAddress').value !== ''
+                                  ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate">
+                              </ng-select>
+                            </div>                      
+                          </div>                        
+                        </ng-container>
+                        
+                        <ng-container>
+                          <div class="col-md-12">
+                            <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                              <label for="zipCode">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.ZIP_CODE' | translate }}</label>
+                              <div class="input-group">
+                                <input type="text" class="form-control" id="zipCode" formControlName="zipCode"
+                                  [required]="getControl('policyAppBeneficiaryHomeAddress', 'zipCode').errors?.required"
+                                  [maxlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','zipCode', 'maxLength')"
+                                  [pattern]="getValidatorValue('policyAppBeneficiaryHomeAddress','zipCode', 'pattern')"
+                                  [minlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','zipCode', 'minLength')"
+                                  [placeholder]="getControl('policyAppBeneficiaryHomeAddress', 'zipCode') !== null
+                                                  && getControl('policyAppBeneficiaryHomeAddress', 'zipCode').value !== ''
+                                                  ? '': 'POLICY.POLICY_ENROLLMENT.ADDRESS.PH_ZIP_CODE' | translate ">
+                                <div class="input-group-append" *ngIf="isMexicoCountry">
+                                  <button class="bp-btn bp-btnsecondary" type="button" (click)="searchZipCode('zipCode')"
+                                    [disabled]="!getControl('policyAppBeneficiaryHomeAddress','zipCode').value || getControl('policyAppBeneficiaryHomeAddress', 'zipCode').invalid">
+                                    <i class="material-icons">search</i> Buscar
+                                  </button>
+                                </div>
+                                <div class="invalid-feedback"
+                                  *ngIf="getControl('policyAppBeneficiaryHomeAddress','zipCode').errors?.pattern">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','zipCode', 'pattern') | uppercase | translate}}
+                                </div>
+                                <div class="invalid-feedback"
+                                  *ngIf="getControl('policyAppBeneficiaryHomeAddress','zipCode').errors?.maxlength">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','zipCode', 'maxLength') | uppercase | translate}}
+                                  {{getControl('policyAppBeneficiaryHomeAddress','zipCode').errors?.maxlength.requiredLength}}
+                                </div>
+                                <div class="invalid-feedback"
+                                  *ngIf="getControl('policyAppBeneficiaryHomeAddress','zipCode').errors?.minlength">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','zipCode', 'minLength') | uppercase | translate}}
+                                  {{getControl('policyAppBeneficiaryHomeAddress','zipCode').errors?.minlength.requiredLength}}
+                                </div>
+                              </div>
+                            </div>                      
+                          </div>                      
+                        </ng-container>
+                        
+                        <ng-container>
+                          <div class="col-md-12">
+                            <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                              <label for="streeAvenue">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.STREET' | translate }}</label>
+                              <input type="text" class="form-control" id="streeAvenue" formControlName="streeAvenue"
+                                [required]="getControl('policyAppBeneficiaryHomeAddress', 'streeAvenue').errors?.required"
+                                [maxlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','streeAvenue', 'maxLength')"
+                                [pattern]="getValidatorValue('policyAppBeneficiaryHomeAddress','streeAvenue', 'pattern')"
+                                [minlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','streeAvenue', 'minLength')"
+                                [placeholder]="getControl('policyAppBeneficiaryHomeAddress', 'streeAvenue').value !== null
+                                                && getControl('policyAppBeneficiaryHomeAddress', 'streeAvenue').value !== ''
+                                                ? '': 'POLICY.POLICY_ENROLLMENT.ADDRESS.PH_STREET_AVENUE' | translate ">
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiaryHomeAddress','streeAvenue').errors?.pattern">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','streeAvenue', 'pattern') | uppercase | translate}}
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiaryHomeAddress','streeAvenue').errors?.maxlength">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','streeAvenue', 'maxLength') | uppercase | translate}}
+                                {{getControl('policyAppBeneficiaryHomeAddress','streeAvenue').errors?.maxlength.requiredLength}}
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiaryHomeAddress','streeAvenue').errors?.minlength">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','streeAvenue', 'minLength') | uppercase | translate}}
+                                {{getControl('policyAppBeneficiaryHomeAddress','streeAvenue').errors?.minlength.requiredLength}}
+                              </div>
+                            </div>                          
+                          </div>
+                        </ng-container>
+                        
+                        <ng-container *ngIf="isMexicoCountry">
+                          <div class="col-md-12">
+                            <div class="form-group" [style.margin-top]="'24px'"
+                              [ngClass]="{ 'was-validated' : wasValidateCss }">
+                              <label
+                                for="mayoralMunicipality">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.MAYORALTY_MUNICIPALITY' | translate }}</label>
+                              <input type="text" class="form-control" id="mayoralMunicipality"
+                                formControlName="mayoralMunicipality"
+                                [required]="getControl('policyAppBeneficiaryHomeAddress', 'mayoralMunicipality').errors?.required"
+                                [maxlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','mayoralMunicipality', 'maxLength')"
+                                [pattern]="getValidatorValue('policyAppBeneficiaryHomeAddress','mayoralMunicipality', 'pattern')"
+                                [minlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','mayoralMunicipality', 'minLength')"
+                                placeholder="">
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiaryHomeAddress','mayoralMunicipality').errors?.pattern">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','mayoralMunicipality', 'pattern') | uppercase | translate}}
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiaryHomeAddress','mayoralMunicipality').errors?.maxlength">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','mayoralMunicipality', 'maxLength') | uppercase | translate}}
+                                {{getControl('policyAppBeneficiaryHomeAddress','mayoralMunicipality').errors?.maxlength.requiredLength}}
+                              </div>
+                              <div class="invalid-feedback"
+                                *ngIf="getControl('policyAppBeneficiaryHomeAddress','mayoralMunicipality').errors?.minlength">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','mayoralMunicipality', 'minLength') | uppercase | translate}}
+                                {{getControl('policyAppBeneficiaryHomeAddress','mayoralMunicipality').errors?.minlength.requiredLength}}
+                              </div>
+                            </div>                      
+                          </div>                      
+                        </ng-container>
+
+                        <ng-container *ngIf="isMexicoCountry">
+                          <div class="col-md-12">
+                            <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                              <label for="locality">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.LOCALITY' | translate }}</label>
+                              <ng-select #localities [items]="localities$ | async" [selectOnTab]="true"
+                                bindValue="localityId" bindLabel="localityName" formControlName="locality"
+                                class="form-control"
+                                [required]="getControl('policyAppBeneficiaryHomeAddress', 'locality').errors?.required"
+                                [placeholder]="getControl('policyAppBeneficiaryHomeAddress', 'locality').value !== null
+                                                && getControl('policyAppBeneficiaryHomeAddress', 'locality').value !== ''
+                                                ? '':'POLICY.POLICY_ENROLLMENT.ADDRESS.PH_LOCALITY' | translate ">
+                              </ng-select>
+                            </div>                            
+                          </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="isMexicoCountry">
+                          <div class="col-md-12">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                                  <label for="insideNumber">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.INSIDE' | translate }}
+                                  </label>
+                                  <input type="text" class="form-control" id="insideNumber" formControlName="insideNumber"
+                                    [required]="getControl('policyAppBeneficiaryHomeAddress', 'insideNumber').errors?.required"
+                                    [maxlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','insideNumber', 'maxLength')"
+                                    [pattern]="getValidatorValue('policyAppBeneficiaryHomeAddress','insideNumber', 'pattern')"
+                                    [minlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','insideNumber', 'minLength')"
+                                    [placeholder]="'POLICY.POLICY_ENROLLMENT.ADDRESS.PH_INSIDE_NUM' | translate ">
+                                  <div class="invalid-feedback"
+                                    *ngIf="getControl('policyAppBeneficiaryHomeAddress','insideNumber').errors?.pattern">
+                                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','insideNumber', 'pattern') | uppercase | translate}}
+                                  </div>
+                                  <div class="invalid-feedback"
+                                    *ngIf="getControl('policyAppBeneficiaryHomeAddress','insideNumber').errors?.maxlength">
+                                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','insideNumber', 'maxLength') | uppercase | translate}}
+                                    {{getControl('policyAppBeneficiaryHomeAddress','insideNumber').errors?.maxlength.requiredLength}}
+                                  </div>
+                                  <div class="invalid-feedback"
+                                    *ngIf="getControl('policyAppBeneficiaryHomeAddress','insideNumber').errors?.minlength">
+                                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','insideNumber', 'minLength') | uppercase | translate}}
+                                    {{getControl('policyAppBeneficiaryHomeAddress','insideNumber').errors?.minlength.requiredLength}}
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                                  <label
+                                    for="outsideNumber">{{ 'POLICY.POLICY_ENROLLMENT.ADDRESS.OUTSIDE' | translate }}</label>
+                                  <input type="text" class="form-control" id="outsideNumber" formControlName="outsideNumber"
+                                    [required]="getControl('policyAppBeneficiaryHomeAddress', 'outsideNumber').errors?.required"
+                                    [maxlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','outsideNumber', 'maxLength')"
+                                    [pattern]="getValidatorValue('policyAppBeneficiaryHomeAddress','outsideNumber', 'pattern')"
+                                    [minlength]="getValidatorValue('policyAppBeneficiaryHomeAddress','outsideNumber', 'minLength')"
+                                    [placeholder]="getControl('policyAppBeneficiaryHomeAddress','outsideNumber').value !== null
+                                        && getControl('policyAppBeneficiaryHomeAddress','outsideNumber').value !== ''
+                                            ? '': 'POLICY.POLICY_ENROLLMENT.ADDRESS.PH_OUTSIDE_NUM' | translate ">
+                                  <div class="invalid-feedback"
+                                    *ngIf="getControl('policyAppBeneficiaryHomeAddress','outsideNumber').errors?.pattern">
+                                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','outsideNumber', 'pattern') | uppercase | translate}}
+                                  </div>
+                                  <div class="invalid-feedback"
+                                    *ngIf="getControl('policyAppBeneficiaryHomeAddress','outsideNumber').errors?.maxlength">
+                                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','outsideNumber', 'maxLength') | uppercase | translate}}
+                                    {{getControl('policyAppBeneficiaryHomeAddress','outsideNumber').errors?.maxlength.requiredLength}}
+                                  </div>
+                                  <div class="invalid-feedback"
+                                    *ngIf="getControl('policyAppBeneficiaryHomeAddress','outsideNumber').errors?.minlength">
+                                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryHomeAddress','outsideNumber', 'minLength') | uppercase | translate}}
+                                    {{getControl('policyAppBeneficiaryHomeAddress','outsideNumber').errors?.minlength.requiredLength}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>                        
+                          </div>
+                        </ng-container>
+                        
+                        
+                      </div>
+                    </div>
+
+                    <div class="col-md-4" formGroupName="policyAppBeneficiaryContactPhone">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h4 class="bp-contentitle">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.CONTENT_TITLE_PHONECONTACT' | translate }}
+                          </h4>                        
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label
+                              for="countryContactPhone">{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.COUNTRY' | translate }}
+                            </label>
+                            <ng-select #countriesContactPhone [items]="wizard.countries$ | async" [selectOnTab]="true"
+                              bindValue="countryId" bindLabel="countryName" formControlName="countryContactPhone"
+                              [required]="getControl('policyAppBeneficiaryContactPhone', 'countryContactPhone').errors?.required"
+                              class="form-control" (change)="handleCountryChangeContactPhone($event)" [placeholder]="getControl('policyAppBeneficiaryContactPhone', 'countryContactPhone').value !== null && getControl('policyAppBeneficiaryContactPhone', 'countryContactPhone').value !== ''
+                                      ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                            </ng-select>
+                          </div>                        
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label
+                              for="cityContactPhone">{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.CITY' | translate }}</label>
+                            <ng-select #citiesContactPhone [items]="citiesContactPhone$ | async" [selectOnTab]="true"
+                              bindValue="cityId" bindLabel="cityName" formControlName="cityContactPhone"
+                              [required]="getControl('policyAppBeneficiaryContactPhone', 'cityContactPhone').errors?.required"
+                              class="form-control" (change)="handleCityChangeContactPhone($event)" [placeholder]="getControl('policyAppBeneficiaryContactPhone', 'cityContactPhone').value !== null
+                                    && getControl('policyAppBeneficiaryContactPhone', 'cityContactPhone').value !== ''
+                                    ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate">
+                            </ng-select>
+                          </div>                        
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                                <label
+                                  for="areaCode">{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.AREA_CODE' | translate }}</label>
+                                <ng-select #citiesContactPhone [items]="areaCodes$ | async" [selectOnTab]="true"
+                                  bindValue="areaCodeId" bindLabel="areaCode" formControlName="areaCode"
+                                  [required]="getControl('policyAppBeneficiaryContactPhone', 'areaCode').errors?.required"
+                                  class="form-control" [placeholder]="getControl('policyAppBeneficiaryContactPhone', 'areaCode').value !== null
+                                                  && getControl('policyAppBeneficiaryContactPhone', 'areaCode').value !== ''
+                                                  ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate">
+                                </ng-select>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                                <label
+                                  for="phoneNumber">{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PHONE' | translate }}</label>
+                                <input type="text"
+                                  [required]="getControl('policyAppBeneficiaryContactPhone', 'phoneNumber').errors?.required"
+                                  [maxlength]="getValidatorValue('policyAppBeneficiaryContactPhone','phoneNumber', 'maxLength')"
+                                  [pattern]="getValidatorValue('policyAppBeneficiaryContactPhone','phoneNumber', 'pattern')"
+                                  [minlength]="getValidatorValue('policyAppBeneficiaryContactPhone','phoneNumber', 'minLength')"
+                                  class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                                  placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_PHONE' | translate }}">
+                                <div class="invalid-feedback"
+                                  *ngIf="getControl('policyAppBeneficiaryContactPhone','phoneNumber').errors?.pattern">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryContactPhone','phoneNumber', 'pattern') | uppercase | translate}}
+                                </div>
+                                <div class="invalid-feedback"
+                                  *ngIf="getControl('policyAppBeneficiaryContactPhone','phoneNumber').errors?.maxlength">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryContactPhone','phoneNumber', 'maxLength') | uppercase | translate}}
+                                  {{getControl('policyAppBeneficiaryContactPhone','phoneNumber').errors?.maxlength.requiredLength}}
+                                </div>
+                                <div class="invalid-feedback"
+                                  *ngIf="getControl('policyAppBeneficiaryContactPhone','phoneNumber').errors?.minlength">
+                                  {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryContactPhone','phoneNumber', 'minLength') | uppercase | translate}}
+                                  {{getControl('policyAppBeneficiaryContactPhone','phoneNumber').errors?.minlength.requiredLength}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : wasValidateCss }">
+                            <label
+                              for="cellPhoneNumber">{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.CELL_PHONE_NUMBER' | translate }}</label>
+                            <input type="text" class="form-control" id="cellPhoneNumber" formControlName="cellPhoneNumber"
+                              [required]="getControl('policyAppBeneficiaryContactPhone', 'cellPhoneNumber').errors?.required"
+                              [maxlength]="getValidatorValue('policyAppBeneficiaryContactPhone','cellPhoneNumber', 'maxLength')"
+                              [pattern]="getValidatorValue('policyAppBeneficiaryContactPhone','cellPhoneNumber', 'pattern')"
+                              [minlength]="getValidatorValue('policyAppBeneficiaryContactPhone','cellPhoneNumber', 'minLength')"
+                              placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_CELL_PHONE_NUMBER' | translate }}">
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiaryContactPhone','cellPhoneNumber').errors?.pattern">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryContactPhone','cellPhoneNumber', 'pattern') | uppercase | translate}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiaryContactPhone','cellPhoneNumber').errors?.maxlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryContactPhone','cellPhoneNumber', 'maxLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiaryContactPhone','cellPhoneNumber').errors?.maxlength.requiredLength}}
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="getControl('policyAppBeneficiaryContactPhone','cellPhoneNumber').errors?.minlength">
+                              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyAppBeneficiaryContactPhone','cellPhoneNumber', 'minLength') | uppercase | translate}}
+                              {{getControl('policyAppBeneficiaryContactPhone','cellPhoneNumber').errors?.minlength.requiredLength}}
+                            </div>
+                          </div>                        
+                        </div>
+
+                        <ng-container *ngIf="isControlVisible('email', 2)">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="email">
+                                {{'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.EMAIL' | translate }}
+                              </label>
+                              <input type="text" class="form-control" formControlName="email"
+                                [placeholder]="'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_EMAIL' | translate "
+                                [ngClass]="{'is-invalid': getControl('policyAppBeneficiaryContactPhone', 'email').invalid && showMsgValidation,
+                                            'is-valid': getControl('policyAppBeneficiaryContactPhone', 'email').valid && showMsgValidation}"
+                                [required]="getControl('policyAppBeneficiaryContactPhone', 'email').errors?.required">
+                              <small class="text-danger"
+                                *ngIf="getControl('policyAppBeneficiaryContactPhone', 'email').errors?.invalidEmail && showMsgValidation">
+                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('email', 'emailPatternValidator') | uppercase | translate}}
+                              </small>
+                            </div>
+                          </div>
+                        </ng-container>
+
+                      </div>
+                    </div>
+
+                    <ng-container *ngIf="isMexicoCountry">
+                      <div class="col-md-12 mt-5 p-0">
+                        <div class="bp-alertform">
+                          <div class="card-message2" role="alert">
+                            <i class="material-icons">info</i>
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.SECT_FOOTER_TEXT' | translate }}
+                          </div>
+                        </div>
+                      </div>                    
+                    </ng-container>
+                    
+                  </div>                
+                </ng-container>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mt-5 p-0" *ngIf="showMsgValidation && !isFormValid()">
+            <div class="bp-alertform">
+              <div class="alert alert-danger" role="alert">
+                <i class="material-icons">info</i>
+                {{ 'POLICY.POLICY_ENROLLMENT.STEP1.ALERT_COMPLETE_FORM' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mt-5 p-0" *ngIf="showMsgNoQuestionAnswer">
+            <div class="bp-alertform">
+              <div class="alert alert-danger" role="alert">
+                <i class="material-icons">info</i>
+                {{ 'POLICY.POLICY_ENROLLMENT.STEP6.SECTION_01.MSG_QUESTION' | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mt-5 p-0">
+            <div class="row">
+              <div class="col-md-4 offset-md-4">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <button class="bp-btn bp-btnsecondary" type="button" (click)="back()">
+                      {{'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="bp-btn bp-btnprimary" type="submit">
+                      {{'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </form>
+</section>

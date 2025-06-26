@@ -1,0 +1,9 @@
+<section class="centeredSection" >
+  <div class="middleText col-10 offset-1 col-lg-6 offset-lg-3" [hidden]="!waitingActivation">
+    <h5 class="generalTextColor" >{{ 'MOBILEAPP.ACTIVATIONACCOUNT.WAITING' | translate }}</h5>
+  </div>
+  <div class="middleText col-10 offset-1 col-lg-6 offset-lg-3" [hidden]="waitingActivation">
+    <h5 class="generalTextColor" [hidden]="!activationSucceeded" >{{ 'MOBILEAPP.ACTIVATIONACCOUNT.SUCCESS.MESSAGE' | translate }}</h5>
+    <h5 class="generalTextColor" [hidden]="activationSucceeded" >{{ 'MOBILEAPP.ACTIVATIONACCOUNT.ERROR.MESSAGE' | translate }}</h5>
+  </div>
+</section>

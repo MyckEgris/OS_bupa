@@ -1,0 +1,442 @@
+<section class="ig-validation">
+  <article class="">
+
+    <div class="col-md-12 ig-requestpre">
+      <div class="row align-items-center">
+
+        <div class="col-lg-9 col-sm-6 col-md-8 ig-title">
+          <h5> {{'CLAIMS.PARENT.TITLE' | translate}} </h5>
+          <br>
+          <p> {{'CLAIMS.PARENT.SUBTITLE' | translate}} </p>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-md-4 text-right" *ngIf="hasPermissionCreateClaimSubmission">
+          <button type="button" class="ig-botones ig-secundariobtn" (click)="routeToCreateClaimBtn()">
+            <i class="material-icons">assignment_turned_in</i>
+            {{ 'CLAIMS.PARENT.CREATE_CLAIM_BTN' | translate }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="row align-items-center ig-radioButton">
+        <div class="col-lg-12 col-sm-12 col-md-12 btn-group btn-group-toggle" ngbRadioGroup name="claimSourceRadio"
+          [(ngModel)]="claimsFromSource">
+          <label ngbButtonLabel class=" ig-botones ig-outlineprincipalbtn col-lg-3 col-sm-6 col-md-4">
+            <input ngbButton type="radio" [value]="1" (click)='claimSourceChanged(1)'> {{ 'CLAIMS.PARENT.MEXICO_CLAIMS'
+            | translate }}
+          </label>
+          <label ngbButtonLabel class=" ig-botones ig-outlineprincipalbtn col-lg-3 col-sm-6 col-md-4">
+            <input ngbButton type="radio" [value]="2" (click)="claimSourceChanged(2)"> {{ 'CLAIMS.PARENT.USA_CLAIMS' |
+            translate }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <article class="col-md-12">
+      <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade" id="#renovaciones" role="tabpanel" aria-labelledby="renovaciones-tab">...
+        </div>
+
+        <div class="tab-pane" id="comisiones" role="tabpanel" aria-labelledby="comisiones-tab">...</div>
+
+        <div class="tab-pane fade show active" id="reclamos" role="tabpanel" aria-labelledby="reclamos-tab">
+          <form [formGroup]="claimViewForm" (ngSubmit)="getClaimsByAgentRoleAndStateMemberName(0)"
+            class="ig-searchpolconten">
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="ig-searchpol">
+                  <div class="row align-items-center">
+
+                    <!-- *ngIf="claimsFromSource === 1" -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select id="selectedClaimStatus" formControlName="selectedClaimStatus"
+                          (change)="clearFields(false);" class="custom-select form-control">
+                          <option *ngFor="let type of claimStatus" value="{{type.value}}">{{
+                            'CLAIMS.AGENT.STATUS.' | concatenate: type.value | uppercase |
+                            translate}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- *ngIf="!IS_POLICY_HOLDER" -->
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <input id="policyId" formControlName="policyId" appOnlyNumber="true" class="form-control"
+                          placeholder="{{ 'CLAIMS.INCOMPLETE_OR_PENDING.POLICY_NUMBER2' | translate }}" type="text">
+                      </div>
+                    </div>
+                    <!-- *ngIf="!IS_POLICY_HOLDER && claimsFromSource === 1" -->
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <input id="claimsListLogId" formControlName="claimsListLogId" class="form-control"
+                          placeholder="{{ 'CLAIMS.PROCESSED_CLAIMS.CLAIM_NUMBER3' | translate }}" type="text">
+                      </div>
+                    </div>
+                    <!-- <div class="col-md-2" *ngIf="!IS_POLICY_HOLDER && claimsFromSource === 1">
+                      <div class="form-group">
+                        <input id="legacyNumber" formControlName="legacyNumber"
+                          class="form-control" placeholder="{{ 'CLAIMS.PROCESSED_CLAIMS.LEGACY_NUMBER' | translate }}"
+                          type="text">
+                      </div>
+                    </div> -->
+
+                    <div class="col-md-2">
+                      <!--*ngIf="(claimsFromSource === 2 && claims.count > 0) || claimsFromSource === 1"-->
+                      <div class="form-group">
+                        <input id="claimNumber" formControlName="claimNumber" appOnlyNumber="true" class="form-control"
+                          placeholder="{{ 'CLAIMS.PROCESSED_CLAIMS.CLAIM_NUMBER2' | translate }}" type="text">
+                      </div>
+                    </div>
+
+                    <div class="col-md-1">
+                      <button type="submit" class="ig-principalbtn ig-botones"
+                        [disabled]="!claimViewForm.valid || !claimViewForm.controls.paymentNumber.valid"
+                        [ngClass]="{'disabled' : !claimViewForm.valid || !claimViewForm.controls.paymentNumber.valid}">
+                        <i class="material-icons">search</i>
+                      </button>
+                    </div>
+
+                    <div class="col-md-1">
+                      <button type="button" class="ig-principalsegundariobtn ig-botones" to (click)="clearFields(true)">
+                        <i class="material-icons">
+                          delete_sweep
+                        </i>
+
+                      </button>
+                    </div>
+
+                    <div class="col-12" *ngIf="claimsFromSource === 1">
+                      <div class="ig-btnmasopciones" (click)="toggleSlideAdvancedOptions();">
+                        {{'CLAIMS.PARENT.ADVANCED_OPTIONS.TAG_DESCRIPTION' | translate}}<i
+                          class="material-icons">keyboard_arrow_down</i>
+                      </div>
+                      <div class="ig-textomasopciones" id="ig-textomasopciones">
+                        <div class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <input id="claimantLastName" formControlName="claimantLastName" class="form-control"
+                                  placeholder="{{ 'CLAIMS.PROCESSED_CLAIMS.CLAIMER_LAST_NAME' | translate }}"
+                                  type="text" appOnlyLetters="true">
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <input id="providerName" formControlName="providerName" class="form-control"
+                                  placeholder="{{ 'CLAIMS.PROCESSED_CLAIMS.PROVIDER_FIRST_NAME' | translate }}"
+                                  type="text" appOnlyLetters="true">
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <select id="selectedPaymentType" formControlName="selectedPaymentType"
+                                  (change)="setPaymentNumberValidations($event.target.value);"
+                                  class="custom-select form-control">
+                                  <option *ngFor="let type of paymentType" value="{{type.value}}">{{
+                                    'CLAIMS.AGENT.PAYMENTMETHOD.' | concatenate:
+                                    type.value | uppercase | translate}}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-md-3">
+                              <div class="form-group"
+                                *ngIf="claimViewForm.value.selectedPaymentType !== paymentType[0].value">
+                                <input id="paymentNumber" appOnlyNumber="true" formControlName="paymentNumber"
+                                  class="form-control"
+                                  placeholder="{{ 'CLAIMS.PROCESSED_CLAIMS.PAYMENT_NUMBER' | translate }}" type="text">
+                                <small class="text" *ngIf="(claimViewForm.controls['paymentNumber'].invalid)">
+                                  {{ 'CLAIMS.PROCESSED_CLAIMS.PAYMENT_NUMBER_VALIDATOR' |
+                                  translate }}
+                                </small>
+                              </div>
+                            </div> 
+                            <div class="col-md-3">
+                              <div class="form-group">
+                                <input id="legacyNumber" formControlName="legacyNumber" class="form-control"
+                                  placeholder="{{ 'CLAIMS.PROCESSED_CLAIMS.LEGACY_NUMBER2' | translate }}" type="text">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="ig-searchresul" *ngIf="collectionSize !== null && claims.count === 0">
+                  <h4>{{ 'CLAIMS.PROCESSED_CLAIMS.CLAIM_NOT_FOUND_STATUS.' | concatenate: claimStatusFilter |
+                    uppercase | translate}} ({{claims.count}})</h4>
+                  <p>{{ 'CLAIMS.SEARCH_RESULT.MESSAGE' | translate }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="ig-reclamosconte" *ngIf="claims.data.length > 0">
+
+              <div class="col-md-12">
+
+                <div class="ig-titulotabs">
+                  <h6>
+                    {{ 'CLAIMS.PROCESSED_CLAIMS.CLAIM_NOT_FOUND_STATUS.' | concatenate:
+                    claimStatusFilter | uppercase | translate}}<span>({{ claims.count | valueOrMoney:'number':''
+                      }})</span>
+                  </h6>
+                </div>
+                <br>
+                <div class="accordion" id="claimsGroupedByMember" *ngIf="policiesInfo">
+                  <div class="card" *ngFor="let policyHolder of policiesInfo">
+                    <div class="card-header row align-middle" id='header-{{policyHolder.member.memberId}}'>
+                      <div class="col-md-4 align-middle d-flex border-right">
+                        <h6 class="cardHeaderCollapse">
+                          {{ policyHolder.member.lastName }}
+                          {{ policyHolder.member.firstName | titlecase }}
+                          {{ policyHolder.member.middleName | titlecase }}
+                        </h6>
+                      </div>
+                      <div class="col-md-3 align-middle d-flex border-right" *ngIf="claimsFromSource === 1">
+                        <h6 class="cardHeaderCollapse">
+                          {{policyHolder.policy.policyReference}}
+                        </h6>
+                      </div>
+                      <div class="col-md-3 align-middle d-flex border-right" *ngIf="claimsFromSource === 1">
+                        <h6 class="cardHeaderCollapse" *ngIf="policyHolder.policy.policyLegacyNumber">
+                          {{ 'CLAIMS.PROCESSED_CLAIMS.LEGACY_NUMBER' | translate }}:
+                          {{policyHolder.policy.policyLegacyNumber}}
+                        </h6>
+                      </div>
+                      <div class="col-md-2 align-middle d-flex">
+                        <button class="ig-principalsegundariobtn ig-botones align-middle float-right"
+                          *ngIf="claimsFromSource === 1" type="button"
+                          (click)="viewAllClaimsByMemberId(policyHolder.member.memberId);">
+                          {{ 'CLAIMS.AGENT.VIEW_ALL' | translate }}
+                        </button>
+                        <div class="ig-btnmasopciones align-middle float-right" data-toggle="collapse"
+                          attr.data-target="#collapse-{{policyHolder.member.memberId}}" aria-expanded="true"
+                          attr.aria-controls="collapse-{{policyHolder.member.memberId}}">
+                          <i class="large material-icons align-middle">keyboard_arrow_down</i>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div id='collapse-{{policyHolder.member.memberId}}' class="collapse"
+                      attr.aria-labelledby='header-{{policyHolder.member.memberId}}'
+                      data-parent="#claimsGroupedByMember">
+                      <div class="card-body">
+                        <div class="ig-resultados"
+                          *ngFor="let claim of getClaimsByMember(policyHolder.member.memberId)">
+
+                          <div class="row align-items-center">
+
+                            <div class="col-md-2 border-right">
+                              <p class="textosmall" id='tooltipBCBSContent'>
+                                {{ 'CLAIMS.PROCESSED_CLAIMS.BUPA_CLAIM_NUMBER' | translate }}:
+                                {{claim.claimNumber}}
+                                <i *ngIf="claim.source != null && claim.source === 2" style="margin: 0;"
+                                  class="material-icons" placement="top" triggers="mouseenter:mouseleave"
+                                  #tooltiptooltipBCBS="ngbTooltip" [ngbTooltip]="tooltipBCBSContent">
+                                  help_outline
+                                </i>
+                              </p>
+                              <p class="textosmall" id='tooltipBCBSContent'>
+                                {{ 'CLAIMS.PROCESSED_CLAIMS.CLAIM_NUMBER3' | translate }}:
+                                {{claim.claimBatchId}}
+                                <i *ngIf="claim.source != null && claim.source === 2" style="margin: 0;"
+                                  class="material-icons" placement="top" triggers="mouseenter:mouseleave"
+                                  #tooltiptooltipBCBS="ngbTooltip" [ngbTooltip]="tooltipBCBSContent">
+                                  help_outline
+                                </i>
+                              </p>
+
+                            </div>
+
+                            <div class="col-md-2 border-right">
+                              <h5 class="ig-procesotext">
+                                {{ 'CLAIMS.AGENT.STATUS.' | concatenate: claim.statusName.trim() | uppercase |
+                                translate}}
+                              </h5>
+                              <p class="textosmall">
+                                {{claim.payment.billingProviderName}}
+                              </p>
+
+                            </div>
+
+                            <div class="col-md-3 border-right">
+                              <p style="font-weight: 500;">
+                                <strong>{{ 'CLAIMS.PROCESSED_CLAIMS.RECEIVED_DATE' | translate }}:</strong>
+                                {{claim.receivedDate | dateTranslate}}
+                              </p>
+                              <p style="font-weight: 500;" *ngIf="claim.estimatedResolutionDate">
+                                <strong>{{ 'CLAIMS.PROCESSED_CLAIMS.RESOLUTION_DATE' | translate }}:</strong>
+                                {{claim.estimatedResolutionDate | dateTranslate}}
+                              </p>
+                              <p style="font-weight: 500;" *ngIf="claim.estimatedPaymentDate">
+                                <strong>{{ 'CLAIMS.PROCESSED_CLAIMS.PAYMENT_DATE' | translate }}:</strong>
+                                {{claim.estimatedPaymentDate | dateTranslate}}
+                              </p>
+                            </div>
+
+                            <div class="{{canUpdateClaims(claim)? 'col-md-4 border-right' : 'col-md-5'}}">
+                              <div class="row align-items-center text-center">
+
+                                <div class="col-md-6">
+                                  <h5 class="ig-processvalor price" *ngIf="claim.billedAmount">
+                                    {{ claim.currencyCode }}
+                                    {{ claim.billedAmount | number:'1.2-2' }}
+                                  </h5>
+                                  <h5 class="ig-processvalor price"
+                                    *ngIf="(!claim.billedAmount && claim.statusName !== 'In Process')">
+                                    {{ claim.currencyCode }}
+                                    {{ 0 | number:'1.2-2' }}
+                                  </h5>
+                                  <h5 class="ig-processvalor price"
+                                    *ngIf="!claim.billedAmount && claim.statusName === 'In Process'">
+                                    {{ 'CLAIMS.PROCESSED_CLAIMS.NO_VALUE' | translate }}
+                                  </h5>
+                                  <p class="textosmall">
+                                    {{ 'CLAIMS.PROCESSED_CLAIMS.BILLED' | translate }}
+                                  </p>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                  <h5 class="ig-processvalor price" *ngIf="claim.netCoveredAmount">
+                                    {{ claim.currencyCode }}
+                                    {{ claim.netCoveredAmount | number:'1.2-2' }}
+                                  </h5>
+                                  <h5 class="ig-processvalor"
+                                    *ngIf="(!claim.netCoveredAmount && claim.statusName !== 'In Process')">
+                                    {{ claim.currencyCode }}
+                                    {{ 0 | number:'1.2-2' }}
+                                  </h5>
+                                  <h5 class="ig-processvalor price"
+                                    *ngIf="!claim.netCoveredAmount && claim.statusName === 'In Process'">
+                                    {{ 'CLAIMS.PROCESSED_CLAIMS.NO_VALUE' | translate }}
+                                  </h5>
+                                  <p class="textosmall">
+                                    {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_COVERED' | translate }}
+                                  </p>
+                                </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-md-1" *ngIf="canUpdateClaims(claim)">
+                              <button class="ig-principalsegundariobtn ig-botones" type="button"
+                                (click)="goToUpdateClaim(claim);">
+                                {{ 'CLAIMS.AGENT.SUBMIT' | translate }}
+                              </button>
+
+                            </div>
+
+                          </div>
+
+                          <div class="ig-numpoliza">
+                            <div class="row  align-items-center">
+
+                              <div class="col-3">
+                                <div class="ig-detallebtn" (click)="toggleSlideDetail(claim);">
+                                  {{ 'CLAIMS.PROCESSED_CLAIMS.CLAIM_DETAIL' | translate }}<i
+                                    class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="ig-fecha">
+                                  <strong>
+                                    {{ 'CLAIMS.PROCESSED_CLAIMS.SERVICE_FROM' | translate }}
+                                  </strong>{{ claim.serviceFrom | dateTranslate }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="ig-fecha">
+                                  <strong>
+                                    {{ 'CLAIMS.PROCESSED_CLAIMS.SERVICE_UNTIL' | translate }}
+                                  </strong> {{ claim.serviceTo | dateTranslate }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-3" *ngIf="claimsFromSource === 1 && claim.statusName !== 'In Process'">
+                                <a (click)="getClaimEob(claim.claimDetailId, claim.insuranceBusinessId);" href="#">
+                                  {{ 'CLAIMS.PARENT.VIEW_EOB' | translate }}</a>
+                              </div>
+
+                              <div class="col-12">
+                                <div class="ig-detallereclamo" id="ig-detallereclamo-{{claim.claimNumber}}">
+                                  <div>
+                                    <app-claim-view-details [claimDetails]="claim.claimLinesDetails"
+                                      [currencySymbol]="claim.currencySymbol" [number]="claim.claimNumber"
+                                      [currencySymbolUsd]="currencyUsdSymbol" [exchangeRate]="claim.exchangeRate"
+                                      [isLocalUsd]="claim.currencyId === currencyUsdId"
+                                      [policy]="claim.policy.policyNumber" [statusName]="claim.statusName"
+                                      [currencyCode]="claim.currencyCode">
+                                    </app-claim-view-details>
+                                  </div>
+                                  <div>
+                                    {{ errorDetail }}
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="collectionSize > 0">
+                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="10" [pageSize]="10"
+                    [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="getClaimsByAgentRoleAndStateMemberName($event);"></ngb-pagination>
+                </div>
+
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+
+        <div class="tab-pane fade" id="mayoriaedad" role="tabpanel" aria-labelledby="mayoriaedad-tab">
+          ...</div>
+
+        <div class="tab-pane fade" id="cumpleanos" role="tabpanel" aria-labelledby="cumpleanos-tab">...
+        </div>
+
+      </div>
+    </article>
+
+  </article>
+</section>
+
+<ng-template #popBCBSContent>
+  {{ 'CLAIMS.TOOLTIP_BCBS_CLAIMS.CONTENT' | translate }}
+</ng-template>
+
+<ng-template #tooltipBCBSContent>
+  <div class="tooltipBCBSTitle">
+    {{ 'CLAIMS.TOOLTIP_BCBS_CLAIMS.TITLE' | translate }}
+  </div>
+  <div>
+    {{ 'CLAIMS.TOOLTIP_BCBS_CLAIMS.CONTENT' | translate }}
+  </div>
+</ng-template>

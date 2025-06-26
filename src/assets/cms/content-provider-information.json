@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Sea una emergencia o una atención programada",
+        "description": "¿Qué hacer en caso de emergencia?",
+        "description2": "",
+        "language": "SPA",
+        "imageUrl": "assets/images/home1image.png",
+        "contentUrl": "https://www.bupasalud.com/centrodebienvenida/pre-home/"
+    },
+    {
+        "id": 2,
+        "title": "Welcome Center",
+        "description": "All your clients needs ",
+        "description2": "to know abour their policy",
+        "language": "ENG",
+        "imageUrl": "assets/images/home1image.png",
+        "contentUrl": "https://www.bupasalud.com/centrodebienvenida/pre-home/"
+    },
+    {
+        "id": 3,
+        "title": "Sea Pago directo reembolso",
+        "description": "¿Cómo realizar una reclamación?",
+        "description2": "",
+        "language": "SPA",
+        "imageUrl": "assets/images/home2image.png",
+        "contentUrl": "http://infografics.bupasalud.com/infografia-reclamacion-individual/"
+    },
+    {
+        "id": 4,
+        "title": "Direct payment and claims",
+        "description": "What should i do to request",
+        "description2": "a claim",
+        "language": "ENG",
+        "imageUrl": "assets/images/home2image.png",
+        "contentUrl": "http://infografics.bupasalud.com/infografia-reclamacion-individual/"
+    }   
+]

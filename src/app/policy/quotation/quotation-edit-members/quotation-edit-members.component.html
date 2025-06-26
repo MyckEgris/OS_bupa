@@ -1,0 +1,106 @@
+<div class="bp-bgtilt bp-bgtilt2">
+  <button class="ig-principalbtn ig-principallinkbtn2"
+    style="padding: 0;">{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.UPDATE_MEMBER' | translate }}</button>
+  <hr>
+  <form [formGroup]="memberForm">
+    <div class="container-change-deductible">
+
+      <div class="row">
+        <div class="col-md-12">
+          <h6 class="ig-datos">
+            <label> {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.FULL_NAME' | translate }}</label>
+          </h6>
+          <p
+            [ngClass]="{ 'border-danger' : (!memberForm.controls['fullname'].valid || memberForm.controls['fullname'].errors) && showValidations}">
+            <input type="text" class="form-control" formControlName="fullname" minlength="5" maxlength="50"
+            >
+            <!--appOnlyLetters="true"-->
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-7">
+          <h6 class="ig-datos">
+            <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.RELATION' | translate }}</label>
+          </h6>
+          <p
+            [ngClass]="{ 'border-danger' : (!memberForm.controls['relationTypeId'].valid || memberForm.controls['relationTypeId'].errors) && showValidations}">
+            <select class="custom-select form-control" formControlName="relationTypeId">
+              <option [ngValue]="type" *ngFor="let type of relation">{{ type.relationType | translate}}
+              </option>
+            </select>
+          </p>
+        </div>
+        <div class="col-md-5">
+          <h6 class="ig-datos">
+            <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.GENRE' | translate }}</label>
+          </h6>
+          <div class="row">
+            <div class="col-md-12">
+              <div
+                [ngClass]="{'quote-bp-genero': true, 'border-danger' : ((!maleSelected && !femaleSelected) && showValidations)}">
+                <a [ngClass]="maleSelected ? 'bp-generohselected' : 'bp-generoh'" (click)="onClickGender('male')"></a>
+                <a [ngClass]="femaleSelected ? 'bp-generomselected' : 'bp-generom'"
+                  (click)="onClickGender('female')"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h6 class="ig-datos">
+            <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.DOB' | translate }}</label>
+          </h6>
+          <p
+            [ngClass]="{ 'border-danger' : (!memberForm.controls['dob'].valid || memberForm.controls['dob'].errors) && showValidations}">
+            <app-custom-date-picker formControlName="dob" [minDate]="minDate" [dateValue]="selectedDate"
+              [maxDate]="maxDate"></app-custom-date-picker>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button class="ig-botones ig-outlinebtn" (click)="cancel()">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.CANCEL' | translate }}</button>
+      </div>
+      <div class="col-md-6">
+        <button class="ig-botones ig-outlinebtn" (click)="ok()">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.UPDATE' | translate }}</button>
+      </div>
+    </div>
+  
+  </form>
+</div>
+
+<div class="bp-alertform">
+  <div class="alert alert-danger" *ngIf="showValidations">
+    <ul>
+      <li *ngIf="memberForm.controls['fullname'].hasError('required') || 
+    memberForm.controls['relationTypeId'].hasError('required') || 
+    memberForm.controls['genre'].hasError('required') || 
+    memberForm.controls['dob'].hasError('required')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.REQUIRED' | translate }}</span></li>
+      <li *ngIf="memberForm.controls['fullname'].hasError('minlength')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.MINLENGTH' | translate }}</span></li>
+      <li *ngIf="memberForm.controls['dob'].hasError('invalidAdultAge')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDADULTAGE' | translate }}</span>
+      </li>
+      <li *ngIf="memberForm.controls['dob'].hasError('invalidAgeRangePolicy')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDAGERANGEPOLICY' | translate }}</span>
+      </li>
+      <li *ngIf="memberForm.controls['dob'].hasError('invalidAgeRangePolicyDependents')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDAGERANGEPOLICYDEPENDENTS' | translate }}</span>
+      </li>
+      <li *ngIf="validateSpouse">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDSPOUSE' | translate }}</span>
+      </li>
+    </ul>
+
+  </div>
+</div>

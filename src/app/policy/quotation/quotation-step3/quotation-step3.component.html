@@ -1,0 +1,424 @@
+<div class="bp-bgtilt bp-bgtilt-gray">
+
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.POLICY' | translate }} |
+          <span>
+            {{ quoteHeader.policy }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.OWNER' | translate }} |
+          <span>
+            {{ quoteHeader.owner }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.AGENT' | translate }} |
+          <span>
+            {{ quoteHeader.agent }}
+          </span>
+        </h6>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.COUNTRY' | translate }} |
+          <span>
+            {{ quoteHeader.country }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.DATE_RENEWAL' | translate }} |
+          <span>
+            {{ quoteHeader.dateRenewal | dateTranslate }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.PRODUCT' | translate }} |
+          <span>
+            {{ quoteHeader.product }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-3" *ngIf="quoteHeader.inCountry">
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.IN_COUNTRY' | translate }} |
+          <span>
+            {{ quoteHeader.inCountry | valueOrMoney:'money':quoteHeader.currency }}
+          </span>
+        </h6>
+      </div>
+    </div>
+
+    <div class="col-md-3" *ngIf="quoteHeader.outCountry">
+
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.OUT_COUNTRY' | translate }} |
+          <span>
+            {{ quoteHeader.outCountry | valueOrMoney:'money':quoteHeader.currency }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="bp-bgtilt bp-bgtilt-white" *ngIf="members && members.length > 0">
+
+
+
+  <div class="row align-items-center" *ngFor="let member of members">
+
+    <div class="col-md-4">
+
+      <div class="bp-quot-titu">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.RELATIONTYPE.' | concatenate:member.relationId | uppercase | translate }}
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-4">
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.NAME' | translate }}
+          <span>
+            {{ member.name }}
+          </span>
+        </h6>
+      </div>
+
+      <!-- <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.DOB' | translate }}
+          <span>
+            {{ member.dob | dateTranslate }}
+          </span>
+        </h6>
+      </div> -->
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE' | translate }}
+          <span>
+            {{ member.age }} {{'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE_' | translate}}
+          </span>
+        </h6>
+      </div>
+
+
+    </div>
+    <div class="col-md-4" *ngIf="member.statusId === 29">
+      <div class="bp-status-item" *ngIf="member && member.xtra && member.xtra.length > 0">
+        <h5 class="bp-item-dark">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.ANNUAL_PREMIUM' | translate }}
+          <span>
+            | {{ member.premium.price | valueOrMoney:'money':currency }}
+          </span>
+        </h5>
+      </div>
+
+
+      <div *ngIf="member.xtra && member.xtra.length > 0">
+        <div class="bp-status-item" *ngFor="let xtra of member.xtra">
+          <h5 class="bp-item-dark">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.EXTRA_PREMIUM' | translate }}
+            <span>
+              | {{ xtra.price | valueOrMoney:'money':currency }} ({{ getXtraPrecentaje(member, xtra) }}%)
+            </span>
+          </h5>
+
+        </div>
+      </div>
+
+
+      <div class="bp-status-item" *ngIf="member.xtra && member.xtra.length > 0">
+        <h5 class="bp-status-item-blue" style="color: #0079c8;">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.TOTAL_PREMIUM' | translate }}
+          <span>
+            | {{ calculateTotal(member) | valueOrMoney:'money':currency }}
+          </span>
+        </h5>
+      </div>
+
+      <div class="bp-status-item" *ngIf="member.xtra && member.xtra.length === 0">
+        <h5 class="bp-status-item-blue" *ngIf="member.premium && member.premium.price === 0">
+          <span>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.FREE_PREMIUM' | translate }}
+          </span>
+        </h5>
+
+        <h5 class="bp-status-item-blue" *ngIf="member.premium && member.premium.price > 0">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.ANNUAL_PREMIUM' | translate }}
+          <span>
+            | {{ member.premium.price | valueOrMoney:'money':currency }}
+          </span>
+        </h5>
+      </div>
+
+    </div>
+    <div class="col-md-4" *ngIf="member.statusId !== 29">
+      <div class="bp-status-item">
+        <h5 class="bp-status-item-blue">
+          <span>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.STATUS.' | concatenate:member.statusId | translate }}
+          </span>
+        </h5>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <hr>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="bp-bgtilt bp-bgtilt-gray">
+
+  <div class="row">
+    <form class="col-md-6">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bp-status-item">
+            <h5 class="bp-status-item-blue2">
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.SPECIAL_CONDITIONS' | translate }}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div *ngIf="riders && riders.length > 0">
+        <!--Se repite-->
+        <div class="row align-items-center" *ngFor="let rider of riders">
+          <div class="col-md-8">
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="rider.checked"
+                [id]="rider.id" (change)="addOrRemoveRiderToQuote(rider);">
+              <label
+                [ngClass]="{'form-check-label': true, 'rider-item-unchecked': (rider.initialRider && !rider.checked) }"
+                class="form-check-label" for="exampleCheck1">{{ rider.name }}</label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="bp-status-item">
+              <h5 class="bp-item-dark" style="display: none;">
+                {{ rider.price | valueOrMoney:'money':currency }}
+              </h5>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="!riders || riders.length === 0">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.NOT_SPECIAL_CONDITIONS' | translate }}
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row" *appShowIfRole="'Employee'">
+        <div class="col-md-12">
+          <div class="bp-status-item">
+            <h5 class="bp-status-item-blue2">
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.DISCOUNT' | translate }}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center" *appShowIfRole="'Employee'">
+        <div class="col-md-8">
+          <ul class="ig-btndscto">
+            <li>
+              <a (click)="changeDiscount('-');" [attr.aria-disabled]="discountValue === 0 ? 'true' : 'false'">-</a>
+            </li>
+            <li>
+              <a aria-disabled="true">{{ discountValue }}%</a>
+            </li>
+            <li>
+              <a (click)="changeDiscount('+');" [attr.aria-disabled]="discountValue === 5 ? 'true' : 'false'">+</a>
+            </li>
+          </ul>
+
+        </div>
+        <div class="col-md-8" style="display: none;">
+          <div class="card-message card-timeout" *ngIf="discountValue === 5">
+            <!--<span [innerHtml]="checkRemovedMembers.message"></span>-->
+            <span>Valor del descuento</span>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+
+
+
+    <div class="col-md-6 bp-bgtilt-blue" *ngIf="selectedPlan">
+      <app-quotation-step3-calculator [premiumValues]="selectedPlan" [discount]="discountValue" [currency]="currency">
+      </app-quotation-step3-calculator>
+    </div>
+
+
+
+  </div>
+</div>
+
+<div class="bp-bgtilt bp-bgtilt-white">
+
+  <div class="row align-items-center" *ngIf="modeOfPayments && modeOfPayments.length > 0">
+
+    <div class="col-md-12">
+      <div class="bp-status-item">
+        <h5 class="bp-status-item-blue2">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.CHOOSE_MODE_OF_PAYMENT' | translate }}
+          <br>
+          <p style="margin-top: 10px;">{{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.CHOOSE_LEGEND' | translate }}</p>
+        </h5>
+      </div>
+    </div>
+
+    <!--ig-precioscot-act-->
+
+    <div [ngClass]="{'ig-precioscot': true, 'ig-precioscot-act': payment.selected, 'w-100': true }"
+      *ngFor="let payment of modeOfPayments">
+      <div class="row align-items-center">
+
+        <div class="col-md-2 pl-5">
+          <div class="">
+            <div class="form-group form-check"><input class="form-check-input" name="payment" id="exampleCheck1"
+                [checked]="payment.selected" (change)="setModeOfPayment(payment.id)" type="checkbox"><label
+                class="form-check-label" for="exampleCheck1">
+                {{ payment.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 bp-cot-white">
+          <div class="bp-cot-gray">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <div class="bp-status-item">
+                  <h6>
+                    {{ payment.firstPaymentLabel }} |
+                    <span>
+                      {{ payment.firstPaymentPrice | valueOrMoney:'money':currency }}
+                    </span>
+                  </h6>
+                </div>
+              </div>
+              <div class="col-md-4" *ngIf="payment.countPayments > 0">
+                <div class="bp-status-item">
+                  <h6>
+                    {{ payment.countPayments }} {{ payment.adicionalPaymentsLabel }} |
+                    <span>
+                      {{ payment.adicionalPaymentsPrice | valueOrMoney:'money':currency }}
+                    </span>
+                  </h6>
+                </div>
+              </div>
+              <div [ngClass]="{ 'col-md-4':true, 'offset-md-4':(payment.countPayments === 0)}">
+                <div class="bp-status-item">
+                  <h5 class="bp-status-item-blue" style="color: #0079c8;">
+                    {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.TOTAL' | translate}} |
+                    <span>
+                      {{ payment.totalPrice | valueOrMoney:'money':currency }}
+                    </span>
+                  </h5>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <br>
+  
+  <br>
+
+
+  <div class="col-md-12">
+    <p>
+      {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.WARN_MESSAGE' | translate }}
+    </p>
+    <p>
+      {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.WARN_MESSAGE_1' | translate }}
+    </p>
+    <p>
+      {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.WARN_MESSAGE_2' | translate }}
+    </p>
+    <p>
+      {{ 'EMPLOYEE.QUOTE.QUOTATION.SUMMARY_QUOTE.WARN_MESSAGE_3' | translate }}
+    </p>
+
+  </div>
+
+  <div class="col-md-12 mt-5">
+    <div class="col-md-4 offset-md-4">
+      <div class="row">
+        <div class="col-md-6">
+          <button class="ig-botones ig-outlinebtn" type="button" (click)="backToChangeOptionsInformation()">
+            <i class="material-icons">navigate_before</i> {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.BACK' | translate }}
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button type="button" (click)="downloadQuote()"
+            class="ig-botones ig-secundariobtn">{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.QUOTE' | translate }} <i
+              class="material-icons">navigate_next</i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

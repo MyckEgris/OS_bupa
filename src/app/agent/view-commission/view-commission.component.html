@@ -1,0 +1,169 @@
+<section class="ig-validation ig-comisiones">
+
+  <article class="">
+    <div class="col-md-12">
+      <div class="ig-title">
+        <h5>{{ 'AGENT.COMMISSIONS.TITLE' | translate }}</h5>
+      </div>
+      <div class="ig-searchpol">
+        <form [formGroup]="formCommissions" (ngSubmit)="getCommissionDetails(formCommissions.value)">
+          <div class="row align-items-center">
+
+            <div class="col-md-2">
+              <h5><strong>{{ 'AGENT.COMMISSIONS.AGENT' | translate }}</strong></h5>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <ng-select #agentSelect [items]="hierarchyByAgent" [selectOnTab]="true" bindValue="agentId" bindLabel="companyName"
+                  formControlName="agent" class="form-control" (change)="onAgentChange($event)">
+                </ng-select>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row align-items-end">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="">{{ 'AGENT.COMMISSIONS.COMMISSION_DATE' | translate }}</label>
+                <select class="custom-select form-control" formControlName="date">
+                  <option *ngFor="let payment of commissionPayments" [value]="payment.paymentId">{{ payment.paymentDate
+                    + ' - ' + ('AGENT.COMMISSIONS.PAYMENT.' | concatenate:payment.paymentTypeName | replacespaces: '_' | uppercase | translate) }}</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="col-md-2">
+              <button type="submit" [disabled]="commissionPayments.length === 0"
+              [ngClass]="{ 'ig-principalbtn ig-botones m-0' : true, 'disabled' :commissionPayments.length === 0  }"><i class="material-icons">search</i></button>
+            </div>
+          </div>
+        </form>
+        <br>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="ig-searchresul" *ngIf="!commissionSummary">
+              <h4>{{ 'AGENT.COMMISSIONS.SEARCH_RESULT.TITLE' | translate }}:</h4>
+              <p>{{ 'AGENT.COMMISSIONS.SEARCH_RESULT.MESSAGE' | translate }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="commissionSummary">
+
+          <div class="ig-comisires">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <h6>
+                  {{ 'AGENT.COMMISSIONS.REFERENCE' | translate }}: <br> {{ commissionSummary.referenceNumber }}
+                </h6>
+              </div>
+              <div class="col-md-4">
+                <h6 class="ig-processvalor">
+                  {{ 'AGENT.COMMISSIONS.PAID_AMOUNT' | translate }}: <br> {{ commissionSummary.amount |
+                  valueOrMoney:'money':commissionSummary.currencyCode }}
+                </h6>
+              </div>
+              <div class="col-md-3 offset-md-1">
+                <div class="dropdown">
+                  <button class="ig-botones ig-secundariobtn" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ 'AGENT.COMMISSIONS.EXPORT' | translate }} <i class="material-icons">insert_chart_outlined</i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" (click)="downloadCommissionPDF()" >{{ 'AGENT.COMMISSIONS.PDF' | translate }}</a>
+                    <!-- <a class="dropdown-item" href="#">{{ 'AGENT.COMMISSIONS.XLS' | translate }}</a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ig-comisioreporte">
+
+            <div class="ig-itemreportetil">
+              <div class="row">
+                <div class="col-md-3">
+                  <h5>{{ 'AGENT.COMMISSIONS.COMMISSION_TYPE' | translate }}</h5>
+                </div>
+                <div class="col-md-3">
+                  <h5>{{ 'AGENT.COMMISSIONS.POLICY_TYPE' | translate }}</h5>
+                </div>
+                <div class="col-md-3">
+                  <h5>{{ 'AGENT.COMMISSIONS.SUBTOTAL_LONG' | translate }}</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="ig-itemreporte" *ngFor="let concept of commissionSummary.commissionDetailConcepts">
+              <div class="row align-items-center">
+                <div class="col-md-3">
+                  <h6>{{ 'AGENT.COMMISSIONS.DATA.' | concatenate:concept.conceptName | uppercase | translate }}</h6>
+                </div>
+                <div class="col-md-3">
+                  <h6>{{ 'AGENT.COMMISSIONS.DATA.' | concatenate:concept.groupName | uppercase | translate }}</h6>
+                </div>
+                <div class="col-md-3">
+                  <h6>{{ concept.subtotal | valueOrMoney:'money':concept.currencyCode }}</h6>
+                </div>
+                <div class="col-md-1">
+                    <a class="btn btn-primary btndown" (click)="collapseElements(concept.conceptId, 'level1');" role="button">
+                    
+                    <i class="material-icons" id="arrow-{{concept.conceptId}}">keyboard_arrow_down</i>
+                  </a>
+                </div>
+                <div class="col-md-12">
+                  <div class="collapse" id="collapse-{{concept.conceptId}}">
+
+                    <div class="ig-itemreportetil" *ngIf="concept.groupId > 0">
+
+                      <div></div>
+
+                      <div class="row">
+                        <div class="col-md-7">
+                          <h5>{{ 'AGENT.COMMISSIONS.GROUP' | translate }}</h5>
+                        </div>
+                        <div class="col-md-4">
+                          <h5>{{ 'AGENT.COMMISSIONS.SUBTOTAL' | translate }}</h5>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row" *ngFor="let group of concept.commissionDetailGroup">
+                      <div class="col-md-7" *ngIf="concept.groupId > 0">
+                        <h6>{{ group.groupName }}</h6>
+                      </div>
+                      <div class="col-md-4" *ngIf="concept.groupId > 0">
+                        <h6 class="ig-processvalor"> {{ group.subtotal | valueOrMoney:'money':group.currencyCode }} </h6>
+                      </div>
+                      <div class="col-md-1" *ngIf="concept.groupId > 0">
+                          <a class="btn btn-primary btndown" (click)="collapseElements(group.groupId, 'level2');" role="button">
+                          <i class="material-icons" id="arrowdet-{{group.groupId}}">keyboard_arrow_down</i>
+                        </a>
+                      </div>
+
+                      <div class="col-md-12" *ngIf="concept.groupId == 1">
+                        <div class="collapse" id="collapsedet-{{ group.groupId }}">
+                          <app-view-commission-detail [commissionDetails]="group.details"></app-view-commission-detail>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" *ngIf="concept.groupId == 0">
+                        <app-view-commission-detail [commissionDetails]="group.details"></app-view-commission-detail>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </article>
+</section>

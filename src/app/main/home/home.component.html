@@ -1,0 +1,19 @@
+<p style="padding-top:20px"></p>
+<article *appShowIfRole="'Agent,GroupAdmin,AgentAssistant'">
+    <app-quick-access-links></app-quick-access-links>
+    <div *ngIf="currentUserId">
+        <app-agent-home [currentUserId]="currentUserId"></app-agent-home>
+    </div>
+</article>
+<section  *appShowIfRole="'Provider'">
+    <app-quick-access-links></app-quick-access-links>
+    <app-provider-home></app-provider-home>
+</section>
+
+<section class="ig-home" *appShowIfRole="'PolicyHolder,GroupPolicyHolder'">
+    <app-quick-access-links></app-quick-access-links>
+    <app-policy-holder-home></app-policy-holder-home>
+</section>
+<section class="ig-home" *appShowIfRole="'Employee'">
+    <app-employee-admin-home></app-employee-admin-home>
+</section>

@@ -1,0 +1,70 @@
+<div class="col-md-12">
+  <div class="bp-itemcontsect">
+
+    <div class="row align-items-center">
+      <div class="col-md-2">
+        <h4 class="bp-contentitle">
+          {{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_IMPORTANT_INFO' | translate }}
+        </h4>
+      </div>
+
+      <div class="col-md-10">
+        <div class="bp-itemsectpoli">
+          <figure>
+            <img src="assets/images/001-file.svg" alt="">
+          </figure>
+          <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP4.BANNER_TEXT_GENERAL_QUESTIONS' | translate"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 mt-4">
+  <div class="bp-itemcontsect2">
+    <div class="bp-textcuest">
+      <h4 class="bp-contentitle mb-3">
+        {{ 'POLICY.POLICY_ENROLLMENT.STEP4.TEXT_AFFIRMATION_ANSWER' | translate }}
+      </h4>
+      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP4.TITLE_RECOMMENDATION' | translate"></p>
+      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP4.TEXT_IMPORTANT_DETAIL' | translate"></p>
+      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP4.TEXT_MEDICAL_PROBLEM' | translate"></p>
+      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP4.TEXT_TREATMENT' | translate"></p>
+      <hr>
+    </div>
+
+    <ng-container *ngIf="questions$">
+      <app-questions [questionForm]="wizard.enrollmentForm"
+        [questions$]="questions$"
+        [medicalQuestionaryName]="MEDICAL_QUESTIONARY_NAME"
+        [members] = "members"
+        [showValidation]="showValidation"
+        [currentSection]="CURRENT_SECTION">
+      </app-questions>
+    </ng-container>
+    <div class="col-md-12 p-0" *ngIf="wizard.enrollmentForm.invalid && showValidation">
+      <div class="bp-alertform">
+        <div class="alert alert-danger" role="alert">
+            <i class="material-icons">info</i> {{ 'POLICY.POLICY_ENROLLMENT.STEP1.ALERT_COMPLETE_FORM' | translate }}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 p-0">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <div class="row align-items-center">
+              <div class="col-md-6">
+                <button class="bp-btn bp-btnsecondary" type="button" (click)="back()">
+                  {{ 'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button class="bp-btn bp-btnprimary"  type="button" (click)="next()">
+                  {{ 'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<ng-template #popContent>
+  <div class="col-md-12">
+    <div class="row" *ngIf="content && content.length > 0">
+      <div class="col-md-12" style="padding: 0;">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let msg of content" class="list-group-item">
+            {{ msg | translate }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row" *ngIf="template && template.length > 0">
+      
+        <div class="col-md-12 " *ngFor="let temp of template">
+          <div [innerHtml]="temp"></div>
+        </div>
+      
+
+    </div>
+    <div class="row" *ngIf="!template && !content && image">
+      <img [src]="image" style="width: 350px;">
+    </div>
+  </div>
+</ng-template>
+<span class="input-group-text-info" [popoverTitle]="" [ngbPopover]="popContent" container="body"
+  popoverClass="custom-popover" autoClose="'outside'" triggers="mouseenter:mouseleave" placement="auto">
+  <i class="material-icons" [style.color]="colorHex"> {{icon}} </i>
+</span>

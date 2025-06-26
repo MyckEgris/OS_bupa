@@ -1,0 +1,61 @@
+<section class="bp-mainpolicy">
+    <div class="row bp-itemcontsect2">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="bp-contentitle"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.TITLE' | translate }} </h4>
+                    <p><!--<i class="fas fa-exclamation-circle text-danger"></i>-->{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.LEGEND' | translate }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4" *ngIf="!showOnShoreAch">
+                    <div class="form-group mt-4">
+                        <label for="country">
+                            {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.COUNTRY' | translate }}
+                        </label>
+                        <select class="form-control" [(ngModel)]="selectedCountry" [disabled]="isCountryDisabled"
+                            (ngModelChange)="onSelectCountry($event)">
+                            <option *ngFor="let country of countries" [ngValue]="country">{{ country.countryName }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--<div class="col-md-4">
+                    <div class="form-group mt-4">
+                        <label for="policy">
+                            {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.POLICY' | translate }}
+                        </label>
+                        <p>{{policyReference}}</p>
+                        <input class="form-control" id="policy" [(ngModel)]="policyReference" [disabled]="true">
+                    </div>
+                </div>-->
+            </div>
+            <div class="row" *ngIf="!selectedCountry">
+                <div class="col-md-3">
+                    <div class="">
+                        <a (click)="back()" style="cursor: pointer;" class="ig-botones ig-secundariobtn">
+                            <i class="material-icons">chevron_left</i>
+                            {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.CANCEL' | translate }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row bp-itemcontsect2" *ngIf="selectedCountry">
+        <app-offshore-ach [returnUrl]="returnUrl" *ngIf="showOffShoreAch" [selectedCountry]="selectedCountry">
+        </app-offshore-ach>
+        <app-offshore-wt [returnUrl]="returnUrl" *ngIf="showOffShoreWt" [selectedCountry]="selectedCountry">
+        </app-offshore-wt>
+        <app-onshore-ach [returnUrl]="returnUrl" *ngIf="showOnShoreAch" [selectedCountry]="selectedCountry">
+        </app-onshore-ach>
+    </div>
+
+</section>

@@ -1,0 +1,110 @@
+<div class="bg-sectmed">
+  <div class="row align-items-center mb-3">
+    <ng-container *ngIf="question">
+      <ng-container  [ngSwitch]="medicalQuestionaryName">
+        <ng-container *ngSwitchCase="'medicalHistoryQuestions'">
+          <div class="col-md-10">
+            <h6 class="mb-2">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP4.' | concatenate: question.medicalQuestionType.medicalQuestionTypeName |uppercase| translate }}
+            </h6>
+            <p>{{question.medicalQuestionByLanguages[0].question}}</p>
+          </div>
+          <div class="col-md-2" [ngClass]="{'border-danger':getControl(question.medicalQuestionReference)?.invalid && showValidation}">
+            <ng-container *ngFor="let opt of options; trackBy:trackByFn">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="{{opt.key}}{{index}}{{trackByFn()}}{{question.medicalQuestionReference}}"
+                  [value]="opt.value"
+                  [formControl]="getControl(question.medicalQuestionReference)"
+                  [name]="getControl(question.medicalQuestionReference)"
+                  (change)="handleAnswer(opt.value)">
+                <label for="{{opt.key}}{{index}}{{trackByFn()}}{{question.medicalQuestionReference}}"  class="form-check-label"> {{opt.key}}</label>
+              </div>
+            </ng-container>
+            <br>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <div class="col-md-12">
+            <div class="row align-items-center">
+              <div class="col-md-10">
+                <div class="bp-cust-til">
+                  <h2>{{question.order}}</h2>
+                  <p>{{question.medicalQuestionByLanguages[0].question}}<small>{{question.medicalQuestionByLanguages[0].toolTipQuestion}}</small></p>
+                </div>
+              </div>
+              <div class="col-md-2" [style.text-align]="'right'" [ngClass]="{'border-danger':getControl(question.medicalQuestionReference)?.invalid && showValidation}">
+                <ng-container *ngFor="let opt of options; trackBy:trackByFn">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="{{opt.key}}{{index}}{{trackByFn()}}{{question.medicalQuestionReference}}"
+                      [value]="opt.value"
+                      [formControl]="getControl(question.medicalQuestionReference)"
+                      [name]="getControl(question.medicalQuestionReference)"
+                      (change)="handleAnswer(opt.value)">
+                    <label for="{{opt.key}}{{index}}{{trackByFn()}}{{question.medicalQuestionReference}}"  class="form-check-label"> {{opt.key}}</label>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+      </ng-container>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="isAnswerYes() && question">
+      <ng-container [ngSwitch]="question.medicalQuestionType.medicalQuestionTypeName">
+        <ng-container *ngSwitchCase="'GeneralQuestionType'">
+          <app-general-questions-details
+            [question] = "question"
+            [answer] = "answer"
+            [questionForm]="getFormGroupDetails(question.medicalQuestionReference)"
+            [members] = "members"
+            [showValidation] = "showValidation"
+            [isFirstDetail] = "isFirstDetail">
+          </app-general-questions-details>
+        </ng-container>
+        <ng-container *ngSwitchCase="'WomenQuestionType'">
+          <app-women-question-details
+            [question] = "question"
+            [answer] = "answer"
+            [questionForm]="getFormGroupDetails(question.medicalQuestionReference)"
+            [members] = "members"
+            [showValidation] = "showValidation"
+            [isFirstDetail] = "isFirstDetail">
+          </app-women-question-details>
+        </ng-container>
+        <ng-container *ngSwitchCase="'familyHistoryQuestionType'">
+          <app-family-history-details
+            [question] = "question"
+            [answer] = "answer"
+            [questionForm]="getFormGroupDetails(question.medicalQuestionReference)"
+            [members] = "members"
+            [showValidation] = "showValidation"
+            [isFirstDetail] = "isFirstDetail">
+          </app-family-history-details>
+        </ng-container>
+        <ng-container *ngSwitchCase="'habitsQuestionType'">
+          <app-habits-details
+            [question] = "question"
+            [answer] = "answer"
+            [questionForm]="getFormGroupDetails(question.medicalQuestionReference)"
+            [members] = "members"
+            [showValidation] = "showValidation"
+            [isFirstDetail] = "isFirstDetail">
+          </app-habits-details>
+        </ng-container>
+        <ng-container *ngSwitchCase="'medicalCheckUpQuestionType'">
+          <app-medical-check-up-details
+            [question] = "question"
+            [answer] = "answer"
+            [questionForm]="getFormGroupDetails(question.medicalQuestionReference)"
+            [members] = "members"
+            [showValidation] = "showValidation"
+            [isFirstDetail] = "isFirstDetail">
+          </app-medical-check-up-details>
+        </ng-container>
+      </ng-container>
+  </ng-container>
+  <hr>
+</div>

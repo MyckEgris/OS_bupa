@@ -1,0 +1,43 @@
+<h1>
+        <a [routerLink]="['/']">
+            <img src="assets/images/logo.png" alt="" class="img-fluid">
+        </a>
+    </h1>
+    <nav *ngIf="state.quickLinks && state.quickLinks.length > 0">
+        <a *ngIf="scrollValue < 0" href="" class="menuico" id="up" (click)="scrollUp($event)"><i
+                class="material-icons">keyboard_arrow_up</i>
+        </a>
+        <div #scrollableContainer class="ig-quicklinks-scroll">
+            <ul #scrollableUl class="nav" [style.top]="scrollValue + 'px'">
+                <li class="nav-item" *ngFor="let menuItem of state.quickLinks"
+                    [ngClass]="{'active': menuItem.name===currentTab?.name}">
+                    <a class="nav-link" href="#" (click)="menuClick($event, menuItem)">
+                        <!-- <div class="ig-icon">
+                            <i class="ig-iconmenu material-icons" id="HEARDER_{{menuItem.name}}">{{ menuItem.pathIcon }}</i>
+                        </div> -->
+
+                        <div class="ig-icon">
+                            <i class="ig-iconmenu ig-icon-{{ menuItem.pathIcon }}" id="HEARDER_{{menuItem.name}}"></i>
+                        </div>
+
+                        <span>{{ 'MENUOPTIONS.' + menuItem.name | translate }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a *ngIf="scrollValue > maxScrollDown && state.quickLinks.length > 0" href="" class="menuico" id="down" (click)="scrollDown($event)"><i
+                class="material-icons">keyboard_arrow_down</i></a>
+    </nav>
+    <!--<div class="ig-close">
+        <div class="ig-date">
+            <p *ngIf="language !== SPANISH_LOADED"> {{day}} {{month}}</p>
+            <p *ngIf="language === SPANISH_LOADED" >{{day}} {{month}}</p>
+            <span *ngIf="language === SPANISH_LOADED">{{month}}</span>
+        </div>
+
+        <ul>
+            <li>
+                <p></p>
+            </li>
+        </ul>
+    </div>-->

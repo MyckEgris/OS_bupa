@@ -1,0 +1,43 @@
+<ng-container *ngIf = "currentStep !== 4">
+    <div class="col-md-12">
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li style="margin-right: 10px;font-weight: 700;"> Pasos: </li>
+                <li *ngFor="let i of array(lengthSection); let ind = index"
+                class = "breadcrumb-item"
+                [ngClass]="{ 'activeEnrollment': ind + 1 === stepActive }">
+                {{ currentStep }}.{{ind + 1}}  </li>
+            </ol>
+        </div>
+    </div>
+</ng-container>
+<ng-container *ngIf = "showFlowStep4Section5()">
+    <div class="col-md-12">
+      <div aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li style="margin-right: 10px;font-weight: 700;"> Pasos: </li>
+          <li *ngFor="let i of array(getNumberStep4Section5()); let ind = index"
+            class = "breadcrumb-item"
+            [ngClass]="{ 'activeEnrollment': ind + 1 === getNumberStep4Section5() }">
+            {{ currentStep }}.{{ind + 1}}
+          </li>
+        </ol>
+      </div>
+    </div>
+
+</ng-container>
+<ng-container *ngIf = "showFlowStep4OtherSections()">
+    <div class="col-md-12">
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li style="margin-right: 10px;font-weight: 700;"> Pasos: </li>
+                <li *ngFor="let i of array(lengthSection); let ind = index"
+                  class = "breadcrumb-item"
+                 [ngClass]="{ 'activeEnrollment': ind + 1 === stepActive }">
+                 {{ currentStep }}.{{ind + 1}}
+
+                </li>
+            </ol>
+        </div>
+    </div>
+</ng-container>

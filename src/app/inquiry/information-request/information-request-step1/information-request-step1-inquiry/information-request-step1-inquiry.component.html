@@ -1,0 +1,223 @@
+<section class="ig-informationrequest">
+  <form class="ig-requestdatos" [formGroup]="wizard.infoRequestForm">
+    <div class="col-md-12 ig-enviarcon">
+
+      <div class="col-md-12" *ngIf="oldInquiry">
+        <div class="form-group">
+          <h5>{{ 'INQUIRY.INFORMATION_REQUEST.RELATED' | translate}}</h5>
+          <small>
+            <a href="#" (click)="goToInquiryAsociated(oldInquiry.inquiryId, $event)"> {{ oldInquiry.ticketNumber }} </a>
+            | {{ oldInquiry.title }}
+          </small>
+        </div>
+
+      </div>
+
+      <div class="row" *ngIf="showInputPolicyNumber">
+
+        <div class="col-md-12">
+          <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.INSURED' | translate}} </h5>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <select class="custom-select form-control" id="policySearchType" formControlName="searchType">
+              <option value="" disabled selected>
+                {{ 'POLICY.VIEW_POLICY_DETAILS.SEARCH_TYPES.SELECT' | translate }} </option>
+              <option *ngFor="let searchType of policySearchTypes" value="{{searchType.value}}">
+                {{'POLICY.VIEW_POLICY_DETAILS.SEARCH_TYPES.'| concatenate: searchType.value | uppercase | translate }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <input class="form-control" id="policyNumber" type="text" formControlName="policyNumber" OnlyNumber="true"
+              placeholder="{{ policyInputPlaceHolder | translate}}" maxCharsAllowed="15"
+              [ngClass]="{disabled: !this.wizard.infoRequestForm.get(this.SEARCH_TYPE_CTRL).value}">
+          </div>
+        </div>
+
+        <div class="col-lg-1 col-sm-2 col-6">
+          <button type="button" (click)="searchPolicyMembers()"
+            [ngClass]="{ 'ig-btncalendar btn' : true, 'disabled' :(!this.wizard.infoRequestForm.get(this.SEARCH_TYPE_CTRL).value || 
+            !wizard.infoRequestForm.controls['policyNumber'].value || wizard.infoRequestForm.controls['policyNumber'].invalid) }">
+            <i class="material-icons">search</i>
+          </button>
+        </div>
+
+        <div class="col-md-12" *ngIf="wizard.infoRequestForm.controls['policyNumber'].errors
+                          && (wizard.infoRequestForm.controls['policyNumber'].errors.isNaN
+                          || wizard.infoRequestForm.controls['policyNumber'].errors.maxAmountExceeded)">
+          <small class="text-danger">
+            {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.NUMBER_NOT_VALID' | translate }}
+          </small>
+        </div>
+
+      </div>
+
+      <div class="row ig-resulsearchnone"
+        *ngIf="showMemberSelect && wizard.memberSearch && wizard.memberSearch.length === 0">
+        <h6>{{ 'CLAIMSUBMISSION.STEP1RESULTTITLETEXT' | translate}}</h6>
+        <small>{{ 'CLAIMSUBMISSION.STEP1RESULTTEXT' | translate}}</small>
+      </div>
+
+      <div class="row" *ngIf="showMemberSelect && wizard.memberSearch && wizard.memberSearch.length > 0">
+        <div class="col-md 12">
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.SUBTITLE1' | translate}} </h5>
+              </div>
+
+              <div class="col-md-6" *ngFor="let member of wizard.memberSearch; let i = index">
+                <div class="ig-check">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio{{ i }}" name="selectedMember{{ i }}"
+                      class="custom-control-input" [checked]="member === wizard.member" (change)="selectMember(member)">
+                    <label class="custom-control-label" for="customRadio{{ i }}">{{ member.fullName }}
+                      ({{ member.dob | dateTranslate }})</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row" *ngIf="showValidations && !wizard.member">
+              <small class="text-danger">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+
+            <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.SUBJECT' | translate}} </h5>
+
+            <app-tree-view-personalized [config]="config" [items]="listSubject" [value]="wizard.subject"
+              (selectedChange)="onSelectedChange($event)" (filterChange)="onFilterChange($event)"
+              (valueChange)="onValueChange($event)">
+            </app-tree-view-personalized>
+
+            <div class="col-md-12" *ngIf="showValidations && (!wizard.subject || !wizard.subject.value)">
+              <small class="text-danger" *ngIf="showValidations && (!wizard.subject || !wizard.subject.value)">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-8" *ngIf="wizard.subject && wizard.subject.message">
+          <div class="ig-registrohelp">
+            <p [innerHTML]="wizard.subject.message"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.TITLE' | translate}} </h5>
+            <small> {{ 'INQUIRY.INFORMATION_REQUEST.MESSAGES.MESSAGE_TITLE' | translate}} </small>
+            <input class="form-control" id="title" formControlName="title" maxCharsAllowed="{{MAX_CHARS_ALLOWED_TITLE}}"
+              placeholder="{{ 'INQUIRY.INFORMATION_REQUEST.TITLE' | translate}}" type="text">
+            <div class="col-md-12" *ngIf="(wizard.infoRequestForm.controls['title'].touched
+                                    && wizard.infoRequestForm.controls['title'].invalid)">
+              <small class="text-danger" *ngIf="(wizard.infoRequestForm.controls['title'].errors
+                              && wizard.infoRequestForm.controls['title'].errors.required)">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.DETAILS' | translate}} </h5>
+            <small> {{ 'INQUIRY.INFORMATION_REQUEST.MESSAGES.MESSAGE_DETAIL' | translate}} </small>
+            <textarea class="form-control" formControlName="details" id="details" rows="4"
+              maxCharsAllowed="{{MAX_CHARS_ALLOWED_DETAILS}}"></textarea>
+            <div class="col-md-12" *ngIf="(wizard.infoRequestForm.controls['details'].touched
+                                    && wizard.infoRequestForm.controls['details'].invalid)">
+              <small class="text-danger" *ngIf="(wizard.infoRequestForm.controls['details'].errors
+                              && wizard.infoRequestForm.controls['details'].errors.required)">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-documents">
+        <div class="row">
+          <div class="col-lg-6 col-sm-12 botton-div">
+            <div class="row align-items-center">
+              <div class="col-md-7">
+                <h5>{{ 'INQUIRY.INFORMATION_REQUEST.DOCUMENTS' | translate }} </h5>
+                <small> {{ 'INQUIRY.INFORMATION_REQUEST.ATTACHMENT' | translate }} </small>
+              </div>
+              <div class="col-md-5">
+                <div class="upload">
+                  <app-upload [typeAttachment]="type1" [fileTypes]="'inquiryTypes'" [maxFileSize]="25">
+                  </app-upload>
+                </div>
+              </div>
+            </div>
+
+            <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items" *ngIf="documents.length > 0">
+              <div class="ig-file-scroll">
+                <div class="row">
+                  <div class="col-md-12" *ngFor="let document of documents">
+                    <div class="inline-text-icon">
+                      <i class="fa" [ngClass]="document.icon"></i>
+                      <span class="text-list">
+                        {{ document.file.name }}
+                        <div class="ig-icofile">
+                          <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                              class="material-icons">delete</i></a>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-md-4 offset-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <button style="width: 100%;" class="ig-principalsegundariobtn ig-botones" type="button"
+                (click)="clearForm()">
+                {{ 'INQUIRY.INFORMATION_REQUEST.CLEAR' | translate }} </button>
+            </div>
+            <div class="col-md-6">
+              <button style="width: 100%;" type="button" [disabled]="wizard.infoRequestForm.invalid"
+                [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : wizard.infoRequestForm.invalid  }"
+                (click)="next()"> {{ 'INQUIRY.INFORMATION_REQUEST.NEXT' | translate }} </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</section>

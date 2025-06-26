@@ -1,0 +1,11 @@
+<div class="modal-header">
+  <h4 class="modal-title aggrement-title-modal">{{title | translate}}</h4>
+</div>
+<div class="modal-body">
+  <div id="{{idContent}}" class="aggrement-content-modal">
+    <div [innerHTML]="content" class="aggrement-content-modal-margin"></div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="ok()">{{acceptText | translate}}</button>
+</div>

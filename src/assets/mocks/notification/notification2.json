@@ -1,0 +1,55 @@
+{
+    "pageindex": 1,
+    "pageSize": 10,
+    "total": 50,
+    "notifications":[{
+                        "inboxId" : 4560,
+                        "emailAddress" : "pepe@pepe.com",
+                        "isRead" : false,
+                        "createdOn": "2019-07-16 12:22:23",
+                        "subject": "OTRO Asunto 1111111111111", 
+                        "body": "sdfasdfasdfasdfasdfasdsdaf",
+                        "attachments": [
+                            {
+                                "path" : "asdfs",
+                                "fileName" : "pepe.pdf",
+                                "mimeType" : 1082
+                            }
+                        ]
+
+                    },
+                    {
+                        "inboxId" : 135456,
+                        "emailAddress" : "pepe@pepe.com",
+                        "isRead" : false,
+                        "createdOn": "2019-07-16 12:22:23",
+                        "subject": "OTRO Asunto 22222222222222", 
+                        "body": "sdfasdfasdfasdfasdfasdsdaf",
+                        "attachments": [
+                        ]
+
+                    },
+                    {
+                        "inboxId" : 78968782,
+                        "emailAddress" : "pepe@pepe.com",
+                        "isRead" : false,
+                        "createdOn": "2019-07-16 12:22:23",
+                        "subject": "OTRO Asunto 3333333333333333", 
+                        "body": "sdfasdfasdfasdfasdfasdsdaf",
+                        "attachments": [
+                            {
+                                "path" : "asdfs",
+                                "fileName" : "pepe.pdf",
+                                "mimeType" : 1082
+                            },
+                            {
+                                "path": "asdfs",
+                                "fileName": "pepe.pdf",
+                                "mimeType" : 1082
+                            }
+                        ]
+
+                    }]
+                
+}
+

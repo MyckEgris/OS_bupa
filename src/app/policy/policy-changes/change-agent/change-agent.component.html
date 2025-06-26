@@ -1,0 +1,172 @@
+<section class="ig-requestpre">
+  <form [formGroup]="wizard.policyChangesForm">
+    <div class="col-md-12 ig-formulario" formGroupName="step2">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ig-titlepolicy">
+            <h5> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.TITLE' | translate }} </h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label> {{ 'POLICY.POLICY_CHANGES.STEP1.TYPE_CHANGE_SUBTITLE' | translate }} </label>
+          <p> {{ wizard.policyChange.description }} </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.CURRENT_AGENT' | translate }} </label>
+          <p>
+            {{ wizard.policy.agent?.agentId }} - {{ wizard.policy.agent?.agentName }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <label> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.NEW_AGENT' | translate }} </label>
+            <div class="form-group">
+            <select class="custom-select form-control" formControlName="agentSearchType">
+              <option value="" disabled selected>
+                {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.SELECT_DEFAULT_OPT' | translate }} </option>
+              <option [ngValue]="item.value" *ngFor="let item of agentSearchTypes">
+                {{'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.AGENT_SEARCH_TYPES.' | concatenate: item.value | replacespaces: '_' | uppercase | translate}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="flagByAgentId">
+
+        <div class="col-md-12">
+          <label> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.PH_ID' | translate }} </label>
+          <br>
+          <small> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.BY_ID_MSG' | translate }} </small>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <input id="inputText" class="form-control" formControlName="agentId"
+              placeholder="{{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.PH_ID' | translate }}" type="text"
+              appOnlyNumber="true" maxCharsAllowed="9">
+          </div>
+        </div>
+
+        <div class="col-md-1">
+          <button type="button" (click)="searchNewAgent()"
+            [ngClass]="{'ig-btnsearch': true, 'disabled':  this.getControl(STEP2, AGENT_ID ).invalid}">
+            <i class="material-icons">search</i></button>
+        </div>
+
+        <div class="col-md-12" *ngIf="newAgent && newAgent.firstName">
+          <label> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.NEW_AGENT_NAME' | translate }} </label>
+          <p> {{newAgent.agentId}} - {{newAgent.firstName}} {{newAgent.middleName}} {{newAgent.lastName}} </p>
+        </div>
+
+        <div class="col-md-12" *ngIf="newAgent && !newAgent.firstName">
+          <label> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.NEW_AGENT_NAME' | translate }} </label>
+          <p> {{newAgent.agentId}} - {{newAgent.companyName}} </p>
+        </div>
+
+      </div>
+
+      <div class="row" *ngIf="flagByAgentName">
+        <div class="col-md-12">
+          <label> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.PH_NAME' | translate }} </label>
+          <br>
+          <small> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.BY_NAME_MSG' | translate }} </small>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <input id="inputText" class="form-control" formControlName="agentName"
+              placeholder="{{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.PH_NAME' | translate }}" type="text"
+              maxCharsAllowed="200">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <label> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.DESCRIPTION_TITLE' | translate }} </label>
+            <br>
+            <small>{{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.DESCRIPTION_MSG' | translate }}</small>
+            <textarea class="form-control" rows="6" maxCharsAllowed="2000" formControlName="description"></textarea>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h6 class="col-md-5" *ngIf="wizard.policyChange.messageLanguage"> {{ wizard.policyChange.messageLanguage }}
+          </h6>
+          <div class="add-documents">
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 botton-div">
+                <div class="row align-items-center">
+                  <div class="col-md-7">
+                    <label> {{ 'POLICY.POLICY_CHANGES.STEP2.ATTACHMENT' | translate }} </label>
+                    <small> {{ 'POLICY.POLICY_CHANGES.STEP2.ATTACHMENT_TOOLTIP' | translate }} </small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="upload">
+                      <app-upload [typeAttachment]="type1" [fileTypes]="'changePolicyFileTypes'" [maxFileSize]="25">
+                      </app-upload>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items" *ngIf="documents.length > 0">
+                  <div class="ig-file-scroll">
+                    <div class="row">
+                      <div class="col-md-12" *ngFor="let document of documents">
+                        <div class="inline-text-icon">
+                          <i class="fa" [ngClass]="document.icon"></i>
+                          <span class="text-list">
+                            {{ document.file.name }}
+                            <div class="ig-icofile">
+                              <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                                  class="material-icons">delete</i></a>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3 offset-6">
+            <button class="ig-principalsegundariobtn ig-botones" style="width: 100%;" type="button" (click)="back()">
+              {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.BT_BACK' | translate }}
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" [ngClass]="{ 'ig-principalbtn ig-botones' : true,
+                                          'disabled' : getFormGroup('step2').invalid || flagNewAgentByIdValid }"
+              (click)="next()">
+              {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_AGENT.BTN_CONTINUE' | translate }}
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </form>
+
+
+</section>

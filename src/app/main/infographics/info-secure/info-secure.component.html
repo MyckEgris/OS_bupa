@@ -1,0 +1,13 @@
+<article class="" *ngIf="contentInformation">
+  <div class="col-md-4">
+    <div class="ig-volver">
+      <a class="ig-secundariobtn ig-botones" (click)="goToBack();">
+        <i class="material-icons">arrow_back</i>{{ 'APP.GO_BACK' | translate }}
+      </a>
+    </div>
+  </div>
+  <div class="embed-responsive embed-responsive-1by1">
+    <iframe class="embed-responsive-item"
+      [src]="contentInformation.contentUrl | domSecurity:contentInformation.contentUrl"></iframe>
+  </div>
+</article>

@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row mt-5 text-center" >
+    <h2 class="m-auto">{{ 'PAYMENTS.OK_RESULT.THANKS' | translate }}</h2>
+  </div>
+  <div class="row mt-3 text-center" *ngIf="paymentResult.paymentId === 0">
+    <p>{{ 'PAYMENTS.OK_RESULT.VERIFY_PAYMENT' | translate }}</p>
+  </div>
+
+  <div class="row mt-5 justify-content-center">
+    <div class="col-md-5 cardmsg">
+      <div class="row">
+        <div class="col-12">
+          <figure><img src="assets/images/aprobadov2.png" alt="" style="width: 50%;"></figure>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <p class="aprobado">{{ 'PAYMENTS.OK_RESULT.SUCCESS' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5 offset-md-1 cardates">
+      <div class="form-group">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.PAYMENT_RECEIVED' | translate }}</label>
+        {{sysdate | dateTranslate: 'APP.DATE_FORMAT'}}
+      </div>
+      <div class="form-group" *ngIf="paymentResult.paymentId > 0">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.PAYMENT_ID' | translate }}</label>
+        {{paymentResult.paymentId}}
+      </div>
+      <div class="form-group" *ngIf="!user.is_anonymous">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.PAYMENT_AGENT' | translate }}</label>
+        {{ payingUser }}
+      </div>
+      <div class="form-group" *ngIf="showAmountUSD">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.PREMIUM_VALUE' | translate }}</label>
+        USD {{ premiumValue | number:'1.2-2'}}
+      </div>
+      <div class="form-group" *ngIf="showAmountMexicanPesos">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.PREMIUM_VALUE_LOCAL' | translate }}</label>
+        MXN {{ premiumValueLocal | number:'1.2-2'}}
+      </div>
+      <div class="form-group" *ngIf="showAmountUSD">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.AMOUNT' | translate }}</label>
+        USD {{ amountPaid | number:'1.2-2'}}
+      </div>
+      <div class="form-group" *ngIf="showAmountMexicanPesos">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.AMOUNT_LOCAL' | translate }}</label>
+        MXN {{ amountPaidLocal | number:'1.2-2'}}
+      </div>
+
+      <div class="form-group" *ngIf="showAmountUSD">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.BALANCE' | translate }}</label>
+        USD {{balance | number:'1.2-2'}}
+      </div>
+      <div class="form-group" *ngIf="showAmountMexicanPesos">
+        <label for="received">{{ 'PAYMENTS.OK_RESULT.BALANCE_LOCAL' | translate }}</label>
+        MXN {{ balanceLocal | number:'1.2-2'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-5 text-center" *ngIf="insurance !== '39'">
+    <p>{{ 'PAYMENTS.OK_RESULT.GRATEFUL_MSG' | translate }}<br>
+      {{ 'PAYMENTS.OK_RESULT.CONTACT_US' | translate }}
+
+      {{ 'PAYMENTS.OK_RESULT.BUPA' | translate }}</p>
+  </div>
+  <div class="row p-5 text-center" *ngIf="insurance === '39'">
+    <p>{{ 'PAYMENTS.OK_RESULT.GRATEFUL_MSG' | translate }}<br>
+      {{ 'PAYMENTS.OK_RESULT.CONTACT_US_ECU' | translate }}
+
+      {{ 'PAYMENTS.OK_RESULT.BUPA' | translate }}</p>
+  </div>
+  <div class="row">
+    <div class="col-md-4 offset-md-2" *ngIf="paymentResult.paymentId > 0">
+
+      <a class="ig-botones ig-principalbtn" [routerLink]="['/policy-payments-view-receipt']" [queryParams]="{
+        policyNumber: policy.policyId,
+        paymentId: paymentResult.paymentId}" target="_blank">{{'PAYMENTS.OK_RESULT.PRINT_BTN' | translate }} </a>
+
+      <!--<button class="bp-btn bp-btnprimary m-auto"
+        (click)="goToBack()">{{ 'PAYMENTS.OK_RESULT.PRINT_BTN' | translate }}</button>-->
+
+    </div>
+    <div [ngClass]="{ 'col-md-4':  true, 'offset-md-4': paymentResult.paymentId === 0 }">
+      <a *ngIf="user.is_anonymous" class="ig-botones ig-principalbtn"
+        (click)="goToBack()">{{ 'PAYMENTS.OK_RESULT.BACK_LOGIN' | translate }}</a>
+
+        <a *ngIf="!user.is_anonymous" class="ig-botones ig-principalbtn"
+        (click)="goToBack()">{{  'PAYMENTS.OK_RESULT.BACK_PAYMENTS' | translate }}</a>
+    </div>
+  </div>
+</div>

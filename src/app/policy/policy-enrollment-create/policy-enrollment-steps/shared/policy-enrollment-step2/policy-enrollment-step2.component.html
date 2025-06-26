@@ -1,0 +1,50 @@
+<section class="bp-mainpolicy">
+    <article class="row">
+
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-9">
+                    <div class="bp-itemtitle">
+                        <!-- <div class="bp-titlenum"> {{ 'POLICY.POLICY_ENROLLMENT.STEP2.TITLE_01' | translate }} </div> -->
+                        <h2 class="bp-titlepolicy"> {{ 'POLICY.POLICY_ENROLLMENT.STEP2.SUBTITLE' | translate }} </h2>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-3">
+                    <app-breadcrumb-enrollment [currentStep]="currentStep"
+                        [lengthSection]="configStep?.sections?.length" [stepActive]="sectionActive">
+                    </app-breadcrumb-enrollment>
+                </div> -->
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <app-policy-enrollment-info></app-policy-enrollment-info>
+        </div>
+
+        <div class="col md-12">
+            <div class="bp-itemcontsect">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <h4 class="bp-contentitle">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP2.BANNER_01' | translate }}
+                        </h4>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="bp-itemsectpoli">
+                            <figure>
+                                <img src="assets/images/001-file.svg" alt="">
+                            </figure>
+                            <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP2.BANNER' | translate"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </article>
+</section>
+
+<router-outlet></router-outlet>

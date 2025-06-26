@@ -1,0 +1,96 @@
+<form [formGroup]="form" (submit)="registerAccount()">
+
+  <div class="col-md-12">
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="owner"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.OWNER' | translate }} </label>
+          <select class="form-control" formControlName="owner">
+            <option *ngFor="let member of members" [ngValue]="member">{{ member.fullName }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="accountType"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ACCOUNT_TYPE' | translate }} </label>
+          <select class="form-control" formControlName="accountType" id="accountType">
+            <option *ngFor="let accountType of accountTypes" [ngValue]="accountType">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.' | concatenate:accountType.bankAccountTypeDesc | uppercase | translate }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="form-group">
+          <label for="accountNumber"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.ACCOUNT_NUMBER' | translate }}</label>
+          <app-custom-popover [title]="" 
+          [template]="['POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.TOOLTIP_ABA.MAIN'|translate, 
+          'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.TOOLTIP_ABA.COUNTRIES'|translate,
+          'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.TOOLTIP_ABA.BRAZIL'|translate,
+          'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.TOOLTIP_ABA.MEXICO'|translate]">
+          </app-custom-popover>
+          <input class="form-control ng-pristine ng-valid ng-touched" formControlName="accountNumber" id="accountNumber"
+            type="text" appRegexInput expression="^[a-zA-Z0-9]*$" maxlength="35" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-4">
+        <div class="form-group">
+          <label for="swiftNumber"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.SWIFT' | translate }}</label>
+          <input class="form-control ng-pristine ng-valid ng-touched" formControlName="swiftNumber" id="swiftNumber"
+            type="text" minlength="8" maxlength="11" autocomplete="off" pattern="[a-zA-Z]{1,6}[0-9a-zA-Z]{2}([0-9]?){3}$"
+            appRegexInput expression="^[a-zA-Z0-9]*$">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="bankName"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.BANK_NAME' | translate }} </label>
+          <input class="form-control ng-pristine ng-valid ng-touched" formControlName="bankName" id="bankName"
+            type="text" placeholder="" maxlength="150" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-4">
+          <label for="bankAddress"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.BANK_ADDRESS' | translate }} </label>
+          <input class="form-control ng-pristine ng-valid ng-touched" formControlName="bankAddress" id="bankAddress"
+            type="text" placeholder="" maxlength="500" autocomplete="off">
+        </div>
+      </div>
+
+      <!--<div class="col-md-12">
+        <div class="alert alert-primary mt-3">
+          *{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.TEXT_BEFORE_SAVE' | translate }}
+        </div>
+      </div>-->
+
+      <div class="col-md-12 mt-3 mb-2">
+        <div class="form-group form-check">
+          <input class="form-check-input ng-untouched ng-pristine ng-valid" type="checkbox" id="125"
+            formControlName="certified">
+          <label class="form-check-label" for="125"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.CERT_OFFSHORE' | translate }}
+          </label>
+          <span autoclose="'outside'" class="input-group-text-info" container="body" popoverclass="custom-popover"
+            triggers="mouseenter:mouseleave"></span>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-3"><button class="bp-btn bp-btnsecondary" type="button" (click)="back()"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.CANCEL' | translate }} </button>
+      </div>
+      <div class="col-md-3"><button class="bp-btn bp-btnprimary" [disabled]="!form.valid || !certified" type="submit">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.ACTIONS.REGISTER.SAVE' | translate }}</button></div>
+    </div>
+  </div>
+  
+
+</form>

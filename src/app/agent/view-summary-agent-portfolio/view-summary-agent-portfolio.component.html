@@ -1,0 +1,139 @@
+
+    <div class="ig-quictilhome">
+        <div class="row align-items-center">
+            <div class="col-md-7 col-6">
+                <h4>
+                    {{ 'AGENT.HOME.PORTFOLIO.MY_PORTFOLIO' | translate }}
+                </h4>
+            </div>
+            <div class="col-md-5 col-6">
+                <a class="ig-principallinkbtn2 ig-botones" [routerLink]=""
+                    (click)="goTo('agents/view-portfolio')">{{ 'AGENT.HOME.PORTFOLIO.SHOW_DETAIL' | translate }} <i
+                        class="material-icons">chevron_right</i> </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="ig-quicval">
+        <div class="row">
+            <div class="col-md-8 col-6">
+                <h5>
+                    {{ 'AGENT.HOME.PORTFOLIO.VALUES_BY' | translate }}
+                </h5>
+                <div class="dropdown">
+                    <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ 'AGENT.HOME.PORTFOLIO.SELECT_BY' | translate }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div *ngIf="!isGroupAdminAgent">
+                            <a class="dropdown-item"
+                                (click)="handleChangeCriteria(1)">{{ 'AGENT.HOME.PORTFOLIO.PRIME' | translate }}</a>
+                        </div>
+                        <div>
+                            <a class="dropdown-item"
+                                (click)="handleChangeCriteria(2)">{{ 'AGENT.HOME.PORTFOLIO.POLICIES_AMOUNT' | translate }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-6">
+                <h5>
+                    {{ 'AGENT.HOME.PORTFOLIO.AMOUNT' | translate }}
+                </h5>
+                <h6 *ngIf="portfolioReport">
+                    <h6 class="ig-valor" *ngIf="quantityType == MONEY">{{portfolioReport.total | valueOrMoney:quantityType:portfolioReport.symbol}}</h6>
+                    <h5 class="ig-valor" *ngIf="quantityType == POLICIES_COUNT">{{portfolioReport.total}}</h5>
+                </h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="ig-quicgrap">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" id="torta-tab" data-toggle="tab" role="tab" aria-controls="torta"
+                            aria-selected="true"
+                            (click)="handleChangeChartType('doughnut')">{{ 'AGENT.HOME.PORTFOLIO.DOUGHNUT' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="barra-tab" data-toggle="tab" href="#barra" role="tab"
+                            aria-controls="barra" aria-selected="false"
+                            (click)="handleChangeChartType('bar')">{{ 'AGENT.HOME.PORTFOLIO.BAR' | translate }}</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="torta-tab">
+                        <app-portfolio-pie-chart [portfolioByAgent]="portfolioByAgent" [chartType]="chartType">
+                        </app-portfolio-pie-chart>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <div class="ig-statu">
+                    <div class="row align-items-center">
+                        <div class="col-md-8 col-6">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.POLICY_STATUS' | translate }}</h6>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.AMOUNT' | translate }}</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ig-statusresul">
+                    <div class="row" *ngIf="portfolioReport">
+                        <div class="col-md-8 col-6">
+                            <h6>{{ 'AGENT.HOME.PORTFOLIO.ACTIVE' | translate }}</h6>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <h5 *ngIf="quantityType == MONEY">{{portfolioReport.active | valueOrMoney:quantityType:portfolioReport.symbol}}</h5>
+                            <h5 *ngIf="quantityType == POLICIES_COUNT">{{portfolioReport.active}}</h5>
+                        </div>
+                        <div class="col-md-8 col-6">
+                            <h6>{{ 'AGENT.HOME.PORTFOLIO.GRACE_PERIOD' | translate }}</h6>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <h5 *ngIf="quantityType == MONEY">{{portfolioReport.gracePeriod | valueOrMoney:quantityType:portfolioReport.symbol}}</h5>
+                            <h5 *ngIf="quantityType == POLICIES_COUNT">{{portfolioReport.gracePeriod}}</h5>
+                        </div>
+                        <div class="col-md-8 col-6">
+                            <h6>{{ 'AGENT.HOME.PORTFOLIO.PENDING_PAYMENT' | translate }}</h6>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <h5 *ngIf="quantityType == MONEY">{{portfolioReport.pendingPayment | valueOrMoney:quantityType:portfolioReport.symbol}}</h5>
+                            <h5 *ngIf="quantityType == POLICIES_COUNT">{{portfolioReport.pendingPayment}}</h5>
+                        </div>
+                        <div class="col-md-8 col-6">
+                            <h6>{{ 'AGENT.HOME.PORTFOLIO.LAPSED' | translate }}</h6>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <h5 *ngIf="quantityType == MONEY">{{portfolioReport.lapsed | valueOrMoney:quantityType:portfolioReport.symbol}}</h5>
+                            <h5 *ngIf="quantityType == POLICIES_COUNT">{{portfolioReport.lapsed}}</h5>
+                        </div>
+                        <!--<div class="col-md-8 col-6">
+                            <h6>{{ 'AGENT.HOME.PORTFOLIO.OTHER_PENDING' | translate }}</h6>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <h5 *ngIf="quantityType == MONEY">{{portfolioReport.pendingOther |
+                            currency:currencySymbol:true:'1.2-2'}}</h5>
+                            <h5 *ngIf="quantityType == POLICIES_COUNT">{{portfolioReport.pendingOther}}</h5>
+                        </div>-->
+                        <div class="col-md-8 col-6">
+                            <h6>{{ 'AGENT.HOME.PORTFOLIO.CANCELLED' | translate }}</h6>
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <h5 *ngIf="quantityType == MONEY">{{portfolioReport.inactive | valueOrMoney:quantityType:portfolioReport.symbol}}</h5>
+                            <h5 *ngIf="quantityType == POLICIES_COUNT">{{portfolioReport.inactive}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

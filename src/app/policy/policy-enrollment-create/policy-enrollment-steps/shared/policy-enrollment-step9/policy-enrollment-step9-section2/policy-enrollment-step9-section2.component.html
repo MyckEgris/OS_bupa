@@ -1,0 +1,139 @@
+<form [formGroup]="wizard.enrollmentForm">
+  <div formGroupName="{{STEP_NAME}}">
+    <div class="row" formGroupName="{{SECTION_NAME}}">
+      <div class="col-md-6">
+        <div class="bp-align">
+          <p>Yo, </p>
+          <div class="form-group"
+            [ngClass]="{ 'was-validated' : !getControl(FULL_NAME).valid && !wizard.isCurrentSectionValid }">
+            <input type="text" formControlName={{FULL_NAME}} class="form-control" id={{FULL_NAME}}
+              placeholder="Ej. Marcela Perez Contreras" [required]="getControl(FULL_NAME).errors?.required"
+              [maxLength]="getValidatorValue(FULL_NAME, 'maxLength')"
+              [minlength]="getValidatorValue(FULL_NAME, 'minlength')"
+              [pattern]="getValidatorValue(FULL_NAME, 'pattern')" [ngClass]="{'is-invalid': getControl(FULL_NAME).invalid && !wizard.isCurrentSectionValid,
+                'is-valid': getControl(FULL_NAME).valid && !wizard.isCurrentSectionValid}" />
+            <small class="text-danger"
+              *ngIf="getControl(FULL_NAME).hasError('pattern') && !wizard.isCurrentSectionValid">
+              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(FULL_NAME, 'pattern') | uppercase | translate}}
+            </small>
+            <small class="text-danger"
+              *ngIf="getControl(FULL_NAME).hasError('maxlength') && !wizard.isCurrentSectionValid">
+              {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(FULL_NAME, 'maxlength') | uppercase | translate}}
+            </small>
+          </div>
+        </div>
+        <div [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.DISCLAIMER1' | translate"></div>
+      </div>
+      <div class="col-md-6">
+        <div class="row align-items-center">
+          <div class="col-md-9">
+            <h6 class="mt-3">
+              {{ "POLICY.POLICY_ENROLLMENT.STEP9.CARD_DATA" | translate }}
+            </h6>
+            <div class="form-group" [ngClass]="{ 'was-validated' : !wizard.isCurrentSectionValid }">
+              <label
+                for="description">{{'POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.FRANCHISE' | translate}}</label>
+              <ng-select #type [items]="typeCards" [selectOnTab]="true" (change)="buildFormByCardType($event.value)"
+                bindLabel="description" formControlName={{CARD_TYPE}} [required]="isFieldRequired(CARD_TYPE)"
+                class="form-control " [placeholder]="getControl(CARD_TYPE).value !== null && getControl(CARD_TYPE).value !== ''
+                    ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-3 mt-5">
+            <img [src]="urlImg" alt="" class="img-fluid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">
+            {{ "POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.CREDIT_CARD_NUMBER" | translate }}</label>
+          <input type="text" required class="form-control" id="cardNumber" [placeholder]="getControl(CARD_NUMBER).value !== null && getControl(CARD_NUMBER).value !== ''
+                    ? '':'POLICY.POLICY_ENROLLMENT.STEP9.CARD_NUMBER_EXAMPLE' | translate "
+            formControlName="cardNumber" [required]="getControl(CARD_NUMBER).hasError('required')"
+            [pattern]="getValidatorValue(CARD_NUMBER, 'pattern')" [required]="getControl(CARD_NUMBER).errors?.required"
+            maxCharsAllowed="{{maxCharCardNumber}}" [ngClass]="{'is-invalid': getControl(CARD_NUMBER).invalid && !wizard.isCurrentSectionValid,
+            'is-valid': getControl(CARD_NUMBER).valid && !wizard.isCurrentSectionValid}" appOnlyNumber="true" />
+          <div class="invalid-feedback" *ngIf="getControl(CARD_NUMBER).invalid && getControl(CARD_NUMBER).dirty">
+            {{ "POLICY.POLICY_ENROLLMENT.STEP9.INVALID_CARD_NUMBER" | translate }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label
+                for="formGroupExampleInput">{{ 'POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.EXPIRATION_DATE' | translate }}</label>
+              <div class="row">
+                <div class="col-md-6" [ngClass]="{ 'was-validated' : !wizard.isCurrentSectionValid }">
+                  <ng-select #month [items]="listMonths" [selectOnTab]="true" bindValue="month" bindLabel="month"
+                    formControlName={{MONTH_EXPIRATION}} [required]="isFieldRequired(MONTH_EXPIRATION)"
+                    class="form-control " [placeholder]="getControl(MONTH_EXPIRATION).value !== null && getControl(MONTH_EXPIRATION).value !== ''
+                      ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                  </ng-select>
+                </div>
+                <div class="col-md-6" [ngClass]="{ 'was-validated' : !wizard.isCurrentSectionValid  }">
+                  <ng-select #year [items]="listYears" [selectOnTab]="true" bindValue="year" bindLabel="month"
+                    formControlName={{YEAR_EXPIRATION}} [required]="isFieldRequired(YEAR_EXPIRATION)"
+                    class="form-control " [placeholder]="getControl(YEAR_EXPIRATION).value !== null && getControl(YEAR_EXPIRATION).value !== ''
+                      ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                  </ng-select>
+                </div>
+              </div>
+              <small class="text-danger"
+                *ngIf="getFormGroup().hasError('invalidDate') && !wizard.isCurrentSectionValid">
+                {{ 'PAYMENTS.ERRORS.DATE_NOT_VALID' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label
+                for="formGroupExampleInput">{{ "POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.SECURITY_CODE" | translate }}</label>
+              <input type="text" required class="form-control" id={{SECURITY_CODE}} placeholder="Ej. 323"
+                formControlName={{SECURITY_CODE}} [required]="getControl(SECURITY_CODE).errors?.required"
+                [maxLength]="getValidatorValue(SECURITY_CODE, 'maxLength')"
+                [minlength]="getValidatorValue(SECURITY_CODE, 'minlength')"
+                [pattern]="getValidatorValue(SECURITY_CODE, 'pattern')" [ngClass]="{'is-invalid': getControl(SECURITY_CODE).invalid && !wizard.isCurrentSectionValid,
+                                  'is-valid': getControl(SECURITY_CODE).valid && !wizard.isCurrentSectionValid}"
+                appOnlyNumber="true" />
+              <div class="invalid-feedback"
+                *ngIf="getControl(SECURITY_CODE).invalid && getControl(SECURITY_CODE).dirty">
+                {{ "POLICY.POLICY_ENROLLMENT.STEP9.INVALID_CODE" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput">{{ "POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.EMAIL" | translate }}</label>
+          <input type="email" required class="form-control" id={{EMAIL}} [placeholder]="getControl(EMAIL).value !== null && getControl(EMAIL).value !== ''
+                      ? '': 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_EMAIL' | translate " formControlName={{EMAIL}}
+            [required]="getControl(EMAIL).errors?.required" [maxLength]="getValidatorValue(EMAIL, 'maxLength')"
+            [minlength]="getValidatorValue(EMAIL, 'minlength')" [pattern]="getValidatorValue(EMAIL, 'pattern')"
+            [ngClass]="{'is-invalid': getControl(EMAIL).invalid && !wizard.isCurrentSectionValid,
+                                  'is-valid': getControl(EMAIL).valid && !wizard.isCurrentSectionValid}" />
+          <small class="text-danger"
+            *ngIf="!getControl(EMAIL).valid && !wizard.isCurrentSectionValid && getControl(EMAIL).dirty">
+            {{ 'PAYMENTS.ERRORS.EMAIL_NOT_VALID' | translate }}
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput">
+            {{ "POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.CARDHOLDER_ADDRESS" | translate }}</label>
+          <input type="text" required class="form-control" id={{DIRECTION}} [placeholder]="getControl(DIRECTION).value !== null && getControl(DIRECTION).value !== ''
+          ? '':'POLICY.POLICY_ENROLLMENT.STEP9.CARD_HOLDER_DIRECTION_EXAMPLE' | translate "
+            formControlName={{DIRECTION}} [required]="getControl(DIRECTION).errors?.required"
+            [maxLength]="getValidatorValue(DIRECTION, 'maxLength')"
+            [minlength]="getValidatorValue(DIRECTION, 'minlength')" [pattern]="getValidatorValue(DIRECTION, 'pattern')"
+            [ngClass]="{'is-invalid': getControl(DIRECTION).invalid && !wizard.isCurrentSectionValid,
+                                  'is-valid': getControl(DIRECTION).valid && !wizard.isCurrentSectionValid}" />
+
+          <small class="text-danger"
+            *ngIf="!getControl(DIRECTION).valid && !wizard.isCurrentSectionValid && getControl(DIRECTION).dirty">
+            {{ 'POLICY.POLICY_ENROLLMENT.STEP9.SECTION_02.CARD_HOLDER_NOT_VALID' | translate }}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

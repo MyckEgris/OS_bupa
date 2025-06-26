@@ -1,0 +1,47 @@
+<ng-template #t let-date>
+	{{ date.day }}
+</ng-template>
+<div class="form-group ig-date-from-to">
+  <div class="input-group">
+    <input class="form-control" readonly 
+    [value]="(dateValue.dateFrom | dateTranslate:'APP.DATE_FORMAT_DASH') + (dateValue.dateFrom && dateValue.dateTo ? ('APP.DATE_TO' | translate) : '') + (dateValue.dateTo | dateTranslate:'APP.DATE_FORMAT_DASH')"
+      [placeholder]="placeholderkey | translate"
+      (click)="toggle()">
+    <div class="input-group-btn">
+      <button class="btncalendar" type="button" (click)="toggle()"><i class="material-icons">date_range</i></button>
+    </div>
+    
+    <div class="ig-picker-popup" [ngClass]="{ 'ig-show-picker': showPopup }">
+      <div class="col-6">
+        <div>
+          <p>{{ 'APP.START_DATE' | translate }}</p>
+          <input #dateInputFrom [value]="dateValue.dateFrom | dateTranslate:'APP.DATE_FORMAT_DASH'" [placeholder]="('APP.DATE_FORMAT_DASH' | translate).toLowerCase()"
+            (change)="dateManualChange($event, 1)" mask="00-00-0000" [showMaskTyped]="true" [clearIfNotMatch]="true">
+          <ngb-datepicker #pickerFrom [minDate]="minDatePickerFrom" [maxDate]="maxDatePickerFrom" (select)="selectFrom($event)"></ngb-datepicker>
+        </div>
+      </div>
+      <div class="col-6">
+        
+        <div>
+          <p>{{ 'APP.END_DATE' | translate }}</p>
+          <input #dateInputTo [value]="dateValue.dateTo | dateTranslate:'APP.DATE_FORMAT_DASH'" [placeholder]="('APP.DATE_FORMAT_DASH' | translate).toLowerCase()"
+            (change)="dateManualChange($event, 2)" mask="00-00-0000" [showMaskTyped]="true" [clearIfNotMatch]="true">
+          <ngb-datepicker #pickerTo [minDate]="minDatePickerTo" [maxDate]="maxDatePickerTo" (select)="selectTo($event)"></ngb-datepicker>
+        </div>
+      </div>
+      <div class="ig-datepicker-buttons">
+        <button class="ig-button-as-message" disabled="disabled" *ngIf="bothmandatory && (!dateValue.dateFrom || !dateValue.dateTo)">{{ 'APP.SELECT_DATES_IS_MANDATORY' | translate }}</button>
+        <button class="ig-btncalendar" (click)="ok()" *ngIf="bothmandatory && (dateValue.dateFrom && dateValue.dateTo)">{{ 'APP.BUTTON.CONTINUE_BTN' | translate }}</button>
+        <button class="ig-btncalendar" (click)="ok()" *ngIf="!bothmandatory">{{ 'APP.BUTTON.CONTINUE_BTN' | translate }}</button>
+        <button class="ig-btncalendar ig-btncalendar-cancel" (click)="reset()">{{ 'APP.BUTTON.RESET_BTN' | translate }}</button>
+        <button class="ig-btncalendar ig-btncalendar-cancel" (click)="cancel()">{{ 'APP.BUTTON.CANCEL_BTN' | translate }}</button>
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="selected-date" *ngIf="dateValue.dateFrom || dateValue.dateTo">
+    {{ oneSelectedDateMessage | translate }}
+  </div>
+</div>

@@ -1,0 +1,21 @@
+import { QuestionDetailModelBase } from './question-detail-base.model';
+
+export class GeneralQuestionDetail extends QuestionDetailModelBase {
+  constructor(
+    public applicationMedicalQuestionExtGUID: string,
+    public applicationAttendingPhysicianGUID: string,
+    public member: string,
+    public memberFullName: string,
+    public diseaseMedicalProblem: string,
+    public treatment: string,
+    public dateOfFirstSymptom: Date,
+    public treatmentStartDate: Date,
+    public treatmentEndDate: Date,
+    public nameOfDoctor: string,
+    public specialtyOfDoctor: string,
+    public phoneNumber: string
+  ) {
+    super(applicationMedicalQuestionExtGUID, applicationAttendingPhysicianGUID, member,
+      memberFullName, nameOfDoctor, specialtyOfDoctor, phoneNumber);
+  }
+}

@@ -1,0 +1,151 @@
+<section class="bp-mainpolicy" *ngIf="wizard" #idSectionStep21>
+  <form [formGroup]="wizard.searchForm">
+
+    <article class="row">
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+
+          <div class="row">
+            <div class="col-md-12">
+              <!-- handleIsPolicyMember && handleAreHealtOrTravelPolicy -->
+              <p *ngIf="handleIsPolicyMember" 
+                [innerHTML]="'CLAIMFORM.STEP_PAYMENT_METHOD.DESC_POLICYMEMBER_HEALT_TRAVELINDIVIDUAL' | translate">
+              </p>
+              <!-- handleIsHolder && handleAreHealtOrTravelPolicy -->
+              <p *ngIf="handleIsHolder"
+                [innerHTML]="'CLAIMFORM.STEP1_1DESC_DESCRIPTION' | translate">
+              </p>
+              <!-- handleAreHealtOrTravelPolicy -->
+              <p *ngIf="handleIsAgent"
+                [innerHTML]="'CLAIMFORM.STEP1_1DESC_DESCRIPTION_AGENT' | translate">
+              </p>
+              <!-- handleIsPolicyMember && handleIsBTIPolicy -->
+              <!-- <p *ngIf="handleIsPolicyMember"
+                [innerHTML]="'CLAIMFORM.STEP_PAYMENT_METHOD.DESC_POLICYMEMBER_BTI' | translate">
+              </p> -->
+              <!-- handleIsAgent && handleIsBTIPolicy -->
+              <!-- <p *ngIf="handleIsAgent"
+                [innerHTML]="'CLAIMFORM.STEP_PAYMENT_METHOD.DESC_AGENTS_BTI' | translate">
+              </p> -->
+            </div>
+          </div>
+
+          <div class="row align-items-end">
+
+            <div class="col-md-3" *ngIf="showPaymentMethodTypeSelect">
+              <div class="form-group">
+                <label for="claimOwnerCob">{{'CLAIMFORM.STEP1PAYMETHODMEMBER' | translate }}</label>
+                <select class="form-control" id="claimPayType" formControlName="claimFormPayType"
+                  (change)="selectPaymentType($event)">
+                  <option value="" disabled selected>
+                    {{ 'CLAIMFORM.SEARCH_PAY_TYPE.SELECT' | translate }} </option>
+                  <option *ngFor="let searchTypes of claimPaySearchTypes" value="{{searchTypes.value}}">
+                    {{ 'CLAIMFORM.SEARCH_PAY_TYPE.'| concatenate: searchTypes.value | uppercase |
+                    translate }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="!showPaymentMethodTypeSelect">
+              <div class="form-group">
+                <label for="claimOwnerCob">{{'CLAIMFORM.STEP1PAYMETHODMEMBER' | translate }}</label>
+                <input type="text" class="form-control" formControlName="searchClaimType"
+                  value="{{ 'CLAIMFORM.SEARCH_PAY_TYPE.BY_TRANSFER' | translate }}" readonly>
+              </div>
+            </div>
+
+          <div class="col-md-3" *ngIf="showBankInformation">
+              <div class="form-group">
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1ACCOUNTEMBERNUMBER' | translate }}</label>
+                <input type="text" class="form-control" formControlName="bankAccountNumber" [readonly]="isReadOnly">
+              </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="showBankInformation">
+              <div class="form-group">
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1ACCOUNTCLABE' | translate }}</label>
+                <input type="text" class="form-control" formControlName="bankAccountClabe" [readonly]="isReadOnly">
+              </div>
+            </div>
+
+              <!-- <div class="col-md-3"
+              *ngIf="showBankInformation && wizard.searchForm.value.bankAccountName && bankAccountType === 1">
+              <div class="form-group">
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1ACCOUNTEMBER' | translate }}</label>
+                <input type="text" class="form-control" formControlName="bankAccountName" readonly
+                  value="{{'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.SAVING' | translate }}">
+              </div>
+            </div>
+
+            <div class="col-md-3"
+              *ngIf="showBankInformation && wizard.searchForm.value.bankAccountName && bankAccountType === 2">
+              <div class="form-group">
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1ACCOUNTEMBER' | translate }}</label>
+                <input type="text" class="form-control" formControlName="bankAccountName" readonly
+                  value="{{'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.CHECKING' | translate }}">
+              </div>
+            </div> -->
+
+
+
+            <div class="col-md-3" *ngIf="showBankInformation">
+              <div class="form-group">
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1ACCOUNTCURRENCY' | translate }}</label>
+                <input type="text" class="form-control" formControlName="bankAccountCurrency" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="row"
+            *ngIf="!this.wizard.bankInformationId && this.wizard.claimPaymentMethoidId === CLAIM_FORM_PAYMENT_TYPE_TRANSFERT">
+            <div class="col-md-12">
+              <div class=" p-0">
+                <div class="bp-alertform">
+                  <div class="card-message w-100 m-0" style="display: flex; align-items: center;">
+                    <i class="material-icons p-0">info</i>
+                    <span class="bp-claim_alert">
+                      {{ 'CLAIMFORM.STEP_PAYMENT_METHOD.WITHOUT_BANK_ACCOUNT' | translate }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </article>
+
+    <article class="row">
+      <div class="col-md-12">
+        <div class="row justify-content-center align-items-end">
+          <div class="col-md-3 col-12">
+            <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="cancel()">
+              {{ 'CLAIMFORM.BTNS.CANCEL' | translate }}
+            </button>
+          </div>
+          <div class="col-md-3 col-12">
+            <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="back()">
+              {{ 'CLAIMFORM.BTNS.BACK' | translate }}
+            </button>
+          </div>
+          <div class="col-md-3 col-12">
+            <!--  -->
+            <button class="ig-botones ig-principalbtn" type="button" (click)="next()"
+            [disabled]="!this.wizard.policyHolder || (!this.wizard.bankInformationId && this.wizard.claimPaymentMethoidId === CLAIM_FORM_PAYMENT_TYPE_TRANSFERT)">
+              {{ 'CLAIMFORM.BTNS.CONTINUE' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+  </form>
+</section>

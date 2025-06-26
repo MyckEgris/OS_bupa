@@ -1,0 +1,33 @@
+<div [formGroup]="form">
+  <label [attr.for]="control.key">{{control.label}}</label>
+
+  <div [ngSwitch]="control.controlType">
+
+    <input *ngSwitchCase="'textbox'" [formControlName]="control.key" [id]="control.key" [type]="control.type">
+    <input *ngSwitchCase="'file'" [formControlName]="control.key" [id]="control.key" [type]="control.type">
+
+    <div *ngSwitchCase="'radio'">
+      <div *ngFor="let opt of control.options">
+          <input [formControlName]="control.key" [id]="opt.key" [type]="control.controlType" [name]="control.name" [value]="opt.key">
+          <label [for]="control.key">{{ opt.value }}</label>
+      </div>
+      
+    </div>
+
+    <div *ngSwitchCase="'checkbox'">
+        <div *ngFor="let opt of control.options">
+            <input [formControlName]="control.key" [id]="opt.key" [type]="control.controlType" [name]="control.name" [value]="opt.key">
+            <label [for]="control.key">{{ opt.value }}</label>
+        </div>
+        
+      </div>
+    
+
+    <select [id]="control.key" *ngSwitchCase="'combo'" [formControlName]="control.key">
+      <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+  </div>
+
+  <div class="errorMessage" *ngIf="!isValid">{{control.label}} is required</div>
+</div>

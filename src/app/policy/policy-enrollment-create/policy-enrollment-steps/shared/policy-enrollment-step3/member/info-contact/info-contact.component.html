@@ -1,0 +1,87 @@
+<div class="col-md-12" *ngIf="formEnrollmentDependents"
+  [formGroup]="formEnrollmentDependents.get('policyAppContactDependents')">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4 class="bp-contentitle">
+        {{'POLICY.POLICY_ENROLLMENT.STEP3.INFO_CONTACT' | translate }}
+      </h4>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+        <label for="country{{numberIndexMember}}"> {{'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.COUNTRY' | translate }} </label>
+        <ng-select #countrySelect [items]="wizard.countries$ | async" [selectOnTab]="true" bindValue="countryId"
+          bindLabel="countryName" formControlName="country" class="form-control "
+          [required]="getControl('country').errors?.required" (change)="handleCountryChange($event)"
+          [placeholder]="getControl('country').value !== null && getControl('country').value !== ''
+                              ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+        <label for="city{{numberIndexMember}}"> {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.CITY' | translate }} </label>
+        <ng-select #citySelect [items]="cities$ | async" [selectOnTab]="true" bindValue="cityId"
+          bindLabel="cityName" formControlName="city" class="form-control"
+          (change)="handleCityChange($event)"
+          [placeholder]="getControl('city').value !== null && getControl('city').value !== ''
+                                  ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate "
+          [required]="getControl('city').errors?.required">
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+        <label for="areaCode{{numberIndexMember}}"> {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.AREA_CODE' | translate }} </label>
+        <ng-select #areaCodeSelect [items]="areaCodes$ | async" [selectOnTab]="true"
+          bindValue="areaCodeId" bindLabel="areaCode" formControlName="areaCode"
+          class="form-control" [required]="getControl('areaCode').errors?.required"
+          [placeholder]="getControl('areaCode').value !== null && getControl('areaCode').value !== ''
+                      ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+        <label for="nroPhone{{numberIndexMember}}"> {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PHONE' | translate }} </label>
+        <input type="text" class="form-control" id="nroPhone{{numberIndexMember}}"
+          placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_PHONE' | translate }}"
+          formControlName="nroPhone"
+          [maxlength]="getValidatorValue('nroPhone', 'maxLength')"
+          [pattern]="getValidatorValue('nroPhone', 'pattern')"
+          [minlength]="getValidatorValue('nroPhone', 'minLength')"
+          [required]="getValidatorValue('nroPhone', 'required')">
+        <small class="text-danger" *ngIf="getControl('nroPhone').errors?.pattern && showValidations">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('nroPhone', 'pattern') | uppercase | translate}}
+        </small>
+        <small class="text-danger" *ngIf="getControl('nroPhone').errors?.maxlength && showValidations">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('nroPhone', 'maxLength') | uppercase | translate}}
+          {{getControl('nroPhone').errors?.maxlength.requiredLength}}
+        </small>
+        <small class="text-danger" *ngIf="getControl('nroPhone').errors?.minlength && showValidations">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('nroPhone', 'minLength') | uppercase | translate}}
+          {{getControl('nroPhone').errors?.minlength.requiredLength}}
+        </small>
+      </div>
+    </div>
+
+    <div class="col-md-12" *ngIf="getControl('email')">
+      <div class="form-group">
+        <label for="email{{numberIndexMember}}"> {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.EMAIL' | translate }} </label>
+        <input type="text" class="form-control" formControlName="email" id="email{{numberIndexMember}}"
+          [placeholder]="getControl('email').value !== null && getControl('email').value !== ''
+                            ? '': 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_EMAIL' | translate "
+          [ngClass]="{'is-invalid': getControl('email').invalid && showValidations,  'is-valid': getControl('email').valid && showValidations}"
+          [required]="getControl('email').errors?.required">
+        <small class="text-danger" *ngIf="getControl('email').errors?.invalidEmail && showValidations">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('email', 'emailPatternValidator') | uppercase | translate}}
+        </small>
+      </div>
+    </div>
+
+  </div>
+</div>

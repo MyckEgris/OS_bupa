@@ -1,0 +1,183 @@
+<section class="bp-mainpolicy">
+  <article class="row">
+    <div class="col-md-12 mb-3">
+      <img src="assets/images/imagestep0.png" alt="" class="img-fluid">
+    </div>
+    <div class="col-md-12 my-5">
+      <div class="row">
+        <div class="col-md">
+          <div class="bp-itemcontsect2 h-100 w-100 ">
+            <div style="margin-top: -62px;" class="bupa-iconstep text-center" 
+              [ngClass]="{'completed': getIconCompletedQuotedApplication[1], 'next': false}">
+              <img [src]="getIconCompletedQuotedApplication[0]" alt="" class="img-fluid">
+            </div>
+            <div class="row">
+              <div class="col-md-12 align-self-center">
+                <h5 class="bp-titlepolicy text-center" style="min-height: 50px;">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.ELEMENT_H5_1' | translate }}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM1' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH1' | translate }}</p>
+              </div>
+              <!-- <div class="bp-itemtitle w-100">
+                <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM2' | translate }}
+                </div> 
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH1' | translate }}</p>
+              </div> -->
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM3' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH3' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="bp-itemcontsect2 h-100 w-100">
+            <div style="margin-top: -62px;" class="bupa-iconstep text-center"
+              [ngClass]="{'completed': getIconCompletedApplication[1], 'next': isCompletedApplicationNext}">
+              <img [src]="getIconCompletedApplication[0]" alt="" class="img-fluid">
+            </div>
+            <div class="row">
+              <div class="col-md-12 align-self-center">
+                <h5 class="bp-titlepolicy text-center" style="min-height: 50px;">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.ELEMENT_H5_2' | translate }}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM4' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH4' | translate }} </p>
+              </div>
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM5' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH5' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="bp-itemcontsect2 h-100 w-100">
+            <div style="margin-top: -62px;" class="bupa-iconstep text-center"
+              [ngClass]="{'completed': getIconCompletedSignApplication[1], 'next': isSignApplicationNext}">
+              <img [src]="getIconCompletedSignApplication[0]" alt="" class="img-fluid">
+            </div>
+            <div class="row">
+              <div class="col-md-12 align-self-center">
+                <h5 class="bp-titlepolicy text-center" style="min-height: 50px;">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.ELEMENT_H5_3' | translate }}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM6' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH6' | translate }}</p>
+              </div>
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM7' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH7' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="bp-itemcontsect2 h-100 w-100">
+            <div style="margin-top: -62px;" class="bupa-iconstep text-center"
+              [ngClass]="{'completed': getIconCompletedUploadDocsApplication[1], 'next': isCompletedUploadDocsApplicationNext}">
+              <img [src]="getIconCompletedUploadDocsApplication[0]" alt="" class="img-fluid">
+            </div>
+            <div class="row">
+              <div class="col-md-12 align-self-center">
+                <h5 class="bp-titlepolicy text-center" style="min-height: 50px;">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.ELEMENT_H5_4' | translate }}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM8' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH8' | translate }}</p>
+              </div>
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM9' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH9' | translate }}</p>
+              </div>
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM10' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH10' | translate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="bp-itemcontsect2 h-100 w-100">
+            <div style="margin-top: -62px;" class="bupa-iconstep text-center"
+              [ngClass]="{'completed': getIconCompletedPaymentInfoApplication[1], 'next': isPaymentInfoApplicationNext}">
+              <img [src]="getIconCompletedPaymentInfoApplication[0]" alt="" class="img-fluid">
+            </div>
+            <div class="row">
+              <div class="col-md-12 align-self-center ">
+                <h5 class="bp-titlepolicy text-center" style="min-height: 50px;">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.ELEMENT_H5_5' | translate }}
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM11' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH11' | translate }}</p>
+              </div>
+              <div class="bp-itemtitle w-100">
+                <!-- <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM12' | translate }}
+                </div> -->
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH12' | translate }}</p>
+              </div>
+              <!-- <div class="bp-itemtitle w-100">
+                <div class="bp-titlenum">
+                  {{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.BP_TITLENUM13' | translate }}
+                </div>
+                <p>{{ 'POLICY.POLICY_ENROLLMENT.INTRODUCTION.PARAGRAPH13' | translate }}</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <button class="bp-btn bp-btnprimary" type="button" (click)="next()">
+            {{'APP.BUTTON.CONTINUE_BTN' | translate }}
+          </button>
+         </div>
+      </div>
+    </div>
+  </article>
+</section>

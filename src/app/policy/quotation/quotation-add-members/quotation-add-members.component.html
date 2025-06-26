@@ -1,0 +1,162 @@
+<div class="bp-bgtilt bp-bgtilt2 bp-contentmember">
+  <button class="ig-principalbtn ig-principallinkbtn2"
+    style="padding: 0;">{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.ADD_MEMBER' | translate }}</button>
+
+
+  <p style="height: 65px;">{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.LEGEND' | translate }}</p>
+  <hr>
+
+  <form [formGroup]="memberForm">
+    <div class="container-change-deductible">
+
+      <div class="row">
+        <div class="col-md-6">
+          <h6 class="ig-datos">
+            <label> {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.FULL_NAME' | translate }}</label>
+          </h6>
+          <div
+            [ngClass]="{ 'border-danger' : (!memberForm.controls['fullname'].valid || memberForm.controls['fullname'].errors) && showValidations}">
+            <input type="text" class="form-control" formControlName="fullname" minlength="5" maxlength="50"
+              >
+              <!--appOnlyLetters="true"-->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h6 class="ig-datos">
+            <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.RELATION' | translate }}</label>
+          </h6>
+          <div
+            [ngClass]="{ 'border-danger' : (!memberForm.controls['relationTypeId'].valid || memberForm.controls['relationTypeId'].errors) && showValidations}">
+            <select class="custom-select form-control" formControlName="relationTypeId">
+              <option [ngValue]="type" *ngFor="let type of relation">{{ type.relationType | translate}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-7">
+          <h6 class="ig-datos">
+            <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.DOB' | translate }}</label>
+          </h6>
+          <p
+            [ngClass]="{ 'border-danger' : (!memberForm.controls['dob'].valid || memberForm.controls['dob'].errors) && showValidations}">
+            <app-custom-date-picker formControlName="dob" [minDate]="minDate" [dateValue]="selectedDate"
+              [maxDate]="maxDate"></app-custom-date-picker>
+          </p>
+        </div>
+        <div class="col-md-5">
+          <h6 class="ig-datos">
+            <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.GENRE' | translate }}</label>
+          </h6>
+          <div class="row">
+            <div class="col-md-12">
+              <div
+                [ngClass]="{'quote-bp-genero': true, 'border-danger' : ((!maleSelected && !femaleSelected) && showValidations)}">
+                <a [ngClass]="maleSelected ? 'bp-generohselected' : 'bp-generoh'" (click)="onClickGender('male')"></a>
+                <a [ngClass]="femaleSelected ? 'bp-generomselected' : 'bp-generom'"
+                  (click)="onClickGender('female')"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <hr>
+      <div *ngIf="addedMembers.length > 0">
+        <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.ADDED' | translate }}</label>
+        <div class="row align-items-center added-members bp-addmember" *ngFor="let added of addedMembers">
+
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-12">
+                <h6 class="ig-datos">
+                  <label> {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.FULL_NAME' | translate }}</label>
+                </h6>
+
+                <p style="font-size: 12px; margin: 0; padding: 0;">
+                  {{ added.memberName }}
+                </p>
+
+              </div>
+              <div class="col-md-12">
+                <h6 class="ig-datos">
+                  <label>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.RELATION' | translate }}</label>
+                </h6>
+                <p style="font-size: 12px; margin: 0; padding: 0;">
+                  {{ added.relationType | translate }}
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-6">
+            <a href="#" (click)="editMember($event, added)"><i class="material-icons"
+                style="font-size: 25px; color: #0079c8;">create</i></a>
+            <a href="#" (click)="deleteMember($event, added)"><i class="material-icons"
+                style="font-size: 25px; color: #0079c8;">delete</i></a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button class="ig-botones ig-outlinebtn" (click)="clearMember()">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.CLEAR' | translate }}</button>
+      </div>
+      <div class="col-md-6">
+        <button class="ig-botones ig-outlinebtn" (click)="addMember(memberForm.value)">
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.ADD' | translate }}</button>
+      </div>
+    </div>
+
+    <!--<p>
+      Value: {{ memberForm.value | json }} <br>
+      Valid: {{ memberForm.valid | json }} <br>
+      FullName: {{ memberForm.controls['fullname'].errors | json }} <br>
+      DOB: {{ memberForm.controls['dob'].errors | json }} <br>
+      RelationTypeId: {{ memberForm.controls['relationTypeId'].errors | json }} <br>
+      Genre: {{ memberForm.controls['genre'].errors | json }} <br>
+    </p>-->
+  </form>
+</div>
+
+<div class="bp-alertform">
+  <div class="alert alert-danger" *ngIf="showValidations">
+    <ul>
+      <li *ngIf="memberForm.controls['fullname'].hasError('required') || 
+    memberForm.controls['relationTypeId'].hasError('required') || 
+    memberForm.controls['genre'].hasError('required') || 
+    memberForm.controls['dob'].hasError('required')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.REQUIRED' | translate }}</span></li>
+      <li *ngIf="memberForm.controls['fullname'].hasError('minlength')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.MINLENGTH' | translate }}</span></li>
+      <li *ngIf="memberForm.controls['dob'].hasError('invalidAdultAge')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDADULTAGE' | translate }}</span>
+      </li>
+      <li *ngIf="memberForm.controls['dob'].hasError('invalidAgeRangePolicy')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDAGERANGEPOLICY' | translate }}</span>
+      </li>
+      <li *ngIf="memberForm.controls['dob'].hasError('invalidAgeRangePolicyDependents')">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDAGERANGEPOLICYDEPENDENTS' | translate }}</span>
+      </li>
+      <li *ngIf="validateSpouse">
+        <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.VALIDATIONS.INVALIDSPOUSE' | translate }}</span>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<div class="card-message card-timeout" *ngIf="success">
+  <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.ADDED_SUCCESSFULLY' | translate }}</span>
+</div>
+<div class="card-message card-timeout" *ngIf="update_success">
+  <span>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.ADD_MEMBERS.UPDATED_SUCCESSFULLY' | translate }}</span>
+</div>

@@ -1,0 +1,210 @@
+<section class="ig-policidetails">
+    <article class="row">
+
+        <div class="col-md-6 offset-md-3" *ngIf="policyDto && paymentDto">
+
+            <span>
+                {{today | dateTranslate: 'APP.DATE_FORMAT'}}
+            </span>
+
+            <h3>
+                {{ 'PAYMENTS.VIEW_RECEIPT.BUPA_INSURANCE_COMPANY' | translate }}
+            </h3>
+
+            <p>
+                {{ 'PAYMENTS.VIEW_RECEIPT.MESSAGE_RECEIPT_3' | translate }} <br> {{ 'PAYMENTS.VIEW_RECEIPT.MESSAGE_RECEIPT_4' | translate }} {{ policyId }} {{ 'PAYMENTS.VIEW_RECEIPT.MESSAGE_RECEIPT_5' | translate }} {{today | dateTranslate: 'APP.DATE_FORMAT'}}.
+                <br> {{ 'PAYMENTS.VIEW_RECEIPT.NOTE' | translate }} <br>
+            </p>
+
+            <div class="ig-detalle">
+
+                <h5>{{ 'PAYMENTS.VIEW_RECEIPT.POLICY_DETAILS' | translate }}</h5>
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.POLICY_NUMBER_PREVIOUS_POLICY' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p> {{ policyDto.policyId }} </p>
+                        <p *ngIf="policyDto.legacyNumber"> / {{ policyDto.legacyNumber}} </p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.INSURED_MEMBER' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p> {{ policyDto.members[0].firstName}} {{ policyDto.members[0].lastName }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.PLAN' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p>{{ policyDto.planDescription }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.PAYMENT_TYPE' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p> {{ policyDto.modeOfPayment }}</p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.EFFECTIVE_DATE' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p> {{ paymentDto.issueDate | dateTranslate: 'APP.DATE_FORMAT'}} </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="ig-detalle">
+
+                <h5>{{ 'PAYMENTS.VIEW_RECEIPT.PAYMENT_DETAILS' | translate }}</h5>
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-6" *ngIf="showAmountMXN">
+                        <h6> {{ 'PAYMENTS.VIEW_RECEIPT.AMOUNT_DUE_MEX' | translate }} </h6>
+                    </div>
+
+                    <div class="col-md-6 text-right" *ngIf="showAmountMXN">
+                        <p> MXN {{ paymentDto.amountDue | number:'1.2-2' }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6" *ngIf="showAmountUSD">
+                        <h6> {{ 'PAYMENTS.VIEW_RECEIPT.AMOUNT_DUE' | translate }} </h6>
+                    </div>
+
+                    <div class="col-md-6 text-right" *ngIf="showAmountUSD">
+                        <p> USD {{ paymentDto.amountDueUSD | number:'1.2-2' }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6" *ngIf="showAmountMXN">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.RECEIVED_AMOUNT_MEXICO' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right" *ngIf="showAmountMXN">
+                        <p> MXN {{ paymentDto.amount | number:'1.2-2' }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6" *ngIf="showAmountUSD">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.RECEIVED_AMOUNT' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right" *ngIf="showAmountUSD">
+                        <p> USD {{ paymentDto.amountUSD | number:'1.2-2' }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6" *ngIf="showAmountMXN">
+                        <h6> {{ 'PAYMENTS.VIEW_RECEIPT.BALANCE_MEX' | translate }} </h6>
+                    </div>
+
+                    <div class="col-md-6 text-right" *ngIf="showAmountMXN">
+                        <p> MXN {{ paymentDto.balance | number:'1.2-2' }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6" *ngIf="showAmountUSD">
+                        <h6> {{ 'PAYMENTS.VIEW_RECEIPT.BALANCE' | translate }} </h6>
+                    </div>
+
+                    <div class="col-md-6 text-right" *ngIf="showAmountUSD">
+                        <p> USD {{ paymentDto.balanceUSD | number:'1.2-2' }}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6">
+                        <h6> {{ 'PAYMENTS.VIEW_RECEIPT.PAID_TO' | translate }} </h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p> {{ paymentDto.paidTo | dateTranslate: 'APP.DATE_FORMAT'}} </p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6">
+                        <h6>{{'POLICY.PAYMENT_METHOD' | translate}}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p> {{'POLICY.METHODS.' | concatenate: paymentDto.paymentMethod | replacespaces: '_' | uppercase | translate}}
+                        </p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6" *ngIf="paymentMethodCreditCard">
+                        <h6>{{'POLICY.ACCOUNT_NUMBER' | translate}}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right" *ngIf="paymentMethodCreditCard">
+                        <p> ****** {{paymentDto.accountNumber}}</p>
+                    </div>
+                    <br>
+
+                    <div class="col-md-6">
+                        <h6>{{ 'PAYMENTS.VIEW_RECEIPT.PAYMENT_DATE' | translate }}</h6>
+                    </div>
+
+                    <div class="col-md-6 text-right">
+                        <p> {{ paymentDto.paymentDate | dateTranslate: 'APP.DATE_FORMAT'}} </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ig-detallepago">
+                <p> {{ 'PAYMENTS.VIEW_RECEIPT.MESSAGE_RECEIPT_1' | translate }} </p>
+                <p [innerHTML]="'PAYMENTS.VIEW_RECEIPT.MESSAGE_RECEIPT_2' | translate"></p>
+                <h6>{{ bupaInsuranceCompany }}</h6>
+
+                <hr>
+
+                <div class="row align-items-center" *ngIf="buttonVisible">
+
+                    <div class="col-md-6">
+                        <a class="btncancelar" style="cursor: pointer;" onclick="window.close();">{{ 'APP.CERRAR' | translate }}</a>
+                    </div>
+
+                    <div class="col-md-6">
+                        <a class="btnimprimir" style="cursor: pointer;" (click)="printDetailReceipt();">
+                            <i class="material-icons">print</i> {{ 'PAYMENTS.VIEW_RECEIPT.PRINT' | translate }}
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ig-captcha" *ngIf="user && user.is_anonymous">
+
+            <re-captcha #captchaRef="reCaptcha" siteKey="{{captchaSiteKey}}" size="invisible" (resolved)="resolved($event)">
+            </re-captcha>
+
+            <button #btonClick (click)="captchaRef.execute()" [ngStyle]="{'display' : 'none'}">Submit</button>
+
+        </div>
+
+    </article>
+</section>

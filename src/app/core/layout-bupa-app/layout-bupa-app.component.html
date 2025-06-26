@@ -1,0 +1,28 @@
+<section class="loadingbupa" [hidden]="!loading">
+  <div class="img-bupa">
+    <div class="logo-bupa"></div>
+  </div>
+</section>
+
+
+<section class="container-fluid p-0">
+  <article class="row">
+    <div>
+      <router-outlet></router-outlet>
+      <footer class="footer-app">
+        <hr>
+        <div class="row align-items-center">
+          <div class="col p-0">
+            <div class="ig-copybupa">
+              <p> <i class="material-icons">copyright</i> {{anio}}{{'FOOTER.ALL_RIGHTS' | translate }}</p>
+            </div>
+          </div>
+          <div style="text-align:right" class="col">
+            <img class="img-fluid"
+              src="https://bupadigitalstoragedev.blob.core.windows.net/login/Bupa-USAMED-digital.jpg" alt="">
+          </div>
+        </div>
+      </footer>
+    </div>
+  </article>
+</section>

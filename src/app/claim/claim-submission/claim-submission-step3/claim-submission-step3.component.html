@@ -1,0 +1,162 @@
+<section class="ig-requestpre setup-content animated fadeIn" id="step-3">
+    <form action="">
+        <div class="col-md-12 ig-formulario">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ig-titlepolicy">
+                        <h5>{{currentStep}}. {{ 'CLAIMSUBMISSION.STEP3DESC' | translate }} </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>{{ 'CLAIMSUBMISSION.STEP3TITLETEXT' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <label>{{ 'CLAIMSUBMISSION.STEP3MEMBERTEXT' | translate }}</label>
+                            <p *ngIf="wizard.member.fullName">
+                                {{wizard.member?.fullName}} ({{wizard.member?.dob | dateTranslate}})
+                            </p>
+                            <p *ngIf="!wizard.member.fullName">
+                                {{wizard.member?.firstName + ' ' + wizard.member?.lastName}} ({{wizard.member?.dob | dateTranslate}})
+                            </p>
+                        </div>
+
+                        <div class="col-md-12" *ngIf="handleShowPolicy()">
+                            <label>{{ 'CLAIMSUBMISSION.STEP3POLICYTEXT' | translate }}</label>
+                            <p>{{ wizard.member.policyReference }}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="row" *ngIf="wizard.user.role_id === '7'">
+                        <div class="col-md-12">
+                            <label> {{ 'CLAIMSUBMISSION.STEP3PROVIDERTEXTT' | translate }} </label>
+                            <p> {{ wizard.provider?.name}} </p>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="handleShowDocument(type1)">
+                        <div class="col-md-12">
+                            <label *ngIf="wizard.currentSubStep === STEP2_MULTI_PROVIDER">
+                                {{ 'CLAIMSUBMISSION.STEP2TITLE01' | translate }}
+                            </label>
+                            <label *ngIf="wizard.currentSubStep === STEP2_SINGLE_PROVIDER">
+                                {{ 'CLAIMSUBMISSION.STEP2TITLE01_02' | translate }}
+                            </label>
+                            <p class="ig-files-scroll" #fileScroll>
+                                <span *ngFor="let document of wizard.documents">
+                                    <span *ngIf="document.category === type1"
+                                        [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                                        {{ document.file.name }} - {{ getFileSize(document.file) }}
+                                        <span *ngIf="document.loadingStatus === 'LOADING'">
+                                            ({{ document.progress }} %)
+                                        </span>
+                                <span *ngIf="document.loadingStatus === 'LOADED'">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                <br>
+                                </span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="handleShowDocument(type2)">
+                        <div class="col-md-12">
+                            <label>{{ 'CLAIMSUBMISSION.STEP2TITLE02' | translate }}</label>
+                            <p class="ig-files-scroll" #fileScrollTwo>
+                                <span *ngFor="let document of wizard.documents">
+                                    <span *ngIf="document.category === type2"
+                                        [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                                        {{ document.file.name }} - {{ getFileSize(document.file) }}
+                                        <span *ngIf="document.loadingStatus === 'LOADING'">
+                                            ({{ document.progress }} %)
+                                        </span>
+                                <span *ngIf="document.loadingStatus === 'LOADED'">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                <br>
+                                </span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="handleShowDocument(type3)">
+                        <div class="col-md-12">
+                            <label>{{ 'CLAIMSUBMISSION.STEP2TITLE03' | translate }}</label>
+                            <p class="ig-files-scroll" #fileScrollTree>
+                                <span *ngFor="let document of wizard.documents">
+                                    <span *ngIf="document.category === type3"
+                                        [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                                        {{ document.file.name }} - {{ getFileSize(document.file) }}
+                                        <span *ngIf="document.loadingStatus === 'LOADING'">
+                                            ({{ document.progress }} %)
+                                        </span>
+                                <span *ngIf="document.loadingStatus === 'LOADED'">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                <br>
+                                </span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="handleShowDocument(type4)">
+                        <div class="col-md-12">
+                            <label>{{ 'CLAIMSUBMISSION.STEP2TITLE04' | translate }}</label>
+                            <p class="ig-files-scroll" #fileScrollFour>
+                                <span *ngFor="let document of wizard.documents">
+                                    <span *ngIf="document.category === type4"
+                                        [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                                        {{ document.file.name }} - {{ getFileSize(document.file) }}
+                                        <span *ngIf="document.loadingStatus === 'LOADING'">
+                                            ({{ document.progress }} %)
+                                        </span>
+                                <span *ngIf="document.loadingStatus === 'LOADED'">
+                                            <i class="fa fa-check-circle"></i>
+                                        </span>
+                                <br>
+                                </span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="offset-3 col-md-6 offset-3">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="back()">
+                                {{ 'APP.BUTTON.BACK_BTN' | translate }}
+                            </button>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button type="button" class="ig-botones ig-principalbtn" data-toggle="modal" data-target="#exampleModalCenter" (click)="submit()">
+                                {{ 'CLAIMSUBMISSION.STEP3BUTTONNEXT' | translate }}
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</section>

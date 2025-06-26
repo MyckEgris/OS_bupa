@@ -1,0 +1,260 @@
+<section class="ig-cartera">
+  <article class="">
+    <article class="col-md-12">
+
+      <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane cartera fade show active" id="#cartera" role="tabpanel" aria-labelledby="cartera-tab">
+
+
+          <div class="ig-title">
+            <h5>{{ 'AGENT.PORTFOLIO.GENERAL.MY_PORTFOLIO' | translate }}</h5>
+          </div>
+          <!--GroupAdmin-->
+          <ul class="ig-itemcartera">
+            <li *appHideIfRole="'GroupAdmin'">
+              <a [className]="quantityType === 'money' ? 'active':'inactive'" href="#"
+                (click)="searchPortfolioWithMoneyInformation();">
+                {{ 'AGENT.PORTFOLIO.GENERAL.SHOW_PREMIUMS' | translate }}</a>
+            </li>
+            <li>
+              <a [className]="quantityType === 'policiescount' ? 'active':'inactive'" href="#"
+                (click)="searchPortfolioWithPoliciesInformation();">
+                {{ 'AGENT.PORTFOLIO.GENERAL.SHOW_POLICIES' | translate }}</a>
+            </li>
+          </ul>
+
+          <div class="ig-searchresul" *ngIf="!hasResult">
+            <p>{{ 'CLAIMS.SEARCH_RESULT.MESSAGE' | translate }}</p>
+          </div>
+
+          <div *ngIf="hasResult">
+            <div class="row" *ngIf="quantityType === 'money' && agentCountry ==='MEX'">
+              <div class="col-md-12 messageText"> {{  'AGENT.PORTFOLIO.GENERAL.MESSAGE_PREMIUMS_MX'  | translate}}
+              </div>
+            </div>
+
+            <div class="ig-resultados">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <p class="textosmall">
+                    {{ 'AGENT.PORTFOLIO.HEADER_INFORMATION.ID' | translate }}: {{agent.agentNumber}}
+                  </p>
+                  <h6>
+                    {{ agentOrCompanyName }}
+                  </h6>
+
+                </div>
+
+                <div class="col-lg-5">
+                  <h6 [innerHTML]="completePhysicalAddress">
+                  </h6>
+
+                </div>
+
+
+                <div class="col-lg-4">
+                  <h6>
+                    {{ email }}
+                  </h6>
+                  <h6>
+                    {{ phone }}
+                  </h6>
+
+                </div>
+              </div>
+
+              <div class="row align-items-end">
+
+
+                <div class="col-lg-3">
+                  <p class="textosmall">
+                    {{ 'AGENT.PORTFOLIO.HEADER_INFORMATION.AGENT' | translate }}
+                  </p>
+                </div>
+
+                <div class="col-lg-5">
+                  <p class="textosmall">
+                    {{ 'AGENT.PORTFOLIO.HEADER_INFORMATION.ADDRESS' | translate }}
+                  </p>
+                </div>
+
+
+                <div class="col-lg-4">
+                  <p class="textosmall">
+                    {{ 'AGENT.PORTFOLIO.HEADER_INFORMATION.CONTACT' | translate }}
+                  </p>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="ig-carteratotal">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4 class="ig-processvalor">
+                    {{ 'AGENT.PORTFOLIO.GENERAL.TOTAL' | translate }}: {{ total |
+                    valueOrMoney:quantityType:currencySymbol }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="ig-datoscartera">
+              <div class="table-responsive">
+                <table class="table table-hover table-sm">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.AGENT' | translate }}</th>
+                      <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.ACTIVE' | translate }}</th>
+                      <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.GRACE_PERIOD' | translate }}</th>
+                      <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.LAPSED' | translate }}</th>
+                      <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.PENDING_PAYMENT' | translate }}</th>
+                      <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.CANCELLED' | translate }}</th>
+                      <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.TOTAL' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let summary of viewSummaryPortfolio">
+                      <th scope="row">{{ summary.title }}</th>
+                      <td>
+                        {{ summary.active | valueOrMoney:quantityType: summary.symbol ? summary.symbol : 'USD' }}
+                      </td>
+                      <td>
+                        {{ summary.gracePeriod | valueOrMoney:quantityType: summary.symbol ? summary.symbol : 'USD' }}
+                      </td>
+                      <td>
+                        {{ summary.lapsed | valueOrMoney:quantityType: summary.symbol ? summary.symbol : 'USD' }}
+                      </td>
+                      <td>
+                        {{ summary.pendingPayment | valueOrMoney:quantityType: summary.symbol ? summary.symbol : 'USD' }}
+                      </td>
+                      <td>
+                        <div class="input-group-append">
+                          {{ summary.inactive | valueOrMoney:quantityType: summary.symbol ? summary.symbol : 'USD' }}
+                        </div>
+                      </td>
+                      <td>{{ summary.total | valueOrMoney:quantityType: summary.symbol ? summary.symbol : 'USD' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+
+              <div class="ig-carteracards">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="" style="padding:20px;" *ngIf="viewSummaryPortfolio.length > 0">
+                      <div class="row align-items-center portfolio-chart-bottom">
+                        <div class="col-md-7 align-items-right">
+                          <h5>{{agentOrCompanyName}}:</h5>
+                        </div>
+                        <div class="col-md-5 text-right">
+                          <h5 *ngIf="viewSummaryPortfolio.length > 0">
+                            {{ viewSummaryPortfolio[0].total |
+                            valueOrMoney:quantityType: viewSummaryPortfolio[0].symbol ? viewSummaryPortfolio[0].symbol : 'USD' }}
+                          </h5>
+                        </div>
+                      </div>
+                      <div>
+                        <app-portfolio-pie-chart [portfolioByAgent]="portfolioByAgent"></app-portfolio-pie-chart>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="" style="padding:20px;" *ngIf="viewSummaryPortfolio.length > 1 && hasSubagents">
+                      <div class="row align-items-center portfolio-chart-bottom">
+                        <div class="col-md-7">
+                          <h5 *ngIf="quantityType === 'money'">
+                            {{ 'AGENT.PORTFOLIO.GENERAL.CHART_PREMIUMS' | translate }} {{ my_agents}}: </h5>
+                          <h5 *ngIf="quantityType === 'policiescount'">
+                            {{ 'AGENT.PORTFOLIO.GENERAL.CHART_POLICIES' | translate }} {{ my_agents }}: </h5>
+                        </div>
+                        <div class="col-md-5 text-right">
+                          <h5 *ngIf="viewSummaryPortfolio.length > 1 && hasSubagents">
+                            {{ viewSummaryPortfolio[1].total
+                            |
+                            valueOrMoney:quantityType: viewSummaryPortfolio[1].symbol ? viewSummaryPortfolio[1].symbol : 'USD'  }}
+                          </h5>
+                        </div>
+                      </div>
+                      <div>
+                        <app-portfolio-pie-chart [portfolioByAgent]="portfolioByAgents"></app-portfolio-pie-chart>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="ig-detalle-agente">
+                <div class="row align-items-center">
+                  <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    {{ 'AGENT.PORTFOLIO.GENERAL.SHOW_DETAILS' | translate }} <i
+                      class="material-icons">keyboard_arrow_down</i>
+                  </a>
+                  <div class="collapse ig-detallemasagente" id="collapseExample" *ngIf="!hasSubagents">
+                    <p>{{ 'CLAIMS.SEARCH_RESULT.MESSAGE' | translate }}</p>
+                  </div>
+                  <div class="collapse ig-detallemasagente" id="collapseExample" *ngIf="hasSubagents">
+                    <div class="table-responsive">
+                      <table class="table table-responsive">
+                        <thead>
+                          <tr>
+                            <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.AGENT' | translate }}</th>
+                            <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.ACTIVE' | translate }}</th>
+                            <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.GRACE_PERIOD' | translate }}</th>
+                            <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.LAPSED' | translate }}</th>
+                            <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.PENDING_PAYMENT' | translate }}</th>
+                            <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.CANCELLED' | translate }}</th>
+                            <th scope="col">{{ 'AGENT.PORTFOLIO.GRID_INFORMATION.TOTAL' | translate }}</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngFor="let detail of viewPortfolio">
+                          <tr>
+                            <td>
+                              <div class="input-group-append">
+                                <a href="javascript:void(0);" (click)="navigate(detail.title)"
+                                  class="subagent-link">{{ detail.title }}</a>
+                                <app-custom-popover [title]="" [content]="[detail.agentName]"></app-custom-popover>
+                              </div>
+                            </td>
+                            <td>{{ detail.active | valueOrMoney:quantityType: detail.symbol ? detail.symbol : 'USD' }}
+                            </td>
+                            <td>
+                              {{ detail.gracePeriod | valueOrMoney:quantityType: detail.symbol ? detail.symbol : 'USD' }}
+                            </td>
+                            <td>{{ detail.lapsed | valueOrMoney:quantityType: detail.symbol ? detail.symbol : 'USD' }}
+                            </td>
+                            <td>
+                              {{ detail.pendingPayment | valueOrMoney:quantityType: detail.symbol ? detail.symbol : 'USD' }}
+                            </td>
+                            <td>
+                              <div class="input-group-append">
+                                {{ detail.inactive | valueOrMoney:quantityType: detail.symbol ? detail.symbol : 'USD' }}
+                              </div>
+                            </td>
+                            <td>{{ detail.total | valueOrMoney:quantityType: detail.symbol ? detail.symbol : 'USD' }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </article>
+  </article>
+</section>

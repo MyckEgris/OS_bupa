@@ -1,0 +1,104 @@
+h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #009ee0;
+    margin: 0;
+    padding: 0;
+  }
+
+#menu-toggle {
+    position: absolute;
+    right: -43px;
+    z-index: 999999;
+    -ms-transform: rotate(-90deg) !important;
+    -webkit-transform: rotate(-90deg) !important;
+    transform: rotate(-90deg) !important;
+    top: 50%;
+    background-color: #007bd1;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    font-size: 22px;
+}
+
+#ig-soporte-ayuda.ig-toggled #ig-soporte {
+    width: 400px;
+    display: block;
+    text-align: left;
+    background-color: #e7e7e7;
+}
+
+#ig-soporte {
+    z-index: 1000;
+    position: absolute;
+    right: 0;
+    width: 0;
+    height: 100%;
+    top: 0;
+    padding: 20px;
+    margin-right: 0px;
+    overflow-y: auto;
+    background: #e9ecef;
+    text-align: left;
+    display: none;
+}
+
+#menu-toggle.toggled1 {
+    position: absolute;
+    right: 337px;
+    z-index: 999999;
+    -ms-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    top: 50%;
+}
+
+#ig-soporte .ig-preguntas .card h5 {
+    font-family: 'Montserrat', sans-serif;
+    color: #333333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#ig-soporte .ig-preguntas h4 {
+    margin: 20px 0;
+    padding: 10px 0;
+    border-bottom: 1px solid lightgray;
+}
+
+#ig-soporte .ig-preguntas .card-body a {
+    text-decoration: underline;
+}
+
+#ig-soporte .ig-preguntas .card-body {
+    font-size: 14px;
+    background-color: white;
+}
+
+@media (max-width: 769px) {    
+    #menu-toggle{
+        position: relative;
+        width: 100%;
+        right: inherit;
+        top: inherit;
+        margin: 20px 0;
+        -ms-transform: rotate(0deg) !important;
+        -webkit-transform: rotate(0deg) !important;
+        transform: rotate(0deg) !important;
+    }
+    #ig-soporte {
+        position: relative;
+        right: inherit;
+        top: inherit;
+        width: 100% !important;
+        margin: 20px 0;
+    }
+
+    #menu-toggle.toggled1 {
+        position: relative;
+        right: inherit;
+        top: inherit;
+    }
+}

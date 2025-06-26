@@ -1,0 +1,241 @@
+<section class="bp-mainpolicy">
+    <article class="row">
+
+        <div class="col-md-12 bp-policystep1 my-3">
+            <div class="row align-items-center">
+
+                <div class="col-md-6">
+                    <div class="bp-itemtitle">
+                        <!-- <div class="bp-titlenum">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.TITLE_01' | translate }}
+                        </div> -->
+                        <h2 class="bp-titlepolicy">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.TITLE' | translate }}
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="bp-policytitlestep1">
+                        <img src="assets/images/002-checklist.svg" alt="">
+                        <h6>
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.TITLE_03' | translate }}
+                            <span>{{ 'POLICY.POLICY_ENROLLMENT.STEP1.TITLE_04' | translate }}</span>
+                        </h6>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="bp-itemcontsect">
+
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="bp-contentitle">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.BANNER_01' | translate }}
+                        </h4>
+                    </div>
+                    <div class="col">
+                        <div class="bp-itemsectpoli">
+                            <figure>
+                                <img src="assets/images/icon-handshake-keyline.png" alt="">
+                            </figure>
+                            <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.BANNER_02' | translate"></p>
+                        </div>
+                    </div>
+                    <!-- <div class="col">
+                        <div class="bp-itemsectpoli">
+                            <figure>
+                                <img src="assets/images/003-accept-1.svg" alt="">
+                            </figure>
+                            <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.BANNER_03' | translate"></p>
+                        </div>
+                    </div> -->
+                    <div class="col">
+                        <div class="bp-itemsectpoli">
+                            <figure>
+                                <img src="assets/images/001-contract.svg" alt="">
+                            </figure>
+                            <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.BANNER_04' | translate"></p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="bp-itemsectpoli">
+                            <figure>
+                                <img style="width: 65px;" src="assets/images/icon-handshake-print.png" alt="">
+                            </figure>
+                            <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.BANNER_05' | translate"></p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <form class="col-md-12" [formGroup]="wizard.enrollmentForm">
+
+            <div class="bp-itemcontsect2" formGroupName="{{INTRODUCTION_STEP}}">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.INFO_01' | translate"></p>
+
+                        <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.INFO_02' | translate"></p>
+
+                        <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.INFO_03' | translate"></p>
+
+                        <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.INFO_04' | translate"></p>
+
+                        <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.INFO_05' | translate"></p>
+
+                        <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP1.INFO_06' | translate"></p>
+
+                    </div>
+
+                    <div class="col-md-4" formGroupName="{{WEKNOW_SECTION}}">
+
+                        <h4 class="bp-contentitle">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.TITLE' | translate }}
+                        </h4>
+
+                        <div
+                            [ngClass]="{
+                                        'form-group': true, 
+                                        ' border-danger': getControl(INTRODUCTION_STEP, WEKNOW_SECTION, RESIDENT_QUESTION_CTRL ).invalid && formInvalid }">
+
+                            <p>{{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.QUESTION_01' | translate }}</p>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="residentYes" value="true"
+                                    formControlName="{{RESIDENT_QUESTION_CTRL}}" (change)="handleResidentYes($event)">
+                                <label class="form-check-label" for="residentYes">
+                                    {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.QUESTION_01_YES' | translate }}
+                                </label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="residentNo" value="false"
+                                    formControlName="{{RESIDENT_QUESTION_CTRL}}">
+                                <label class="form-check-label" for="residentNo">
+                                    {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.QUESTION_01_NO' | translate }}
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <div
+                                [ngClass]="{
+                                            'form-group': true, 
+                                            'border-danger': getControl(INTRODUCTION_STEP, WEKNOW_SECTION, PETITIONER_TYPE_CTRL ).invalid && formInvalid }">
+
+                                <p> {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.QUESTION_03' | translate }}</p>
+
+                                <div class="form-check" *ngFor="let petitioner of petitionerType">
+                                    <input class="form-check-input" type="radio" id="petitioner{{petitioner.value}}"
+                                        value="{{petitioner.value}}" formControlName="{{PETITIONER_TYPE_CTRL}}">
+                                    <label class="form-check-label" for="petitioner{{petitioner.value}}">
+                                        {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.QUESTION_03_PETITIONER_TYPE.' | concatenate: petitioner.description | replacespaces: '_' | uppercase | translate }}
+                                    </label>
+                                </div>
+
+                                <div class="col-md-12 mt-2" *ngIf="handlePetitionerMsgView()">
+                                    <div class="bp-alertform">
+                                        <div class="card-message2" role="alert">
+                                            <i class="material-icons">warning</i>
+                                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.PETITIONER_MSG' | translate }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <p> {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_01.QUESTION_03_SUBTITLE' | translate }}
+                                </p>
+                            </div>
+
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4" formGroupName="{{PAPERLESS_SECTION}}">
+
+                        <h4 class="bp-contentitle">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_02.TITLE' | translate }}
+                        </h4>
+
+                        <div class="bp-itemsectpoli">
+                            <p>
+                                {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_02.SUBTITLE' | translate }}
+                            </p>
+                        </div>
+
+                        <div
+                            [ngClass]="{
+                                        'form-group': true, 
+                                        'border-danger': getControl(INTRODUCTION_STEP, PAPERLESS_SECTION, PAPERLESS_CTRL ).invalid && formInvalid }">
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="true" id="paperlessYes"
+                                    formControlName="{{PAPERLESS_CTRL}}">
+                                <label class="form-check-label" for="paperlessYes">
+                                    {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_02.QUESTION_01_YES' | translate }}
+                                </label>
+                            </div>
+
+                            <div class="bp-itemsectpoli">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" value="false" id="paperlessNo"
+                                        formControlName="{{PAPERLESS_CTRL}}">
+                                    <label class="form-check-label" for="paperlessNo">
+                                        {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SECTION_02.QUESTION_01_NO' | translate }}
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12" *ngIf="formInvalid && getStepFormGroup(INTRODUCTION_STEP).invalid">
+                        <div class="bp-alertform">
+                            <div class="alert alert-danger text-center">
+                                <i class="material-icons">info</i>
+                                {{ 'POLICY.POLICY_ENROLLMENT.STEP1.ALERT_COMPLETE_FORM' | translate }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 offset-md-9">
+                    <div [ngClass]="{'ig-bt': !formInvalid || !getStepFormGroup(INTRODUCTION_STEP).invalid }">
+                        <button class="bp-btn bp-btnprimary" (click)="next();">
+                            {{ 'POLICY.POLICY_ENROLLMENT.STEP1.SUBMIT_BTN_TEXT' | translate }}
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </article>
+</section>

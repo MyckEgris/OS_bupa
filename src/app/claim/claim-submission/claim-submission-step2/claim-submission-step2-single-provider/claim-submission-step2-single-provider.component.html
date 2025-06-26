@@ -1,0 +1,95 @@
+<section class="ig-requestpre setup-content animated fadeIn" id="step-2">
+    <form action="">
+        <div class="col-md-12 ig-formulario">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ig-titlepolicy">
+                        <h5>{{currentStep}}. {{ 'CLAIMSUBMISSION.STEP2DESC' | translate }}</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>{{ 'CLAIMSUBMISSION.STEP2TITLETEXT02' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="add-documents">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 botton-div">
+
+                            <div class="row align-items-center">
+                                <div class="col-md-7">
+                                    <h6>{{ 'CLAIMSUBMISSION.STEP2TITLE01_02' | translate }}</h6>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="upload">
+                                        <app-upload [typeAttachment]="type1"></app-upload>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+                                <div class="ig-file-scroll">
+                                    <div class="row">
+                                        <div class="col-md-12" *ngFor="let document of documents">
+                                            <div class="inline-text-icon" *ngIf="document.category === type1">
+                                                <i class="fa" [ngClass]="document.icon"></i>
+                                                <span class="text-list">
+                                                    {{document.file.name}}
+                                                    <div class="ig-icofile">
+                                                        <a href="#" title="Eliminar"
+                                                            (click)="removeDocument(document, $event)">
+                                                            <i class="material-icons">delete</i>
+                                                        </a>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ig-new-buss">
+                                <div class="row align-items-start">
+                                    <div class="col-md-1 col-auto text-center">
+                                        <i class="material-icons">info</i>
+                                    </div>
+                                    <div class="col-md-11 col-10 p-0">
+                                        <p>{{ 'CLAIMSUBMISSION.STEP2TITLE01TEXT_02' | translate }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="offset-3 col-md-6 offset-3">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <button class="ig-principalsegundariobtn ig-botones" type="button" (click)="back()">
+                                {{ 'APP.BUTTON.BACK_BTN' | translate }}
+                            </button>
+                        </div>
+
+                        <div class="col-md-6">
+                            <button class="ig-botones ig-principalbtn" type="button" (click)="next()">
+                                {{ 'CLAIMSUBMISSION.STEP1BUTTONCLAIM' | translate }}
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</section>

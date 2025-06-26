@@ -1,0 +1,42 @@
+<section class="loadingbupa" [hidden]="!loading">
+    <div class="img-bupa">
+        <div class="logo-bupa"></div>
+    </div>
+</section>
+
+
+<section class="container-fluid p-0">
+    <article class="row">
+        <article class="ig-header order-2">
+            <app-header></app-header>
+        </article>
+
+        <article class="ig-contenido order-1">
+            <app-menu></app-menu>
+        </article>
+        <article class="ig-contenido order-3">
+            <div class="ig-contenedor">
+                <router-outlet></router-outlet>
+                <footer>
+                    <app-footer></app-footer>
+                </footer>
+            </div>
+        </article>
+    </article>
+</section>
+
+
+<ng-template #noticesModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{'IMPORTANT_ANNOUNCEMENT.TITLE' | translate}}</h4>
+    </div>
+
+    <div class="modal-body">
+        <p class="card-text" [innerHTML]="'IMPORTANT_ANNOUNCEMENT.MESSAGE' | translate">
+        </p>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModalNotices()">{{'CERRAR' | translate}}</button>
+    </div>
+</ng-template>

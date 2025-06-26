@@ -1,0 +1,36 @@
+<form [formGroup]="wizard.enrollmentForm">
+  <div class="row" formGroupName="{{STEP_NAME}}">
+    <div class="col-md-4">
+      <div [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP9.SECTION_03.DISCLAIMER1' | translate"></div>
+    </div>
+
+    <div class="col-md-4" formGroupName="{{SECTION_NAME}}">
+      <div [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP9.SECTION_03.DISCLAIMER2' | translate"></div>
+      <div class="col-md-12 mt-4">
+        <div class="form-check form-check-inline"
+          [ngClass]="{'border-danger': !wizard.isCurrentSectionValid && !getControl(DISCLAIMER_CHECK).value}">
+          <input class="form-check-input" type="checkbox" id="inlineradio1" value=""
+            formControlName="{{DISCLAIMER_CHECK}}" />
+          <label class="form-check-label" for="inlineradio1">
+            {{"POLICY.POLICY_ENROLLMENT.STEP9.ACCEPT_TERMS_AND_SCOPES" | translate}}
+          </label>
+        </div>
+      </div>
+      <div class="form-group mt-4"
+        [ngClass]="{ 'was-validated' : !wizard.isCurrentSectionValid  }">
+        <label for="relationship">{{"POLICY.POLICY_ENROLLMENT.STEP9.SECTION_03.RELATIONSHIP" | translate}}</label>
+
+        <ng-select #ownerCobSelect [items]="typeRelationships" [selectOnTab]="true" bindValue="id"
+          bindLabel="description" formControlName="{{RELATIONSHIP}}" [required]="isFieldRequired(RELATIONSHIP)"
+          class="form-control " [placeholder]="getControl(RELATIONSHIP).value !== null && getControl(RELATIONSHIP).value !== ''
+                                        ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+        </ng-select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP9.SECTION_03.DISCLAIMER3' | translate"></div>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,119 @@
+<form [formGroup]="wizard.enrollmentForm">
+  <section class="bp-mainpolicy" formGroupName="{{STEP_NAME}}">
+    <article class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="bp-itemtitle">
+              <div class="bp-titlenum">
+                {{ "POLICY.POLICY_ENROLLMENT.STEP9.TITLE_01" | translate }}
+              </div>
+              <h2 class="bp-titlepolicy">
+                {{ "POLICY.POLICY_ENROLLMENT.STEP9.TITLE" | translate }}
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="xol-md-4">
+              <div class="xol-md-4" *ngIf="(sectionActive===2 && wizard.isHomeVisible)">
+                <app-breadcrumb-enrollment  [currentStep]="9"
+                      [lengthSection]="2" [stepActive]="1">
+                  </app-breadcrumb-enrollment>
+              </div>
+              <div class="xol-md-4" *ngIf="(!wizard.isHomeVisible)">
+                <app-breadcrumb-enrollment  [currentStep]="9"
+                      [lengthSection]="2" [stepActive]="2">
+                  </app-breadcrumb-enrollment>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <app-policy-enrollment-info></app-policy-enrollment-info>
+      </div>
+
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+          <div class="row">
+
+            <div class="col-md-12">
+              <h4 class="bp-contentitle">
+                {{ "POLICY.POLICY_ENROLLMENT.STEP9.PAYMENT_INFO" | translate }}
+              </h4>
+              <p *ngIf="wizard.isHomeVisible" >
+                {{ "POLICY.POLICY_ENROLLMENT.STEP9.INFO_MODE_METHOD" | translate}}
+              </p>
+            </div>
+            <div class="col-md-4" *ngIf="modeOfPayments?.length > 0 && wizard.isHomeVisible"
+              formGroupName="{{DEFAULT_SECTION_NAME}}">
+
+              <div class="form-group mb-3 mt-3"
+                [ngClass]="{'border-danger': !wizard.isCurrentSectionValid && !getControl(this.PAYMENT_MODE).valid}">
+
+                <label for="mPayment">
+                  {{ "POLICY.POLICY_ENROLLMENT.STEP9.PAYMENT_TYPE" | translate }}</label>
+                <ng-container *ngFor="let modPayment of modeOfPayments">
+                  <div class="form-check form-check">
+                    <input formControlName="{{PAYMENT_MODE}}" class="form-check-input" id="mPayment-{{ modPayment.id }}"
+                      type="radio" [value]="modPayment" (change)="handleModePayment(modPayment)" />
+                    <label class="form-check-label" for="mPayment-{{ modPayment.id }}">
+                      {{
+                        "POLICY.POLICY_ENROLLMENT.MODE_PAYMENT."
+                          | concatenate: modPayment.name
+                          | uppercase
+                          | translate
+                      }}
+                    </label>
+                  </div>
+                </ng-container>
+              </div>
+
+              <div class="form-group my-3" *ngIf="methodPayment"
+                [ngClass]="{'border-danger': !wizard.isCurrentSectionValid && !getControl(this.PAYMENT_METHOD).valid}">
+                <label
+                  for="metPayment">{{ "POLICY.POLICY_ENROLLMENT.STEP9.PAYMENT_METHOD" | translate }}</label>
+                <ng-container *ngFor="let metPaym of methodPayment">
+                  <ng-container *ngIf="metPaym.isVisible">
+                    <div class="form-check form-check">
+                      <input class="form-check-input" formControlName="{{PAYMENT_METHOD}}"
+                        id="metPayment{{ metPaym.id }}" type="radio" [value]="metPaym"
+                        (click)="handleMethodPayment(metPaym)" />
+                      <label class="form-check-label" for="metPayment{{ metPaym.id }}">
+                        {{ metPaym.name }}
+                      </label>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </div>
+            <div *ngIf="isRouterVisible"
+              [ngClass]="{'col-md-8':wizard.isHomeVisible,'col-md-12':!wizard.isHomeVisible}">
+              <router-outlet></router-outlet>
+            </div>
+
+            <div class="col-md-12 mt-5 p-0" *ngIf="(!wizard.isCurrentSectionValid &&  !getFormGroup().valid )">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i>
+                  {{ "POLICY.POLICY_ENROLLMENT.STEP9.INCOMPLETE_INFORMATION" | translate }}
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-12 mt-5 p-0">
+              <div class="row">
+                <div class="col-md-4 offset-md-4">
+                  <app-navigator-buttons></app-navigator-buttons>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</form>

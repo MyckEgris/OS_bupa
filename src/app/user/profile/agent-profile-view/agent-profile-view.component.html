@@ -1,0 +1,678 @@
+<section class="ig-contentprofile">
+  <article class="">
+    <div class="col-md-12" *ngIf="agent && countries && loadForm">
+      <form [formGroup]="mainForm" (ngSubmit)="reportChanges()" novalidate>
+        <div class="ig-userperf">
+          <div class="ig-user">
+            <h4>{{ 'AGENT.PROFILE.TITLE' | translate }}</h4>
+            <div class="row align-items-center">
+
+              <div class="col-md-8 p-0">
+                <div class="ig-contper">
+                    <i class="material-icons">account_circle</i>
+                  <h5>{{formControls.FullName.value}}</h5>
+                  <p *ngIf="dateOfBirth">{{ dateOfBirth | dateTranslate: 'APP.DATE_FORMAT' }}</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="ig-utlconex">
+                  <div class="row align-items-center">
+                      <div class="col-md-2 text-left">
+                          <i class="material-icons">tv</i>
+                        </div>
+                    <div class="col-md-10 ">
+                      <p>{{ 'AGENT.PROFILE.LAST_LOGIN' | translate }}</p>
+                      <span>{{formControls.LastConnection.value}}</span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ig-userperdt">
+              <div class="row align-items-center">
+                <div class="col-md-4">
+                  <h5>{{ 'AGENT.PROFILE.OFFICE' | translate }}</h5>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-title">
+                    <h5>{{formControls.OfficeCountry.value}}</h5>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h5 class="ig-ubicacion">
+                    {{formControls.OfficeName.value}}
+                  </h5>
+                </div>
+              </div>
+
+              <div class="row mt-5" formGroupName="PersonalInfo">
+                <div class="col-md-12">
+
+                  <div class="ig-infoprofile">
+                    <h6>{{ 'AGENT.PROFILE.DATA' | translate }}</h6>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-infoprofile">
+                    <div class="formulario">
+                      <div class="form-group">
+                        <label for="inputPassword" class="col-form-label">{{ 'AGENT.PROFILE.NAME' | translate }}</label>
+                        <input type="text" [readonly]="disabledControls" formControlName="FirstName"
+                          class="form-control" id="inputtext" placeholder="{{ 'AGENT.PROFILE.NAME' | translate }}">
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-infoprofile">
+                    <div class="formulario">
+
+                      <div class="form-group">
+                        <label for="inputPassword"
+                          class="col-form-label">{{ 'AGENT.PROFILE.LAST_NAME' | translate }}</label>
+                        <input type="text" [readonly]="disabledControls" formControlName="LastName" class="form-control"
+                          id="inputtext" placeholder="{{ 'AGENT.PROFILE.LAST_NAME' | translate }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="ig-infoprofile">
+                    <div class="formulario">
+                      <div class=" form-group">
+                        <label for="inputPassword" class="col-form-label">{{ 'AGENT.PROFILE.DATE' | translate }}</label>
+
+                        <input type="text" class="form-control" [readonly]="disabledControls" id="Dob"
+                          placeholder="{{ 'AGENT.PROFILE.DOB' | translate }}" formControlName="Dob" appDateMask
+                          appOnlyNumber="true">
+                        <br>
+                        <small class="text-danger"
+                          *ngIf="(personalInfoControls.Dob.touched && personalInfoControls.Dob.invalid)">
+                          {{ 'AGENT.DATE_VALIDATE' | translate}}
+                        </small>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <hr>
+                </div>
+
+              </div>
+
+              <div class="row" *ngIf="contactPhoneArray && contactPhoneArray.controls">
+                <div class="col-md-12">
+                  <h5 class="ig-infotil m-0"> {{ 'AGENT.PROFILE.CONTACT' | translate }}</h5>
+
+                </div>
+                <div [ngClass]="{ 'col-md-12' : isMexico, '' : !isMexico }">
+                  <div class="ig-infoprofile">
+                    <div class="row" formGroupName="ContactPhones">
+                      <!-- Office -->
+                      <div class="formulario col-md-12" formArrayName="office"
+                        *ngFor="let phone of contactPhoneOffice.controls; let i=index">
+                        <div class="form-group" [formGroupName]="i">
+                          <div class="row">
+
+                            <div class="col-md-12">
+                              <div class="ig-iconper">
+                                <i class="material-icons">local_phone</i>
+                                <h5 class="col-11 ">
+                                  {{ 'AGENT.PROFILE.CONTACT' | translate }}
+                                  {{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}
+                                </h5>
+                              </div>
+                            </div>
+
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }"
+                              *ngIf="isMexico && countries">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}
+                                </label>
+                                <select class="form-control form-control-sm" formControlName="countryId">
+                                  <option *ngFor="let country of countries" [value]="country.countryId">
+                                    {{country.countryName}}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }">
+                              <div class="form-group">
+                                <label for="inputPassword"
+                                  class=" col-form-label">{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="Number" id="{{ 'inputnumber' + i }}"
+                                  placeholder="{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}"
+                                  maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }" *ngIf="isMexico">
+                              <div class="form-group">
+                                <label for="inputPassword"
+                                  class=" col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate }}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="ext" id="{{ 'inputnumber' + i }}"
+                                  placeholder="{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate}}"
+                                  maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Home -->
+                      <div class="formulario col-md-12" formArrayName="home"
+                        *ngFor="let phone of contactPhoneHome.controls; let i=index">
+                        <div class="form-group" [formGroupName]="i">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="ig-iconper">
+                                <i class="material-icons">local_phone</i>
+                                <h5 class="col-11 ">
+                                  {{ 'AGENT.PROFILE.CONTACT' | translate }}
+                                  {{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}
+                                </h5>
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }"
+                              *ngIf="isMexico && countries">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}
+                                </label>
+                                <select class="form-control form-control-sm" formControlName="countryId">
+                                  <option *ngFor="let country of countries" [value]="country.countryId">
+                                    {{country.countryName}}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }">
+                              <div class="form-group">
+                                <label for="inputPassword"
+                                  class=" col-form-label">{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="Number" id="{{ 'inputnumber' + i }}"
+                                  placeholder="{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}"
+                                  maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }" *ngIf="isMexico">
+                              <div class="form-group">
+                                <label for="inputPassword"
+                                  class=" col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate }}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="ext" id="{{ 'inputnumber' + i }}"
+                                  placeholder="{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate}}"
+                                  maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Movil-->
+                      <div class="formulario col-md-12" formArrayName="movil"
+                        *ngFor="let phone of contactPhoneMovil.controls; let i=index">
+                        <div class="form-group" [formGroupName]="i">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="ig-iconper">
+                                <i class="material-icons">local_phone</i>
+                                <h5 class="col-11 ">
+                                  {{ 'AGENT.PROFILE.CONTACT' | translate }}
+                                  {{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}
+                                </h5>
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }">
+                              <div class="form-group">
+                                <label for="inputPassword"
+                                  class=" col-form-label">{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="Number" id="{{ 'inputnumber' + i }}"
+                                  placeholder="{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}"
+                                  maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Fax -->
+                      <div class="formulario col-md-12" formArrayName="fax"
+                        *ngFor="let phone of contactPhoneFax.controls; let i=index">
+                        <div class="form-group" [formGroupName]="i">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="ig-iconper">
+                                <i class="material-icons">local_phone</i>
+                                <h5 class="col-11 ">
+                                  {{ 'AGENT.PROFILE.CONTACT' | translate }}
+                                  {{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}
+                                </h5>
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }"
+                              *ngIf="isMexico && countries">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}
+                                </label>
+                                <select class="form-control form-control-sm" formControlName="countryId">
+                                  <option *ngFor="let country of countries" [value]="country.countryId">
+                                    {{country.countryName}}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }">
+                              <div class="form-group">
+                                <label for="inputPassword"
+                                  class=" col-form-label">{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="Number" id="{{ 'inputnumber' + i }}"
+                                  placeholder="{{ 'AGENT.PROFILE.PHONE_NUMBER_TYPES.' | concatenate: phone.value.PhoneTypeId | translate}}"
+                                  maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                              </div>
+                            </div>
+                            <div [ngClass]="{ 'col-md-4' : isMexico, 'col-md-12' : !isMexico }" *ngIf="isMexico">
+                              <div class="form-group">
+                                <label for="inputPassword"
+                                  class=" col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate }}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="ext" id="{{ 'inputnumber' + i }}"
+                                  placeholder="{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate}}"
+                                  maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <hr>
+                </div>
+              </div>
+              <!--<div [ngClass]="{ '' : isMexico, '' : !isMexico }">-->
+              <div>
+                <div class="ig-infoprofile">
+                  <div class="">
+                    <h5 class="ig-infotil m-0">{{ 'AGENT.PROFILE.EMAIL_TYPES.1' | translate}}</h5>
+
+                  </div>
+                  <div class="row">
+                    <div class="formulario col-md-12" formGroupName="ContactEmails">
+
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="form-group" formGroupName="preferredEmail">
+                            <label for="inputPassword"
+                              class="col-form-label">{{ 'AGENT.PROFILE.EMAIL_TYPES.1' | translate}}</label>
+                            <div class="form-control">
+                              {{ getControlContact('preferredEmail').controls.Email.value }} </div>
+                            <p>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group" formGroupName="alternateEmail">
+                            <label for="inputPassword"
+                              class="col-form-label">{{ 'AGENT.PROFILE.EMAIL_TYPES.2' | translate}}</label>
+                            <input type="email" [readonly]="disabledControls" class="form-control"
+                              formControlName="Email" id="alternateEmail"
+                              placeholder="{{ 'AGENT.PROFILE.EMAIL_TYPES.2' | translate}}">
+                            <small class="text-danger" *ngIf="(getControlContact('preferredEmail').get('Email').touched
+                                          && getControlContact('preferredEmail').get('Email').invalid)">
+                              {{ 'AGENT.EMAIL_VALIDATE' | translate}}
+                            </small>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group" formGroupName="assistantEmail">
+                            <label for="inputPassword"
+                              class="col-form-label">{{ 'AGENT.PROFILE.EMAIL_TYPES.3' | translate}}</label>
+                            <input type="email" [readonly]="disabledControls" class="form-control"
+                              formControlName="Email" id="assistantEmail"
+                              placeholder="{{ 'AGENT.PROFILE.EMAIL_TYPES.3' | translate}}">
+                            <small class="text-danger" *ngIf="(getControlContact('assistantEmail').get('Email').touched
+                                        && getControlContact('assistantEmail').get('Email').invalid)">
+                              {{ 'AGENT.EMAIL_VALIDATE' | translate}} </small>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group" formGroupName="otherEmail">
+                            <label for="inputPassword"
+                              class="col-form-label">{{ 'AGENT.PROFILE.EMAIL_TYPES.4' | translate}}</label>
+                            <input type="email" [readonly]="disabledControls" class="form-control"
+                              formControlName="Email" id="otherEmail"
+                              placeholder="{{ 'AGENT.PROFILE.EMAIL_TYPES.4' | translate}}">
+                            <small class="text-danger" *ngIf="(getControlContact('otherEmail').get('Email').touched
+                                      && getControlContact('otherEmail').get('Email').invalid)">
+                              {{ 'AGENT.EMAIL_VALIDATE' | translate}} </small>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group" formGroupName="onlineServicesEmail">
+                            <label for="inputPassword"
+                              class="col-form-label">{{ 'AGENT.PROFILE.EMAIL_TYPES.11' | translate}}</label>
+                            <input type="email" [readonly]="disabledControls" class="form-control"
+                              formControlName="Email" id="onlineServicesEmail"
+                              placeholder="{{ 'AGENT.PROFILE.EMAIL_TYPES.11' | translate}}">
+                            <small class="text-danger" *ngIf="(getControlContact('onlineServicesEmail').get('Email').touched
+                                        && getControlContact('onlineServicesEmail').get('Email').invalid)">
+                              {{ 'AGENT.EMAIL_VALIDATE' | translate}}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" formGroupName="Addresses">
+                <div class="col-md-12">
+                  <h5 class="ig-infotil m-0">{{ 'AGENT.PROFILE.ADDRESSES' | translate }}</h5>
+                  <p *ngIf="isMexicoCountry" class="messageText mt-2">
+                    {{ 'AGENT.PROFILE.PROFILE_MESSAGE_MAILING' | translate }}
+                  </p>
+                  <br>
+                </div>
+                <div class="col-md-6">
+                  <div class="ig-infoprofile" formGroupName="Home">
+                    <div class="ig-iconper mb-3">
+                      <i class="material-icons">home</i>
+                      <h5 class="col-10">
+                        {{ 'AGENT.PROFILE.PHYSICAL' | translate }}
+                      </h5>
+                    </div>
+                    <div class="formulario">
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <label for="inputPassword"
+                            class="col-form-label">{{ 'AGENT.PROFILE.PHYSICAL' | translate }}</label>
+                          <input type="text" [readonly]="disabledControls" class="form-control"
+                            formControlName="StreetAddress" id="inputtext"
+                            placeholder="{{ 'AGENT.PROFILE.PHYSICAL' | translate }}">
+                        </div>
+
+                        <div class="col-md-6" *ngIf="isMexico">
+                          <div class="form-group">
+                            <label class="" for="inputText">
+                              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.INTERNO' | translate }}</label>
+                            <input type="text" formControlName="interior" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6" *ngIf="isMexico">
+                          <div class="form-group">
+                            <label class="" for="inputText">
+                              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXTERNO' | translate }}</label>
+                            <input type="text" formControlName="exterior" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6" *ngIf="countries">
+                          <div class="form-group">
+                            <label class="" for="inputText"> {{ 'AGENT.PROFILE.COUNTRY' | translate }} </label>
+                            <select *ngIf='!isMexico' class="form-control form-control-sm" formControlName="Country">
+                              <option *ngFor="let country of countries" [value]="country.countryId">
+                                {{country.countryName}}
+                              </option>
+                            </select>
+                            <p *ngIf='isMexico'> {{ getControl('Home', 'countryName').value }} </p>
+                          </div>
+                        </div>
+
+                        <div class="form-group col-md-6" *ngIf="!isMexico">
+                          <label for="inputPassword"
+                            class="col-form-label">{{ 'AGENT.PROFILE.CITY' | translate }}</label>
+
+                          <input type="text" [readonly]="disabledControls" class="form-control" formControlName="City"
+                            id="inputtext" placeholder="{{ 'AGENT.PROFILE.CITY' | translate }}">
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="row align-items-center">
+                            <div [ngClass]="{ 'col-md-9' : isMexico, 'col-md-12' : !isMexico }">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'AGENT.PROFILE.ZIPCODE' | translate }}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="ZipCode" id="inputtext"
+                                  placeholder="{{ 'AGENT.PROFILE.ZIPCODE' | translate }}">
+                                <small class="text-danger" *ngIf="( getControl('Home','ZipCode').touched
+                                                      && getControl('Home','ZipCode').errors?.maxlength)">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                </small>
+                                <small class="text-danger" *ngIf="(getControl('Home','ZipCode').touched
+                                                        && getControl('Home','ZipCode').errors?.required)
+                                                        || (getControl('Home','ZipCode').invalid && showValidations)">
+                                  {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate}}
+                                </small>
+                              </div>
+                            </div>
+                            <div class="col-lg-1 col-sm-2 col-6" *ngIf="isMexico">
+                              <button type="button" (click)="searchByZip(0)" [disabled]="!getControl('Home','ZipCode').value
+                                                  || getControl('Home','ZipCode').invalid"
+                                [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : getControl('Home','ZipCode').invalid }"><i
+                                  class="material-icons">search</i></button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="row align-items-center">
+                            <div class="form-group col-md-4">
+                              <label for="inputPassword"
+                                class="col-form-label">{{ 'AGENT.PROFILE.STATE' | translate }}</label>
+                              <input *ngIf="!isMexico" type="text" [readonly]="disabledControls" class="form-control"
+                                formControlName="State" id="inputtext"
+                                placeholder="{{ 'AGENT.PROFILE.STATE' | translate }}">
+                              <div class="form-control" *ngIf="isMexico"> {{ getControl('Home','State').value }} </div>
+                            </div>
+
+                            <div class="col-md-4" *ngIf="isMexico">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MUNICIPALITY' | translate }}</label>
+                                <div class="form-control">
+                                  {{ getControl('Home','municipality').value }} </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-md-4" *ngIf="isMexico">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COLONY' | translate }}</label>
+                                <select class="form-control form-control-sm" formControlName="colonyId">
+
+                                  <option *ngFor="let c of coloniesMail" [value]="c.colonyId">
+                                    {{ c.colonyName }}
+                                  </option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-6">
+
+                  <div class="ig-infoprofile" formGroupName="Postal">
+                    <div class="ig-iconper mb-3">
+                      <i class="material-icons">home</i>
+                      <h5 class="col-10">
+                        {{ 'AGENT.PROFILE.POSTAL' | translate }}
+                      </h5>
+                    </div>
+                    <div class="formulario">
+
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          <label for="inputPassword"
+                            class="col-form-label">{{ 'AGENT.PROFILE.POSTAL' | translate }}</label>
+
+                          <input type="text" [readonly]="disabledControls" class="form-control"
+                            formControlName="StreetAddress" id="inputtext"
+                            placeholder="{{ 'AGENT.PROFILE.POSTAL' | translate }}">
+                        </div>
+
+                        <div class="col-md-6" *ngIf="isMexicoCountry">
+                          <div class="form-group">
+                            <label class="" for="inputText">
+                              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.INTERNO' | translate }}</label>
+                            <input type="text" formControlName="interior" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6" *ngIf="isMexicoCountry">
+                          <div class="form-group">
+                            <label class="" for="inputText">
+                              {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXTERNO' | translate }}</label>
+                            <input type="text" formControlName="exterior" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-6" *ngIf="countries">
+                          <div class="form-group">
+                            <label class="" for="inputText"> {{ 'AGENT.PROFILE.COUNTRY' | translate }} </label>
+                            <select class="form-control form-control-sm" formControlName="Country">
+                              <option *ngFor="let country of countries" [value]="country.countryId">
+                                {{country.countryName}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group col-md-6" *ngIf="!isMexicoCountry">
+                          <label for="inputPassword"
+                            class="col-form-label">{{ 'AGENT.PROFILE.CITY' | translate }}</label>
+
+                          <input type="text" [readonly]="disabledControls" class="form-control" formControlName="City"
+                            id="inputtext" placeholder="{{ 'AGENT.PROFILE.CITY' | translate }}">
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="row align-items-center">
+                            <div [ngClass]="{ 'col-md-9' : isMexicoCountry, 'col-md-12' : !isMexicoCountry }">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'AGENT.PROFILE.ZIPCODE' | translate }}</label>
+                                <input type="text" [readonly]="disabledControls" class="form-control"
+                                  formControlName="ZipCode" id="inputtext"
+                                  placeholder="{{ 'AGENT.PROFILE.ZIPCODE' | translate }}">
+                                <small class="text-danger" *ngIf="( getControl('Postal','ZipCode').touched
+                                                    && getControl('Postal','ZipCode').errors?.maxlength)">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                </small>
+                                <small class="text-danger" *ngIf="(getControl('Postal','ZipCode').touched
+                                                      && getControl('Postal','ZipCode').errors?.required)
+                                                      || (getControl('Postal','ZipCode').invalid && showValidations)">
+                                  {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate}}
+                                </small>
+                              </div>
+                            </div>
+                            <div class="col-lg-1 col-sm-2 col-6" *ngIf="isMexicoCountry">
+                              <button type="button" (click)="searchByZip(1)" [disabled]="!getControl('Postal','ZipCode').value
+                                                || getControl('Postal','ZipCode').invalid"
+                                [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : getControl('Postal','ZipCode').invalid }">
+                                <i class="material-icons">search</i></button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="row align-items-center">
+                            <div class="form-group col-md-4">
+                              <label for="inputPassword"
+                                class="col-form-label">{{ 'AGENT.PROFILE.STATE' | translate }}</label>
+
+                              <input *ngIf="!isMexicoCountry" type="text" [readonly]="disabledControls"
+                                class="form-control" formControlName="State" id="inputtext"
+                                placeholder="{{ 'AGENT.PROFILE.STATE' | translate }}">
+                              <div class="form-control" *ngIf="isMexicoCountry"> {{ getControl('Postal','State').value }} </div>
+                            </div>
+
+                            <div class="col-md-4" *ngIf="isMexicoCountry">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MUNICIPALITY' | translate }}</label>
+                                <div class="form-control">
+                                  {{ getControl('Postal','municipality').value }} </div>
+
+                              </div>
+                            </div>
+
+                            <div class="col-md-4" *ngIf="isMexicoCountry">
+                              <div class="form-group">
+                                <label class="" for="inputText">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COLONY' | translate }}</label>
+                                <select class="form-control form-control-sm" formControlName="colonyId">
+
+                                  <option *ngFor="let c of coloniesPostal" [value]="c.colonyId">
+                                    {{ c.colonyName }}
+                                  </option>
+                                </select>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-12">
+                  <hr>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-2">
+                  <h6>{{ 'AGENT.PROFILE.AGREEMENT_STATUS' | translate }}</h6>
+                </div>
+                <div class="col-md-6 offset-0">
+                  <a> {{ 'AGENT.PROFILE.READ_ACCEPTED' | translate }} </a>
+                  <p><strong>{{ 'AGENT.PROFILE.USER_AGREEMENT' | translate }}:</strong>
+                    {{ acceptedOn | dateTranslate: 'APP.DATE_TIME_FORMAT' }}</p>
+                  <p><strong>{{ 'AGENT.PROFILE.PRODUCER_AGREEMENT' | translate }}:</strong>
+                    {{ agentAcceptedOn | dateTranslate: 'APP.DATE_TIME_FORMAT' }}</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ig-perfilbtn">
+          <div class="col-md-3 offset-5" *ngIf="!disabledControls">
+            <button type="submit"
+              class="btn btn-primary btn-actualizar">{{ 'AGENT.PROFILE.UPDATE_INFORMATION_BUTTON' | translate }}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </article>
+</section>

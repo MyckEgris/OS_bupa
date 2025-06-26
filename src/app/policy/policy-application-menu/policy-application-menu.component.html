@@ -1,0 +1,30 @@
+<section class="nuevapolizabupa">
+  <article class="row">
+    <h2 class="bp-titlepolicy">{{ 'POLICY.APPLICATION.MENU.TITLE_H2' | translate }}</h2>
+    <p>{{ 'POLICY.APPLICATION.MENU.SUBTITLE_P' | translate }}</p>
+
+    <div class="row">
+      <div class="itemseleccion" [routerLink] = "pathURLQuote2NewBusiness">
+        <figure><img src="assets/images/information.png" alt=""></figure>
+        <div class="contentitem">
+          <h4 class="bp-contentitle">{{ 'POLICY.APPLICATION.MENU.CARD_CREATE_APPLICATION_QUOTE.H3' | translate }}</h4>
+          <p>{{ 'POLICY.APPLICATION.MENU.CARD_CREATE_APPLICATION_QUOTE.P' | translate }}</p>
+        </div>
+      </div>
+      <div class="itemseleccion" [routerLink] = "createPolicyApplicationEnrollment">
+        <figure><img src="assets/images/information.png" alt=""></figure>
+        <div class="contentitem">
+          <h4 class="bp-contentitle">{{ 'POLICY.APPLICATION.MENU.CARD_CREATE_APPLICATION_NEW_POLICY.H3' | translate }}</h4>
+          <p>{{ 'POLICY.APPLICATION.MENU.CARD_CREATE_APPLICATION_NEW_POLICY.P' | translate }}</p>
+        </div>
+      </div>
+      <div class="itemseleccion" [routerLink] = "createPolicyApplication">
+        <figure><img src="assets/images/information.png" alt=""></figure>
+        <div class="contentitem">
+          <h4 class="bp-contentitle">{{ 'POLICY.APPLICATION.MENU.CARD_CREATE_APPLICATION_POLICY.H3' | translate }}</h4>
+          <p>{{ 'POLICY.APPLICATION.MENU.CARD_CREATE_APPLICATION_POLICY.P' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

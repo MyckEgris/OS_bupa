@@ -1,0 +1,99 @@
+<section class="ig-notifi" *ngIf="notificationInfo && !dataNotFound">
+
+
+
+  <article class="ig-readcontent">
+    <div class="row">
+      <div class="col-md-3">
+        <button class="ig-botones ig-secundariobtn" [ngClass]="{'read':true, disabled:  viewAllBtnDisabled()}"
+          data-toggle="tooltip" data-placement="top" title="Marcar todos leidas" (click)="setAllAsRead()">
+          {{ 'NOTIFICATIONS.CHECK_ALL_READ' | translate }} <i class="material-icons">done</i>
+        </button>
+      </div>
+    </div>
+  </article>
+
+
+  <article [ngClass]="{'ig-notfitem':true, 'ig-readitem': !disabledReadButton(notifi)}"
+    *ngFor="let notifi of notificationInfo.data">
+    <div class="row align-items-center" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+      aria-controls="collapseTwo" (click)="toggleSlideDetail(notifi)">
+
+      <div class="col-md-1">
+        <div class="ig-icon">
+          <i class="fa fa-tasks ig-iconmenu" id="HEARDER_CLAIMSONLINE" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <p class="small p-0 m-0">
+          <strong class="d-block text-gray-dark ">{{ 'NOTIFICATIONS.SUBJECT' | translate }}: </strong>
+          {{notifi.subject}}
+        </p>
+      </div>
+
+      <div class="col-md-2">
+        <ul class="ig-notfbt" *ngIf="disabledReadButton(notifi)">
+
+          <li>
+            <button class="read" data-toggle="tooltip" data-placement="top"
+              title="{{ 'NOTIFICATIONS.CHECK_AS_READ' | translate }}" (click)="changeReadState(notifi)">
+              <i class="material-icons">done</i>
+            </button>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div id="ig-detalleNotification-{{notifi.inboxId}}" class="collapse" aria-labelledby="headingOne"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        {{notifi.body}}
+        <br>
+        <br>
+
+
+        <h6>{{ 'NOTIFICATIONS.ATTACHMENT' | translate }}</h6>
+
+
+        <div class="ig-docpoli">
+
+          <ul *ngFor="let doc of notifi.attachments">
+            <li>
+              <div class="ig-link" (click)="downloadFile(doc)">
+                {{doc.fileName}}
+              </div>
+            </li>
+          </ul>
+
+          <p *ngIf="notifi.attachments.length < 1">
+            {{ 'NOTIFICATIONS.DOCS_NOT_FOUND' | translate}}
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+  </article>
+
+  <div class="ig-paymentnav">
+    <ul *ngIf="notificationInfo.data.length !== 0" class="pagination">
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(pager.currentPage - 1)"><i
+            class="material-icons">chevron_left</i></button>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <button type="button" [disabled]="pager.currentPage === pager.totalPages"
+          (click)="setPage(pager.currentPage + 1)"><i class="material-icons">chevron_right</i></button>
+      </li>
+    </ul>
+  </div>
+
+
+</section>
+
+<div class="ig-notifnot" *ngIf="dataNotFound">
+  <p>{{ 'NOTIFICATIONS.NOT_FOUND' | translate }}</p>
+</div>

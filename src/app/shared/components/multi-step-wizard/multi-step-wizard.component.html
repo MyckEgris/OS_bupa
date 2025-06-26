@@ -1,0 +1,9 @@
+<ng-container>
+  <div class="container-wizard">
+    <ul class="bupawizard">
+      <ng-container *ngFor="let step of stepValues, let x=index">
+        <li *ngIf = "step.stepNumber > 1" [ngStyle] = "{'cursor': (step.isCompleted) ? 'pointer' : 'no-drop'}" [ngClass] = "{'current': currentStep===step.stepNumber, 'check': step.isCompleted}" (click)="goToStep(step)">{{step.title | translate}}</li>
+      </ng-container>    
+    </ul>
+  </div>
+</ng-container>

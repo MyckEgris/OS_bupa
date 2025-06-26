@@ -1,0 +1,7 @@
+export enum EmailEnum {
+    PREFERRED_EMAIL = 1,
+    ALTERNATE_EMAIL = 2,
+    ASSISTANT_EMAIL = 3,
+    OTHER_EMAIL = 4,
+    ONLINE_SERVICES_EMAIL = 11
+}

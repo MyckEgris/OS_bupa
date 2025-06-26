@@ -1,0 +1,105 @@
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="!inactivityPeriod()">
+  
+  <div class="tab-pane fade show active" id="credito" role="tabpanel" aria-labelledby="credito-tab">
+    <app-payment-credit-card-steps [currentStep]="currentStep"></app-payment-credit-card-steps>
+
+    <div class="row">
+      <div class="col-md-8">
+
+        <div [ngClass]="{ 'bp-bgtilt backpay' : !isMexico }"  *ngIf="customPay">
+
+          <app-payment-widget-mex [policy]="policy" *ngIf="isMexico"
+            (sendCustomPayMexProperties)="getCustomPayMexProperties($event)"></app-payment-widget-mex>
+            <!--<app-payment-credit-card-sync *ngIf="isMexico" [policy]="policy"></app-payment-credit-card-sync>-->
+          
+          
+          <form action="" *ngIf="bupaInsurance === 39">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="radio" [(ngModel)]="modelPayment.paymentOption" name="paymentOption" value="TotalPay"
+                    (change)="changePaymentOption($event)">
+                  {{ 'PAYMENTS.CONTAINER.TOTAL' | translate }}
+                </div>
+              </div>
+              <div class="col-md-8 p-0">
+                <label>{{ currencySymbol }} {{ policyAmount | number:'1.2-2'}} </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="radio" [(ngModel)]="modelPayment.paymentOption" name="paymentOption" value="PartialPay"
+                    (change)="changePaymentOption($event)">
+                  {{ 'PAYMENTS.CONTAINER.PARTIAL' | translate }}
+                </div>
+              </div>
+              <div class="col-md-8 p-0">
+
+                <div class="row">
+
+                  <div class="col-md-8">
+                      <input type="text" [disabled]="modelPayment.disabledCustomValue" appOnlyNumber="true" autocomplete="off"
+                            #customValue name="otherValue" class="form-control" placeholder="" appCurrencyFormatter="USD "
+                            [(ngModel)]="txtCustomPay"
+                            (change)="customPayValidation($event)">
+                  </div>
+                </div>
+                <small class="text-danger">{{ validateMessageInCustomPay | translate }}</small>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="ig-btnpago">
+                  <button class="ig-botones ig-segundariobupa"
+                    (click)="goToBack()">{{ 'PAYMENTS.CONTAINER.CANCEL' | translate }}</button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="ig-btnpago">
+                    <button (click)="onClickPaymentPolicy()" [disabled]="modelPayment.wrongPaymentValue  && (!txtCustomPay && modelPayment.paymentOption === 'PartialPay')"
+                            class="ig-botones ig-principalbtn">
+                        {{ 'PAYMENTS.CONTAINER.CONTINUE' | translate }}
+                    </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <div *ngIf="gatewayPayActive" [ngSwitch]="bupaInsurance">
+          <div *ngSwitchCase="39">
+            <app-payment-credit-card-ecu [policy]="policy"></app-payment-credit-card-ecu>
+          </div>
+          <div *ngSwitchDefault>
+            <app-payment-credit-card-sync [policy]="policy"></app-payment-credit-card-sync>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <app-payment-policy-info [policy]="policy"></app-payment-policy-info>
+        <div *ngIf="isMexico && paymentInDollarsFromMexico && isExchangeRateValid" class="px-3 py-3">
+          <p>{{ 'PAYMENTS.CONTAINER.EXCHANGE_DESCRIPTION_P1_MEX' | translate }} {{  valueInMexicanPesosFromUsd | number:'1.2-2' }} MXN<br>
+            {{ 'PAYMENTS.CONTAINER.EXCHANGE_DESCRIPTION_P2_MEX' | translate }}  {{ 1  / policy.exchangeRate  }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="inactivityPeriod()">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="ig-title">
+        <p style="font-weight: bold;"> {{ 'APP.MESSAGE.MEXICO_INACTIVITY' | translate }} </p>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</section>
+

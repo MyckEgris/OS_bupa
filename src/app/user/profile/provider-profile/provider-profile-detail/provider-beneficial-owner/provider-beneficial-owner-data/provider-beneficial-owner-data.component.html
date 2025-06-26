@@ -1,0 +1,175 @@
+<div class="col-md-12" *ngIf="this.wizard">
+  <div class="row p-0" [formGroup]="this.wizard.providerProfileForm" *ngIf="this.validateForExists()">
+    <div class="col-md-12" [formGroupName]="this.STEP2_FG">
+
+      <div class="row">
+
+        <div class="col-md-12 left-content">
+          <h4 class="bp-contentitle" *ngIf="!this.EditBeneficialOwner">
+            {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECTION1_TITLE' | translate }}
+          </h4>
+          <h4 class="bp-contentitle" *ngIf="this.EditBeneficialOwner">
+            {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECTION1_TITLE_02' | translate }}
+          </h4>
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="FIRST_NAME_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.FIRST_NAME_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.FIRST_NAME_CTRL" id="FIRST_NAME_CTRL" type="text"
+              [placeholder]="getControl(this.FIRST_NAME_CTRL).value !== null && getControl(this.FIRST_NAME_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.FIRST_NAME_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.FIRST_NAME_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="SECOND_NAME_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECOND_NAME_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.SECOND_NAME_CTRL" id="SECOND_NAME_CTRL" type="text"
+              [placeholder]="getControl(this.SECOND_NAME_CTRL).value !== null && getControl(this.SECOND_NAME_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECOND_NAME_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.SECOND_NAME_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="FIRST_SUR_NAME_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.FIRST_SUR_NAME_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.FIRST_SUR_NAME_CTRL" id="FIRST_SUR_NAME_CTRL"
+              type="text"
+              [placeholder]="getControl(this.FIRST_SUR_NAME_CTRL).value !== null && getControl(this.FIRST_SUR_NAME_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.FIRST_SUR_NAME_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.FIRST_SUR_NAME_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="SECOND_SUR_NAME_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECOND_SUR_NAME_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.SECOND_SUR_NAME_CTRL" id="SECOND_SUR_NAME_CTRL"
+              type="text"
+              [placeholder]="getControl(this.SECOND_SUR_NAME_CTRL).value !== null && getControl(this.SECOND_SUR_NAME_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECOND_SUR_NAME_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.SECOND_SUR_NAME_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="this.DATE_OF_BIRTH_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.DATE_OF_BIRTH_LBL' | translate }}
+            </label>
+            <app-datepicker-wrapper [formControlName]="this.DATE_OF_BIRTH_CTRL"
+              [hasErrors]="this.getControl(this.DATE_OF_BIRTH_CTRL).errors" [maxDate]="this.currentMaxDate"
+              [showValidations]="false">
+            </app-datepicker-wrapper>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.DATE_OF_BIRTH_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="NATIONALITY_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.NATIONALITY_LBL' | translate }}
+            </label>
+            <ng-select #nationalitySelect [selectOnTab]="true" [items]="this.wizard.countries" bindLabel="nacionality"
+              bindValue="" [formControlName]="this.NATIONALITY_CTRL" id="NATIONALITY_CTRL" class="form-control"
+              [placeholder]="getControl(this.NATIONALITY_CTRL).value !== null && getControl(this.NATIONALITY_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate">
+            </ng-select>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.NATIONALITY_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="COUNTRY_RESIDENCE_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.COUNTRY_RESIDENCE_LBL' | translate }}
+            </label>
+            <ng-select #countrySelect [selectOnTab]="true" [items]="this.wizard.countries" bindLabel="countryName"
+              bindValue="" [formControlName]="this.COUNTRY_RESIDENCE_CTRL" id="COUNTRY_RESIDENCE_CTRL"
+              class="form-control"
+              [placeholder]="getControl(this.COUNTRY_RESIDENCE_CTRL).value !== null && getControl(this.COUNTRY_RESIDENCE_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate">
+            </ng-select>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.COUNTRY_RESIDENCE_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="OWNERSHIP_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.OWNERSHIP_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.OWNERSHIP_CTRL" id="OWNERSHIP_CTRL" type="text"
+              [placeholder]="getControl(this.OWNERSHIP_CTRL).value !== null && getControl(this.OWNERSHIP_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.OWNERSHIP_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.OWNERSHIP_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-12" *ngIf="this.showValidations && this.getFormGroup(this.STEP2_FG).invalid">
+          <div class="bp-alertform">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i> {{ 'APP.MESSAGE.ALERT_COMPLETE_FORM' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-12" *ngIf="this.showNoChangesMsg && this.getFormGroup(this.STEP2_FG).untouched">
+          <div class="bp-alertform">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i> {{ 'APP.MESSAGE.ALERT_NO_CHANGES_FORM' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row justify-content-center">
+
+        <div class="col-md-3">
+          <button class="bp-btn bp-btnprimary" type="button" (click)="this.sendNewBeneficialOwner()">
+            {{ 'APP.BUTTON.ADD_BTN' | translate }}
+          </button>
+        </div>
+
+        <div class="col-md-3">
+          <button class="bp-btn bp-btnprimary" type="button" (click)="this.sendNewBeneficialOwner(true)">
+            {{ 'APP.BUTTON.CANCEL_BTN' | translate }}
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

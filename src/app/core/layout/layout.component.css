@@ -1,0 +1,60 @@
+article.col-md-10.menu-top {
+    padding-left: 0px;
+}
+
+article.col-md-2.position-static {
+    padding-right: 0px;
+}
+
+.progress-md {
+    position: fixed;
+    top: 0px;
+    z-index: 9999;
+    width: 100%;
+}
+
+
+.progress-md.loading {
+  display: none;
+}
+
+@keyframes loadingg {
+    100%  { width: 100%; }
+    100%  { width: 100%; }
+}
+
+.loadingbupa {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.6);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9999;
+    display: block;
+}
+
+.loadingbupa .img-bupa {
+    position: absolute;
+    height: 205px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 220px;
+}
+
+.loadingbupa .logo-bupa {
+    background-image: url("../../../assets/images/load4.svg");
+    background-repeat: no-repeat;
+    background-size: 220px;
+    width: 100%;
+    height: 205px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}

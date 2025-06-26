@@ -1,0 +1,46 @@
+<div class="ig-homepre">
+  <div class="row">
+    <div class="col-md-10 ">
+        <div class="ig-adminselect2">
+          <div class="m-5 col-md-12 p-0">
+            <div class="">
+                <h4>{{ 'USER.UNLOCK_ACCOUNT.TITLE' | translate }}</h4>
+            </div>
+            <div class="card-body" >
+              <div class="row">
+                <div class="col-md-12">
+                <p> {{ 'USER.UNLOCK_ACCOUNT.DESCRIPTION' | translate }}</p>
+                </div>
+              </div>
+              <form [formGroup]="form" (ngSubmit)="searchAccount()" >
+                <div class="row">
+                    <div class="col-md-6">
+                      <input type="email" class="form-control" id=""  placeholder="{{ 'USER.UNLOCK_ACCOUNT.PLACEHOLDER' | translate }}" formControlName="email">
+                    </div>
+                    <div class="col-md-2">
+                      <button type="button" class="btn btn-sm btnprim" type="submit" [disabled]="form.status=='INVALID'">
+                          {{ 'USER.UNLOCK_ACCOUNT.BUTTON_TEXT' | translate }}
+                      </button>
+                    </div>
+                    <div class="col-md-1">
+                        
+                            <button class="btn btn-sm btnprim" (click)="clear()" type="button">
+                                <i class="material-icons"> delete_sweep </i>
+                            </button>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 text-danger" *ngIf="form.status=='INVALID' && !form.pristine">
+                    {{'USER.UNLOCK_ACCOUNT.ERRORS.INVALID_EMAIL'  | translate}}
+                  </div>
+                </div>
+              </form>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+

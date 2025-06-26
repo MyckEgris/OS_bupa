@@ -1,0 +1,84 @@
+<section class="ig-home">
+  <article class="ig-hgraficas">
+      <div class="row">
+          <div class="col-md-6">
+              <app-view-summary-agent-portfolio 
+                  [currentUserId]="currentUserId" 
+                  [currentUserRoleId]="currentUserRoleId">
+              </app-view-summary-agent-portfolio>
+          </div>
+          <div class="col-md-6" *appShowIfRole="'Agent'">
+              <app-view-summary-agent-commissions [currentUserId]="currentUserId"></app-view-summary-agent-commissions>
+          </div>
+      </div>
+  </article>
+
+  <article class="ig-hmedia">
+      <h5>{{'AGENT.HOME.CMS_INFORMATION.GROWS' | translate}}</h5>
+      <div class="ig-hmediabg">
+          <div class="row align-items-center">
+              <div class="col-md-8" >
+                  <span>{{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_TITLE.KNOW' | translate}}</span>
+                  <h4>{{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_TITLE.BUPA_IS_MORE' | translate}}</h4>
+                  <p>
+                      {{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_DESCRIPTION.A_PLATFORM_HELP_YOU1' | translate}} <br>
+                      {{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_DESCRIPTION.A_PLATFORM_HELP_YOU2' | translate}}
+                  </p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a class="ig-principalbtn ig-botones" [routerLink]="" (click)="onNavigate('https://www.bupaesmas.com/')">
+                            {{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_DESCRIPTION.SEE_MORE' | translate}} <i
+                                class="material-icons">chevron_right</i></a>
+                    </div>
+                </div>
+                  
+              </div>
+              <div class="col-md-4" (click)="onNavigate('https://vimeo.com/174807478')">
+                  <a [routerLink]="">
+                      <img class="img-fluid" src="assets/images/video.png" alt="">
+                  </a>
+
+              </div>
+          </div>
+      </div>
+  </article>
+  <article class="ig-hitems">
+      <div class="row">
+          <div class="col-lg-4 col-sm-6 offset-md-2">
+              <div class="ig-bgblue ig-itemser" >
+                  <span>{{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_TITLE.BUPA_ACADEMY' | translate}}</span>
+                  <h4>{{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_DESCRIPTION.DEVELOP_SKILLS1' | translate}}</h4>
+                  <div class="row align-items-center">
+                      <div class="col-md-6 col-8">
+                          <a class="ig-outlineprincipalbtn2 ig-botones" [routerLink]="" (click)="onNavigate('https://grow.sabacloud.com/Saba/Web_wdk/SPCTNT18Site/index/prelogin.rdf')">
+                              {{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_DESCRIPTION.SEE_MORE' | translate}} <i class="material-icons">chevron_right</i>
+                          </a>
+                      </div>
+                      <div class="col-md-6 col-4">
+                          <div class="ig-icon">
+                              <img class="img-fluid" src="assets/images/Icon-briefcase-keyline.png" alt="">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-sm-6">
+              <div class="ig-bggray ig-itemser" >
+                  <span>{{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_TITLE.PERSONAL_POLICY' | translate}} </span>
+                  <h4>{{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_DESCRIPTION.EXCLUSIVE_PERSONAL_POLICY1' | translate}}</h4>
+                  <div class="row align-items-center">
+                      <div class="col-md-6 col-8">
+                          <a class="ig-principalbtn ig-botones" [routerLink]="" (click)="onNavigateTranslated('incentive')">
+                            {{'AGENT.HOME.CMS_INFORMATION.CMS_INFORMATION_DESCRIPTION.SEE_MORE' | translate}}  <i class="material-icons">chevron_right</i></a>
+                      </div>
+                      <div class="col-md-6 col-4">
+                          <div class="ig-icon">
+                              <img class="img-fluid" src="assets/images/Icon-document-policy-keyline.png" alt="">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </article>
+</section>

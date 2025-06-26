@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-md-3">
+
+  </div>
+  <div class="col-md-3" *ngIf="policy">
+    {{ 'CLAIMS.INCOMPLETE_OR_PENDING.POLICY_NUMBER' | translate }} <strong> {{ policy }}
+    </strong>
+  </div>
+  <div class="col-md-6" *ngIf="roleId === '1'">
+    {{ 'CLAIMS.AGENT.STATUS_MESSAGE.' | concatenate:  statusName | replacespaces: '' | uppercase | translate}}
+  </div>
+</div>
+
+<div class="row row-eq-height ig-claim-detail animated fadeInUp" *ngFor=" let detail of pagedItems">
+
+  <div class="col-md-12">
+    <h6>
+      {{ detail.fromDate | dateTranslate }} - {{ detail.toDate | dateTranslate }}
+    </h6>
+  </div>
+
+  <div class="col-md-5">
+
+    <div class="row align-items-center">
+      <div class="col-md-4 col-6">
+        <h5>
+          {{ currencyCode }}
+          {{ detail.xchangeBilledAmount | number:'1.2-2' }}
+        </h5>
+        <p>
+          {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_BILLED' | translate }}
+        </p>
+      </div>
+      <div class="col-md-4 col-6">
+        <h5>
+          {{ currencyCode }}
+          {{ detail.deductibleAmount | number:'1.2-2' }}
+        </h5>
+        <p>
+          {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_DEDUCED' | translate }}
+        </p>
+      </div>
+      <div class="col-md-4 col-6">
+        <h5>
+          {{ currencyCode }}
+          {{ detail.coInsuranceAmount |  number:'1.2-2' }}
+        </h5>
+        <p>
+          {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_COINSURED' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <div class="row row-eq-height ">
+      <div class="col-md-4">
+        <h5>
+          {{ currencyCode }}
+          {{ detail.memberLiabilityAmount | number:'1.2-2' }}
+        </h5>
+        <p>
+          {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_INSURED_RESPONSABILITY' | translate }}
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h5>
+          {{ currencyCode }}
+          {{ detail.providerLiabilityAmount | number:'1.2-2' }}
+        </h5>
+        <p>
+          {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_PROVIDER_RESPONSABILITY' | translate }}
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h5>
+          {{ currencyCode }}
+          {{ detail.ineligibleAmount | number:'1.2-2' }}
+        </h5>
+        <p>
+          {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_INEGIBILITY' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="row align-items-end ">
+      <div class="col-md-12">
+        <h5>
+          {{ currencyCode }}
+          {{ detail.netCoveredAmount | number:'1.2-2'  }}
+        </h5>
+        <p>
+          {{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_COVERED' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-md-12" *ngIf="roleId === '7'">
+    <div class="ig-avisopage">
+      <div *ngFor="let remark of detail.remarks">
+        <p [style.display]="remark.languageId === languageId ? 'inherit' : 'none'">{{ remark.message }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12" *ngIf="roleId !== '7' && detail.ineligibleDescription">
+    <div class="ig-avisopage">
+      <span>{{ 'CLAIMS.PROCESSED_CLAIMS.DETAIL_INEGIBILITY_DESCRIPTION' | translate }}:</span> {{ detail.ineligibleDescription }}
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="pager.totalPages > 1">
+  <div class="col-md-12 ig-paymentnav">
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(1)"><i class="material-icons">first_page</i></button>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(pager.currentPage - 1)"><i class="material-icons">chevron_left</i></button>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.currentPage + 1)"><i class="material-icons">chevron_right</i></button>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.totalPages)"><i class="material-icons">last_page</i></button>
+        </li>
+    </ul>
+  </div>
+</div>

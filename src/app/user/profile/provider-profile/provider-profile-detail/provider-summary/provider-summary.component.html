@@ -1,0 +1,274 @@
+<div class="col-md-12 p-0" *ngIf="this.wizard && this.wizard.providerProfileDetailInfo">
+  <div class="row p-0" [formGroup]="this.wizard.providerProfileForm" *ngIf="this.validateForExists()">
+    <div class="col-md-12 m-0 bp-mainpolicy" [formGroupName]="this.STEP1_FG">
+
+      <div class="row">
+
+        <div class="col-md-12 left-content">
+          <h4 class="bp-contentitle">
+            {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.SECTION1_TITLE' | translate }}
+          </h4>
+        </div>
+
+        <div class="col-md-12">
+          <p [innerHTML]="'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.DESCRIPTION' | translate"></p>
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="PROVIDER_KEY_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.PROVIDER_KEY_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.PROVIDER_KEY_CTRL" id="PROVIDER_KEY_CTRL" type="text"
+              [placeholder]="getControl(this.PROVIDER_KEY_CTRL).value !== null && getControl(this.PROVIDER_KEY_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.PROVIDER_KEY_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.PROVIDER_KEY_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="ACCOUNT_NAME_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.ACCOUNT_NAME_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.ACCOUNT_NAME_CTRL" id="ACCOUNT_NAME_CTRL" type="text"
+              [placeholder]="getControl(this.ACCOUNT_NAME_CTRL).value !== null && getControl(this.ACCOUNT_NAME_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.ACCOUNT_NAME_CTRL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.ACCOUNT_NAME_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="ALIAS_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.ALIAS_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.ALIAS_CTRL" id="ALIAS_CTRL" type="text"
+              [placeholder]="getControl(this.ALIAS_CTRL).value !== null && getControl(this.ALIAS_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.ALIAS_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.ALIAS_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="PARENT_ACCOUNT_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.PARENT_ACCOUNT_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.PARENT_ACCOUNT_CTRL" id="PARENT_ACCOUNT_CTRL"
+              type="text"
+              [placeholder]="getControl(this.PARENT_ACCOUNT_CTRL).value !== null && getControl(this.PARENT_ACCOUNT_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.PARENT_ACCOUNT_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.PARENT_ACCOUNT_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="DOC_TYPE_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.DOC_TYPE_LBL' | translate }}
+            </label>
+            <ng-select #docTypeSelect [selectOnTab]="true" [items]="this.wizard.documentTypes"
+              bindLabel="documentTypeName" bindValue="" [formControlName]="this.DOC_TYPE_CTRL" id="DOC_TYPE_CTRL"
+              class="form-control"
+              [placeholder]="getControl(this.DOC_TYPE_CTRL).value !== null && getControl(this.DOC_TYPE_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate">
+            </ng-select>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.DOC_TYPE_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="NUMBER_ID_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.NUMBER_ID_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.NUMBER_ID_CTRL" id="NUMBER_ID_CTRL" type="text"
+              [placeholder]="getControl(this.NUMBER_ID_CTRL).value !== null && getControl(this.NUMBER_ID_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.NUMBER_ID_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.NUMBER_ID_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="PPAL_LANG_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.PPAL_LANG_LBL' | translate }}
+            </label>
+            <ng-select #languageSelect [selectOnTab]="true" [items]="this.wizard.languages" bindLabel="name"
+              bindValue="" [formControlName]="this.PPAL_LANG_CTRL" id="PPAL_LANG_CTRL" class="form-control"
+              [placeholder]="getControl(this.PPAL_LANG_CTRL).value !== null && getControl(this.PPAL_LANG_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate">
+            </ng-select>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.PPAL_LANG_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="row">
+
+        <div class="col-md-12 left-content">
+          <h4 class="bp-contentitle">
+            {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.SECTION2_TITLE' | translate }}
+          </h4>
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="COUNTRY_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.COUNTRY_LBL' | translate }}
+            </label>
+            <ng-select #countrySelect [selectOnTab]="true" [items]="this.wizard.countries" bindLabel="countryName"
+              [bindValue]="" [formControlName]="this.COUNTRY_CTRL" id="COUNTRY_CTRL" class="form-control"
+              [placeholder]="getControl(this.COUNTRY_CTRL).value !== null && getControl(this.COUNTRY_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate">
+            </ng-select>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.COUNTRY_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="STATE_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.STATE_LBL' | translate }}
+            </label>
+            <ng-select #stateSelect [selectOnTab]="true" [items]="this.wizard.states" bindLabel="stateName" bindValue=""
+              [formControlName]="this.STATE_CTRL" id="STATE_CTRL" class="form-control"
+              [placeholder]="getControl(this.STATE_CTRL).value !== null && getControl(this.STATE_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate">
+            </ng-select>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.STATE_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="CITY_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.CITY_LBL' | translate }}
+            </label>
+            <ng-select #citySelect [selectOnTab]="true" [items]="this.wizard.cities" bindLabel="cityName" bindValue=""
+              [formControlName]="this.CITY_CTRL" id="CITY_CTRL" class="form-control"
+              [placeholder]="getControl(this.CITY_CTRL).value !== null && getControl(this.CITY_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate">
+            </ng-select>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.CITY_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="PHONE_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.PHONE_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.PHONE_CTRL" id="PHONE_CTRL"
+              [placeholder]="getControl(this.PHONE_CTRL).value !== null && getControl(this.PHONE_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.PHONE_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.PHONE_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="CELLPHONE_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.CELLPHONE_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.CELLPHONE_CTRL" id="CELLPHONE_CTRL"
+              [placeholder]="getControl(this.CELLPHONE_CTRL).value !== null && getControl(this.CELLPHONE_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.CELLPHONE_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.CELLPHONE_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <label for="EMAIL_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.EMAIL_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.EMAIL_CTRL" id="EMAIL_CTRL" type="text"
+              [placeholder]="getControl(this.EMAIL_CTRL).value !== null && getControl(this.EMAIL_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.EMAIL_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.EMAIL_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.EMAIL_CTRL).errors?.invalidEmail && this.showValidations">
+              {{ 'APP.MESSAGE.EMAIL_INVALID' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="WEBSITE_CTRL">
+              {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.WEBSITE_LBL' | translate }}
+            </label>
+            <input class="form-control" [formControlName]="this.WEBSITE_CTRL" id="WEBSITE_CTRL" type="text"
+              [placeholder]="getControl(this.WEBSITE_CTRL).value !== null && getControl(this.WEBSITE_CTRL).value !== '' ? '':'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.SUMMARY.WEBSITE_LBL' | translate">
+            <div class="invalid-feedback-show"
+              *ngIf="this.getControl(this.WEBSITE_CTRL).errors?.required && this.showValidations">
+              {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="row justify-content-center">
+        <div class="col-md-12" *ngIf="this.showValidations && this.getFormGroup(this.STEP1_FG).invalid">
+          <div class="bp-alertform">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i> {{ 'APP.MESSAGE.ALERT_COMPLETE_FORM' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-md-12"
+          *ngIf="this.showNoChangesMsg && this.getFormGroup(this.STEP1_FG).pristine && this.getFormGroup(this.STEP1_FG).untouched">
+          <div class="bp-alertform">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i> {{ 'APP.MESSAGE.ALERT_NO_CHANGES_FORM' | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-md-4 offset-md-8">
+          <button class="bp-btn bp-btnprimary" type="button" (click)="save()">
+            {{ 'APP.BUTTON.SAVE_BTN' | translate }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+/** 
+* accordion component
+**/
+.accordion,
+.bp-accordion {
+  .card-simple {
+    border: 0;
+  }
+
+  .card-header {
+    background-color: white;
+    box-shadow: 0 0px 10px $color_grey-light_30;
+    padding: 0;
+
+    h2 {
+      padding: 0;
+      font-size: 1.125rem;
+      text-decoration: none;
+    }
+
+    button {
+      color: $color_primary;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1rem;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        background-color: $color_navy-active;
+        color: $color_universal-white;
+        text-decoration: none;
+      }
+    }
+
+    &.card-header_secondary {
+      button {
+        color: $color_navy;
+
+        &:hover,
+        &:focus {
+          color: $color_universal-white;
+        }
+      }
+    }
+  }
+
+}
+/* estilo outline y secundario */
+.bp-accordion-outline {
+  .card-header {
+    border: 0;
+    box-shadow: none;
+    border-bottom: 2px dashed $color_bupa;
+    h2 {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 0;
+    }
+  }
+  .card {
+    border: 0;
+  }
+  &.bp-accordion-outline--secondary {
+    .card-header {
+      border-color: $color_navy;
+      h2{
+        color: $color_navy;
+      }
+      button{
+        color: $color_navy;
+        &:hover, &:focus{
+          color: $color_universal-white;
+        }
+      }
+    }
+
+  }
+}
+
+/** 
+* end accordion component
+**/

@@ -1,0 +1,179 @@
+<section class="bp-mainpolicy">
+  <div class="row bp-itemcontsect2">
+    <div class="col-md-12">
+      <div class="row justify-content-center align-items-center ">
+        <div class="container">
+          <div style="text-align: center;">
+            <h3>{{ 'CLAIMFORM.RESUMECLAIM' | translate }}
+              {{this.claimFormWizardService.claimBatchId}} </h3>
+            <p>{{'CLAIMFORM.RESUMECLAIMTITLE'| translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngFor="let claim of this.claimFormWizardService.dataResponse; let i = index"
+      (ngOnInit)="erroValidate(claim.errorCode, claim.errorMessage, i)">
+      <!-- <section class="bp-section bp-section_shadow"
+        style="box-shadow: 0 0px 10px #E6E6E6 !important; padding: 1.1rem; border-radius: 0.5rem;"> -->
+      <!-- <section class="bp-mainpolicy">
+        <div class="row bp-itemcontsect2"> -->
+      <div class="col-md-12">
+
+        <div class="row justify-content-center align-items-center bp-itemcontsect2">
+          <div>
+            <div *ngIf="claim.errorCode == null">
+              <div class="ajfinal">
+                <div class="fechasbupa">
+                  <div class="row">
+                    <div class="col-md-4"><span>{{'CLAIMFORM.RESUME_DATEON' | translate }}</span></div>
+                    <div class="col-md-4"><span>{{'CLAIMFORM.RESUME_DATERESOLUTION' | translate }}</span></div>
+                    <div class="col-md-4"><span>{{'CLAIMFORM.RESUME_DATEPAY' | translate }}</span></div>
+                  </div>
+                  <div class="row"><img src="assets/images/finalstep.png" alt=""></div>
+                  <!-- <div *ngFor="let claim of this.claimFormWizardService.dataResponse.controls; let i = index"> -->
+                  <div class="row">
+                    <div class="col-md-4">
+                      <p><strong>{{ currentDate | dateTranslate: 'APP.DATE_FORMAT'}}</strong></p>
+                    </div>
+                    <div class="col-md-4">
+                      <p><strong>{{ claim.resolutionDate | dateTranslate: 'APP.DATE_FORMAT'}}</strong></p>
+                    </div>
+                    <div class="col-md-4">
+                      <p><strong>{{ claim.paymentDate | dateTranslate: 'APP.DATE_FORMAT'}}</strong></p>
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                  <div class="row mt-4 d-grid">
+                    <p *ngIf="claim">
+                      <strong>{{'CLAIMFORM.RESUMECLAIM_REFOUND' | translate }} :
+
+                      </strong>
+                      <strong style="font-weight: 600 !important;">
+                        {{claim.claimHeaderId}}
+                      </strong>
+
+                    </p>
+                    <p *ngIf="fullNameOwner"><strong>{{'CLAIMFORM.RESUMECLAIM_MEMEBER' | translate }} : </strong>
+                      {{fullNameOwner}} </p>
+                    <p *ngIf="claim"><strong>{{'CLAIMFORM.RESUMECLAIM_IMPORT' | translate }} : </strong>
+                      {{claim.totalCharges | number:'1.2-2'}} </p>
+                      <!-- bankAccountClabe -->
+                    <p *ngIf="bankAccountType === 1 && bankAccountValid !== '' ">
+                      <strong>{{'CLAIMFORM.RESUMECLAIM_ACCOUNT' | translate }} : </strong> 
+                      <!-- {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.SAVING' | translate }}  -->
+                      {{destinationAccount}}
+                    </p>
+                    <p *ngIf="bankAccountType === 2 && bankAccountValid !== '' ">
+                      <strong>{{'CLAIMFORM.RESUMECLAIM_ACCOUNT' | translate }} : </strong> 
+                      <!-- {{'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.CHECKING' | translate }} -->
+                      {{destinationAccount}}
+                    </p>
+
+                    <p *ngIf="bankAccountClabeValid === '1'">
+                      <strong>{{'CLAIMFORM.RESUMECLAIM_ACCOUNT' | translate }} : </strong>
+                      {{destinationClabeAccount}}
+                    </p>
+                  </div>
+                  <!-- <div class="row" *ngIf="wizard.policyHolder.insuranceBusinessIsOnShore === true">
+                <div class="col-md-12">
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_NOTE' | translate"></p>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="wizard.policyHolder.insuranceBusinessIsOnShore === true && wizard.policyHolder.insuranceBusinessId === ECUADOR_BUSINESS_ID">
+                <div class="col-md-12">
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_DPTO_NOTE' | translate"></p>
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_NOTE_ECUADOR' | translate"></p>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="wizard.policyHolder.insuranceBusinessIsOnShore === true && wizard.policyHolder.insuranceBusinessId === BOLIVIA_BUSINESS_ID_1">
+                <div class="col-md-12">
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_DPTO_NOTE' | translate"></p>
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_NOTE_BOLIVIA' | translate"></p>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="wizard.policyHolder.insuranceBusinessIsOnShore === true && wizard.policyHolder.insuranceBusinessId === BOLIVIA_BUSINESS_ID_2">
+                <div class="col-md-12">
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_DPTO_NOTE' | translate"></p>
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_NOTE_BOLIVIA' | translate"></p>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="wizard.policyHolder.insuranceBusinessIsOnShore === true && wizard.policyHolder.insuranceBusinessId === DR_BUSINESS_ID">
+                <div class="col-md-12">
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_DPTO_NOTE' | translate"></p>
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_NOTE_DR' | translate"></p>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="wizard.policyHolder.insuranceBusinessIsOnShore === true && wizard.policyHolder.insuranceBusinessId === PANAMA_BUSINESS_ID">
+                <div class="col-md-12">
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_DPTO_NOTE' | translate"></p>
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_NOTE_PANAMA' | translate"></p>
+                </div>
+              </div>
+              <div class="row"
+                *ngIf="wizard.policyHolder.insuranceBusinessIsOnShore === true && wizard.policyHolder.insuranceBusinessId === GUATEMALA_BUSINESS_ID">
+                <div class="col-md-12">
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_DPTO_NOTE' | translate"></p>
+                  <p [innerHTML]="'CLAIMFORM.FINALRESUME_NOTE_GUATEMALA' | translate"></p>
+                </div>
+              </div> -->
+                </div>
+              </div>
+            </div>
+            <div *ngIf="claim.errorCode != null">
+              <div class="ajfinal">
+                <div class="fechasbupa">
+                  <div class="card border-0 mt-4 d-grid" style="width: 100%;">
+                    <p *ngIf="claim.errorCode == 'BE_008' || claim.errorCode == 'BE_006'"
+                      style="font-size: 1.0em; font-weight: 700;">{{
+                      'CLAIMSUBMISSION.STEP3VALIDATEXMLTITLE' | translate}}</p>
+                    <p *ngIf="claim.errorCode == 'BE_008'" style="font-size: 0.70em; ">{{
+                      'CLAIMSUBMISSION.STEP3VALIDATEXMLEXTRAMESSAGE' | translate}}</p>
+
+                    <p *ngIf="claim.errorCode == 'BE_006'" style="font-size: 0.70em;">{{
+                      'CLAIMSUBMISSION.STEP3VALIDATEXMLMESSAGE' | translate}} </p>
+
+
+                    <p *ngIf="claim.errorCode == 'BE_008'" style="font-size: 0.70em;"
+                      [innerHTML]="messages[i] |  translate"></p>
+
+                    <p *ngIf="claim.errorCode != 'BE_008' && claim.errorCode != 'BE_006'"
+                      style="font-size: 1.0em; font-weight: 700;">{{
+                      'CLAIMSUBMISSION.STEP3ERRORTITLE' | translate}}</p>
+                    <p *ngIf="claim.errorCode != 'BE_008' && claim.errorCode != 'BE_006'"
+                        style="font-size: 0.70em;">{{
+                      'CLAIMSUBMISSION.STEP3ERRORMESSAGE' | translate}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- </div>
+      </section> -->
+      <!-- </section>
+      <br> -->
+    </ng-container>
+
+
+
+
+    <div class="col-md-12">
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-3">
+          <button type="button" class="bp-btn bp-btnprimary" (click)="finish()">
+            {{'CLAIMFORM.BTNS.FINISH' | translate }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

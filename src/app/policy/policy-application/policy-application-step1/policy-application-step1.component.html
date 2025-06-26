@@ -1,0 +1,313 @@
+<div class="setup-content" id="step-1" ng-show="agent">
+  <div *ngIf="checked">
+    <form [formGroup]="wizard.policyForm">
+      <div class="">
+        <div class="col-md-12">
+          <div class="ig-solicituddatos">
+            <h6>
+              1.1 {{ 'POLICY.APPLICATION.STEP1.TITLE' | translate }}
+            </h6>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.REQUESTER_TYPE' |
+                    translate }} </label>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="inputText" class=""> </label>
+                      <input id="inputText" class="form-control" placeholder=" Rol solicitante" autofocus="" type="hidden"
+                        formControlName="applicantRole" readonly>
+                      <input id="inputText" class="form-control" placeholder=" Rol solicitante" autofocus="" type="text"
+                        value="{{agentRole | translate}}" readonly>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['applicantRole'].touched 
+                      && wizard.policyForm.controls['applicantRole'].invalid) || 
+                      (wizard.policyForm.controls['applicantRole'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                    </div>
+                    <div class="col-md-8">
+                      <label for="inputText" class=""> </label>
+                      <input id="inputText" class="form-control" placeholder=" Nombre completo solicitante" autofocus=""
+                        type="text" formControlName="applicantName" readonly>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['applicantName'].touched 
+                      && wizard.policyForm.controls['applicantName'].invalid) || 
+                      (wizard.policyForm.controls['applicantName'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT' | translate}}
+                  </label>
+                  <ng-select #agentSelect [items]="hierarchyAgents" [selectOnTab]="true" bindValue="agentId" bindLabel="companyName"
+                    formControlName="agentName" class="form-control" (change)="handleAgentChange($event)">
+                  </ng-select>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT_PHONE' |translate }}</label>
+                      <input id="inputText" class="form-control" placeholder="{{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT_PHONE_PLACEHOLDER' | translate }}"
+                        autofocus="" type="text" formControlName="phone">
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['phone'].touched 
+                      && wizard.policyForm.controls['phone'].invalid) || 
+                      (wizard.policyForm.controls['phone'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="email" class="">{{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT_EMAIL' |
+                        translate }}</label>
+                      <input id="email" class="form-control" placeholder="{{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT_EMAIL_PLACEHOLDER' | translate }}"
+                        autofocus="" type="email" formControlName="email">
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['email'].touched 
+                      && wizard.policyForm.controls['email'].invalid) || 
+                      (wizard.policyForm.controls['email'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.WRONG_FORMAT' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="col-md-12">
+          <div class="ig-solicituddatos">
+            <h6>
+              1.2 {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.TITLE' | translate }}
+            </h6>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.BUSINESS' |
+                        translate }} </label>
+                      <input id="inputText" class="form-control" placeholder="Negocio" autofocus="" type="text"
+                        formControlName="insuranceBusiness" readonly>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['insuranceBusiness'].touched 
+                      && wizard.policyForm.controls['insuranceBusiness'].invalid) || 
+                      (wizard.policyForm.controls['insuranceBusiness'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.SIGNATURE_DATE'
+                        |
+                        translate }}</label>
+                      <app-custom-date-picker formControlName="date" [maxDate]="maxDate"
+                      [dateValue]="wizard.policyForm.controls['date'].value" ></app-custom-date-picker>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['date'].touched 
+                        && wizard.policyForm.controls['date'].invalid) || 
+                        (wizard.policyForm.controls['date'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputPassword" class="">
+                        {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.COUNTRY' | translate }}
+                      </label>
+                      <ng-select #countriesSelect [items]="countries" [selectOnTab]="true" bindValue="countryId"
+                        bindLabel="countryName" formControlName="country" class="form-control" (change)="handleCountryChange($event)"
+                        [placeholder]="wizard.policyForm.value.country != null? '':'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.SELECT_COUNTRY' | translate ">
+                      </ng-select>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['country'].touched 
+                        && wizard.policyForm.controls['country'].invalid) || 
+                        (wizard.policyForm.controls['country'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                      <div class="invalid-feedback">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputPassword" class="">
+                        {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.CITY' | translate }}
+                      </label>
+                      <ng-select #citiesSelect [items]="cities" [selectOnTab]="true" bindValue="cityId" bindLabel="cityName"
+                        formControlName="city" class="form-control " (change)="handleCityChange($event)" [placeholder]="wizard.policyForm.value.city != null ? '':'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.SELECT_CITY' | translate ">
+                      </ng-select>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['city'].touched 
+                      && wizard.policyForm.controls['city'].invalid) || 
+                      (wizard.policyForm.controls['city'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                      <div class="invalid-feedback">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputPassword" class="">
+                        {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.PRODUCT' | translate }}
+                      </label>
+                      <ng-select #productsSelect [items]="products" [selectOnTab]="true" bindValue="id" bindLabel="name"
+                        formControlName="product" class="form-control" (change)="handleProductChange($event)"
+                        [placeholder]="wizard.policyForm.value.product != null ? '':'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.SELECT_PRODUCT' | translate ">
+                      </ng-select>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['product'].touched 
+                      && wizard.policyForm.controls['product'].invalid) || 
+                      (wizard.policyForm.controls['product'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                      <div class="invalid-feedback">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputPassword" class="">
+                        {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.PLAN' | translate }}
+                      </label>
+                      <ng-select #plansSelect [items]="plans" [selectOnTab]="true" bindValue="id" bindLabel="name"
+                        formControlName="plan" class="form-control " (change)="handlePlanChange($event)" [placeholder]="wizard.policyForm.value.plan != null ? '':'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.SELECT_PLAN' | translate ">
+                      </ng-select>
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['plan'].touched 
+                      && wizard.policyForm.controls['plan'].invalid) || 
+                      (wizard.policyForm.controls['plan'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                      <div class="invalid-feedback">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="col-md-12">
+          <div class="ig-solicituddatos">
+            <h6>
+              1.3 {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.TITLE' | translate }}
+            </h6>
+
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="row">
+                  <div class="col-lg-6 col-sm-6">
+                    <div class="form-group">
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.NAMES' |
+                        translate }} </label>
+                      <input id="holderName" class="form-control" placeholder=" {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.NAMES' | translate }}"
+                        formControlName="holderName" autofocus="" type="text">
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['holderName'].touched 
+                      && wizard.policyForm.controls['holderName'].invalid) || 
+                      (wizard.policyForm.controls['holderName'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.SURNAMES' |
+                        translate }} </label>
+                      <input id="holderSurname" class="form-control" placeholder="{{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.SURNAMES' | translate }}"
+                        autofocus="" type="text" formControlName="holderSurname">
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['holderSurname'].touched 
+                      && wizard.policyForm.controls['holderSurname'].invalid) || 
+                      (wizard.policyForm.controls['holderSurname'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="form-group ig-date-picker">
+
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.DOB' |
+                        translate }}</label><app-custom-popover [title]="" [content]="['POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.DOB_TOOLTIP' | translate]"></app-custom-popover>
+                      
+                      <app-custom-date-picker formControlName="holderBirthDate" 
+                        [dateValue]="wizard.policyForm.controls['holderBirthDate'].value" [maxDate]="maxDate">
+                      </app-custom-date-picker> 
+                      
+                        <div>
+                            <small class="text-danger" *ngIf="(wizard.policyForm.controls['holderBirthDate'].touched 
+                              && wizard.policyForm.controls['holderBirthDate'].errors?.required) || 
+                              (wizard.policyForm.controls['holderBirthDate'].errors?.required && showValidations)">
+                              {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                            </small>
+                        </div>
+                        <div>
+                            <small class="text-danger" *ngIf="((wizard.policyForm.controls['holderBirthDate'].dirty
+                              && wizard.policyForm.controls['holderBirthDate'].errors?.invalidDateRange )) || ((wizard.policyForm.controls['holderBirthDate'].errors?.dirty &&
+                              wizard.policyForm.controls['holderBirthDate'].errors?.invalidDateRange && showValidations))">
+                              {{ 'POLICY.APPLICATION.VALIDATIONS.WRONG_DATE_VALUE' | translate }}
+                            </small>
+                          </div>
+                          
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="form-group">
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.MAIN_PHONE' | translate }} </label>
+                      <input id="holderPhone" class="form-control" placeholder=" {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.MAIN_PHONE' | translate }}"
+                        autofocus="" formControlName="holderPhone">
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['holderPhone'].touched 
+                        && wizard.policyForm.controls['holderPhone'].invalid) || 
+                        (wizard.policyForm.controls['holderPhone'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.REQUIRED_FIELD' | translate }}
+                      </small>
+                  </div>
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="form-group">
+                      <label for="inputText" class="">{{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.MAIN_EMAIL'
+                        |
+                        translate }} </label>
+                      <input id="holderEmail" class="form-control" placeholder="{{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.MAIN_EMAIL' | translate }}"
+                        autofocus="" type="email" formControlName="holderEmail">
+                      <small class="text-danger" *ngIf="(wizard.policyForm.controls['holderEmail'].touched 
+                      && wizard.policyForm.controls['holderEmail'].invalid) || 
+                      (wizard.policyForm.controls['holderEmail'].invalid && showValidations)">
+                        {{ 'POLICY.APPLICATION.VALIDATIONS.WRONG_FORMAT' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="col-md-12">
+          <div class="col-md-6 offset-md-6">
+            <div class="row">
+              <div class="col-lg-6"></div>
+              <div class="col-lg-6">
+                <!--<button class="ig-botones ig-principalbtn" type="button" (click)="next();"
+                [disabled]="!wizard.policyForm.valid">{{ 'POLICY.APPLICATION.STEP1.CONTINUE' | translate }}
+              </button>-->
+                <button class="ig-botones ig-principalbtn" type="button" (click)="next();"
+                  >{{ 'POLICY.APPLICATION.STEP1.CONTINUE' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>

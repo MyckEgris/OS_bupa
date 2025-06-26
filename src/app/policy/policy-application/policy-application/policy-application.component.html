@@ -1,0 +1,40 @@
+<!--<section class="ig-validation">
+  <div class="row align-items-center">
+    <div class="col-md-10 offset-md-1">
+      <app-policy-application-header></app-policy-application-header>
+    </div>
+  </div>
+</section>-->
+<section class="ig-policyapp ig-wizarsolicitud animated fadeIn">
+  <article class="">
+    <div class="col-md-3">
+      <div class="">
+        <a class="ig-botones ig-secundariobtn" (click)="goToSearch();">
+          <i class="material-icons">arrow_back</i>{{ 'POLICY.APPLICATION.GO_TO_SEARCH_POLICY_APPLICATION' | translate}}
+        </a>
+      </div>
+    </div>
+  </article>
+  <br>
+  <article class="ig-wizard ">
+    <div class="col-md-12">
+      <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 1 ? 'btn-primary' : 'btn-defaul'">1</span>
+            <p>{{ 'POLICY.APPLICATION.STEP1.TITLE' | translate}}</p>
+          </div>
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 2 ? 'btn-primary' : 'btn-defaul'">2</span>
+            <p>{{ 'POLICY.APPLICATION.STEP2.TITLE' | translate}}</p>
+          </div>
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 3 ? 'btn-primary' : 'btn-defaul'">3</span>
+            <p>{{ 'POLICY.APPLICATION.STEP3.TITLE' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </article>
+</section>

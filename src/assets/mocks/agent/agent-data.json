@@ -1,0 +1,104 @@
+{
+    "agent": {
+        "agentId": 6206,
+        "agentNumber": "6206",
+        "companyName": "",
+        "firstName": "SIIRB",
+        "middleName": "",
+        "lastName": "GECECTAL SI BEBLIOORE",
+        "dob": null,
+        "isAdministrator": false,
+        "statusId": 11,
+        "status": "Active",
+        "countryId": 8,
+        "country": "Honduras ",
+        "isoAlpha": "HND",
+        "insuranceBusinessId": 30,
+        "insuranceBusiness": "Bupa                       ",
+        "agencyId": 1077,
+        "agencyName": "SIIRB GECECTAL    BEBLIOORE",
+        "emails": [
+            {
+                "eMailAddress": "ende@bupalatinamerica.com",
+                "type": "Preferred Email",
+                "emailTypeId": 1
+            },
+            {
+                "eMailAddress": "",
+                "type": "Alternate Email",
+                "emailTypeId": 2
+            },
+            {
+                "eMailAddress": "",
+                "type": "Assistant",
+                "emailTypeId": 3
+            },
+            {
+                "eMailAddress": "",
+                "type": "Other",
+                "emailTypeId": 4
+            },
+            {
+                "eMailAddress": "",
+                "type": "Claim Submission Email",
+                "emailTypeId": 5
+            }
+        ],
+        "phones": [
+            {
+                "phoneNumber": "5553366",
+                "type": "Home",
+                "phoneTypeId": 1000
+            },
+            {
+                "phoneNumber": "5553366",
+                "type": "Office",
+                "phoneTypeId": 1001
+            },
+            {
+                "phoneNumber": "5553366",
+                "type": "Office_1",
+                "phoneTypeId": 1002
+            },
+            {
+                "phoneNumber": "5553366",
+                "type": "Office_2",
+                "phoneTypeId": 1003
+            },
+            {
+                "phoneNumber": "5553366",
+                "type": "Portable",
+                "phoneTypeId": 1004
+            },
+            {
+                "phoneNumber": "5553366",
+                "type": "Fax",
+                "phoneTypeId": 1005
+            }
+        ],
+        "addresses": [
+            {
+                "addressTypeId": 1,
+                "type": "Mailing",
+                "addressLine": "123 Happy Road at Bupa",
+                "city": "San Pedro Sula                ",
+                "zipCode": "",
+                "state": "",
+                "countryId": 8,
+                "country": "Honduras ",
+                "isoAlpha": "HND"
+            },
+            {
+                "addressTypeId": 2,
+                "type": "Physical",
+                "addressLine": "123 Happy Road at Bupa",
+                "city": "San Pedro Sula                ",
+                "zipCode": "",
+                "state": "",
+                "countryId": 8,
+                "country": "Honduras ",
+                "isoAlpha": "HND"
+            }
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+<div aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li *ngFor="let agent of breadcrumbArray" class="breadcrumb-item">{{ 'AGENT.PORTFOLIO.HEADER_INFORMATION.ID' | translate }}: <a href="#" (click)="navigateBack($event, agent.agentId)" >{{agent.agentId}}</a></li>
+
+    <li *ngIf="dropdownArray.length > 0" class="breadcrumb-item active" aria-current="page">
+
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a href="#" *ngFor="let agent of dropdownArray" class="dropdown-item" (click)="navigateBack($event, agent.agentId)">{{agent.agentId}}</a>
+        </div>
+      </div>
+
+    </li>
+  </ol>
+</div>
+
+<app-view-portfolio></app-view-portfolio>

@@ -1,0 +1,53 @@
+<div class="ig-polidetaleinfo">
+    <h3>{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.DOCUMENTS' | translate }} </h3>
+</div>
+    <div *ngIf="searchProccess">
+
+        <div class="ig-searchresul animated fadeIn" *ngIf="!documentsPermission">
+            {{ 'POLICY.VIEW_POLICY_DETAILS.DOCUMENTS.DOCUMENTS_WITHOUT_PERMISSION' | translate }}
+        </div>
+        <div class="ig-searchresul animated fadeIn" *ngIf="documents.length === 0 && searchProccess && documentsPermission">
+            <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+            <div *ngIf="searchFiltered;then policyNotFound else policyLapsedNotFound"></div>
+            <p>{{ 'POLICY.VIEW_POLICY_DETAILS.DOCUMENTS.NOT_DOCUMENTS' | translate }}</p>
+        </div>
+    </div>
+
+<div *ngIf="pagedItems && pagedItems.length > 0">
+<div class="ig-docpoli animated slideInRight" *ngFor="let doc of pagedItems">
+    <div >
+        <div class="row justify-content-center">
+            <div class="col-md-2">
+                <h6>{{ 'POLICY.VIEW_POLICY_DETAILS.DOCUMENTS.DATE' | translate }}</h6>
+                <p> {{doc.eligibilityDate | dateTranslate: 'APP.DATE_FORMAT'}}</p>
+            </div>
+            <div class="col-md-4">
+                <h6>
+                    {{ 'POLICY.VIEW_POLICY_DETAILS.DOCUMENTS.DOCUMENT_TYPE' | translate }}
+                </h6>
+                <p>{{doc.documentType}}</p>
+            </div>
+            <div class="col-sm-2">
+                <i class="material-icons" style="cursor:pointer;font-size: 48px;"
+                    (click)="downloadFile(doc)">vertical_align_bottom</i>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="ig-paymentnav">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(1)"><i class="material-icons">first_page</i></button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(pager.currentPage - 1)"><i class="material-icons">chevron_left</i></button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.currentPage + 1)"><i class="material-icons">chevron_right</i></button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.totalPages)"><i class="material-icons">last_page</i></button>
+            </li>
+        </ul>
+    </div>
+</div>

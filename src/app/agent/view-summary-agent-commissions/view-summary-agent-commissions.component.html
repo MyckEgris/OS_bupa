@@ -1,0 +1,169 @@
+<div class="ig-quictilhome">
+    <div class="row align-items-center">
+        <div class="col-md-7 col-12">
+            <h4>
+                {{ 'AGENT.HOME.COMMISSIONS.MY_COMMISSIONS' | translate }}
+            </h4>
+        </div>
+        <div class="col-md-5 col-12">
+            <a class="ig-principallinkbtn2 ig-botones" [routerLink]="" (click)="goTo('agents/view-commission')">{{ 'AGENT.HOME.COMMISSIONS.SHOW_DETAIL' | translate }} <i class="material-icons">chevron_right</i> </a>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="hasCommissionsDates">
+    <div class="ig-quicval">
+        <div class="row">
+
+            <div class="col-md-7 col-6">
+                <h5>
+                    {{ 'AGENT.HOME.COMMISSIONS.DATE' | translate }}
+                </h5>
+
+                <div class="dropdown">
+                    <select (change)="handleDateChange($event.target.value)" 
+                        class="form-control">
+                        <option *ngFor="let commission of commissionsDates" [ngValue]="commission" 
+                        value="{{commission.paymentId}}">{{ commission.paymentDate + ' - ' + commission.paymentTypeName }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-6">
+                <h5>
+                    {{ 'AGENT.HOME.COMMISSIONS.AMOUNT' | translate }}
+                </h5>
+                <h6 class="ig-valor" *ngIf="commissionsGroups">
+                    {{total | currency:currencySymbol:'symbol':'1.2-2'}}
+                </h6>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="ig-quicgrap" >
+        <div class="row">
+            <div class="col-md-12" *ngIf="!hasNegativeValues">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="torta-tab" data-toggle="tab"  role="tab" aria-controls="torta"
+                            aria-selected="true" (click)="handleChangeChartType('doughnut')">{{ 'AGENT.HOME.COMMISSIONS.DOUGHNUT' | translate }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " id="barra-tab" data-toggle="tab" href="#barra" role="tab" aria-controls="barra"
+                            aria-selected="false" (click)="handleChangeChartType('bar')">{{ 'AGENT.HOME.COMMISSIONS.BAR' | translate }}</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent" >
+                    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="torta-tab">
+                        <app-portfolio-pie-chart [portfolioByAgent]="commissionsGroups"
+                        [chartType]="chartType"></app-portfolio-pie-chart>
+                    </div>
+                </div>
+                
+            </div>
+            <br>
+            <div class="col-md-12">
+                <div class="ig-statu">
+                    <div class="row align-items-center">
+                        <div class="col-md-9 col-6">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.POLICY_STATUS' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.AMOUNT' | translate }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="ig-statusresul" *ngIf="commissionsGroups.length > 0">
+                    <div class="row">
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[0].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.NEW_BUSINESS_INDIVIDUAL' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[0].total != 0">
+                            <h5>{{commissionsGroups[0].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[1].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.NEW_BUSINESS_GROUP' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[1].total != 0">
+                            <h5>{{commissionsGroups[1].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[2].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.INDIVIDUAL_RENEWALS' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[2].total != 0">
+                            <h5>{{commissionsGroups[2].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[3].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.GROUP_RENEWALS' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[3].total != 0">
+                            <h5>{{commissionsGroups[3].total | currency:currencySymbol:'':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[4].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.ADJUSTMENT_INDIVIDUAL' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[4].total != 0">
+                            <h5>{{commissionsGroups[4].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[5].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.ADJUSTMENT_GROUP' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[5].total != 0">
+                            <h5>{{commissionsGroups[5].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[6].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.INDIVIDUAL_RENEWALS_IHI' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[6].total != 0">
+                            <h5>{{commissionsGroups[6].total | currency:currencySymbol:true:'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[7].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.GROUP_RENEWALS_IHI' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[7].total != 0">
+                            <h5>{{commissionsGroups[7].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[8].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.NEW_BUSINESS_INDIVIDUAL_IHI' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[8].total != 0">
+                            <h5>{{commissionsGroups[8].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[9].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.NEW_BUSINESS_GROUP_IHI' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[9].total != 0">
+                            <h5>{{commissionsGroups[9].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[10].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.ADJUSTMENT_INDIVIDUAL_IHI' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[10].total != 0">
+                            <h5>{{commissionsGroups[10].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        <div class="col-md-9 col-6" *ngIf="commissionsGroups[11].total != 0">
+                            <h6>{{ 'AGENT.HOME.COMMISSIONS.ADJUSTMENT_GROUP_IHI' | translate }}</h6>
+                        </div>
+                        <div class="col-md-3 col-6" *ngIf="commissionsGroups[11].total != 0">
+                            <h5>{{commissionsGroups[11].total | currency:currencySymbol:'symbol':'1.2-2'}}</h5>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div *ngIf="!hasCommissionsDates">
+    <div class="ig-quicval">
+        <div class="row">
+            <div class="col-md-12 empty-commissions-dates">
+                <p> {{ 'AGENT.HOME.COMMISSIONS.EMPTY_COMMISSIONS_DATES' | translate }}</p>
+            </div>
+        </div>
+    </div>
+</div>

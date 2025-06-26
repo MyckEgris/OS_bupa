@@ -1,0 +1,104 @@
+<div class="row align-items-end">
+  <div class="col-md-9">
+    <h4 class="bp-contentitle">
+      <i class="material-icons" *ngIf="showValidation && this.getDetails().invalid"
+      [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().invalid}">info</i>
+      {{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_INFO_ADITIONAL' | translate }}
+      <p>{{ 'POLICY.POLICY_ENROLLMENT.STEP4.INFO_EXPLANATION_DETAIL_HABITS' | translate }}</p>
+    </h4>
+    <hr style="border-color: #0079c8;">
+  </div>
+  <div class="col-md-3">
+    <div class="row align-items-center">
+      <div class="col-md-3">
+        <button class="ig-icondiagnosminim" (click)="changeValueIsExpanded()"
+          type="button"
+          data-toggle="collapse"
+          [attr.data-target]="'#'+question.medicalQuestionReference"
+          aria-expanded="false"
+          [attr.aria-controls]="question.medicalQuestionReference">
+          <i class="material-icons">{{isExpanded ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}</i>
+        </button>
+      </div>
+      <div class="col-md-9">
+        <button class="bp-btn bp-btnprimary" type="button" (click)="addDetail()">
+          <i class="material-icons">add_circle</i> {{ 'APP.BUTTON.ADD_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapse" [ngClass]="{'show': isExpanded || showValidation}" data-parent="#accordion"
+  id="{{question.medicalQuestionReference}}" [formGroup]="questionForm">
+  <div formArrayName="details">
+    <div class="row align-items-center"
+      *ngFor="let detail of getDetails().controls; let i = index; last as lastIndex"
+      [formGroupName]="i">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12">
+            <h6 style="font-weight: 700;">
+              <i class="material-icons" *ngIf="showValidation && this.getDetails().controls[i].invalid"
+              [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().controls[i].invalid}">info</i>
+              {{this.getDetails().controls[i].get('memberFullName').value}}
+            </h6>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="member">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEMBER' | translate }}</label>
+              <ng-select #memberSelect
+                [items]="members"
+                [selectOnTab]="true"
+                bindValue="applicationMemberGuid"
+                bindLabel="fullName"
+                formControlName="member"
+                [placeholder]="this.getDetails().controls[i].get('member').value !== null && this.getDetails().controls[i].get('member').value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate"
+                class="form-control"
+                (change)="hangleChangedMember($event, i)">
+              </ng-select>
+            </div>
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="type{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_HABITS_TYPE' | translate }}</label>
+              <input class="form-control"
+                type="text"
+                id="type{{i}}{{question.medicalQuestionReference}}"
+                formControlName="type"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_HABITS_TYPE' | translate }}"
+                [required]="this.getDetails().controls[i].get('type').hasError('required')"
+                maxlength="12">
+            </div>
+          </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+                <label for="forHowLong{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_HABITS_FOR_HOW_LONG' | translate }}</label>
+                <input class="form-control"
+                  type="text"
+                  id="forHowLong{{i}}{{question.medicalQuestionReference}}"
+                  formControlName="forHowLong"
+                  placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_HABITS_FOR_HOW_LONG' | translate }}"
+                  [required]="this.getDetails().controls[i].get('forHowLong').hasError('required')"
+                  maxlength="6">
+              </div>
+              <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+                <label for="quantityDay{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_HABITS_QUANTITY_DAY' | translate }}</label>
+                <input class="form-control"
+                  type="text"
+                  id="quantityDay{{i}}{{question.medicalQuestionReference}}"
+                  formControlName="quantityDay"
+                  placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_HABITS_QUANTITY_DAY' | translate }}"
+                  [required]="this.getDetails().controls[i].get('quantityDay').hasError('required')"
+                  maxlength="5">
+              </div>
+            </div>
+            <div class="col-md-12"><hr></div>
+        </div>
+      </div>
+      <div class="col-md-2" *ngIf="ifGreaterThanCero(i)">
+        <button class="ig-icondiagnosminim" style="cursor: pointer;" type="button" (click) = "deleteDetail(i)">
+          <i class="material-icons"> delete_forever </i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<div class="col-md-12" *ngIf="policy">
+    <div class="ig-process-cuentadetal">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ig-procesuser">
+                    <h5>
+                        {{'POLICY.POLICYSTATUS.' | concatenate: policy.policyStatus | replacespaces: '_' | uppercase | translate}}</h5>
+                    <span>{{ 'PAYMENTS.INFORMATION.CURRENT_STATUS' | translate }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ig-procesuser">
+                    <h5>{{policy.policyReference}}</h5>
+                    <span>{{ 'PAYMENTS.INFORMATION.POLICY_ID' | translate }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ig-procesuser">
+                    <h5>{{policy.members[0].firstName}} {{policy.members[0].lastName}}</h5>
+                    <span>{{ 'PAYMENTS.INFORMATION.OWNER' | translate }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ig-procesuser">
+                    <h5>{{'POLICY.FRECUENCIES.' | concatenate: policy.modeOfPayment | replacespaces: '_' | uppercase | translate}}
+                    </h5>
+                    <span>{{ 'PAYMENTS.INFORMATION.PAYMENT_METHOD' | translate }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" *ngIf="!showToPayMexicanPeso">
+                <div class="ig-procesuser">
+                    <h5 *ngIf="!isMexico"> USD {{ policy.amountUSDTotalToPay | number:'1.2-2'}}</h5>
+                    <h5 *ngIf="isMexico && isExchangeRateValid"> {{ policy.amountUSDTotalToPay | number:'1.2-2'}} USD</h5>
+                    <p *ngIf="!isMexico">{{ 'PAYMENTS.INFORMATION.TOTAL_TO_PAY' | translate }}</p>
+                    <p *ngIf="isMexico && isExchangeRateValid">{{ 'PAYMENTS.INFORMATION.TOTAL_TO_PAY_MEX' | translate }}</p>
+
+                </div>
+            </div>
+
+            <div class="col-md-12" *ngIf="isMexico && (showToPayMexicanPeso || !isExchangeRateValid)">
+                <div class="ig-procesuser">
+                    <h5>{{ policy.amountTotalToPay | number:'1.2-2'}} MXN</h5>
+                    <p>{{ 'PAYMENTS.INFORMATION.TOTAL_TO_PAY_MEX' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-12" *ngIf="isMexico && (showToPayMexicanPeso || !isExchangeRateValid)">
+                <div class="ig-procesuser">
+                    <h5> {{ policy.amountToPay | number:'1.2-2' }} MXN</h5>
+                    <p> {{ 'PAYMENTS.INFORMATION.TO_PAY_MEX' | translate }}</p>
+                </div>
+            </div>
+
+
+            <div class="col-md-12" *ngIf="!showToPayMexicanPeso">
+                <div class="ig-procesuser">
+                    <h5 *ngIf="!isMexico"> USD {{ policy.amountUSDToPay | number:'1.2-2'}}</h5>
+                    <h5 *ngIf="isMexico && isExchangeRateValid">{{ policy.amountUSDToPay | number:'1.2-2'}} USD</h5>
+                    <p *ngIf="!isMexico">{{ 'PAYMENTS.INFORMATION.TO_PAY' | translate }}</p>
+                    <p *ngIf="isMexico && isExchangeRateValid">{{ 'PAYMENTS.INFORMATION.TO_PAY_MEX' | translate }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ig-procesuser">
+                    <span *ngIf="policy.daysToPay != 0 && !isMexico" class="textosmall">
+            {{'POLICY.DATE_EXP_GT_ZERO_1' | translate}} {{policy.daysToPay}}
+            {{'POLICY.DATE_EXP_GT_ZERO_2' | translate}}
+          </span>
+                    <span *ngIf="policy.daysToPay == 0 && !isMexico" class="textosmall">
+            {{'POLICY.DATE_EXP_EQ_ZERO' | translate}}
+          </span>
+                    <h5>{{policy.paymentDate | dateTranslate: 'APP.DATE_FORMAT'}}</h5>
+                    <p *ngIf="!isMexico">{{ 'PAYMENTS.INFORMATION.PAYMENT_DATE' | translate }}</p>
+                    <p *ngIf="isMexico">{{ 'PAYMENTS.INFORMATION.PAYMENT_DATE_MEX' | translate }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

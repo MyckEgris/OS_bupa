@@ -1,0 +1,202 @@
+<section class="ig-validation">
+  <article>
+    <form [formGroup]="policyApplicationForm" (ngSubmit)="newFilterPolicies(policyApplicationForm.value)" novalidate
+      class="ig-searchpolconten">
+      <div class="col-md-12">
+
+        <div class="row align-items-center">
+          <div class="col-lg-9 col-sm-6 col-md-8">
+            <h5>{{ 'POLICY.APPLICATION.ONLINE_APPLICATION' | translate }}</h5>
+            <br>
+            <p [innerHtml]="'POLICY.APPLICATION.TEXT_1' | translate"></p>
+          </div>
+          <div class="col-lg-3 col-sm-6 col-md-4 text-right">
+            <button type="button" class="ig-botones ig-secundariobtn" [routerLink]="[getRoutePolicyProcess()]">
+              <i class="material-icons">assignment_turned_in</i> {{
+                            'POLICY.APPLICATION.CREATE_APPLICATION' | translate }}</button>
+          </div>
+        </div>
+        <br>
+
+        <div class="ig-searchpol">
+          <div class="row align-items-center">
+
+            <div class="col-lg-4 col-sm-4">
+              <div class="form-group">
+                <select class="custom-select form-control" id="policyAppSearchType"
+                  formControlName="policyAppSearchType">
+                  <option *ngFor="let searchType of policyAppSearchType" value="{{searchType.value}}">{{'POLICY.APPLICATION.SEARCH_TYPES.'
+                                        | concatenate: searchType.value | uppercase |
+                                        translate}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[1].value"
+              class="col-lg-6 col-sm-4  animated fadeIn">
+              <div class="form-group">
+                <input id="policyAppNumber" formControlName="policyAppNumber" maxCharsAllowed="10" appOnlyNumber="true"
+                  class="form-control" placeholder="{{ 'POLICY.APPLICATION.APPLICATION_NUMBER' | translate }}"
+                  type="text">
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[2].value"
+              class="col-lg-6 col-sm-4  animated fadeIn">
+              <div class="form-group">
+                <input id="policyId" formControlName="policyId" maxCharsAllowed="10" appOnlyNumber="true"
+                  class="form-control" placeholder="{{ 'APP.NUMERO_POLIZA_PLACEHOLDER' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[3].value"
+              class="col-lg-3 col-sm-4 animated fadeIn">
+              <div class="form-group">
+                <input id="firstName" formControlName="firstName" class="form-control"
+                  placeholder="{{ 'APP.NOMBRE' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[3].value"
+              class="col-lg-3 col-sm-4 animated fadeIn">
+              <div class="form-group">
+                <input id="lastName" formControlName="lastName" class="form-control"
+                  placeholder="{{ 'APP.APELLIDO' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div class="col-lg-1 col-sm-2 col-6">
+              <button type="submit"
+                [disabled]="policyApplicationForm.invalid || policyApplicationForm.value.policyAppSearchType==policyAppSearchType[0]"
+                [ngClass]="{ 'ig-botones ig-principalbtn' : true, 'disabled' : policyApplicationForm.invalid || policyApplicationForm.value.policyAppSearchType==policyAppSearchType[0]  }"><i
+                  class="material-icons">search</i></button>
+            </div>
+
+            <div class="col-lg-1 col-sm-2 col-6">
+              <button type="button" class="ig-principalsegundariobtn ig-botones btnclean" (click)="clearFields(true)">
+                <i class="material-icons">
+                  delete_sweep
+                </i>
+
+                <span class="tooltiptext">{{ 'POLICY.APPLICATION.CLEAN_SEARCH' | translate }}</span>
+
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="ig-application " *ngIf="searchProccess">
+        <div class="col-md-12">
+          <h5 _ngcontent-c5="" class="ig-texthistorial">{{ 'POLICY.APPLICATION.APPLICATION' | translate }}
+            <span> ({{ policyAplication.totalCount }}) </span></h5>
+          <div *ngIf="searchProccess">
+            <div class="ig-searchresul animated fadeIn"
+              *ngIf="policyAplication.policyApplications.length === 0 && searchProccess">
+              <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+              <p>{{ 'POLICY.APPLICATION.POLICY_APP_NOT_FOUND' | translate }}</p>
+            </div>
+          </div>
+
+          <div class="ig-resultados animated fadeInUp" *ngFor="let policyApp of policyAplication.policyApplications">
+            <div class="row">
+              <div class="col-md-3">
+                <p class="textosmall">
+                  {{ 'POLICY.APPLICATION.NUMBER_APPLICATION' | translate }} {{
+                                    policyApp.applicationId }}
+                </p>
+                <p *ngIf="policyApp.policyId && policyApp.status !== 'New'" class="textosmall">
+                  {{ 'POLICY.APPLICATION.POLICY_ID' | translate }} {{ policyApp.policyId }}
+                </p>
+              </div>
+              <div class="col-md-3">
+                <p class="textosmall ig-procesotext">
+                  {{ 'POLICY.APPLICATION.AGENT_INFO' | translate }}
+                </p>
+                <p class="textosmall ">
+                  {{ policyApp.agentId + " - " +  policyApp.agent | uppercase}}
+                </p>
+
+              </div>
+              <div class="col-md-3">
+                <h6 class="ig-procesotext text-center">
+                  {{ 'POLICY.APPLICATION.PLAN' | translate }} {{ policyApp.plan }}
+                </h6>
+              </div>
+
+              <div class="col-md-3 text-right">
+                <h6 class="ig-procesotext">
+                  {{'POLICY.APPLICATION.STATUS.' | concatenate: policyApp.status | replacespaces: '_' | uppercase | translate}}
+                </h6>
+              </div>
+            </div>
+
+            <div class="row align-items-end">
+
+              <div class="col-md">
+                <h5>
+                  {{ policyApp.members[0].firstName }} <br> {{ policyApp.members[0].lastName }}
+                </h5>
+                <p class="textosmall">
+                  {{ 'POLICY.OWNER' | translate }}
+                </p>
+              </div>
+
+              <div class="col-md">
+                <h5 class="ig-processvalor">
+                  {{ policyApp.members[0].dob | dateTranslate: 'APP.DATE_FORMAT'}}
+                </h5>
+                <p class="textosmall">
+                  {{ 'POLICY.APPLICATION.DOB' | translate }}
+                </p>
+              </div>
+
+              <div class="col-md">
+                <h5>
+                  {{ policyApp.country }}
+                </h5>
+                <p class="textosmall">
+                  {{ 'POLICY.APPLICATION.COUNTRY' | translate }}
+                </p>
+              </div>
+
+              <div class="col-md">
+                <h5 class="ig-processvalor">
+                  {{ policyApp.createdOn | dateTranslate: 'APP.DATE_FORMAT'}}
+                </h5>
+                <p class="textosmall">
+                  {{ 'POLICY.APPLICATION.CREATION_DATE' | translate }}
+                </p>
+              </div>
+            </div>
+
+            <div class="row align-items-end">
+
+              <div class="col-md">
+                <p class="textosmall ig-procesotext">
+                  {{ 'POLICY.APPLICATION.RECEIVED_METHOD' | translate }}
+                </p>
+                <p class="textosmall">
+                  {{  policyApp.receivedMethodId | receivedMethod | translate | uppercase}}
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <div *ngIf="collectionSize > PAGE_SIZE">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="PAGE_SIZE"
+              [pageSize]="PAGE_SIZE" [rotate]="true" [boundaryLinks]="true"
+              (pageChange)="changePageOfPoliciesApp($event);">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </article>
+</section>

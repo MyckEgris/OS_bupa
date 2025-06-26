@@ -1,0 +1,182 @@
+<section class="ig-requestpre">
+
+  <div class="ig-formulario">
+    <div class="row">
+      <div class="col-md-12" [formGroup]="wizard.preAuthForm.get('medicalInformation')">
+
+        <div class="row">
+          <div class="col-md-2">
+            <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.REQUEST_DATE' | translate }}
+            </label>
+            <div class="form-group">
+              <h5> {{ toDay | dateTranslate: 'APP.DATE_FORMAT'}} </h5>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.INCURRED_DATE' | translate }}
+            </label>
+            <div class="form-group ig-date-picker">
+              <app-custom-date-picker formControlName="incurredDate" autofocus required></app-custom-date-picker>
+              <small class="text-danger"
+                      *ngIf="(isFieldValid('medicalInformation','incurredDate')
+                                && getControl('medicalInformation','incurredDate').errors?.required)
+                              || (getControl('medicalInformation','incurredDate').errors?.required && showValidations)">
+                  {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.ADMISSION_DATE' | translate }}
+            </label>
+            <div class="form-group ig-date-picker">
+              <app-custom-date-picker formControlName="admissionDate"></app-custom-date-picker>
+              <small class="text-danger"
+                      *ngIf="(isFieldValid('medicalInformation','admissionDate')
+                                && getControl('medicalInformation','admissionDate').errors?.required)
+                              || (getControl('medicalInformation','admissionDate').errors?.required && showValidations)">
+                  {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label class="" for="inputText">
+              {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.LENGTH_STAY_REQUESTED' | translate }} </label>
+            <div class="form-group">
+              <input id="lengthOfStayRequested" class="form-control" formControlName="lengthOfStayRequested"
+                placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.LENGTH_STAY_REQUESTED' | translate }}" type="number">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.REQUEST_TYPE' | translate }}
+            </label>
+            <div class="form-group">
+              <select class="custom-select form-control" id="requestType" formControlName="requestType"
+                      (change)="handleRequestTypeChange($event.target.value)" autofocus required>
+                <option value="" disabled selected > {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.SELECT_REQUEST_TYPE' | translate }} </option>
+                <option *ngFor="let requestType of listRequestType" value="{{requestType.id}}">
+                    {{'CLAIMS.PRE_AUTHORIZATION.REQUEST_TYPE.' | concatenate: requestType.name | uppercase | translate}}</option>
+              </select>
+              <small class="text-danger" 
+                *ngIf="(isFieldValid('medicalInformation', 'requestType')) 
+                            || ((getControl('medicalInformation', 'requestType').errors?.required 
+                                    || getControl('medicalInformation', 'requestType').value === '')
+                                    && showValidations)">
+                  {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.SERVICE_TYPE' | translate }}
+            </label>
+            <div class="form-group">
+              <select class="custom-select form-control" id="listServiceType" formControlName="serviceType" 
+                      (change)="handleServiceTypeChange($event.target.value)" autofocus required>
+                <option value="" disabled selected > {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.SELECT_SERVICE_TYPE' | translate }} </option>
+                <option *ngFor="let service of listServiceType" value="{{service.id}}">
+                    {{'CLAIMS.PRE_AUTHORIZATION.SERVICE_TYPE.' | concatenate: service.description | replacespaces: '_' | uppercase | translate}} </option>
+              </select>
+              <small class="text-danger" 
+                *ngIf="(isFieldValid('medicalInformation', 'serviceType')) 
+                            || (
+                              (getControl('medicalInformation', 'serviceType').errors?.required 
+                                || getControl('medicalInformation', 'serviceType').value === '')
+                              && showValidations)">
+                  {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.NOTES' | translate}} </label>
+              <small> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.MESSAGE_NOTES' | translate}} </small>
+              <textarea class="form-control" formControlName="notes" id="notes" rows="4"
+                maxCharsAllowed="{{MAX_CHARS_ALLOWED_NOTES}}"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="add-documents">
+              <div class="row">
+                <div class="col-lg-12 col-sm-12 botton-div">
+                  <div class="row align-items-center">
+                    <div class="col-md-10">
+                      <h6 class="ig-infotil">
+                        {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.DOCUMENTS' | translate }}
+                      </h6>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="upload">
+                        <app-upload [typeAttachment]="type1" [fileTypes]="'preAuthFileTypes'" [maxFileSize]="25">
+                        </app-upload>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.ATTACHMENT_02' | translate}} </p>
+                      <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.ATTACHMENT' | translate}} </p>
+                    </div>
+                  </div>
+
+                  <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items" *ngIf="documents && documents.length > 0">
+                    <div class="ig-file-scroll">
+                      <div class="row">
+                        <div class="col-md-12" *ngFor="let document of documents">
+                          <div class="inline-text-icon">
+                            <i class="fa" [ngClass]="document.icon"></i>
+                            <span class="text-list">
+                              {{ document.file.name }}
+                              <div class="ig-icofile">
+                                <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                                    class="material-icons">delete</i></a>
+                              </div>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <app-diagnostic></app-diagnostic>
+
+        <app-procedure></app-procedure>
+
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="col-md-6 offset-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <button class="ig-principallinkbtn ig-botones" style="width: 100%;" type="button" (click)="back()">
+              {{ 'CLAIMS.PRE_AUTHORIZATION.BACK' | translate }} </button>
+          </div>
+          <div class="col-md-6">
+            <button style="width: 100%;" type="button"
+              class="ig-principalbtn ig-botones"
+              (click)="next()"> {{ 'CLAIMS.PRE_AUTHORIZATION.NEXT' | translate }} </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

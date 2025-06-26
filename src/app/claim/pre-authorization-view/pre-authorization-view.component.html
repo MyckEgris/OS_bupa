@@ -1,0 +1,302 @@
+<section class="ig-requestpre">
+
+    <article *ngIf="true">
+        <div class="col-md-3 offset-md-9">
+            <div class="ig-volver">
+                <a class="ig-secundariobtn ig-botones" (click)="goToPreAuth();">
+                    <i class="material-icons"> assignment_turned_in </i>
+                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.GO_TO_MAKE_PRE_AUTHORIZATION' | translate }}
+                </a>
+            </div>
+        </div>
+    </article>
+    <br>
+
+    <div class="col-md-12">
+        <div class="ig-title">
+            <h5> {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE' | translate }} </h5>
+            <p> {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.DISCLAIMER' | translate }} </p>
+        </div>
+    </div>
+
+    <div class="col-md-12" *ngIf="preAuthInfo.preAuthInfo">
+
+        <form [formGroup]="preAuthViewForm" novalidate>
+
+
+            <div class="row align-items-center">
+
+                <div class="col" *ngIf="user.role_id !== rol.POLICY_HOLDER.toString() && 
+                user.role_id !== rol.GROUP_POLICY_HOLDER.toString()">
+
+                    <div class="form-group">
+                        <input id="inputName" class="form-control"
+                            placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_POLICY_NUM' | translate }}"
+                            type="text" maxCharsAllowed="10" appOnlyNumber="true" formControlName="policyId">
+                    </div>
+
+                </div>
+
+                <div class="col">
+
+                    <div class="form-group">
+                        <input id="inputName" class="form-control"
+                            placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_REF_NUM' | translate }}" type="text"
+                            maxCharsAllowed="50" formControlName="referenceNumber">
+                    </div>
+
+                </div>
+
+                <div class="col">
+
+                    <div class="form-group">
+                        <input id="inputName" class="form-control"
+                            placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_TRACK_NUM' | translate }}"
+                            type="text" maxCharsAllowed="50" formControlName="trackingNumber">
+                    </div>
+
+                </div>
+
+                <div class="col">
+
+                    <div class="form-group">
+                        <input id="inputName" class="form-control"
+                            placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_NAME' | translate }}" type="text"
+                            maxCharsAllowed="50" formControlName="memberFirstName">
+                    </div>
+
+                </div>
+
+                <div class="col">
+
+                    <div class="form-group">
+                        <input id="inputName" class="form-control"
+                            placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_LAST_NAME' | translate }}"
+                            type="text" maxCharsAllowed="50" formControlName="memberLastName">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row align-items-end ig-preautoup">
+
+
+                <div class="col-lg-2 col-sm-4 animated fadeIn">
+                    <div class="ig-filtrar">
+                        <div class="input-group">
+                            {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_DATE_FROM' | translate }}
+                            <app-custom-date-picker formControlName="requestStartDate" [minDate]="minDate"
+                                [maxDate]="maxDate" [dateValue]="minDate"></app-custom-date-picker>
+                        </div>
+                        <div *ngIf="invalidStartDate">
+                            {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.FIELD_REQUIERED' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-sm-4 animated fadeIn">
+                    <div class="ig-filtrar">
+                        <div class="input-group">
+                            {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_DATE_TO' | translate }}
+                            <app-custom-date-picker formControlName="requestEndDate" [minDate]="minDateRange"
+                                [maxDate]="maxDate" [dateValue]="maxDate" [ngClass]="{'disabled': invalidDateRange}">
+                            </app-custom-date-picker>
+                        </div>
+                        <div *ngIf="invalidEndDate">
+                            {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.FIELD_REQUIERED' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4" *ngIf="!isProvider()">
+                    <div class="">
+                        <select class="custom-select form-control" formControlName="serviceCountry">
+                            <option value="" disabled selected>
+                                {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_COUNTRY' | translate }}
+                            </option>
+                            <option [ngValue]="countrie.isoAlpha" *ngFor="let countrie of countries">
+                                {{ countrie.countryName }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-4" *ngIf="user.role_id === rol.PROVIDER.toString()">
+                    <div class="">
+                        <select class="custom-select form-control" formControlName="providerId">
+                            <option value="" disabled selected>
+                                {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.INPUT_PROVIDER' | translate }}
+                            </option>
+                            <option [ngValue]="prov.id" *ngFor="let prov of associatedProviderResult">
+                                {{prov.id}} - {{prov.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-sm-2 col-6">
+                    <button type="submit" ng-reflect-ng-class="[object Object]"
+                        [ngClass]="{'ig-principalbtn ig-botones m-0': true, 'disabled' : preAuthViewForm.invalid  || preAuthViewForm.pristine || dateNotValid }"
+                        (click)="setPage(1, false)">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+
+                <div class="col-lg-2 col-sm-2 col-6">
+                    <button data-placement="top" data-toggle="tooltip" type="button"
+                        [ngClass]="{'ig-principalsegundariobtn ig-botones btnclean m-0': true, 'disabled' :  preAuthViewForm.pristine}"
+                        (click)="cleanFilterValuesAndSearch()">
+                        <i class="material-icons"> delete_sweep </i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+
+                <div class="ig-validation animated fadeInUp" *ngIf="sucessSearch">
+                    <div class="ig-resultados" *ngFor="let item of preAuthInfo.preAuthInfo.data">
+
+                        <div class="row align-items-center">
+
+                            <div class="col-md-3">
+                                <h6 class="active-status ig-procesotext">
+                                    {{'CLAIMS.PRE_AUTHORIZATION.SEARCH.STATUS.' | concatenate: item.statusId | replacespaces: '_' | uppercase | translate}}
+                                </h6>
+                                <br>
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="textosmall">
+                                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_TRACK_NUM' | translate }}:
+                                    {{ item.trackingNumber }}
+                                </p>
+                            </div>
+
+                            <div class="col-md-3" *ngIf="item.referenceNumber">
+                                <p class="textosmall">
+                                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_REF_NUM' | translate }}:
+                                    {{ item.referenceNumber }}
+                                </p>
+                            </div>
+
+                            <div class="col-md-3">
+                                <p class="textosmall">
+                                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_COUNTRY_OF_SERVICE' | translate }}:
+                                    {{ item.countryOfService.countryName }}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-3">
+                                <h5> {{ item.patient.fullName }} </h5>
+                                <p class="textosmall">
+                                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_POLICY_NUM' | translate }}:
+                                    {{ item.patient.policyId }}
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="ig-processvalor">{{ item.requestDate | dateTranslate: 'APP.DATE_FORMAT' }}
+                                </h5>
+                                <p class="textosmall">
+                                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_DATE_SERV' | translate }}
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="ig-processvalor">
+                                    {{'CLAIMS.PRE_AUTHORIZATION.SEARCH.REQUEST_TYPE.' | concatenate: item.requestType.description | replacespaces: '_' | uppercase | translate}}
+                                </h5>
+                                <p class="textosmall">
+                                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_REQUST_TYPE' | translate }}
+                                </p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5 class="ig-processvalor">
+                                    {{'CLAIMS.PRE_AUTHORIZATION.SEARCH.SERVICE_TYPE.' | concatenate: item.serviceType.description | replacespaces: '_' | uppercase | translate}}
+                                </h5>
+                                <p class="textosmall">
+                                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_SERV_TYPE' | translate }}
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="item.statusId === 2950">
+                            <a class="btn btn-link" style="padding: 0;" (click)="toggleSlideDetail(item)">
+                                {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.TITLE_ATTACH' | translate }}
+                            </a>
+                        </div>
+
+                        <div id="ig-detalleNotification-{{item.trackingNumber}}" class="collapse"
+                            aria-labelledby="headingOne" data-parent="#accordionExample" style="margin-top: -5px;">
+                            <div class="card-body" style="padding: 0;">
+
+                                <div class="ig-docpoli">
+
+                                    <ul>
+                                        <li *ngIf="item.referral.document">
+                                            <div class="ig-link" (click)="downloadFile(item.referral.document)">
+                                                {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.DOCUMENT_NAME' | translate }}
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <p *ngIf="!item.referral.document">
+                                        {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.MESSAGE_NO_ATTACH' | translate }}
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div *ngIf="!sucessSearch">
+                    {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.MESSAGE_NO_RESULTS' | translate }}
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="col-md-12" *ngIf="!preAuthInfo.preAuthInfo">
+        {{ 'CLAIMS.PRE_AUTHORIZATION.SEARCH.NO_PREAUTH' | translate }}
+    </div>
+
+
+    <div class="ig-paymentnav">
+        <ul *ngIf="sucessSearch && preAuthInfo.preAuthInfo" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(1, true)"><i
+                        class="material-icons">first_page</i></button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="pager.currentPage === 1"
+                    (click)="setPage(pager.currentPage - 1, true)"><i class="material-icons">chevron_left</i></button>
+            </li>
+            <li
+                [ngClass]="{disabled:pager.currentPage === pager.totalPages || preAuthInfo.preAuthInfo.count === firstPageSize}">
+                <button type="button"
+                    [disabled]="pager.currentPage === pager.totalPages || preAuthInfo.preAuthInfo.count === firstPageSize"
+                    (click)="setPage(pager.currentPage + 1, true)"><i class="material-icons">chevron_right</i></button>
+            </li>
+            <li
+                [ngClass]="{disabled:pager.currentPage === pager.totalPages || preAuthInfo.preAuthInfo.count === firstPageSize}">
+                <button type="button"
+                    [disabled]="pager.currentPage === pager.totalPages || preAuthInfo.preAuthInfo.count === firstPageSize"
+                    (click)="setPage(pager.totalPages, true)"><i class="material-icons">last_page</i></button>
+            </li>
+        </ul>
+    </div>
+
+
+
+</section>

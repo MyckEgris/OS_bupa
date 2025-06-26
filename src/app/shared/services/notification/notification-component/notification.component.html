@@ -1,0 +1,23 @@
+<div class="modal-header">
+
+  <h4 class="modal-title aggrement-title-modal">{{title | translate}}</h4>
+
+</div>
+
+<div class="modal-body modal-body-content">
+
+  <div [innerHTML]="message | translate"></div>
+
+</div>
+
+<div class="modal-footer">
+
+  <button type="button" class="btn btn-primary btn-sm" (click)="ok()">{{acceptText | translate}}</button>
+  <button *ngIf="showCancel" type="button" class="btn btn-default btn-sm"
+    (click)="cancel();">{{declineText | translate}}</button>
+  <button *ngIf="showThirdButton" type="button" class="btn btn-default btn-sm"
+    (click)="thirdButton();">{{thirdText | translate}}</button>
+  <button *ngIf="showFourthButton" type="button" class="btn btn-default btn-sm"
+    (click)="fourthButton();">{{fourthText | translate}}</button>
+
+</div>

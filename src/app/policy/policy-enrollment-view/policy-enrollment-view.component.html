@@ -1,0 +1,127 @@
+<section class="ig-validation">
+  <article>
+    <form [formGroup]="policyApplicationForm" (ngSubmit)="newFilterPolicies(policyApplicationForm.value)" novalidate
+      class="ig-searchpolconten">
+      <div class="col-md-12">
+
+        <div class="row align-items-center">
+          <div class="col-md">
+            <h2 class="bp-titlepolicy">{{ 'POLICY.APPLICATION.ONLINE_APPLICATION_ENROLLMENT' | translate }}</h2>
+            <br>
+            <p [innerHtml]="'POLICY.APPLICATION.TEXT_1' | translate"></p>
+          </div>
+        </div>
+
+        <div class="ig-searchpol">
+          <div class="row align-items-center">
+
+            <div class="col-lg-4 col-sm-4">
+              <div class="form-group">
+                <select class="custom-select form-control" id="policyAppSearchType"
+                  formControlName="policyAppSearchType">
+                  <option *ngFor="let searchType of policyAppSearchType" value="{{searchType.value}}">
+                    {{'POLICY.APPLICATION.SEARCH_TYPES.' | concatenate: searchType.value | uppercase | translate}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[1].value"
+              class="col-lg-6 col-sm-4  animated fadeIn">
+              <div class="form-group">
+                <input id="policyAppNumber" formControlName="policyAppNumber" maxCharsAllowed="10" appOnlyNumber="true"
+                  class="form-control" placeholder="{{ 'POLICY.APPLICATION.APPLICATION_NUMBER' | translate }}"
+                  type="text">
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[2].value"
+              class="col-lg-6 col-sm-4  animated fadeIn">
+              <div class="form-group">
+                <input id="policyId" formControlName="policyId" maxCharsAllowed="10" appOnlyNumber="true"
+                  class="form-control" placeholder="{{ 'APP.NUMERO_POLIZA_PLACEHOLDER' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[3].value"
+              class="col-lg-3 col-sm-4 animated fadeIn">
+              <div class="form-group">
+                <input id="firstName" formControlName="firstName" class="form-control"
+                  placeholder="{{ 'APP.NOMBRE' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div *ngIf="policyApplicationForm.value.policyAppSearchType==policyAppSearchType[3].value"
+              class="col-lg-3 col-sm-4 animated fadeIn">
+              <div class="form-group">
+                <input id="lastName" formControlName="lastName" class="form-control"
+                  placeholder="{{ 'APP.APELLIDO' | translate }}" type="text">
+              </div>
+            </div>
+
+            <div class="col-lg-1 col-sm-2 col-6">
+              <button type="submit"
+                [disabled]="policyApplicationForm.invalid || policyApplicationForm.value.policyAppSearchType==policyAppSearchType[0]"
+                [ngClass]="{ 'ig-botones ig-principalbtn' : true, 'disabled' : policyApplicationForm.invalid || policyApplicationForm.value.policyAppSearchType==policyAppSearchType[0]  }"><i
+                  class="material-icons">search</i></button>
+            </div>
+
+            <div class="col-lg-1 col-sm-2 col-6">
+              <button type="button" class="ig-principalsegundariobtn ig-botones btnclean" (click)="clearFields(true)">
+                <i class="material-icons">
+                  delete_sweep
+                </i>
+                <span class="tooltiptext">{{ 'POLICY.APPLICATION.CLEAN_SEARCH' | translate }}</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="ig-application " *ngIf="searchProccess">
+        <div class="col-md-12">
+
+          <ng-container *ngIf="policyAplication.policyApplications.length === 0">
+            <div class="ig-searchresul animated fadeIn">
+              <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+              <p>{{ 'POLICY.APPLICATION.POLICY_APP_NOT_FOUND' | translate }}</p>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="policyAplication.policyApplications.length > 0">
+            <h5 class="ig-texthistorial">
+              {{ 'POLICY.APPLICATION.APPLICATION' | translate }} <span> ({{ policyAplication.totalCount }}) </span>
+            </h5>  
+
+            <!-- <div class="col-lg-3 col-sm-2 col-6">
+              <button type="button" class="ig-principalsegundariobtn ig-botones btnclean" (click) = "toggleTableCards">
+                {{labelTableOrCards | translate}}
+              </button>
+            </div> -->
+          </ng-container>
+
+          <ng-container *ngIf="table && policyAplication.policyApplications.length > 0">
+            <app-policy-application-list-search>
+                <app-policy-application-table [user]="getUser" [policyAplication] = "policyAplication"></app-policy-application-table>
+            </app-policy-application-list-search>
+          </ng-container>
+
+          <ng-container *ngIf="!table && policyAplication.policyApplications.length > 0">
+            <app-policy-application-list-search>
+              <app-policy-application-cards [user]="getUser" [policyAplication] = "policyAplication"></app-policy-application-cards>
+            </app-policy-application-list-search>
+          </ng-container>
+
+          <div *ngIf="collectionSize > PAGE_SIZE">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="PAGE_SIZE"
+              [pageSize]="PAGE_SIZE" [rotate]="true" [boundaryLinks]="true"
+              (pageChange)="changePageOfPoliciesApp($event);">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </article>
+</section>

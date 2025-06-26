@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4 class="modal-title aggrement-title-modal">{{title | translate}}</h4>
+</div>
+<div class="modal-body">
+  <div id="{{idContent}}" class="aggrement-content-modal">
+    <div [innerHTML]="content" class="aggrement-content-modal-margin"></div>
+  </div>
+  <div class="row" *ngIf="agreementId ===2" style="padding-top:40px">
+    <div class="col-1">
+      <input type="checkbox" [(ngModel)]="acceptTerms" class="form-control " style="width: 20px;">
+    </div>
+    <div class="col-10 p-0">
+      {{ 'AGREEMENT.CHECKBOXMESSAGE' | translate }}
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="ok()" [disabled]="agreementId===2 && !acceptTerms">{{acceptText | translate}}</button>
+  <button *ngIf="!(hideButtonLastRetry && (refuseNumber == (retryCount - 1)))" type="button" class="btn btn-default" (click)="showAtDeclineAgreementForUserCanBeLocked();">{{declineText | translate}}</button>
+</div>

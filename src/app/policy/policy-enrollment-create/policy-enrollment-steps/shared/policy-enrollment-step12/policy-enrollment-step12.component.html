@@ -1,0 +1,219 @@
+<section class="bp-mainpolicy" *ngIf="wizard.enrollmentForm">
+
+  <form class="form-group" [formGroup]="wizard.enrollmentForm">
+
+    <div formGroupName="{{SUMMARY_STEP}}">
+
+      <article class="row" formGroupName="{{SUMMARY_SECTION}}">
+
+        <div class="col-md-12">
+          <div class="bp-itemtitle">
+            <div class="bp-titlenum">
+              {{currentStep}}
+            </div>
+            <h2 class="bp-titlepolicy">
+              {{'POLICY.POLICY_ENROLLMENT.STEP12.TITLE' | translate }}
+            </h2>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <app-policy-enrollment-info></app-policy-enrollment-info>
+        </div>
+
+        <div class="col-md-12">
+          <div class="bp-itemcontsect2">
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="row">
+
+                  <div class="col-md-4">
+
+                    <h4 class="bp-contentitle">
+                      {{'POLICY.POLICY_ENROLLMENT.STEP12.TITLE_01' | translate }}
+                    </h4>
+
+                    <div class="col-md-12">
+
+                      <div class="bp-itemsectpoli my-2">
+                        <i class="material-icons done">done</i>
+                        <p>
+                          {{'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_01_01' | translate }}
+                        </p>
+                      </div>
+
+                      <div class="bp-itemsectpoli my-2">
+                        <i class="material-icons done">done</i>
+                        <p>
+                          {{'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_01_02' | translate }}
+                        </p>
+                      </div>
+
+                      <div class="bp-itemsectpoli my-2">
+                        <i class="material-icons done">done</i>
+                        <p>
+                          {{'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_01_03' | translate }}
+                        </p>
+                      </div>
+
+                    </div>
+
+                    <p>
+                      <span class="bold">
+                        {{'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_01_04' | translate }}
+                      </span>
+                    </p>
+
+                    <div class="row my-4">
+                      <div class="col-md-8 offset-md-2">
+                        <button class="bp-btn bp-btnprimary"
+                          (click)="handleDownloadFile(wizard.policyApplicationModel)">
+                          {{'POLICY.POLICY_ENROLLMENT.STEP12.PDF_BTN_TEXT' | translate }}
+                          <i class="material-icons">chevron_right</i>
+                        </button>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-4">
+
+                    <h4 class="bp-contentitle">
+                      {{'POLICY.POLICY_ENROLLMENT.STEP12.TITLE_02' | translate }}
+                    </h4>
+
+                    <div class="bp-itemsectpoli my-4">
+                      <figure>
+                        <img src="assets/images/001-file.svg" style="width: 25px;">
+                      </figure>
+                      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_02_01' | translate">
+                      </p>
+                    </div>
+
+                    <div class="bp-itemsectpoli my-4">
+                      <figure>
+                        <img src="assets/images/003-accept-1.svg" style="width: 25px;">
+                      </figure>
+                      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_02_02' | translate">
+                      </p>
+                    </div>
+
+                    <div class="bp-itemsectpoli my-4">
+                      <figure>
+                        <img width="60px" src="assets/images/car.svg" style="width: 25px;">
+                      </figure>
+                      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_02_03' | translate">
+                      </p>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-4">
+
+                    <h4 class="bp-contentitle">
+                      {{'POLICY.POLICY_ENROLLMENT.STEP12.TITLE_03' | translate }}
+                    </h4>
+
+                    <div class="bp-itemsectpoli  my-4">
+                      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_03_01' | translate">
+                      </p>
+                    </div>
+
+                    <div class="bp-itemsectpoli" [ngClass]="{ 
+                      'border-danger': !getControl(DISCLAIMER_CHECK_CTRL).value && formInvalid }">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="" id="{{DISCLAIMER_CHECK_CTRL}}"
+                          formControlName="{{DISCLAIMER_CHECK_CTRL}}">
+                        <label class="form-check-label" for="{{DISCLAIMER_CHECK_CTRL}}">
+                          <p>
+                            <span>
+                              {{'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_03_02' | translate }}
+                            </span>
+                          </p>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="bp-blueback">
+                      <div class="row align-items-center">
+                        <div class="col-md-2">
+                          <i class="material-icons icon" style="font-size: 40px">
+                            keyboard_tab
+                          </i>
+                        </div>
+
+                        <div class="col-md-10">
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h5 style="color: white">
+                                {{'POLICY.POLICY_ENROLLMENT.STEP12.TEXT_03_03' | translate }}
+                              </h5>
+                            </div>
+                            <div class="col-md-6">
+                              <a (click)="next()">
+                                <h5 style="color: white">
+                                  {{'APP.BUTTON.YES_BTN' | translate }}
+                                </h5>
+                                <i class="material-icons">chevron_right</i>
+                              </a>
+                            </div>
+                            <div class="col-md-6">
+                              <a>
+                                <h5 style="color: white">
+                                  {{'APP.BUTTON.NO_BTN' | translate }}
+                                </h5>
+                                <i class="material-icons">chevron_right</i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <hr>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-12" ng *ngIf="!getControl(DISCLAIMER_CHECK_CTRL).value && formInvalid">
+                <div class="bp-alertform">
+                  <div class="alert alert-danger" role="alert">
+                    <i class="material-icons">info</i>
+                    {{'POLICY.POLICY_ENROLLMENT.ALERT_COMPLETE_FORM' | translate }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-4 offset-md-4">
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <button class="bp-btn bp-btnsecondary" (click)="back()">
+                          {{'POLICY.POLICY_ENROLLMENT.STEP11.BACK' | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+
+  </form>
+
+</section>

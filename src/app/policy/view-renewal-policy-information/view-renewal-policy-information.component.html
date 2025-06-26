@@ -1,0 +1,269 @@
+<section class="ig-validation ig-requestpre">
+
+    <div class="col-md-12">
+        <div class="ig-title">
+            <h5> {{ 'EMPLOYEE.QUOTE.TITLE' | translate }} </h5>
+            <p>{{ 'EMPLOYEE.QUOTE.LEGEND' | translate }}</p>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <form [formGroup]="policyForm" style="width: 100%" (ngSubmit)="searchPolicies(1)" novalidate>
+
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="form-group">
+                        <select class="custom-select form-control" formControlName="parameter"
+                            (change)="onParameterChange()">
+                            <option [value]="option.value" *ngFor="let option of parameters">{{ option.key | translate}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col" *ngIf="visibleParameters[0] === true">
+
+                    <div class="form-group">
+                        <input id="policyNumber" class="form-control" maxlength="9"
+                            [placeholder]="'EMPLOYEE.QUOTE.PLACEHOLDER.POLICY' | translate" type="text"
+                            formControlName="policyNumber" [appOnlyNumber]="true">
+                        <div class="bp-validate"
+                            *ngIf="policyForm.controls['policyNumber'].touched && policyForm.controls['policyNumber'].errors">
+                            {{ 'EMPLOYEE.QUOTE.VALIDATOR.POLICY' | translate }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col" *ngIf="visibleParameters[1] === true">
+
+                    <div class="form-group" *appShowIfRole="'Employee'">
+                        <input id="agentNumber" class="form-control" maxlength="9"
+                            [placeholder]="'EMPLOYEE.QUOTE.PLACEHOLDER.AGENT' | translate" type="text"
+                            formControlName="agentNumber" [appOnlyNumber]="true">
+                    </div>
+                    <div class="form-group" *appShowIfRole="'Agent,AgentAssistant'">
+                        <ng-select #agentSelect [items]="agentList" [selectOnTab]="true" bindValue="agentId"
+                            bindLabel="companyName" formControlName="agentNumber" class="form-control">
+                        </ng-select>
+                    </div>
+                    <div class="bp-validate"
+                        *ngIf="policyForm.controls['agentNumber'].touched && policyForm.controls['agentNumber'].errors">
+                        {{ 'EMPLOYEE.QUOTE.VALIDATOR.AGENT' | translate }}
+                    </div>
+
+
+                </div>
+                <div class="col" *ngIf="visibleParameters[2] === true">
+
+                    <div class="form-group">
+                        <select class="custom-select form-control" formControlName="status">
+                            <option [value]="option.value" *ngFor="let option of status">{{ option.key | translate }}
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="col" *ngIf="visibleParameters[3] === true ">
+                    <div class="ig-filtrar" style="margin-top: 10px;">
+                        <app-custom-date-picker [dateValue]="renewalDateFrom" [minDate]="minDate"
+                            formControlName="renewalDatefrom" [isDisableOnlyInput]="false">
+                        </app-custom-date-picker>
+                    </div>
+                </div>
+
+                <div class="col" *ngIf="visibleParameters[3] === true">
+                    <div class="ig-filtrar" style="margin-top: 10px;">
+                        <app-custom-date-picker [dateValue]="renewalDateTo" [minDate]="renewalDateFrom"
+                            formControlName="renewalDateTo" [isDisableOnlyInput]="false" [maxDate]="maxDate">
+                        </app-custom-date-picker>
+                    </div>
+                    <div class="bp-validate" *ngIf="policyForm.errors?.dates">
+                        {{ 'EMPLOYEE.QUOTE.VALIDATOR.DATES' | translate }}
+                    </div>
+                </div>
+
+
+                <div class="col-1"><button type="submit" class="ig-botones ig-secundariobtn"
+                        [disabled]="!policyForm.valid"><i class="material-icons">search</i></button></div>
+                <div class="col-1"><button class="ig-botones ig-outlinebtn" data-placement="top" data-toggle="tooltip"
+                        type="button" (click)="clearForm()"><i class="material-icons"> delete_sweep </i>
+                    </button></div>
+            </div>
+
+            <br>
+
+            <br>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ig-searchresul"
+                        *ngIf="policyResponse && policyResponse.count === 0 && !isValidRenewalPeriod">
+                        <h4>{{ 'EMPLOYEE.QUOTE.RESULT.NO_RESULT_TITLE' | translate }}</h4>
+                        <p>{{ 'EMPLOYEE.QUOTE.RESULT.NO_RESULT' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ig-searchresul" *ngIf="isValidRenewalPeriod || !isValidRange">
+                        <h4>{{ 'EMPLOYEE.QUOTE.RESULT.NO_RESULT_TITLE' | translate }}</h4>
+                        <p *ngIf="isValidRenewalPeriod">{{ 'EMPLOYEE.QUOTE.RESULT.INVALID_RENEWAL_PERIOD' | translate }}
+                        </p>
+                        <p *ngIf="!isValidRange">{{ 'EMPLOYEE.QUOTE.RESULT.INVALID_RANGE_60_DAYS' | translate }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 ig-validation ig-requestpre" *ngIf="policyResponse && policyResponse.count > 0">
+
+                <div class="ig-titulotabs">
+                    <h6>
+                        {{ 'EMPLOYEE.QUOTE.RESULT.POLICIES_COUNT' | translate }} ({{policyResponse.count}})
+                    </h6>
+                </div>
+                <br>
+                <br>
+                <div class="bp-bgtilt" *ngFor="let policy of policyResponse.data">
+
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="bp-status bp-status-active">
+                                <h6>
+                                    <span>
+                                        {{ 'EMPLOYEE.QUOTE.STATUS.' | concatenate:policy.policyStatus | uppercase | translate }}
+                                    </span>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="bp-status-item" *appShowIfRole="'Agent,AgentAssistant'">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.AGENT' | translate }} |
+                                    <span class="">
+                                        {{ policy.agent.agentName }}
+                                    </span>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-md">
+
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.POLICY' | translate }} |
+                                    <span class="">
+                                        {{ policy.policyReference }}
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.OWNER' | translate }} |
+                                    <span class="">
+                                        {{ policy.members[0].firstName }} {{ policy.members[0].middleName }}
+                                        {{ policy.members[0].lastName }}
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.COUNTRY' | translate }} |
+                                    <span class="">
+                                        {{ policy.policyCountry }}
+                                    </span>
+                                </h6>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md">
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.PREMIUM' | translate }} |
+                                    <span class="">
+                                        {{ policy.policyPremium | valueOrMoney:MONEY:policy.currencyCode }}
+                                    </span>
+                                </h6>
+                            </div>
+
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.PLAN' | translate }} |
+                                    <span class="">
+                                        {{ policy.productName }}
+                                    </span>
+                                </h6>
+                            </div>
+
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.PAYMENT_METHOD' | translate }} |
+                                    <span class="">
+                                        {{ 'EMPLOYEE.QUOTE.PAYMENT_METHOD.' | concatenate:policy.modeOfPayment | uppercase | translate }}
+                                    </span>
+                                </h6>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md">
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.DATES.COVERAGE' | translate }} |
+                                    <span class="">
+                                        {{ getpolicyDate(100, policy.policyDates) | dateTranslate }}
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="bp-status-item" *ngIf="user.role_id === '5'">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.DATES.RENEWAL' | translate }} |
+                                    <span class="">
+                                        {{ getpolicyDate(111, policy.policyDates) | dateTranslate }}
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="bp-status-item" *ngIf="user.role_id !== '5'">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.DATES.RENEWAL' | translate }} |
+                                    <span class="">
+                                        {{ getpolicyDate(101, policy.policyDates) | dateTranslate }}
+                                    </span>
+                                </h6>
+                            </div>
+                            <div class="bp-status-item">
+                                <h6>
+                                    {{ 'EMPLOYEE.QUOTE.RESULT.DATES.APPLICATION' | translate }} |
+                                    <span class="">
+                                        {{ getpolicyDate(102, policy.policyDates) | dateTranslate }}
+                                    </span>
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" class="ig-botones ig-secundariobtn"
+                                [disabled]="isIhiBupaInsurances(policy.insuranceBusinessId)"
+                                (click)="goToQuotation(policy.policyId)">{{ 'EMPLOYEE.QUOTE.BUTTON.QUOTE' | translate }}</button>
+                            <br>
+                            <button type="submit" class="ig-botones ig-secundariobtn" style="display: none;"
+                                disabled="disabled">{{ 'EMPLOYEE.QUOTE.BUTTON.VIEW_QUOTES' | translate }}</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div *ngIf="policyResponse.count > 0">
+                <ngb-pagination [collectionSize]="policyResponse.count" [(page)]="page" [maxSize]="10" [pageSize]="10"
+                    [rotate]="true" [boundaryLinks]="true" (pageChange)="searchPolicies($event);">
+                </ngb-pagination>
+            </div>
+
+        </form>
+    </div>
+
+</section>

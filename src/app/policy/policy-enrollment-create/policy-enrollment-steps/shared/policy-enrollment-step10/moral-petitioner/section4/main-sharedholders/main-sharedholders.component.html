@@ -1,0 +1,198 @@
+<div class="bg-sectmed" *ngIf="wizard.enrollmentForm" [formGroup]="formEnrollmentPetitioner">
+  <div class="row align-items-end">
+    <div class="col-md-9">
+      <h6>
+        <i class="material-icons" 
+          *ngIf="showValidations && formEnrollmentPetitioner.get('itemsOfficerAdvisors').invalid" 
+          [ngClass]="{ 'bp-contentitledanger' : showValidations && formEnrollmentPetitioner.get('itemsSharedholders').invalid}" >info</i>
+        {{ 'POLICY.POLICY_ENROLLMENT.STEP10.CORPORATE_STRUCTURE.TITLE_MAIN_SHAREDHOLDERS' | translate }}
+      </h6>
+      <hr>
+    </div>
+    <div class="col-md-3">
+
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <button class="ig-icondiagnosminim" type="button" data-toggle="collapse" 
+            data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+            <i class="material-icons">
+              {{handleToggleIcon() ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}
+            </i>
+          </button>
+        </div>
+        <div class="col-md-9">
+
+          <button class="bp-btn bp-btnprimary" type="button" (click)="addMainSharedholder()">
+            <i class="material-icons">add_circle</i> {{ 'POLICY.POLICY_ENROLLMENT.STEP10.CORPORATE_STRUCTURE.ADD' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse show" id="collapseExample2" formArrayName="itemsSharedholders">
+    <div style="margin-top: 20px" class="animated fadeInUp"
+          *ngFor="let item of getItemsSharedHolder().controls; let i = index; first as isFirst; last as isLast">
+      <div class="row align-items-center" [formGroupName]="i">
+        <div class="col-md-10">
+          <div class="row">
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                    <label for="formGroupExampleInput">
+                      {{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.FIRST_NAME' | translate }} </label>
+                    <input type="text" class="form-control" id="{{'firstName' + i}}" formControlName="firstName" 
+                      placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_NAME' | translate }}"
+                      [required]="getControl('firstName', i).errors?.required"
+                      [maxlength]="getValidatorValue('firstName', 'maxLength')"
+                      [pattern]="getValidatorValue('firstName', 'pattern')"
+                      [minlength]="getValidatorValue('firstName', 'minLength')">
+                    <div class="invalid-feedback" *ngIf="getControl('firstName', i).errors?.pattern">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('firstName', 'pattern') | uppercase | translate}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('firstName', i).errors?.maxlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('firstName', 'maxLength') | uppercase | translate}}
+                      {{getControl('firstName', i).errors?.maxlength.requiredLength}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('firstName', i).errors?.minlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('firstName', 'minLength') | uppercase | translate}}
+                      {{getControl('firstName', i).errors?.minlength.requiredLength}}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                    <label for="formGroupExampleInput"> {{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.LAST_NAME' | translate }}
+                    </label>
+                    <input type="text" class="form-control" id="{{'middleName' + i}}" formControlName="middleName" 
+                      placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_MIDDLE_NAME' | translate }}"
+                      [maxlength]="getValidatorValue('middleName', 'maxLength')"
+                      [pattern]="getValidatorValue('middleName', 'pattern')">
+                    <div class="invalid-feedback" *ngIf="getControl('middleName', i).errors?.pattern">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('middleName', 'pattern') | uppercase | translate}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('middleName', i).errors?.maxlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('middleName', 'maxLength') | uppercase | translate}}
+                      {{getControl('middleName', i).errors?.maxlength.requiredLength}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                    <label for="formGroupExampleInput"> {{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.SURNAME' | translate }}
+                    </label>
+                    <input type="text" class="form-control" id="{{'fatherLastName' + i}}" formControlName="fatherLastName"
+                      placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_FATHER_LAST_NAME' | translate }}" 
+                      [required]="getControl('fatherLastName', i).errors?.required"
+                      [maxlength]="getValidatorValue('fatherLastName', 'maxLength')"
+                      [pattern]="getValidatorValue('fatherLastName', 'pattern')"
+                      [minlength]="getValidatorValue('fatherLastName', 'minLength')">
+                    <div class="invalid-feedback" *ngIf="getControl('fatherLastName', i).errors?.pattern">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('fatherLastName', 'pattern') | uppercase | translate}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('fatherLastName', i).errors?.maxlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('fatherLastName', 'maxLength') | uppercase | translate}}
+                      {{getControl('fatherLastName', i).errors?.maxlength.requiredLength}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('fatherLastName', i).errors?.minlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('fatherLastName', 'minLength') | uppercase | translate}}
+                      {{getControl('fatherLastName', i).errors?.minlength.requiredLength}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                    <label for="formGroupExampleInput">
+                      {{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.SURNAME_MOTHER' | translate }} </label>
+                    <input type="text" class="form-control" id="{{'motherLastName' + i}}" formControlName="motherLastName"
+                      placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_MOTHER_LAST_NAME' | translate }}" 
+                      [required]="getControl('motherLastName', i).errors?.required"
+                      [maxlength]="getValidatorValue('motherLastName', 'maxLength')"
+                      [pattern]="getValidatorValue('motherLastName', 'pattern')"
+                      [minlength]="getValidatorValue('motherLastName', 'minLength')">
+                    <div class="invalid-feedback" *ngIf="getControl('motherLastName', i).errors?.pattern">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('motherLastName', 'pattern') | uppercase | translate}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('motherLastName', i).errors?.maxlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('motherLastName', 'maxLength') | uppercase | translate}}
+                      {{getControl('motherLastName', i).errors?.maxlength.requiredLength}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('motherLastName', i).errors?.minlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('motherLastName', 'minLength') | uppercase | translate}}
+                      {{getControl('motherLastName', i).errors?.minlength.requiredLength}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                    <label for="countryId">
+                      {{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.NATIONALITY' | translate }} </label>
+                    <ng-select #countryNationalitySelect [items]="wizard.countries$ | async" [selectOnTab]="true"
+                      bindValue="countryId" bindLabel="countryName" formControlName="nationality" class="form-control"
+                      [required]="getControl('nationality', i).errors?.required" 
+                      [placeholder]="getControl('nationality', i).value !== null && getControl('nationality', i).value !== ''
+                                                      ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                    </ng-select>
+                  </div>
+                </div>
+               
+                <div class="col-md-12">
+                  <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                    <label for="formGroupExampleInput">
+                      {{ 'POLICY.POLICY_ENROLLMENT.STEP10.CORPORATE_STRUCTURE.SHARE_CAPITAL' | translate }} </label>
+                    <input type="number" step=".01" class="form-control" id="{{'percentageShareCapital' + i}}"
+                      placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP10.CORPORATE_STRUCTURE.PLACEHOLDER_SHARE_CAPITAL' | translate }}"
+                      formControlName="percentageShareCapital" [maxlength]="getValidatorValue('percentageShareCapital', 'maxLength')"
+                      [pattern]="getValidatorValue('percentageShareCapital', 'pattern')"
+                      [minlength]="getValidatorValue('percentageShareCapital', 'minLength')"
+                      [required]="getControl('percentageShareCapital', i).errors?.required">
+                    <div class="invalid-feedback" *ngIf="getControl('percentageShareCapital', i).errors?.pattern">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('percentageShareCapital', 'pattern') | uppercase | translate}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('percentageShareCapital', i).errors?.maxlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('percentageShareCapital', 'maxLength') | uppercase | translate}}
+                      {{getControl('percentageShareCapital', i).errors?.maxlength.requiredLength}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl('percentageShareCapital', i).errors?.minlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('percentageShareCapital', 'minLength') | uppercase | translate}}
+                      {{getControl('percentageShareCapital', i).errors?.minlength.requiredLength}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+           
+           
+       
+
+          </div>
+        </div>
+        <div class="col-md-2" *ngIf="!isFirst">
+          <button class="ig-icondiagnosminim" 
+              style="cursor: pointer;" type="button" (click)="delete(i)">
+              <i class="material-icons">
+                delete_forever
+            </i></button>
+        </div>
+      </div>
+      <hr *ngIf="!isLast">
+    </div>
+  </div>
+  <hr>
+</div>

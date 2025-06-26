@@ -1,0 +1,73 @@
+<div class="bp-bgtilt bp-bgtilt2 " *ngIf="pagedItems">
+
+
+  <button class="ig-principalbtn ig-principallinkbtn2"
+    style="padding: 0;">{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.DELETE_MEMBER' | translate }}</button>
+
+
+  <p style="height: 65px;">{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.SELECT_MEMBERS' | translate }} </p>
+  <hr>
+
+  <div class="container-change-deductible">
+
+    <div [ngClass]="{'form-check':true, 'tachar-texto': member.removedFromQuote || validateDependentAge(member) !== ''}" *ngFor="let member of pagedItems">
+      <input type="checkbox" [value]="member.memberId" (change)="checkMemberToDelete(member.memberId)"
+        [checked]="validateDependentAge(member) !== '' || member.checked" 
+        [disabled]="(member.relationTypeId === 2 || member.relationTypeId === 5) || validateDependentAge(member) !== '' || validateIfSpouseWasDeletedAndAddedLater(member) !== ''" style="display: flex;align-content: center;align-items: center;border-bottom: 1px solid lightgray;margin: 10px 0;padding: 10px 0;">
+
+      <div class="bp-status-item" style="margin-left: 10px;">
+        <h6> {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.RELATIONTYPE.' | concatenate:member.relationTypeId | uppercase | translate }} | 
+          <span>{{member.memberName}}, </span><br>
+          <span> {{ member.age }}
+            {{'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE_' | translate}} </span>
+        </h6>
+      </div>
+
+
+      <div class="bp-status-item-error">
+        <h6>
+          {{ (validateDependentAge(member) | translate).replace('{0}', member.memberName) }}
+
+        </h6>
+      </div>
+
+
+    </div>
+
+    <div class="row" *ngIf="pager.totalPages > 1">
+      <div class="col-md-12 ig-paymentnav">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(1)"><i
+                class="material-icons">first_page</i></button>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(pager.currentPage - 1)"><i
+                class="material-icons">chevron_left</i></button>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <button type="button" [disabled]="pager.currentPage === pager.totalPages"
+              (click)="setPage(pager.currentPage + 1)"><i class="material-icons">chevron_right</i></button>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <button type="button" [disabled]="pager.currentPage === pager.totalPages"
+              (click)="setPage(pager.totalPages)"><i class="material-icons">last_page</i></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!--
+  <button class="ig-botones ig-outlinebtn" [disabled]="countSelectedMembers === 0"
+    (click)="confirmDeleteMembers();">{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.DELETE_MEMBER' | translate }}</button>-->
+
+  <!--<div *ngIf="checkIfMembersWasDeleted().deleted">
+    <p [innerHtml]="checkIfMembersWasDeleted().translated"></p>
+  </div>-->
+
+
+
+</div>

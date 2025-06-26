@@ -1,0 +1,278 @@
+<script>
+    $('.dropdown-toggle').dropdown()
+</script>
+<section class="ig-validation" >
+    <article>
+        <form [formGroup]="policyPaymentForm" (ngSubmit)="NewFilterPolicies(policyPaymentForm.value)" novalidate
+            class="ig-searchpolconten">
+            <div class="col-md-12">
+                <div class="ig-title">
+                    <h5>{{ 'POLICY.PAYMENTS' | translate }}</h5>
+                </div>
+                <div class="ig-searchpol" *appHideIfRole="'PolicyHolder'">
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <select class="custom-select form-control" id="searchMemberType"
+                                    formControlName="searchMemberType">
+                                    <option *ngFor="let searchType of memberSearchType" value="{{searchType.value}}">{{'PAYMENTS.SEARCH_TYPES.'
+                                        | concatenate: searchType.value | uppercase |
+                                        translate}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div *ngIf="policyPaymentForm.value.searchMemberType==memberSearchType[1].value"
+                            class="col-lg-6 animated fadeIn">
+                            <div class="form-group">
+                                <input id="policyId" formControlName="policyId" appOnlyNumber="true"
+                                    class="form-control" placeholder="{{ 'APP.NUMERO_POLIZA_PLACEHOLDER' | translate }}"
+                                    type="text">
+                            </div>
+                        </div>
+
+                        <div *ngIf="policyPaymentForm.value.searchMemberType==memberSearchType[2].value"
+                            class="col-lg-3 col-sm-6 animated fadeIn">
+                            <div class="form-group">
+                                <input id="firstName" formControlName="firstName" class="form-control"
+                                    placeholder="{{ 'APP.NOMBRE' | translate }}" type="text">
+                            </div>
+                        </div>
+
+                        <div *ngIf="policyPaymentForm.value.searchMemberType==memberSearchType[2].value"
+                            class="col-lg-3 col-sm-6 animated fadeIn">
+                            <div class="form-group">
+                                <input id="lastName" formControlName="lastName" class="form-control"
+                                    placeholder="{{ 'APP.APELLIDO' | translate }}" type="text">
+                            </div>
+                        </div>
+
+                        <div *ngIf="policyPaymentForm.value.searchMemberType==memberSearchType[3].value"
+                            class="col-lg-3 col-sm-6 animated fadeIn" style="position: static; z-index: 9;">
+                            <div class="dropdown">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
+                                    data-display="static" aria-haspopup="true" aria-expanded="false">
+                                    {{ 'PAYMENTS.FILTER_BY_STATUS' | translate }}
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-lg-right">
+                                    <div class="form-check" *ngFor="let status of paymentStatusSearch">
+                                        <input class="form-check-input" type="checkbox" value="status.value"
+                                            id="defaultCheck1" class=""
+                                            (change)="changeValueFilterStatus($event, status.value)">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            {{'PAYMENTS.PAYMENT_STATUS.' | concatenate: status.value | uppercase | translate}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div [hidden]="true">
+                            <input type="text" id="listStatusString" [(ngModel)]="listStatusString"
+                                formControlName="status" class="form-control">
+                        </div>
+
+                        <div class="col-lg-1 col-sm-6 col-6">
+                            <button type="submit"
+                                [disabled]="policyPaymentForm.invalid || policyPaymentForm.value.searchMemberType==memberSearchType[0]"
+                                [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : policyPaymentForm.invalid || policyPaymentForm.value.searchMemberType==memberSearchType[0]  }"><i
+                                    class="material-icons">search</i></button>
+                        </div>
+
+                        <div class="col-lg-1 col-sm-6 col-6">
+                            <button type="button" class="ig-principalsegundariobtn ig-botones"
+                                (click)="clearFields(true)">
+                                <i class="material-icons">
+                                    delete_sweep
+                                </i>
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ig-payment animated fadeInUp" *ngIf="searchProccess">
+                <div class="col-md-12">
+                    <h5 class="ig-texthistorial">{{ 'POLICY.POLICY' | translate }}
+                        <span> ({{ policies.count | valueOrMoney:'number':'' }}) </span></h5>
+                    <div class="ig-searchresul animated fadeIn" *ngIf="policies.data.length === 0 && searchProccess">
+                        <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+                        <div *ngIf="searchFiltered;then policyNotFound else policyLapsedNotFound"></div>
+                        <ng-template #policyNotFound>
+                            <p>{{ 'POLICY.HISTORY_POLICY_NOT_FOUND' | translate }}</p>
+                        </ng-template>
+                        <ng-template #policyLapsedNotFound>
+                            <p>{{ 'POLICY.HISTORY_POLICY_LAPSED_NOT_FOUND' | translate }}</p>
+                        </ng-template>
+                    </div>
+
+
+                    <div class="ig-resultados" *ngFor="let policy of policies.data">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3">
+                                <p class="textosmall">
+                                    {{policy.policyReference}}
+                                </p>
+                            </div>
+                            <div class="col-lg-9">
+                                <h6 [ngClass]="[setStatusClass(policy.policyStatus), 'ig-procesotext' ]">
+                                    {{'POLICY.POLICYSTATUS.' | concatenate: policy.policyStatus | replacespaces: '_' | uppercase | translate}}
+                                </h6>
+                            </div>
+
+                            <br>
+
+                            <div class="col-lg-3">
+                                <h5>
+                                    {{policy.members[0].firstName}}
+                                    <br> {{policy.members[0].lastName}}
+                                </h5>
+                                <p class="textosmall">
+                                    {{ 'POLICY.OWNER' | translate }}
+                                </p>
+                            </div>
+
+                            <br>
+                            <div class="col-lg-6">
+                                <div class="row align-items-center">
+                                    <div class="col-md-{{sizeColumnToPay}} col-12" >
+                                        <h6 *ngIf="policy.isGroupPolicy" style="color:#678004; font-weight: 700;">
+                                            {{ 'POLICY.IS_POLICY_GROUP' | translate }}
+                                        </h6>
+                                        <p class="textosmall">
+                                            {{'POLICY.FRECUENCIES.' | concatenate: policy.modeOfPayment | replacespaces: '_' | uppercase | translate}}
+                                        </p>
+                                        <div *ngIf="!showToPayMexicanPeso">
+                                            <h5 *ngIf="!policy.isGroupPolicy" class="ig-processvalor">
+                                                USD {{ policy.amountUSDToPay | currency:currencySymbolUsd:true:'1.2-2'}}
+                                            </h5>
+    
+                                            <p *ngIf="!policy.paymentStatus" class="textosmall">
+                                                {{ 'POLICY.TO_PAY' | translate }}
+                                            </p>
+                                        </div>
+                                        <div *ngIf="showToPayMexicanPeso && policy.exchangeRate !== 1 && !policy.fixedRate">
+                                            <h5 *ngIf="!policy.isGroupPolicy" class="ig-processvalor">
+                                                USD {{ policy.amountUSDToPay | currency:currencySymbolUsd:true:'1.2-2'}}
+                                            </h5>
+    
+                                            <p *ngIf="!policy.paymentStatus" class="textosmall">
+                                                {{ 'POLICY.TO_PAY' | translate }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-{{sizeColumnToPay}} col-12"
+                                        *ngIf="!policy.isGroupPolicy && showToPayMexicanPeso">
+                                        <p class="textosmall" *ngIf="!policy.fixedRate && policy.exchangeRate !== 1">
+                                            {{ 'POLICY.CURRENT_EXCHANGE_RATE' | translate }}
+                                            {{ 1 / policy.exchangeRate | number:'1.2-2' }}
+                                        </p>
+                                        <p class="textosmall" *ngIf="policy.fixedRate || policy.exchangeRate === 1">
+                                            -
+                                        </p>
+                                        
+                                        <h5 class="ig-processvalor">
+                                            MXN {{ policy.amountToPay | number:'1.2-2'}}
+                                        </h5>
+
+                                        <p *ngIf="!policy.paymentStatus" class="textosmall">
+                                            {{ 'POLICY.TO_PAY_MEXICAN_PESO' | translate }}
+                                        </p>
+                                        
+                                        
+                                    </div>
+
+                                    <div class="col-md-{{sizeColumnToPay}} col-12">
+                                        <p *ngIf="policy.daysToPay != 0 " class="textosmall">
+                                            {{'POLICY.DATE_EXP_GT_ZERO_1' | translate}} {{policy.daysToPay}}
+                                            {{'POLICY.DATE_EXP_GT_ZERO_2' | translate}}
+                                        </p>
+                                        <p *ngIf="policy.daysToPay == 0" class="textosmall">
+                                            {{'POLICY.DATE_EXP_EQ_ZERO' | translate}}
+                                        </p>
+                                        <h5 class="ig-processvalor">
+                                            {{policy.paymentDate | dateTranslate: 'APP.DATE_FORMAT'}}
+                                        </h5>
+                                        <p class="textosmall">
+                                            {{ 'POLICY.PAYMENT_DATE' | translate }}
+                                        </p>
+
+                                       
+                                    </div>
+
+                                    
+
+                                </div>
+                                
+                               
+
+                            </div>
+
+                            <div class="col-lg-1 text-center" *ngIf="policy.paymentStatus === 'PolicyWithAutodeduction' && isMexico">
+                                <p class="textosmall"> {{ 'POLICY.AUTODEDUCTION' | translate }}</p>
+                                <input type="checkbox" [disabled]="policy.modeOfPayment === 'Quarterly' || policy.modeOfPayment === 'Monthly'" [checked]="isChecked" (change)="onAutodeductionChange(inputAutodeductionPolicy.checked, policy.policyId)"  #inputAutodeductionPolicy type="checkbox" >
+                            </div>
+                            
+
+                            <div class="col-lg-2" *ngIf="!policy.isGroupPolicy">
+                                <div class="ig-btnpago" *ngIf="!policy.paymentStatus || (policy.paymentStatus == 'PolicyWithAutodeduction')">
+                                    <button type="button" (click)="payPolicy(policy)"
+                                        class="ig-botones ig-principalbtn">{{ 'POLICY.PAY' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ig-numpoliza" *ngIf="!policy.isGroupPolicy">
+                            <div class="row  align-items-center">
+                                <div class="col-lg-3 col-12">
+                                    <div class="ig-detallebtn" (click)="toggleSlideDetail(policy);">
+                                        {{ 'POLICY.SHOW_HISTORY' | translate }}<i
+                                            class="material-icons">keyboard_arrow_down</i>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="ig-detallereclamo" id="ig-detallePago-{{policy.policyId}}">
+
+                                        <h5 class="ig-texthistorial" *ngIf="policy.payments">
+                                            {{ 'POLICY.PAYMENT_HISTORY' | translate }}
+                                            <span>({{ policy.payments.length }})</span>
+                                        </h5>
+                                        <div>
+                                            <app-policy-payments-historical [payments]="policy.payments"
+                                                [showToPayMexicanPeso]="showToPayMexicanPeso"
+                                                [fixedRate]="policy.fixedRate">
+                                            </app-policy-payments-historical>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="collectionSize > PAGE_SIZE">
+                        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="PAGE_SIZE"
+                            [pageSize]="PAGE_SIZE" [rotate]="true" [boundaryLinks]="true"
+                            (pageChange)="changePageOfPolicies($event);">
+                        </ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </article>
+</section>
+
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="inactivityPeriod()">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="ig-title">
+          <p style="font-weight: bold;"> {{ 'APP.MESSAGE.MEXICO_INACTIVITY' | translate }} </p>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </section>

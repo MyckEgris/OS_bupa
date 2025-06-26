@@ -1,0 +1,80 @@
+<section class="ig-datosend ig-requestpre">
+  <form [formGroup]="wizard.policyChangesForm">
+    <div class="col-md-12 ig-formulario">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="ig-titlepolicy">
+                <h5>{{ 'POLICY.POLICY_CHANGES.STEP3.SUBTITLE' | translate }}</h5>
+            </div>
+            
+            <p>{{ 'POLICY.POLICY_CHANGES.STEP3.TITLE_TOOLTIP' | translate }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <Label>{{ 'POLICY.POLICY_CHANGES.STEP3.CHANGE_AGENT.CHANGE_TYPE' | translate }}</Label>
+          <p>{{wizard.policyChange.description}}</p>
+        </div>
+        <div class="col-md-12">
+          <Label>{{ 'POLICY.POLICY_CHANGES.STEP3.CHANGE_AGENT.POLICY_NUM' | translate }}</Label>
+          <p>{{wizard.policy.policyReference}}</p>
+        </div>
+        <div class="col-md-12">
+          <label> {{ 'POLICY.POLICY_CHANGES.STEP3.CHANGE_AGENT.CURRENT_AGENT' | translate }} </label>
+          <p> {{ getControl('step2', 'currentAgent').value }} </p>
+        </div>
+        <div class="col-md-12">
+          <Label> {{ 'POLICY.POLICY_CHANGES.STEP3.CHANGE_AGENT.NEW_AGENT' | translate }}</Label>
+          <p>{{wizard.newAgent.agentName}}</p>
+        </div>
+        <div class="col-md-12">
+          <Label>{{ 'POLICY.POLICY_CHANGES.STEP3.CHANGE_DESCRIPTION' | translate }}</Label>
+          <p>{{getControl('step2','description').value}} </p>
+        </div>
+        <div class="col-md-12">
+          <div class="row" *ngIf="wizard.documents && wizard.documents.length > 0">
+            <div class="col-md-12">
+              <label class="ig-datos"> {{ 'POLICY.POLICY_CHANGES.STEP3.DOCUMENTATION' | translate }} </label>
+              <p class="ig-files-scroll" #fileScroll>
+                <span *ngFor="let document of wizard.documents"
+                  [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                  {{ document.file.name }} - {{ getFileSize(document.file) }}
+                  <span *ngIf="document.loadingStatus === 'LOADING'">({{ document.progress }} %) </span>
+                  <span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span>
+                  <br> </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4 offset-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <button class="ig-principalsegundariobtn ig-botones" style="width: 100%;" type="button"
+                  (click)="back()">
+                  {{ 'POLICY.POLICY_CHANGES.STEP3.BT_BACK' | translate }}
+                </button>
+              </div>
+              <div class="col-md-6">
+                <button style="width: 100%;" type="button" class="ig-principalbtn ig-botones"
+                  ng-reflect-ng-class="[object Object]" (click)="save()">
+                  {{ 'POLICY.POLICY_CHANGES.SUBMIT' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+    </div>
+  </form>
+</section>

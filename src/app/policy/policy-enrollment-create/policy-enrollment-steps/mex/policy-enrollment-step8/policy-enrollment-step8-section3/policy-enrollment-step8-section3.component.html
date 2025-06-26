@@ -1,0 +1,93 @@
+<div class="bp-mainpolicy">
+    <form [formGroup]="wizard.enrollmentForm">
+        <div formGroupName="{{STEP_NAME}}">
+            <div class="bp-itemcontsect2 bp-aviso" formGroupName="{{SECTION_NAME}}">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <h4 class="bp-contentitle mb-3"  [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.TITLE1' | translate"></h4>
+
+
+                        <div class="" [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.DISCLAIMER1' | translate"></div>
+                        <div class="col-md-12 mt-5"
+                            [ngClass]="{
+                                    'border-danger': !getControl(DISCLAIMER_MEDICAL).value && showErrorMsg }">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="{{DISCLAIMER_MEDICAL}}" value=""
+                                    formControlName="{{DISCLAIMER_MEDICAL}}">
+                                <label class="form-check-label"
+                                    for="{{DISCLAIMER_MEDICAL}}">{{'POLICY.POLICY_ENROLLMENT.STEP8.ACCEPT_CONSENTS' | translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <h4 class="bp-contentitle mb-4" [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.TITLE2' | translate"></h4>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <p class=""
+                                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.DISCLAIMER2' | translate">
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+
+                                <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.DISCLAIMER3' | translate">
+                                </p>
+                                <div class="col-md-12 mt-5"
+                                    [ngClass]="{
+                                            'border-danger': !getControl(DISCLAIMER_RECOGNITION).value && showErrorMsg }">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="{{DISCLAIMER_RECOGNITION}}"
+                                            value="" formControlName="{{DISCLAIMER_RECOGNITION}}">
+                                        <label class="form-check-label"
+                                            for="{{DISCLAIMER_RECOGNITION}}">{{'POLICY.POLICY_ENROLLMENT.STEP8.RECOGNITION_AND_AUTH' | translate}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 p-0"
+                    *ngIf="(showErrorMsg && getFormGroup().invalid) || (this.showErrorMsg && getValueDisclaimer())">
+                    <div class="bp-alertform">
+                        <div class="alert alert-danger" role="alert">
+                            <i class="material-icons">info</i>
+                            {{'POLICY.POLICY_ENROLLMENT.STEP8.INFORMATION_INCOMPLETE' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 p-0 mt-5">
+                    <div class="row">
+                        <div class="col-md-4 offset-md-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <button class="bp-btn bp-btnsecondary" (click)="back()"
+                                        [innerHtml]="'POLICY.POLICY_ENROLLMENT.BACK' | translate">
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="bp-btn bp-btnprimary" (click)="next()"
+                                        [innerHtml]="'POLICY.POLICY_ENROLLMENT.NEXT' | translate ">
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

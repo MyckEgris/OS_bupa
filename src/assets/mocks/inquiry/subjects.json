@@ -1,0 +1,34 @@
+[
+    {
+        "subjectId": 1,
+        "subjectsByLanguaje": [
+            {
+                "subjectLanguageId": 1,
+                "title": "Agente",
+                "message": "X1"
+            },
+            {
+                "subjectLanguageId": 2,
+                "title": "Agent",
+                "message": "X2"
+            }
+        ],
+        "subjectInformationSons": [
+            {
+                "subjectId": 2,
+                "subjectsByLanguaje": [
+                    {
+                        "subjectLanguageId": 1,
+                        "title": "Agente comisiones",
+                        "message": "Are you looking to view your commissions? Access the “Commissions” option and you will be able to browse through commissions with the aid of the search filters we have provided for you. Option only valid for agents."
+                    },
+                    {
+                        "subjectLanguageId": 2,
+                        "title": "Agent Commission",
+                        "message": "Are you looking to view your commissions? Access the “Commissions” option and you will be able to browse through commissions with the aid of the search filters we have provided for you. Option only valid for agents."
+                    }
+                ]
+            }
+        ]
+    }
+]

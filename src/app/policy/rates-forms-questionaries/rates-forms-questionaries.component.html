@@ -1,0 +1,85 @@
+<section class="ig-document" >
+    <div class="ig-title">
+      <h5>{{ 'POLICY.RATE_FORMS_QUESTIONARIES.TITLE' | translate }}</h5>
+    </div>
+        <form [formGroup]="formDocuments" (ngSubmit)="loadDocuments()">
+            <div class="row align-items-top " >
+
+
+                <!-- <div class="col-md-2" *ngIf="currentContract.policyId !== null">
+                    <label> {{ 'POLICY.RATE_FORMS_QUESTIONARIES.POLICY_NUMBER' | translate }} </label>
+             
+                    <div class="form-control"> {{currentContract.policyId}}</div>
+                </div> -->
+
+                <!-- <div class="col-md-2" *ngIf="currentContract.agentId !== null">
+                        <label >{{ 'POLICY.RATE_FORMS_QUESTIONARIES.ID_AGENT' | translate }}</label>
+                        <div class="form-control">  {{currentContract.agentId}}</div>
+                </div> -->
+
+                <div class="col-md-2">
+                
+                    <label  >{{ 'POLICY.RATE_FORMS_QUESTIONARIES.BENEFIC_YEAR' | translate }}</label>
+                    <select class="custom-select form-control" formControlName="benefic_year" (change)="cleanDocuments()">
+                        <option [value]="currentContract.dob">{{ currentContract.dob}}</option>
+                        <option [value]="currentContract.dob-1" *ngIf="displayYearsOptions()">{{  currentContract.dob -1 }}</option>
+                    </select>
+                
+                
+                </div>
+
+                <div class="col-md-3">
+                    <label > {{ 'POLICY.RATE_FORMS_QUESTIONARIES.PRODUCT' | translate }} </label>
+                    <select class="custom-select form-control" formControlName="product" (change)="cleanDocuments()">
+                           <option *ngFor="let prod of currentContract.products" [value]="prod.id"> {{ prod.name }}</option> 
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label > {{ 'POLICY.RATE_FORMS_QUESTIONARIES.LANGUAGE' | translate }} </label>
+                    <select class="custom-select form-control" formControlName="language"  (change)="cleanDocuments()">
+                           <option *ngFor="let lang of languageOptions" [value]="lang.CODE"> {{ lang.NAME }}</option> 
+                    </select>
+                </div>
+
+                <div class="col-md-1 align-self-center">
+                   
+                    <button type="submit" class="btn btn-primary"  >
+                       <i class="material-icons">search</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="ig-docpoli" *ngFor="let doc of pagedItems">
+              <div class="row justify-content-center align-items-center">
+              
+                  <div class="col-md-6">
+                      <h6> {{ 'POLICY.RATE_FORMS_QUESTIONARIES.DOCUMENT_TYPE' | translate }}  </h6>
+                      <p>{{doc.documentName}}</p>
+                  </div>
+                  <div class="col-sm-2"><i class="material-icons" (click) = "getDocument(doc)"
+                          style="cursor:pointer;font-size: 48px;">vertical_align_bottom</i></div>
+              </div>
+        </div>
+
+
+        <div class="ig-paymentnav">
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(1)"><i class="material-icons">first_page</i></button>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(pager.currentPage - 1)"><i class="material-icons">chevron_left</i></button>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.currentPage + 1)"><i class="material-icons">chevron_right</i></button>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.totalPages)"><i class="material-icons">last_page</i></button>
+                </li>
+            </ul>
+        </div>
+
+
+</section>

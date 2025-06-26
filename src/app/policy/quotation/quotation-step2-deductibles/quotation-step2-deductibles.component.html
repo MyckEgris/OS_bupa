@@ -1,0 +1,140 @@
+<div class="bp-bgtilt bp-bgtilt-gray">
+  <div class="row">
+    <div class="col-md-12">
+      <a class="ig-principalbtn ig-principallinkbtn2" href="#" (click)="backToChangeOptions();"><i
+          class="material-icons">keyboard_arrow_left</i>{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.BACK' | translate }}</a>
+    </div>
+
+    <div class="col-12">
+
+      <div id="carouselExampleFade" class="carousel slide" data-ride="carousel"
+        *ngIf="carouselItems && carouselItems.length > 0">
+        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+          <span class="carousel-arrow"><i class="material-icons">keyboard_arrow_left</i></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <div class="carousel-inner">
+
+          <div [ngClass]="{'carousel-item': true, 'active': i === 0}" *ngFor="let item of carouselItems; let i = index">
+            <div class="row">
+
+              <div class="col-md-4" *ngFor="let plan of item">
+
+                <div [ngClass]="{ 'bp-bgtilt2': true, 'bp-bgtilt-selected': plan.currentPlan }">
+                  <button class="ig-principalbtn ig-principallinkbtn2">{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.PLAN' | translate }} {{ plan.planNameToShow }} &nbsp;&nbsp;<span
+                      *ngIf="policyPlan(plan.planId)">
+                      ({{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.CURRENT_PLAN' | translate }})</span>
+                  </button>
+                  <hr>
+
+                  <div class="bp-status-item">
+                    <h6>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.PLAN_DESCRIPTION' | translate }} |
+                      <span> {{ plan.planDescription }} </span></h6>
+                  </div>
+
+                  <div class="bp-status-item" *ngIf="plan.deductibleInCountry">
+                    <h6> {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.IN_COUNTRY' | translate }} |
+                      <span> {{ plan.deductibleInCountry | valueOrMoney:'money':plan.benefitCurrencyCode }}
+                      </span></h6>
+                  </div>
+
+
+
+                  <div class="bp-status-item" *ngIf="plan.deductibleOutCountry">
+                    <h6> {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.OUT_COUNTRY' | translate }} |
+                      <span>
+                        {{ plan.deductibleOutCountry | valueOrMoney:'money':plan.benefitCurrencyCode }}</span>
+                    </h6>
+                  </div>
+
+                  <div class="bp-status-item-blue" *ngIf="premiums">
+                    <h6> {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.PREMIUM' | translate }} |
+                      <span>
+                        {{ getPremiumValueFromQuotePremiums(plan.planId) | valueOrMoney:'money':wizard.policyDetail.currencyCode }}</span>
+                    </h6>
+                  </div>
+
+
+                    <hr *ngIf="plan.riders && plan.riders.length > 0">
+
+                  <div class="bp-status-item" *ngIf="plan.riders && plan.riders.length > 0">
+                    <h4>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.HAS_RIDERS' | translate }}</h4>
+                  </div>
+                  
+                  <hr>
+
+                  <div class="bp-status-item">
+                    <h5>{{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.MORE_RIDERS' | translate }}</h5>
+                  </div>
+
+                  <div class="bp-status-item" *ngIf="!plan.riders || plan.riders.length === 0">
+                    <h6> <span> {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.NOT_RIDERS' | translate }} </span></h6>
+                  </div>
+
+                  <div *ngFor="let rider of plan.riders">
+
+                    <div class="bp-status-item" *ngIf="languageId === 1">
+                      <h6> 
+                        <span>
+                            {{ rider.englishDescription }} 
+                        </span>
+                        <span style="display: none;">
+                          {{ rider.cost | valueOrMoney:'money':rider.riderCurrencyCode }}</span>
+                      </h6>
+                    </div>
+
+
+                    <div class="bp-status-item" *ngIf="languageId === 2">
+                      <h6> 
+                        <span>
+                            {{ rider.spanishDescription }} 
+                        </span>
+                        
+                        <span style="display: none;">
+                          {{ rider.cost | valueOrMoney:'money':rider.riderCurrencyCode }}</span>
+                      </h6>
+                    </div>
+
+                  </div>
+                  <br>
+
+
+
+
+                </div>
+
+                <div class="row" *ngIf="!policyPlan(plan.planId)">
+                  <div class="col-md-8 offset-md-2">
+                    <button class="ig-botones ig-secundariobtn" (click)="selectDeductible(plan.planId)">
+                      {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.SELECT' | translate }}</button>
+                  </div>
+
+                </div>
+                <div class="row" *ngIf="policyPlan(plan.planId)">
+                  <div class="col-md-8 offset-md-2">
+                    <button class="ig-botones ig-secundariobtn" (click)="selectDeductible(plan.planId)">
+                      {{ 'EMPLOYEE.QUOTE.QUOTATION.CHANGE_OPTIONS.MODIFY_DEDUCTIBLE.KEEP_CURRENT' | translate }}</button>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+        <span class="carousel-arrow"><i class="material-icons">keyboard_arrow_right</i></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+    </div>
+
+
+  </div>
+
+</div>

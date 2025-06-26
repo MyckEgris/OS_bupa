@@ -1,0 +1,113 @@
+<div class="bp-bgtilt bp-bgtilt-gray" *ngIf="wizard.policyDetail">
+
+  <div class="row">
+    <div class="col-md-3">
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.POLICY' | translate }} |
+          <span>
+            {{ wizard.policyDetail.policyReference }}
+          </span>
+        </h6>
+      </div>
+      <div class="bp-status-item" *appShowIfRole="'Agent,AgentAssistant'">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.AGENT' | translate }}
+          |
+          <span>
+            {{ wizard.policyDetail.agent.agentName }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.OWNER' | translate }} |
+          <span>
+            {{ wizard.policyDetail.firstName }} {{ wizard.policyDetail.lastName }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.PLAN' | translate }} |
+          <span>
+            {{wizard.policyDetail.productName}}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+
+      <div class="bp-status-item">
+        <h6>
+          {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.RENEWAL_DATE' | translate }} |
+          <span>
+            {{ getPolicyDate(wizard.policyDetail.policyDates, 101) | dateTranslate }}
+          </span>
+        </h6>
+      </div>
+
+    </div>
+  </div>
+</div>
+<form>
+
+  <div class="row">
+    <div class="col-md-4">
+      <app-quotation-remove-members [membersQuote]="membersQuoteForRemove" [allMembers]="membersQuote"
+        [renewalDate]="renewalDate" (sendUpdatedMembers)="getMembersToRemoveAndUpdateQuotation($event)">
+      </app-quotation-remove-members>
+      <div class="card-message card-timeout" *ngIf="checkRemovedMembers.hasRemoved && checkRemovedMembers.show">
+        <span [innerHtml]="checkRemovedMembers.message"></span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <app-quotation-add-members [membersQuote]="membersQuoteForAdd" [allMembers]="membersQuote"
+        (sendAddedMembers)="getMembersToAddQuotation($event)"></app-quotation-add-members>
+    </div>
+    <div class="col-md-4" *ngIf="wizard.policyId && product">
+      <app-quotation-modify-deductible [policy]="wizard.policyId" [products]="product"
+        [currency]="wizard.policyDetail.currencyCode" [wizard]="wizard"
+        (sendUpdatedDeductible)="getDeductibleChangedQuotation($event)">
+      </app-quotation-modify-deductible>
+      <div class="card-message card-timeout" *ngIf="checkChangedDeductibles.modified && checkChangedDeductibles.show">
+        <span>{{ checkChangedDeductibles.translated | translate }}</span>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="col-md-12">
+    <div class="col-md-4 offset-md-4">
+      <div class="row">
+        <div class="col-md-6">
+          <button class="ig-botones ig-outlinebtn" type="button" (click)="backToCurrentInformation()">
+            <i class="material-icons">navigate_before</i> {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.BACK' | translate }}
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button type="button" (click)="goToSummary()"
+            class="ig-botones ig-secundariobtn">{{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.QUOTE_SUMMARY' | translate }} <i
+              class="material-icons">navigate_next</i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</form>

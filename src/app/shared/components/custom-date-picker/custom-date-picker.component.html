@@ -1,0 +1,13 @@
+<div class="ig-date-picker">
+  <div class="input-group">
+    <input class="ig-date-picker-hidden" ngbDatepicker #d="ngbDatepicker" (dateSelect)="dateSelect($event)">
+    <input #dateInput [value]="dateValue | dateTranslate:'APP.DATE_FORMAT_DASH'" (change)="dateManualChange($event)" 
+    class="form-control" [placeholder]="('APP.DATE_FORMAT' | translate).toLowerCase()"  (blur)="onTouched();">
+    <!--[attr.disabled]="(isDisable || isDisableOnlyInput) ? '' : null"-->
+    <div class="input-group-btn">
+      <button class="btncalendar" (click)="d.toggle()" type="button" [attr.disabled]="isDisable ? '' : null">
+        <i class="material-icons">date_range</i>
+      </button>
+    </div>
+  </div>
+</div>

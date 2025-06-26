@@ -1,0 +1,78 @@
+<div class="modal-header">
+  <h4 class="modal-title"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.DIAGNOSTICS' | translate }} </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p> {{ 'CLAIMS.PRE_AUTHORIZATION.MESSAGE.INFO_DIAG_MODAL' | translate }} </p>
+  <form [formGroup]="diagnosticForm" (ngSubmit)="searchDiagnostics(diagnosticForm.value, 1)" novalidate>
+    <div class="row align-items-center">
+      <div class="col-md-2">
+        <div class="form-group mb-0">
+          <input id="cod" class="form-control" formControlName="code"
+            placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.CODE_DIAGNOSTIC' | translate }}" type="text">
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-group mb-0">
+          <input id="cod" class="form-control" formControlName="name"
+            placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.NAME_DIAGNOSTIC' | translate }}" type="text">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <button class="ig-principalbtn ig-botones" type="submit">
+          <i class="material-icons">search</i>
+        </button>
+      </div>
+    </div>
+  </form>
+
+
+  <div class="row  ig-preauthorizationmod" *ngIf="searchProccess">
+    <div class="col-md-12">
+      <h5 class="ig-texthistorial">{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.DIAGNOSTICS' | translate }}
+        <span> ({{ diagnostic.count | valueOrMoney:'number':'' }}) </span>
+      </h5>
+      <div *ngIf="searchProccess">
+        <div class="ig-searchresul animated fadeIn" *ngIf="diagnostic.data.length === 0 && searchProccess">
+          <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+          <div *ngIf="searchFiltered;then policyNotFound else policyLapsedNotFound"></div>
+          <p>{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.DIAGNOSTIC_NOT_FOUND' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="form-check" *ngFor="let diag of diagnostic.data; let i = index;">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck{{i}}"
+          (change)="seletedDiagnostic(diag, $event)">
+        <label class="form-check-label" for="defaultCheck{{i}}">
+          <strong>
+            {{ diag.code }} - {{ diag.description }}
+          </strong>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="collectionSize > PAGE_SIZE" style="justify-content: center;display: flex;width: 100%; margin-top:15px;">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="PAGE_SIZE" [pageSize]="PAGE_SIZE"
+      [rotate]="true" [boundaryLinks]="true" (pageChange)="changePageOfDiagnostics($event);">
+    </ngb-pagination>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-md-6">
+      <button type="button" class="ig-botones ig-principallinkbtn" data-dismiss="modal"
+        (click)="activeModal.close()">{{ 'CLAIMS.PRE_AUTHORIZATION.CANCEL' | translate }}</button>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="ig-botones ig-principalbtn" [disabled]="listDiagnoticsSelected.length < 1"
+        [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : (listDiagnoticsSelected.length < 1)  }"
+        (click)="acceptDiagnosticSelected()"> {{ 'CLAIMS.PRE_AUTHORIZATION.ADD' | translate }} </button>
+    </div>
+  </div>
+
+
+</div>

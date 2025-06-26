@@ -1,0 +1,98 @@
+<div class="modal-content">
+
+  <div class="modal-header">
+    <h4 class="modal-title"> {{ 'COVERAGES.ADD_PLANS.TITLE_01_ADD' | translate }} </h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <p> {{ 'COVERAGES.ADD_PLANS.TITLE_02_ADD' | translate }} </p>
+
+    <div class="row  ig-preauthorizationmod" [formGroup]="formAddPlansModal" novalidate>
+      <div class="col-md-12">
+
+        <h6 style="font-weight: 700;"> {{ 'COVERAGES.ADD_PLANS.RESULTS_ADD' | translate }}
+          <span> ({{ coveragesResponse.data.length | valueOrMoney:'number':'' }}) </span>
+        </h6>
+
+        <div *ngIf="coveragesResponse && coveragesResponse.data && coveragesResponse.data.length === 0  && searchProccess">
+          <div class="ig-searchresul animated fadeIn">
+            <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+            <p>{{ 'COVERAGES.ADD_PLANS.COVERAGES_RESULTS_NO_FOUND' | translate }}</p>
+          </div>
+        </div>
+        <div class="ig-searchresul animated fadeIn" *ngIf="coveragesResponse && coveragesResponse.data && coveragesResponse.data.length > 0  && searchProccess">
+          <input class="form-check-input" type="checkbox" value="" formControlName="selectAll" (change)="seletedAllCheckPage($event)">
+          <label class="form-check-label">
+              <h6>{{ 'COVERAGES.ADD_PLANS.SELECT_ALL' | translate }}</h6>
+          </label>
+        </div>
+
+        <div class="div" *ngIf="coveragesResponse && coveragesResponse.data && coveragesResponse.data.length > 0"
+          formArrayName="coverages">
+
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col"> {{ 'COVERAGES.ADD_PLANS.COVERAGE_REFERENCE' | translate }} <app-custom-popover
+                  [title]="" [content]="[]" [template]="['COVERAGES.ADD_PLANS.COVERAGE_REFERENCE'|translate]">
+                </app-custom-popover>
+                </th>
+                <th scope="col"> {{ 'COVERAGES.ADD_PLANS.COVERAGE_NAME_LITTLE' | translate }} <app-custom-popover
+                    [title]="" [content]="[]" [template]="['COVERAGES.ADD_PLANS.COVERAGE_NAME'|translate]">
+                  </app-custom-popover>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody >
+              <tr *ngFor="let coverage of coveragesResponse.data; let i = index;">
+                <td class="select-option">
+                  <input class="form-check-input" type="checkbox" value="coverage.isSelect" [formControlName]="i"
+                  [checked]="coverage.isSelect"
+                  (change)="seletedCoverage(coverage, $event)">
+                </td>
+                <td scope="row">
+                  {{ coverage.coverageId }}
+                </td>
+                <td scope="row">
+                  {{ coverage.coverageName }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="collectionSize > PAGE_SIZE" style="justify-content: center;display: flex;width: 100%; margin-top:15px;">
+      <ngb-pagination [collectionSize]="collectionSize" [page]="this.page" [pageSize]="PAGE_SIZE" [rotate]="true"
+        [boundaryLinks]="true" (pageChange)="changePageOfExcludedCoverages($event);">
+      </ngb-pagination>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <button type="button" class="ig-principalsegundariobtn ig-botones" data-dismiss="modal"
+          (click)="activeModal.close()">
+          {{ 'COVERAGES.ADD_PLANS.ADD_CANCEL_BTN' | translate }}
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="ig-botones ig-principalbtn"
+          [ngClass]="{ 'ig-secundariobtn ig-botones' : true, 'disabled' : (listSelectedCoverages && listSelectedCoverages.length < 1)  }"
+          (click)="acceptCoveragesSelected()">
+          {{ 'COVERAGES.ADD_PLANS.ADD_ADD_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

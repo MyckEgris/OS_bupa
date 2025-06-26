@@ -1,0 +1,121 @@
+<div class="row align-items-end">
+  <div class="col-md-9">
+    <h4 class="bp-contentitle">
+      <i class="material-icons" *ngIf="showValidation && this.getDetails().invalid"
+      [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().invalid}">info</i>
+      {{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_INFO_ADITIONAL' | translate }}
+      <p>{{ 'POLICY.POLICY_ENROLLMENT.STEP4.INFO_EXPLANATION_DETAIL_MEDICAL_HISTORY' | translate }}</p>
+    </h4>
+    <hr style="border-color: #0079c8;">
+  </div>
+  <div class="col-md-3">
+    <div class="row align-items-center">
+      <div class="col-md-3">
+        <button class="ig-icondiagnosminim" (click)="changeValueIsExpanded()"
+          type="button"
+          data-toggle="collapse"
+          [attr.data-target]="'#'+question.medicalQuestionReference"
+          aria-expanded="false"
+          [attr.aria-controls]="question.medicalQuestionReference">
+          <i class="material-icons">{{isExpanded ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}</i>
+        </button>
+      </div>
+      <div class="col-md-9">
+        <button class="bp-btn bp-btnprimary" type="button" (click)="addDetail()">
+          <i class="material-icons">add_circle</i> {{ 'APP.BUTTON.ADD_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="collapse" [ngClass]="{'show': isExpanded || showValidation}" data-parent="#accordion"  id="{{question.medicalQuestionReference}}" [formGroup]="questionForm">
+  <div formArrayName="details">
+    <div class="row align-items-center"
+      *ngFor="let detail of getDetails().controls; let i = index; last as lastIndex"
+      [formGroupName]="i">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12">
+            <h6 style="font-weight: 700;">
+              <i class="material-icons" *ngIf="showValidation && this.getDetails().controls[i].invalid"
+              [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().controls[i].invalid}">info</i>
+              {{this.getDetails().controls[i].get('memberFullName').value}}
+            </h6>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="member">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEMBER' | translate }}</label>
+              <ng-select #memberSelect
+                [items]="members"
+                [selectOnTab]="true"
+                bindValue="applicationMemberGuid"
+                bindLabel="fullName"
+                formControlName="member"
+                [placeholder]="this.getDetails().controls[i].get('member').value !== null && this.getDetails().controls[i].get('member').value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate"
+                class="form-control"
+                (change)="hangleChangedMember($event, i)">
+              </ng-select>
+            </div>
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="examinationType{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEDICAL_CHECKUP_TYPE' | translate }}</label>
+              <input class="form-control"
+                type="text"
+                id="examinationType{{i}}{{question.medicalQuestionReference}}"
+                formControlName="examinationType"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_MEDICAL_CHECKUP_TYPE' | translate }}"
+                [required]="this.getDetails().controls[i].get('examinationType').hasError('required')"
+                maxlength="28">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="date">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEDICAL_CHECKUP_DATE' | translate }}</label>
+              <app-datepicker-wrapper formControlName="date"
+                id="date"
+                [maxDate]="setMaxDateDefault()"
+                [hasErrors]="this.getDetails().controls[i].get('date').errors"
+                [showValidations]="showValidation">
+              </app-datepicker-wrapper>
+            </div>
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="healthResult">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEDICAL_CHECKUP_RESULT' | translate }}</label>
+              <ng-select [items]="resultsType"
+                class="form-control"
+                bindValue="name"
+                bindLabel="name"
+                placeholder=""
+                formControlName="healthResult"
+                [placeholder]="this.getDetails().controls[i].get('healthResult').value !== null && this.getDetails().controls[i].get('healthResult').value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate"
+                (change)="hangleChangedResultType($event, i)"
+                [required]="this.getDetails().controls[i].get('healthResult').hasError('required')">
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="detailOfAbnormalResult{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEDICAL_CHECKUP_ABNORMAL_DETAIL_RESULT' | translate }}</label>
+              <input class="form-control"
+                type="text"
+                id="detailOfAbnormalResult{{i}}{{question.medicalQuestionReference}}"
+                formControlName="detailOfAbnormalResult"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_MEDICAL_CHECKUP_ABNORMAL_DETAIL_RESULT' | translate }}"
+                [required]="this.getDetails().controls[i].get('detailOfAbnormalResult').hasError('required')"
+                maxlength="50">
+            </div>
+          </div>
+          <div class="col-md-12"><hr></div>
+        </div>
+      </div>
+      <div class="col-md-2" *ngIf="ifGreaterThanCero(i)">
+        <button class="ig-icondiagnosminim" style="cursor: pointer;" type="button" (click) = "deleteDetail(i)">
+          <i class="material-icons"> delete_forever </i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

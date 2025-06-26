@@ -1,0 +1,117 @@
+<section class="ig-informationrequest">
+  <form class="ig-requestdatos">
+    <div class="col-md-12 ig-enviarcon">
+
+      <div class="row" *ngIf="wizard.infoRequestForm.controls['policyNumber'].value && wizard.member">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.INSURED' | translate }} </h5>
+          <p> {{ wizard.member.policyReference }} <br>
+            {{ wizard.member.fullName }} ({{ wizard.member.dob | dateTranslate }}) </p>
+        </div>
+      </div>
+
+      <!--<div class="row">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.SUBJECT' | translate }} </h5>
+          <p> {{ wizard.subject.text }} </p>
+        </div>
+      </div>-->
+
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.COUNTRY' | translate }} </h5>
+          <p> {{ wizard.countryOfResident.countryName }} </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.PHONE' | translate }} </h5>
+          <p> {{ wizard.phoneNumber }}</p>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.DATE' | translate }} </h5>
+          <p>
+            {{ 'INQUIRY.INFORMATION_REQUEST.DATE_TYPE_0' | concatenate:(wizard.appointmentType.appointmentTypeId + 1) | uppercase | translate }}
+            <span *ngIf="wizard.appointmentType.appointmentTypeId === 1">-
+              {{ wizard.appointmentType.appointmentDate | dateTranslate }} {{ hourFormatted }} </span>
+          </p>
+        </div>
+      </div> -->
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.SPECIALITY' | translate }} </h5>
+          <p>
+            {{ 'INQUIRY.INFORMATION_REQUEST.SPECIALITY_0' | concatenate:wizard.speciality.specialityId | uppercase | translate }}
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                (change)="changeConfirm($event, 1)">
+              <label class="form-check-label" for="defaultCheck1">
+                <p style="margin-bottom: 0;" [innerHTML]="'INQUIRY.INFORMATION_REQUEST.STEP_2.TYC_HTML_02' | translate">
+                </p>
+              </label>
+              <div class="col-md-12">
+                <small class="text-danger" *ngIf="showError">
+                  {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck2"
+                (change)="changeConfirm($event, 2)">
+              <label class="form-check-label" for="defaultCheck2">
+                <p style="margin-bottom: 0;" [innerHTML]="'INQUIRY.INFORMATION_REQUEST.STEP_2.TYC_HTML_03' | translate">
+                </p>
+              </label>
+              <div class="col-md-12">
+                <small class="text-danger" *ngIf="showErrorTwo">
+                  {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-7 offset-md-5">
+          <div class="row">
+            <div class="col-md-4">
+              <button style="width: 100%;" class="ig-principalbtn ig-botones" type="button" (click)="cancel()">
+                {{ 'INQUIRY.INFORMATION_REQUEST.CANCEL' | translate }} </button>
+            </div>
+            <div class="col-md-4">
+              <button style="width: 100%;" class="ig-principalsegundariobtn ig-botones" type="button" (click)="back()">
+                {{ 'INQUIRY.INFORMATION_REQUEST.GO_BACK' | translate }} </button>
+            </div>
+            <div class="col-md-4">
+              <button style="width: 100%;" class="ig-principalbtn ig-botones" type="button" (click)="save()"
+                [ngClass]="'ig-principalbtn ig-botones'">
+                {{ 'INQUIRY.INFORMATION_REQUEST.SUBMIT_TELEMEDICINE' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</section>

@@ -1,0 +1,116 @@
+<div *ngIf="!dataNotFound">
+    <div class="ig-historialpay animated bounceInUp" *ngFor="let payment of pagedItems">
+
+        <div class="row align-items-end">
+
+            <div class="col-md-12">
+                <h6 class="ig-processvalor">
+                    {{payment.paymentDateToShow }}
+                </h6>
+            </div>
+
+        </div>
+        <div class="row align-items-end">
+            <div class="col-lg-1 col-sm-6">
+                <h5 *ngIf="payment.confirmationNumber">
+                    {{payment.confirmationNumber}}
+                </h5>
+                <h5 *ngIf="!payment.confirmationNumber">
+                    -
+                </h5>
+                <p>
+                    {{'POLICY.CONFIRMATION_NUMBER' | translate}}
+                </p>
+            </div>
+            <div class="col-lg-2 col-sm-6">
+                <h5 class="textpay">
+                    <i class="material-icons">payment</i>
+                    {{'POLICY.METHODS.' | concatenate: payment.paymentMethod | replacespaces: '_' | uppercase | translate}}
+                </h5>
+                <p>
+                    {{'POLICY.PAYMENT_METHOD' | translate}}
+                </p>
+            </div>
+            <div class="col-lg-{{sizeColumnToPay}} col-sm-4">
+                <h5 *ngIf="payment.accountNumber.trim()">
+                    **** {{payment.accountNumber}}
+                </h5>
+                <h5 *ngIf="!payment.accountNumber.trim()">
+                    -
+                </h5>
+                <p>
+                    {{'POLICY.ACCOUNT_NUMBER' | translate}}
+                </p>
+            </div>
+            <ng-container *ngIf="!isRoleEmployeeOrAdmin">
+              <div class="col-lg-2 col-sm-4">
+                  <h5 *ngIf="payment.reference">
+                      {{payment.reference}}
+                  </h5>
+                  <h5 *ngIf="!payment.reference">
+                          -
+                  </h5>
+                  <p>
+                      {{'POLICY.REFERENCE' | translate}}
+                  </p>
+              </div>
+            </ng-container>
+            <div class="col-lg-2 col-sm-4">
+                <h5 class="ig-processvalor">
+                   USD {{ payment.amountUSD | currency:currencySymbol:true:'1.2-2'}}
+                </h5>
+                <p>
+                    {{'POLICY.AMOUNT' | translate}}
+                </p>
+            </div>
+
+            <div class="col-md-2 col-4" *ngIf="showToPayMexicanPeso">
+                <p class="textosmall" *ngIf="!fixedRate">
+                    {{ 'POLICY.CURRENT_EXCHANGE_RATE' | translate }} {{ payment.exchangeRate | number:'1.2-5' }}
+                </p>
+                <p class="textosmall" *ngIf="fixedRate">
+                    -
+                </p>
+                <h5 class="ig-processvalor">
+                    MXN {{ payment.amount | number:'1.2-2'}}
+                </h5>
+                <p>
+                    {{ 'POLICY.AMOUNT_MEXICAN_PESO' | translate }}
+                </p>
+            </div>
+
+            <div class="col-lg-2">
+                <div class="ig-btnpago" >
+                    <a class="ig-botones ig-principalbtn" [routerLink]="['/policy-payments-view-receipt']"
+                        [queryParams]="{
+                            policyNumber: payment.policyId,
+                            paymentId: payment.paymentId
+                        }"
+                        target="_blank"> <i class="material-icons">receipt</i> {{ 'POLICY.SHOW_LAST_RECEIPT' | translate }} </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ig-paymentnav">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(1)"><i class="material-icons">first_page</i></button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <button type="button" [disabled]="pager.currentPage === 1" (click)="setPage(pager.currentPage - 1)"><i class="material-icons">chevron_left</i></button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.currentPage + 1)"><i class="material-icons">chevron_right</i></button>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <button type="button" [disabled]="pager.currentPage === pager.totalPages" (click)="setPage(pager.totalPages)"><i class="material-icons">last_page</i></button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="animated fadeIn" *ngIf="dataNotFound">
+    <p>{{ 'POLICY.HISTORY_PAYMENT_NOT_FOUND' | translate }}</p>
+</div>

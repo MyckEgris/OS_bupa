@@ -1,0 +1,292 @@
+<section class="bp-mainpolicy" *ngIf="wizard" #idSectionStep5>
+  <form [formGroup]="wizard.searchForm">
+
+    <article class="row">
+      <section class="col-12 col-lg-12">
+        <div class="col-md">
+          <ng-container *ngFor="let claim of this.claimFormWizardService.claimList.controls; let i = index"
+            style="margin-top: 10px !important;">
+            <section class="bp-section bp-section_shadow"
+              style="box-shadow: 0 0px 10px #E6E6E6 !important; padding: 1.1rem; border-radius: 0.5rem;">
+              <h6> {{ 'CLAIMFORM.STEP5TITLE_REQUEST' | translate}} {{i + 1}}</h6>
+              <div class="row justify-content-end">
+                <div class="col-md-6 col-lg-3">
+                  <div class="bp-itemcontsect3" style="height: auto;">
+                    <div class="bp-scrollable">
+
+                      <div class="form-group ng-star-inserted mb-2">
+                        <h5 class="bp-h5 bp-color_secondary" style="color: #00335B; font-weight: 650;">
+                          {{ 'CLAIMFORM.STEP5RESUME1' | translate }}
+                          <!-- Datos de contacto y pago -->
+                        </h5>
+                      </div>
+
+                      <div class="form-group mb-2" *ngIf="wizard.policyHolder && wizard.policyHolder.policyReference">
+                        <label class="font-weight-bold" for="inputText">
+                          {{ 'CLAIMFORM.POLYCYREFENCE' | translate }}
+                        </label>
+                        <br>
+                        <!-- <input type="text" class="form-control-plaintext"
+                          value="{{wizard.policyHolder.policyReference}}" readonly> -->
+                          <label for="" style="font-weight: 400; word-break: break-all;">{{wizard.policyHolder.policyReference}}</label>
+
+                      </div>
+
+                      <div class="form-group mb-2" *ngIf="this.wizard?.policyContact">
+                        <label class="font-weight-bold" for="inputText">
+                          {{ 'CLAIMFORM.STEP5RESUME5' | translate }}</label>
+                          <label for="" style="font-weight: 400; word-break: break-all;">{{this.wizard.policyContact.firstName}} {{this.wizard.policyContact.middleName}} {{this.wizard.policyContact.lastName}}</label>
+                        <!-- <input type="text" class="form-control-plaintext"
+                          value="{{this.wizard.policyContact.firstName}} {{this.wizard.policyContact.middleName}} {{this.wizard.policyContact.lastName}}"
+                          readonly> -->
+                      </div>
+
+                      <div class="form-group mb-2" *ngIf="this.wizard?.policyContact.email">
+                        <label class="font-weight-bold" for="inputText">
+                          {{ 'CLAIMFORM.STEP1EMAILMEMBER' | translate }}</label>
+                          <label for="" style="font-weight: 400; word-break: break-all;">{{this.wizard.policyContact.email}}</label>
+                        <!-- <input type="text" class="form-control-plaintext" value="{{this.wizard.policyContact.email}}"
+                          readonly> -->
+                      </div>
+
+                      <!-- <div class="form-group mb-2" *ngIf="this.wizard?.policyContact.phone">
+                        <label class="font-weight-bold" for="inputText">
+                          {{ 'CLAIMFORM.STEP1PHONEMEMBER' | translate }}</label>
+                        <input type="text" class="form-control-plaintext" value="{{this.wizard.policyContact.phone}}"
+                          readonly>
+                      </div> -->
+
+                      <!-- <div class="form-group mb-2" *ngIf="wizard.searchForm.value.bankAccountNumber">
+                        <label class="font-weight-bold" for="inputText">
+                          {{ 'CLAIMFORM.STEP1ACCOUNTEMBERNUMBER' | translate }}</label>
+                        <input type="text" class="form-control-plaintext"
+                          value="{{wizard.searchForm.value.bankAccountNumber}}" readonly>
+                      </div> -->
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                  <div class="bp-itemcontsect3" style="height: auto;">
+                    <div class="bp-scrollable">
+                      <div class="form-group ng-star-inserted mb-2">
+                        <h5 class="bp-h5 bp-color_secondary" style="color: #00335B; font-weight: 650;">
+                          {{ 'CLAIMFORM.STEP5RESUME2' | translate }}
+                          <!-- Datos del evento -->
+                        </h5>
+                      </div>
+
+                      <div class="form-group mb-2" *ngIf="wizard.member && wizard.member.firstName">
+                        <label class="font-weight-bold" for="inputText">
+                          {{'CLAIMS.UPDATE_CLAIM.MEMBER' | translate }}</label>
+                          <label for="" style="font-weight: 400;">{{wizard.member.firstName}} {{wizard.member.middleName}} {{wizard.member.lastName}}</label>
+                        <!-- <input type="text" class="form-control-plaintext"
+                          value="{{wizard.member.firstName}} {{wizard.member.middleName}} {{wizard.member.lastName}}"
+                          readonly> -->
+                      </div>
+
+                      <div class="form-group mb-2">
+                        <label class="font-weight-bold" for="inputText">
+                          {{ 'CLAIMSUBMISSION.STEP1SELECTCOUNTRY' | translate}}</label>
+                        <input type="text" class="form-control-plaintext"
+                          [value]="getCountryName(claim.get('countryOfServiceId').value)" readonly>
+
+                      </div>
+                      <!-- <label class="font-weight-bold" for="inputText">
+                          Fecha</label>
+                        <input type="text" class="form-control-plaintext" value=" {{ claim.get('treatmentStartDate').value | date:
+                            'yyyy-MM-dd' }}" readonly> -->
+                      <div class="form-group mb-2">
+                        <label class="font-weight-bold" for="inputText">
+                          {{ 'CLAIMFORM.STEP2DATEQUERY' | translate}}</label>
+                        <input type="text" class="form-control-plaintext" value="{{ claim.get('treatmentStartDate').value | date:
+                            'yyyy-MM-dd' }}" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                  <div class="row bp-itemcontsect3" style="height: auto;">
+                    <div class="bp-scrollable" style="word-break: break-all;">
+
+                      <div class="col-md-12 mb-2">
+                        <h5 class="bp-h5 bp-color_secondary" style="color: #00335B; font-weight: 650;">{{ 'CLAIMFORM.STEP5RESUME3' | translate }}</h5>
+                      </div>
+
+                      <div class="col-md-12 mb-2" *ngFor="let document of fileNameSend">
+                        <div class="inline-text-icon"
+                          *ngIf="document.index === i && document.typeAttachment === 'CLAIM_BILL'">
+                          <!-- <i class="fa" [ngClass]="document.icon"></i> -->
+                          <span class="text-list" style="margin-left: 0px !important;">
+                            {{document.name}}
+                            <!-- <div class="ig-icofile" *ngFor="let documentD of documents">
+                                  <a href="#" title="Eliminar"
+                                    (click)="removeDocument(documentD, document.index, document.name, document.typeAttachment, $event)">
+                                    <i class="material-icons">delete</i></a>
+                                </div> -->
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- <div class="col-md-12 mb-2" *ngIf="this.handleShowDocument(type2)">
+                            <div class="ig-files-scroll" #fileScrollTwo>
+                              <p *ngFor="let document of wizard.documents">
+                                <span *ngIf="document.category === type2"
+                                  [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                                  {{ document.file.name }} - {{ getFileSize(document.file) }}
+                                  <span *ngIf="document.loadingStatus === 'LOADING'">
+                                    ({{ document.progress }} %)
+                                  </span>
+                                  <span *ngIf="document.loadingStatus === 'LOADED'">
+                                    <i class="fa fa-check-circle"></i>
+                                  </span>
+                                  <br>
+                                </span>
+                              </p>
+                            </div>
+                          </div> -->
+
+                      <div class="col-md-12 mb-2">
+                        <div class="form-group mb-2">
+                          <label class="font-weight-bold" for="inputText">
+                            {{ 'CLAIMFORM.STEP5RESUME_TOTAL' | translate }}</label>
+
+
+                          <!-- <input type="text" class="form-control-plaintext"
+                            [value]="getCurrency(claim.get('currencyId').value)"
+                            readonly>
+                            <input type="text" class="form-control-plaintext"
+                            value="{{ claim.get('amount').value | number:'1.2-2' }}"
+                            readonly> -->
+                        </div>
+                        <div class="form-group mb-2">
+                          <label class="form-control-plaintex" for="inputText">
+                            {{ getCurrency(claim.get('currencyId').value) }} - {{ claim.get('amount').value |
+                            number:'1.2-2' }}
+                          </label>
+                        </div>
+                      </div>
+                      <!-- - claim.get('amount').value | number:'1.2-2' -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                  <div class="row bp-itemcontsect3" style="height: auto;">
+                    <div class="bp-scrollable" style="word-break: break-all;">
+
+                      <div class="col-md-12 mb-2">
+                        <h5 class="bp-h5 bp-color_secondary" style="color: #00335B; font-weight: 650;">{{ 'CLAIMFORM.STEP5RESUME4' | translate }}</h5>
+                      </div>
+                      <div class="col-md-12" *ngFor="let document of fileNameSend">
+                        <div class="inline-text-icon"
+                          *ngIf="document.index === i && document.typeAttachment === 'CLAIM_DUCUMENTS'">
+                          <!-- <i class="fa" [ngClass]="document.icon"></i> -->
+                          <span class="text-list" style="margin-left: 0px !important;">
+                            {{document.name}}
+                            <!-- <div class="ig-icofile" *ngFor="let documentD of documents">
+                              <a href="#" title="Eliminar"
+                                (click)="removeDocument(documentD, document.index, document.name, document.typeAttachment, $event)">
+                                <i class="material-icons">delete</i></a>
+                            </div> -->
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- <div class="col-md-12 mb-2" *ngIf="this.handleShowDocument(type3)">
+                        <div class="ig-files-scroll" #fileScrollTree>
+                          <p *ngFor="let document of wizard.documents">
+                            <span *ngIf="document.category === type3"
+                              [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                              {{ document.file.name }} - {{ getFileSize(document.file) }}
+                              <span *ngIf="document.loadingStatus === 'LOADING'">
+                                ({{ document.progress }} %)
+                              </span>
+                              <span *ngIf="document.loadingStatus === 'LOADED'">
+                                <i class="fa fa-check-circle"></i>
+                              </span>
+                              <br>
+                            </span>
+                          </p>
+                        </div>
+                      </div> -->
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group ng-star-inserted mb-2">
+                <h5 class="bp-h5 bp-color_secondary">
+                  {{ 'CLAIMFORM.STEP5RESUME1' | translate }}
+                </h5>
+              </div>
+
+              <div class="form-group mb-2" *ngIf="wizard.policyHolder && wizard.policyHolder.policyReference">
+                <label class="font-weight-bold" for="inputText">
+                  {{ 'CLAIMFORM.POLYCYREFENCE' | translate }}
+                </label>
+                <input type="text" class="form-control-plaintext" value="{{wizard.policyHolder.policyReference}}"
+                  readonly>
+
+                <label class="font-weight-bold" for="inputText">
+                  {{ 'CLAIMFORM.STEP5RESUME5' | translate }}</label>
+                <input type="text" class="form-control-plaintext"
+                  value="{{this.wizard.policyContact.firstName}} {{this.wizard.policyContact.middleName}} {{this.wizard.policyContact.lastName}}"
+                  readonly>
+
+                <label class="font-weight-bold" for="inputText">
+                  Monto</label>
+                <input type="text" class="form-control-plaintext" value="{{ claim.get('amount').value }}" readonly>
+
+                <label class="font-weight-bold" for="inputText">
+                  Fecha</label>
+                <input type="text" class="form-control-plaintext" value=" {{ claim.get('treatmentStartDate').value | date:
+                    'yyyy-MM-dd' }}" readonly>
+
+              </div> -->
+              </div>
+            </section>
+
+          </ng-container>
+        </div>
+      </section>
+
+      <br>
+      <div class="col-12 ml-3">
+        <div class="row" style="padding-top:40px">
+          <div class="checkbox">
+            <input type="checkbox" class="form-control" formControlName="isAcceptTerms" style="width: 20px;">
+          </div>
+          <div class="col-10 p-0 ml-2 mt-2">
+            {{ 'CLAIMFORM.CHECKTERMS' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row justify-content-center align-items-end ">
+          <div class="col-md-3 col-12">
+            <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="cancel()">
+              {{ 'CLAIMFORM.BTNS.CANCEL' | translate }}
+            </button>
+          </div>
+          <div class="col-md-3 col-12">
+            <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="back()">
+              {{ 'CLAIMFORM.BTNS.BACK' | translate }}
+            </button>
+          </div>
+          <div class="col-md-3 col-12">
+            <button type="button" class="ig-botones ig-principalbtn" data-toggle="modal"
+              data-target="#exampleModalCenter" [disabled]="!wizard.searchForm.value.isAcceptTerms" (click)="submit()">
+              {{ 'CLAIMSUBMISSION.STEP3BUTTONNEXT' | translate }}
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </article>
+
+  </form>
+</section>

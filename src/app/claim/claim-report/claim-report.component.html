@@ -1,0 +1,73 @@
+<section class="ig-validation">
+
+
+    <form [formGroup]="claimViewForm" (ngSubmit)="getReport()" novalidate class="ig-searchpolconten">
+
+        <div class="">
+            <div class="col-md-12">
+                <div class="ig-searchpol">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="ig-title">
+                                <h4>{{'CLAIMS.REPORTCLAIMS.TITLE' | translate}}</h4>
+                                <p style="display: none;">Aqui en esta sección va un texto de información</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="ig-title">
+                                <P>{{'CLAIMS.REPORTCLAIMS.sUBTITLE' | translate}}</P>
+                                <p style="display: none;">Aqui en esta sección va un texto de información</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1 ig-second-line">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!--<app-custom-date-picker formControlName="dateFrom" [minDate]="" [maxDate]="maxDate"></app-custom-date-picker>-->
+                                            <div >
+                                                <app-custom-date-picker-from-to formControlName="dateOfServiceFrom"
+                                                    [placeholderkey]="'APP.DATE_FROM'"></app-custom-date-picker-from-to>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="ig-title">
+                            <button type="submit"
+                                [ngClass]="{ 'ig-principalbtn ig-botones' : true}">
+                                {{'CLAIMS.REPORTCLAIMS.BUTTON' | translate}}
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </form>
+
+
+
+</section>

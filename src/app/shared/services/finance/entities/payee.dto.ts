@@ -1,0 +1,44 @@
+export interface PayeeDto {
+    payeeId: number;
+    accountName: string;
+    AccountLastName: string;
+    AccountFirstName: string;
+    accountNumber: string;
+    accountCode: string;
+    paymentMethodAccountTypeId?: number;
+    paymentMethodAccountType?: string;
+    accountCountryId: number;
+    currencyCode?: string;
+    currencyId: number;
+    insuranceBusinessId?: number;
+    policyId: number;
+    memberId: number;
+    bankAccountTypeId: number;
+    bankAccountType?: string;
+    paymentMethodId: number;
+    paymentMethod?: string;
+    fromDate?: Date;
+    toDate?: Date;
+    claimPreferred?: boolean;
+    claimPreferredOnShore?: boolean;
+    isCreatedForClaims?: boolean;
+    contactIdentificationTypeId?: number;
+    contactIdentificationId?: number;
+    contactIdentificationNumber?: number;
+    contactIdentificationType?: string;
+
+    pendingApprovalclaimPreferred?: boolean;
+    payeeStatus?: string;
+    beneficiaryBankId?: number;
+    beneficiaryBank?: string;
+    beneficiaryBankAddress?: string;
+    intermediaryBankId?: number;
+    intermediaryBankName?: string;
+    intermediaryBankAddress?: string;
+    bankName: string;
+    bankAddress?: string;
+    receivedModeId?: number;
+    clabe?: any;
+    bank?: string;
+    type: string;
+}

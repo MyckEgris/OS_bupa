@@ -1,0 +1,145 @@
+<section class="bp-mainpolicy">
+  <form [formGroup]="signAndAttachDocsFormGroup">
+    <div class="row align-items-center my-3">
+      <div class="col-md-12">
+        <div class="bp-itemtitle">
+          <!-- <div class="bp-titlenum">
+            {{currentStep}}
+          </div> -->
+          <h2 class="bp-titlepolicy">
+            {{'POLICY.POLICY_ENROLLMENT.STEP11.TITLEPOLICY' | translate }}
+          </h2>
+        </div>
+      </div>
+    </div>
+    <article class="row">
+      <div class="col-md-12">
+        <app-policy-enrollment-info></app-policy-enrollment-info>
+      </div>
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+          <div class="row">
+
+            <div class="col-md-12 my-3 mb-5">
+              <div class="row align-items-center">
+                <div class="col-md-9">
+                  <h6 class="bp-contentitle">
+                    {{'POLICY.POLICY_ENROLLMENT.STEP11.CONTENTITLE2' | translate }}
+                  </h6>
+                  <p [innerHTML] = "'POLICY.POLICY_ENROLLMENT.STEP11.P2' | translate" > </p>
+                </div>
+              </div>
+            </div>
+
+            <ng-container *ngIf="rules">
+              <ng-container *ngFor="let key of getKeys(groupedMap)">
+                <div class="col-md-12">
+                  <div class="row align-items-top">
+                    <div class="col-md">
+                      <h6>
+                        {{ 'POLICY.POLICY_ENROLLMENT.STEP11.' | concatenate:key | uppercase | translate }}
+                      </h6>
+                      <ng-container *ngFor = "let rule of rules | filterRulesByDocumentTypeId: key">
+                        <ng-container *ngIf = "rule.rulesByBusinessId === 124">
+                          <p><strong>Persona natural</strong></p>
+                        </ng-container>
+                        <ng-container *ngIf = "rule.rulesByBusinessId === 129">
+                          <p><strong>Persona jurídica</strong></p>
+                        </ng-container>
+                        <div class="form-group form-check" [ngClass]="{ 'border-danger': !isRuleRequiredCheckedByBusinessId(rule.rulesByBusinessId.toString()) && isSubmitted }">
+                          <input type="checkbox" class="form-check-input"
+                            [id]="rule.rulesByBusinessId"
+                            [formControlName]="rule.rulesByBusinessId.toString()"
+                            (change)="addOrRemoveRules(rule, $event)">
+                          <label class="form-check-label" [for]="rule.rulesByBusinessId">
+                            {{rule.ruleName}} 
+                            <!-- <ng-container *ngIf="rule.ruleDocument">
+                              <a [href]="rule.ruleDocument.ruleDocumentUrl" target="_blank"> - Descargar</a>
+                            </ng-container> -->
+                          </label>
+                          <ng-container *ngIf="rule.ruleDescription !== 'N/A'">
+                            <app-custom-popover [title]="rule.documentType.documentTypeName" [content]="[rule.ruleDescription]" [icon]="'error'" colorHex="#009ee0"></app-custom-popover>
+                          </ng-container>
+                        </div>                        
+                      </ng-container>
+
+                    </div>
+                    <div class="col-md-4">
+                      <ng-container *ngIf="this.uploadService.getDocumentsByCategory(key)?.length > 0">
+                        <h6 class="text-black-50" style="opacity: 50%;">
+                          {{'POLICY.POLICY_ENROLLMENT.STEP11.H6' | translate }}
+                        </h6>
+                        <div class="bp-heigadjunt bp-scrollable">
+                          <div class="bp-itemsectpoli my-2" *ngFor="let document of this.uploadService.getDocumentsByCategory(key)">
+                            <i class="material-icons" style="margin-right: 10px; color: gray;">description</i>
+                            <p>
+                              {{getFileName(document.file.name)}} - {{ getFileSize(document.file) }}
+                            </p>
+                            <a class="rounded-circle" href="javascript: void(0)" (click)="removeDocument(document, $event)"><i class="material-icons"> delete_outline </i> </a>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="getDocumentsByDocumentTypeToEdit(key)?.length > 0">
+                        <h6 class="text-black-50" style="opacity: 50%;">
+                          {{'POLICY.POLICY_ENROLLMENT.STEP11.H6_SEND_DOCS' | translate }}
+                        </h6>
+                        <div class="bp-heigadjunt bp-scrollable">
+                          <div class="bp-itemsectpoli my-2" *ngFor="let document of getDocumentsByDocumentTypeToEdit(key)">
+                            <i class="material-icons" style="margin-right: 10px; color: gray;">description</i>
+                            <p>
+                              {{getFileNameDocsToEdit(document.documentName)}}
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="col-md-2.1">
+                      <div class="upload bp-adj">
+                        <app-upload  [typeAttachment]="key" 
+                          [fileTypes]="'policyAplicationFileTypes'"
+                          [maxFileSize]="10" 
+                          [textButton] ="'POLICY.POLICY_ENROLLMENT.STEP11.BTNSECONDARY2' | translate">
+                        </app-upload>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bp-alertform" *ngIf="!isUploadDocsRulesRequiredByDocumentTypeId(key) && isSubmitted ">
+                    <div class="alert alert-danger" role="alert">
+                      <i class="material-icons">info</i> {{'POLICY.POLICY_ENROLLMENT.STEP11.MSG_UPLOAD_DOCS' | translate }}
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </ng-container>
+            </ng-container>
+            <div class="col-md-12" *ngIf="isSubmitted  && !checkIsAllRuleValid()">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i> {{'POLICY.POLICY_ENROLLMENT.ALERT_COMPLETE_FORM' | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-5">
+              <div class="row">
+                <div class="col-md-4 offset-md-4">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <button type="button" class="bp-btn bp-btnsecondary" (click)="back()">
+                        {{'POLICY.POLICY_ENROLLMENT.BACK' | translate}}
+                      </button>
+                    </div>                    
+                    <div class="col-md-6">
+                      <button class="bp-btn bp-btnprimary" type="button" (click) = "next()">
+                        {{'POLICY.POLICY_ENROLLMENT.STEP11.NEXT' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </form>
+</section>

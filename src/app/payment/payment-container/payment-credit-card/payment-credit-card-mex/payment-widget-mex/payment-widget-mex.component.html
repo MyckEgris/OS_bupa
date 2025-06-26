@@ -1,0 +1,68 @@
+<div *ngIf="!confirmToPayment">
+<div class="bp-bgtilt backpay">
+    <form action="">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            {{ 'PAYMENTS.CONTAINER.TOTAL' | translate }}
+          </div>
+        </div>
+
+        <div class="col-md-7 p-0" *ngIf="paymentInMexicanPesos || !isExchangeRateValid">
+          <label>{{ policyAmount | number:'1.2-2'}} MXN</label>
+        </div>
+
+        <div class="col-md-7 p-0" *ngIf="!paymentInMexicanPesos && isExchangeRateValid">
+          <label>{{ policyAmountInUsd | number:'1.2-2'}} USD</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            {{ 'PAYMENTS.CONTAINER.PARTIAL_MEX' | translate }}
+          </div>
+        </div>
+
+        <div class="col-md-6.5 p-0">
+          <input type="text" [(ngModel)]="txtCustomPayMex" appOnlyNumber="true" autocomplete="off" name="otherValueMex" class="m-1 form-control"
+            placeholder="" (change)="customPayValidation($event)">
+            
+        </div>
+        
+        <div class="tooltip-payment-mex">
+          <i class="fa fa-info-circle"></i>
+          <span class="tooltiptext">{{ 'PAYMENTS.CONTAINER.TOOLTIP_MEX_DESC' | translate }}</span>
+        </div>
+
+        <div class="col-md-12 p-0 text-center">
+          <small class="text-danger" *ngIf="showPaymentValidationResult">{{ 'PAYMENTS.CONTAINER.PAYMENT_VALIDATION_TEXT_MEX' | translate }}</small>
+          <small class="text-danger" *ngIf="showPaymentUSDEquivalentValidationResult">{{ 'PAYMENTS.CONTAINER.PAYMENT_VALIDATION_TEXT_MEX_CONVERT_TO_USD' | translate }}</small>
+        </div>
+
+      </div>
+      <div class="row mt-4">
+
+        <div class="col-md-6 mx-auto">
+          <div class="ig-btnpago">
+            <button (click)="onClickPaymentContinue()"
+            [disabled]="isDisabled" class="ig-botones ig-principalbtn">{{ 'PAYMENTS.CONTAINER.CONTINUE' | translate }} </button>
+          </div>
+
+        </div>
+
+      </div>
+    </form>
+   
+  </div>
+  <div class="col-md-12 text-center my-3" *ngIf="!isAuserAnonymous && !automaticAutodeduction">
+    <input type="checkbox" class="checkbox-widget-payment-mex" #inputAutodeduction type="checkbox" [(ngModel)]="isChecked" (change)="onChange(inputAutodeduction.checked)">&nbsp;<span>{{ 'PAYMENTS.AUTODEDUCTION.DESC_MEX' | translate }}</span>
+  </div>
+  <div class="col-md-12 text-center my-3" *ngIf="automaticAutodeduction">
+    <p>{{ 'PAYMENTS.AUTODEDUCTION.DESC_MEX_QM_1' | translate }}</p>
+    <p>{{ 'PAYMENTS.AUTODEDUCTION.DESC_MEX_QM_2' | translate }}</p>
+  </div>
+</div>
+
+  <div *ngIf="confirmToPayment">
+    <app-payment-credit-card-mex [policy]="policy"></app-payment-credit-card-mex>
+  </div>

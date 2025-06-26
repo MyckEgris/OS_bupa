@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+      <label for="{{formControlNameHeight}}">
+        {{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.HEIGHT' | translate }}
+      </label>
+      <input class="form-control"
+        placeholder="{{'POLICY.POLICY_ENROLLMENT.SHARED_PLACEHOLDER.HEIGHT' | translate }}"
+        type="text" 
+        [required]="isFieldRequired(formControlNameHeight)" 
+        class="form-control"
+        id="{{formControlNameHeight}}"
+        [formControl]="getControl(formControlNameHeight)"
+        [maxlength]="getValidatorValue(formControlNameHeight, 'maxLength')"
+        [pattern]="getValidatorValue(formControlNameHeight, 'pattern')"
+        [minlength]="getValidatorValue(formControlNameHeight, 'minLength')">
+        <div class="invalid-feedback" *ngIf="getControl(formControlNameHeight).errors?.pattern">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(formControlNameHeight, 'pattern') | uppercase | translate}}
+        </div>
+        <div class="invalid-feedback" *ngIf="getControl(formControlNameHeight).errors?.maxlength">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(formControlNameHeight, 'maxLength') | uppercase | translate}}
+          {{getControl(formControlNameHeight).errors?.maxlength.requiredLength}}
+        </div>
+        <div class="invalid-feedback" *ngIf="getControl(formControlNameHeight).errors?.minlength">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(formControlNameHeight, 'minLength') | uppercase | translate}}
+          {{getControl(formControlNameHeight).errors?.minlength.requiredLength}}
+        </div>        
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-check form-check-inline" [ngStyle]="{'margin-top': '48px'}" >
+      <input class="form-check-input" type="radio"  id="radioMts" checked>
+      <label class="form-check-label"
+        for="radioMts">{{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.MTS' | translate}}</label>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+      <label for="{{formControlNameWeight}}">
+        {{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.WEIGHT' | translate }}
+      </label>
+      <input class="form-control"
+        placeholder="{{'POLICY.POLICY_ENROLLMENT.SHARED_PLACEHOLDER.WEIGHT' | translate }}"
+        type="text" 
+        [required]="isFieldRequired(formControlNameWeight)" 
+        class="form-control"
+        id="{{formControlNameWeight}}"
+        [formControl]="getControl(formControlNameWeight)"
+        [maxlength]="getValidatorValue(formControlNameWeight, 'maxLength')"
+        [pattern]="getValidatorValue(formControlNameWeight, 'pattern')"
+        [minlength]="getValidatorValue(formControlNameWeight, 'minLength')">
+        <div class="invalid-feedback" *ngIf="getControl(formControlNameWeight).errors?.pattern">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(formControlNameWeight, 'pattern') | uppercase | translate}}
+        </div>
+        <div class="invalid-feedback" *ngIf="getControl(formControlNameWeight).errors?.maxlength">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(formControlNameWeight, 'maxLength') | uppercase | translate}}
+          {{getControl(formControlNameWeight).errors?.maxlength.requiredLength}}
+        </div>
+        <div class="invalid-feedback" *ngIf="getControl(formControlNameWeight).errors?.minlength">
+          {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(formControlNameWeight, 'minLength') | uppercase | translate}}
+          {{getControl(formControlNameWeight).errors?.minlength.requiredLength}}
+        </div>        
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-check form-check-inline" [ngStyle]="{'margin-top': '48px'}">
+      <input class="form-check-input" type="radio" [value]="3" id="radioKg"
+        name="{{formControlNameSystemMeasure}}" [formControl]="getControl(formControlNameSystemMeasure)"
+        (change)="convertFromPoundToKg()">
+      <label class="form-check-label"
+        for="radioKg">{{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.KG' | translate}}
+      </label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-check form-check-inline" [ngStyle]="{'margin-top': '48px'}">
+      <input class="form-check-input" type="radio" [value]="4" id="radioLb"
+        name="{{formControlNameSystemMeasure}}" [formControl]="getControl(formControlNameSystemMeasure)"
+        (change)="convertFromKgToPound()">
+      <label class="form-check-label" for="radioLb">
+        {{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.LB' | translate}}
+      </label>
+    </div>
+  </div>  
+</div>

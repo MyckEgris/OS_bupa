@@ -1,0 +1,237 @@
+<section class="bp-mainpolicy">
+  <form class="" (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="row align-items-center my-3">
+      <div class="col-md-12">
+        <div class="bp-itemtitle">
+          <!-- <div class="bp-titlenum">
+            {{currentStep}}
+          </div> -->
+          <h2 class="bp-titlepolicy">
+            {{ 'PAYMENTS.VIEW_RECEIPT.PAYMENT_DETAILS' | translate }}
+          </h2>
+        </div>
+      </div>
+    </div>
+    <article class="row align-items-end">
+      <div class="col-md-12">
+        <div class="bp-itemcontsect">
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <h4 class="bp-contentitle">
+                {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.TITL_INFO_IMPORTANT' | translate }}
+              </h4>
+            </div>
+            <div class="col-md">
+              <div class="bp-itemsectpoli">
+                <figure>
+                  <img src="assets/images/001-file.svg" alt="">
+                </figure>
+                  <p>
+                    {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.INFO_IMPORTANT_P1' | translate }}
+                  </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 p-0">
+        <div class="bp-bgtilt">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <h4 class="bp-contentitle ">
+                    {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.INFO_PAYMENT_H4' | translate }}
+                  </h4>
+                </div>
+                <div class="col-md-12">
+                   <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group mt-3">
+                        <label for="formGroupExampleInput">{{ 'PAYMENTS.CC.CARD_TYPE' | translate }}</label>
+                        <div class="bp-payicon">
+                          <div class="row">
+                            <div class="col">
+                              <div class="bp-payameri bp-paylogo" [ngClass]="{'active': isAMEX}"></div>
+                            </div>
+                            <div class="col">
+                              <div class="bp-paymaster bp-paylogo" [ngClass]="{'active': isMASTERCARD}"></div>
+                            </div>
+                            <div class="col">
+                              <div class="bp-payvisa bp-paylogo" [ngClass]="{'active': isVISA}"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>  
+                      <div class="form-group">
+                        <label for="creditCardNumber">{{ 'PAYMENTS.CC.CARD_NUMBER' | translate }}</label>
+                        <input type="text" 
+                          class="form-control" 
+                          id="creditCardNumber"
+                          [placeholder]="'POLICY.POLICY_ENROLLMENT.STEP12.PH_CREDIT_CARD_NUMBER' | translate" 
+                          formControlName="creditCardNumber"
+                          [minlength]="getMin" 
+                          [maxlength]="getMin"
+                          [required]="f.get('creditCardNumber').errors?.required" appCreditCardMask
+                          [ngClass]="{'is-invalid': f.get('creditCardNumber').invalid && showValidations,  'is-valid': f.get('creditCardNumber').valid && showValidations}">
+                      </div>
+                      <small class="text-danger" *ngIf="f.get('creditCardNumber').hasError('incorrect') && showValidations">{{'PAYMENTS.ERRORS.CC_NOT_VALID' | translate}}</small>                      
+                      <div class="row">
+                        <div class="col-md">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                            <label for="cardHolderName"> {{ 'PAYMENTS.CC.FIRST_NAME' | translate }} </label>
+                            <input type="text" 
+                              class="form-control" 
+                              id="cardHolderName"  
+                              required                      
+                              [placeholder]="'POLICY.POLICY_ENROLLMENT.STEP12.PH_CARD_HOLDER_NAME' | translate"
+                              formControlName="cardHolderName">
+                          </div>  
+                        </div>
+                        <div class="col-md">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                            <label for="cardHolderLastName"> {{ 'PAYMENTS.CC.LAST_NAME' | translate }} </label>
+                            <input type="text" 
+                              class="form-control" 
+                              id="cardHolderLastName"  
+                              required                      
+                              [placeholder]="'POLICY.POLICY_ENROLLMENT.STEP12.PH_CARD_HOLDER_LASTNAME' | translate"
+                              formControlName="cardHolderLastName">
+                          </div>  
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="formGroupExampleInput">{{ 'PAYMENTS.CC.DATE' | translate }}</label>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                            <ng-select #monthSelect class="form-control" [items]="monthtList" [selectOnTab]="true"
+                              bindValue="numberInString" bindLabel="numberInString" formControlName="expirationMonth"
+                              [required] = "f.controls.expirationMonth.hasError('required')"
+                              [placeholder]="f.controls.expirationMonth.value !== null && f.controls.expirationMonth.value !== ''
+                                        ? '':'PAYMENTS.CC.MONTH' | translate" >
+                            </ng-select>
+                          </div>
+                          <small class="text-danger" *ngIf="f.get('expirationMonth').hasError('required') && showValidations">{{'PAYMENTS.ERRORS.REQUIRED' | translate}}</small>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                            <ng-select #yearsSelect class="form-control" [items]="years$ | async" [selectOnTab]="true"
+                              [required] = "f.controls.expirationYear.hasError('required')"                  
+                              bindValue="year" bindLabel="year" formControlName="expirationYear"
+                              [placeholder]="f.controls.expirationYear.value !== null && f.controls.expirationYear.value !== ''
+                              ? '':'PAYMENTS.CC.YEAR' | translate">
+                            </ng-select>
+                          </div>
+                          <small class="text-danger" *ngIf="f.controls.expirationYear.hasError('required') && showValidations">{{'PAYMENTS.ERRORS.REQUIRED' | translate}}</small>                          
+                        </div>
+                      </div>
+                      <small class="text-danger" *ngIf="isMonthOrYearValid && showValidations">{{'PAYMENTS.ERRORS.DATE_NOT_VALID' | translate}}</small>
+                    </div>
+                    <div class="col-md-4 offset-md-1 p-4" style="background-color: #fbfbfb;">
+                        <h6 class=" mb-4" style="font-weight: 700;">
+                          {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.SUMMARY_REQUEST_POLICY' | translate }}
+                        </h6>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.REQUEST' | translate }} | <span class=""> {{applicationId}} </span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.OWNER_INSURER' | translate }} | <span class=""> {{ownerFirstNameLastName}} </span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.AGENT' | translate }} | <span class=""> {{agentFullName}} </span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.PRODUCT' | translate }} | <span class=""> {{productName}} </span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.DEDUCTIBLE' | translate }} | <span class="">  {{ deductibleValue | number:'1.2-2' }} USD </span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.EFFECTIVE_DATE' | translate }} | <span class=""> {{issueDate}} </span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.PAYMENT_PERIOD' | translate }} | <span class=""> {{modeOfPayment | translate}}  </span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.PREMIUM_PERIODO' | translate }} | <span class=""> {{quotePremiumsFirstPayment | number:'1.2-2'}} USD</span>
+                          </h6>
+                        </div>
+                        <div class="bp-status-item my-3">
+                          <h6> 
+                            {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.PREMIUM_TOTAL' | translate }} | <span class=""> {{quotePremiumsTotal | number:'1.2-2'}} USD </span>
+                          </h6>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+                <ng-container *ngIf="!isPolicyStatusPreValidationClean">
+                  <div class="col-md-12 mt-3">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="agreementUnCleanPayment" formControlName="agreementUnCleanPayment" hidden>
+                      <label class="form-check-label" for="agreementUnCleanPayment">
+                        {{ 'PAYMENTS.CC.UNCLEAN_DISCLAIMER_MSG' | translate }}
+                      </label>
+                    </div>
+                  </div>
+                </ng-container>                  
+
+                <div class="col-md-12 mt-2" [ngClass]="{ 'border-danger': !f.controls.agreementCertificationPayment.value && showValidations }">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" formControlName="agreementCertificationPayment" id="agreementCertificationPayment">
+                    <label class="form-check-label" for="agreementCertificationPayment">
+                      {{ 'PAYMENTS.CC.PANAMA_DISCLAIMER_MSG' | translate }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 my-5" *ngIf="showValidations && f.invalid">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i> 
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP2.INFO_INCOMPLETE' | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4 offset-md-4">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <button type="button" (click)="back()" class="bp-btn bp-btnsecondary">
+                        {{ 'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="submit" class="bp-btn bp-btnprimary">
+                        {{ 'PAYMENTS.SUMMARY_POLICY_APPLICATION.END_REQUEST' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </form>
+</section>

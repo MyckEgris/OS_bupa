@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{ title }}</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <div class="ig-session">
+    <i class="material-icons">update</i>
+    <h4>Your online session will expire in</h4>
+</div>
+<div class="ig-timer">
+    <h2>{{ message }}</h2>
+</div>
+<p>Please click "Continue" to keep working or click "log Out" To end your session now.</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-cancel" data-dismiss="modal" (click)="activeModal.close('Close click')">Log Out</button>
+  <button type="button" class="btn btn-segundario" (click)="activeModal.dismiss('Close click')">Continue</button>
+</div>

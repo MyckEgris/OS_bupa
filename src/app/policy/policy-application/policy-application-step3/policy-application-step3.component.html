@@ -1,0 +1,357 @@
+<div class="row setup-content" id="step-3">
+
+  <div class="col-md-12">
+    <h5>3. {{ 'POLICY.APPLICATION.STEP3.TITLE' | translate }}</h5>
+
+
+    <div class="row">
+      <div class="col-md-8 border-right">
+        <div class="ig-solicituddatos">
+          <h6>
+              {{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.TITLE' | translate }}
+          </h6>
+
+          <div class="row">
+
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.ROLE' | translate }}
+                  </h6>
+                  <p>
+                    {{agentRole | translate }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.FULL_NAME' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['applicantName'].value }}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="col-md-12">
+              <h6 class="ig-datos">
+                  {{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT' | translate }}
+              </h6>
+              <p>
+                {{ wizard.agent }}
+              </p>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT_EMAIL' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['email'].value }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.CONTACT_INFORMATION.AGENT_PHONE' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['phone'].value }}
+                  </p>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="ig-solicituddatos">
+          <h6>
+              {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.TITLE' | translate }}
+          </h6>
+
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.BUSINESS' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['insuranceBusiness'].value }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.SIGNATURE_DATE' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['date'].value | dateTranslate }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.COUNTRY' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.countryName }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.CITY' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.cityName }}
+                  </p>
+                </div>
+
+                <div class="col-md-12">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.PRODUCT' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.productName }}
+                  </p>
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.PLAN' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.planName }}
+                  </p>
+                </div>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="ig-solicituddatos">
+          <h6>
+              {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.TITLE' | translate }}
+          </h6>
+
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.NAMES' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['holderName'].value }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.SURNAMES' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['holderSurname'].value }}
+                  </p>
+                </div>
+                <div class="col-md-12">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.DOB' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['holderBirthDate'].value | dateTranslate }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.MAIN_PHONE' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['holderPhone'].value }}
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="ig-datos">
+                      {{ 'POLICY.APPLICATION.STEP1.POLICY_OWNER_INFORMATION.MAIN_EMAIL' | translate }}
+                  </h6>
+                  <p>
+                    {{ wizard.policyForm.controls['holderEmail'].value }}
+                  </p>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <h4>{{ 'POLICY.APPLICATION.STEP3.DOCUMENTATION' | translate }}</h4>
+        <br>
+        <h6>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.HEALTH' | translate }}</h6>
+        <!--<div *ngFor="let document of wizard.documents">
+          <p *ngIf="document.category === 'type1'">{{ document.file.name }}</p>
+        </div>-->
+        <p class="ig-files-scroll-summary" #fileScroll>
+          <span *ngFor="let document of wizard.documents" [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+            <span *ngIf="document.category === 'type1'">
+              {{ document.file.name }} - {{ getFileSize(document.file) }} <span *ngIf="document.loadingStatus === 'LOADING'">({{
+                document.progress }} %) </span><span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span>
+              <br>
+            </span>
+          </span>
+        </p>
+
+        <h6>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.PAYMENT' | translate }}</h6>
+        <!--<div *ngFor="let document of wizard.documents">
+          <p *ngIf="document.category === 'type2'">{{ document.file.name }}</p>
+        </div>-->
+        <p class="ig-files-scroll-summary" #fileScroll>
+          <span *ngFor="let document of wizard.documents" [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+            <span *ngIf="document.category === 'type2'">
+              {{ document.file.name }} - {{ getFileSize(document.file) }} <span *ngIf="document.loadingStatus === 'LOADING'">({{
+                document.progress }} %) </span><span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span>
+              <br>
+            </span>
+          </span>
+        </p>
+        <h6>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.RECORDS' | translate }}</h6>
+        <!--<div *ngFor="let document of wizard.documents">
+          <p *ngIf="document.category === 'type3'">{{ document.file.name }}</p>
+        </div>-->
+        <p class="ig-files-scroll-summary" #fileScroll>
+          <span *ngFor="let document of wizard.documents" [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+            <span *ngIf="document.category === 'type3'">
+              {{ document.file.name }} - {{ getFileSize(document.file) }} <span *ngIf="document.loadingStatus === 'LOADING'">({{
+                document.progress }} %) </span><span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span>
+              <br>
+            </span>
+          </span>
+        </p>
+        <h6>{{ 'POLICY.APPLICATION.STEP2.CATEGORIES.REGULATORY' | translate }}</h6>
+        <!--<div *ngFor="let document of wizard.documents">
+          <p *ngIf="document.category === 'type4'">{{ document.file.name }}</p>
+      </div>-->
+        <p class="ig-files-scroll-summary" #fileScroll>
+          <span *ngFor="let document of wizard.documents" [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+            <span *ngIf="document.category === 'type4'">
+              {{ document.file.name }} - {{ getFileSize(document.file) }} <span *ngIf="document.loadingStatus === 'LOADING'">({{
+                document.progress }} %) </span><span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span>
+              <br>
+            </span>
+
+          </span>
+        </p>
+      </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+      
+      <div class="col-md-12">
+        <div class="confirm-declaration checkbox">
+          <input type="checkbox" (change)="changeConfirm($event)">
+          <p style="font-weight: 500; padding-left: 8px; font-size: 16px;">{{ 'POLICY.APPLICATION.STEP3.DISCLAIMER' | translate }} </p>
+        </div>
+        <div *ngIf="confirmDeclaration !== undefined">
+          <small class="text-danger" *ngIf="!confirmDeclaration">
+              {{ 'POLICY.APPLICATION.VALIDATIONS.DISCLAIMER_REQUIRED' | translate }}
+          </small>
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    
+    <div class="row">
+      <div class="col-md-6">
+        <!--<p class="ig-files-scroll" #fileScroll><span *ngFor="let document of wizard.documents" [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+            {{ document.file.name }} - {{ getFileSize(document.file) }} <span *ngIf="document.loadingStatus === 'LOADING'">({{
+              document.progress }} %) </span><span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span><br>
+          </span></p>-->
+      </div>
+      <div class="col-md-6">
+        <div class="row align-items-center">
+          <div class="col-md-4">
+            <button class="btn btn-link btn-lg pull-right" type="button" (click)="cancel();">{{ 'POLICY.APPLICATION.STEP3.CANCEL' | translate }}</button>
+          </div>
+          <div class="col-md-4">
+            <button class="ig-principalsegundariobtn ig-botones" type="button" (click)="back();">{{ 'POLICY.APPLICATION.STEP3.BACK' | translate }}</button>
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="ig-botones ig-principalbtn" (click)="submit();"
+              data-toggle="modal">
+              {{ 'POLICY.APPLICATION.STEP3.SUBMIT' | translate }}
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- positivo modal -->
+  <!--
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    mensaje positivo
+  </button>-->
+
+  <!-- Modal positivo-->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Solicitud</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          La Aplicación de la póliza se envió con éxito + “Número de solicitud "+" Número
+          / ID de la póliza ".
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="submit();">nueva aplicacion</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- negativo modal -->
+  <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+    mensaje negativo
+  </button>-->
+
+  <!-- Modal negativo-->
+  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Solicitud</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          No fue posible enviar esta aplicación de póliza.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Regresar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

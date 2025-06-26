@@ -1,0 +1,102 @@
+<div class="row align-items-end">
+  <div class="col-md-9">
+    <h4 class="bp-contentitle">
+      <i class="material-icons" *ngIf="showValidation && this.getDetails().invalid"
+      [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().invalid}">info</i>
+      {{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_INFO_ADITIONAL' | translate }}
+      <p>{{ 'POLICY.POLICY_ENROLLMENT.STEP4.INFO_EXPLANATION_DETAIL_FAMILY_HISTORY' | translate }}</p>
+    </h4>
+    <hr style="border-color: #0079c8;">
+  </div>
+  <div class="col-md-3">
+    <div class="row align-items-center">
+      <div class="col-md-3">
+        <button class="ig-icondiagnosminim" (click)="changeValueIsExpanded()"
+          type="button"
+          data-toggle="collapse"
+          [attr.data-target]="'#'+question.medicalQuestionReference"
+          aria-expanded="false"
+          [attr.aria-controls]="question.medicalQuestionReference">
+          <i class="material-icons">{{isExpanded ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}</i>
+        </button>
+      </div>
+      <div class="col-md-9">
+        <button class="bp-btn bp-btnprimary" type="button" (click)="addDetail()">
+          <i class="material-icons">add_circle</i> {{ 'APP.BUTTON.ADD_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapse" [ngClass]="{'show': isExpanded || showValidation}" data-parent="#accordion"  id="{{question.medicalQuestionReference}}" [formGroup]="questionForm">
+  <div formArrayName="details">
+    <div class="row align-items-center" *ngFor="let detail of getDetails().controls; let i = index" [formGroupName]="i">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12">
+            <h6 style="font-weight: 700;">
+              <i class="material-icons" *ngIf="showValidation && this.getDetails().controls[i].invalid"
+              [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().controls[i].invalid}">info</i>
+              {{this.getDetails().controls[i].get('memberFullName').value}}
+            </h6>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="member">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEMBER' | translate }}</label>
+              <ng-select #memberSelect
+                id="member"
+                [items]="members"
+                [selectOnTab]="true"
+                bindValue="applicationMemberGuid"
+                bindLabel="fullName"
+                formControlName="member"
+                class="form-control"
+                [placeholder]="this.getDetails().controls[i].get('member').value !== null && this.getDetails().controls[i].get('member').value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate"
+                (change)="hangleChangedMember($event, i)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="familyMembersWithDisorder">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_FAMILY_HISTORY_FAMILY_DISORDER' | translate }}</label>
+              <ng-select #medFamilyDisorderSelect
+                class="form-control"
+                [items]="medicalFamilyDisorder"
+                [closeOnSelect]="false"
+                id="familyMembersWithDisorder"
+                bindLabel="familyName"
+                appendTo="body"
+                multiple="true"
+                [placeholder]="this.getDetails().controls[i].get('familyMembersWithDisorder').value !== null && this.getDetails().controls[i].get('familyMembersWithDisorder').value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate"
+                formControlName="familyMembersWithDisorder">
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                  <input id="item-{{index}}" type="checkbox" [(ngModel)]="item$.selected" [ngModelOptions]="{ standalone : true }" /> {{item.familyName}}
+                </ng-template>
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="disorder{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_FAMILY_HISTORY_DISORDER' | translate }}</label>
+              <input class="form-control"
+                type="text"
+                id="disorder{{i}}{{question.medicalQuestionReference}}"
+                formControlName="disorder"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_FAMILY_HISTORY_DISORDER' | translate }}"
+                [required]="this.getDetails().controls[i].get('disorder').hasError('required')"
+                maxlength="33">
+            </div>
+          </div>
+          <div class="col-md-12"><hr></div>
+        </div>
+      </div>
+      <div class="col-md" *ngIf="ifGreaterThanCero(i)">
+        <button class="ig-icondiagnosminim" style="cursor: pointer;" type="button" (click) = "deleteDetail(i)">
+          <i class="material-icons"> delete_forever </i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

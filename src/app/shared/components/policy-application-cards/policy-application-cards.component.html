@@ -1,0 +1,37 @@
+<section class="bp-mainpolicy row mb-3">
+  <ng-container *ngFor="let policyApp of policyAplication.policyApplications">
+    <div class="col-md-12 bp-itemcontsect2 listsolicitudes m-auto mb-3 animated fadeInUp">
+      <ul>
+        <li><strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.STATUS' | translate }}:</strong> {{'POLICY.APPLICATION.STATUS.' | concatenate: policyApp.status | replacespaces: '_' | uppercase | translate}}</li>
+        <li><strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.REQUEST' | translate }}:</strong> {{ policyApp.applicationId }} </li>
+        <ng-container *ngIf="policyApp.policyId">
+          <li>
+            <strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.POLICY_ID' | translate }}: </strong>
+            <a href="#" (click)="!!showPolicyDetail(policyApp.policyId)">{{policyApp.policyId}}</a>
+          </li>          
+        </ng-container>        
+        <!-- <ng-container *ngIf="policyApp.policyId && policyApp.process === 'ElectronicApplication'">
+          <li>
+            <strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.POLICY_ID' | translate }}: </strong>
+            <a [routerLink]="['/policies/view-policy-information', policyApp.policyId]">{{ policyApp.policyId }}</a>
+          </li>          
+        </ng-container>
+        <ng-container *ngIf="policyApp.policyId && policyApp.process !== 'ElectronicApplication'">
+          <li>
+            <strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.POLICY_ID' | translate }}: </strong>
+            {{ policyApp.policyId }}
+          </li>          
+        </ng-container>    -->
+        <li><strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.OWNER' | translate }}:</strong> {{ policyApp.members[0].firstName }} {{ policyApp.members[0].lastName }}</li>
+        <li><strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.CREATED_ON' | translate }}:</strong> {{ policyApp.createdOn | dateTranslate: 'APP.DATE_FORMAT'}}</li>
+        <li><strong>{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.UPDATED_ON' | translate }}:</strong> {{ policyApp.updatedOn | dateTranslate: 'APP.DATE_FORMAT'}}</li>
+        <li>
+          <span class="material-icons" (click)="edit(policyApp.applicationId)" *ngIf="getStatusEdit(policyApp.process, policyApp.status, policyApp.policyId)">create</span>
+          <!-- <span class="material-icons" (click)="uploadDocs(policyApp.applicationId)" *ngIf="getStatusUploadDocs(policyApp.process, policyApp.status)">backup</span>
+          <span class="material-icons" (click)="capturePaymentInfo(policyApp.applicationId)" *ngIf="getStatusPaymentInfo(policyApp.process, policyApp.status)">payment</span> -->
+          <span class="material-icons" (click)="downloadFile(policyApp.applicationGuid, policyApp.applicationId, policyApp.status)" *ngIf="getStatusDownloadDocs(policyApp.process, policyApp.status, policyApp.policyId)">cloud_download</span>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+</section>

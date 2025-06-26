@@ -1,0 +1,215 @@
+<div class="row align-items-center ig-polidetaleinfo">
+
+  <div class="col-lg-9 col-sm-6 col-md-8">
+    <h3> {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.MEMBERS' | translate }} </h3>
+  </div>
+
+  <div class="col-lg-3 col-sm-6 col-md-4 text-right"
+    *ngIf="!policyDto.isGroupPolicy && showDependentPremium && isDiffGroupAdminAgentRole">
+    <h5 class="ig-texthistorial">
+      {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.DEPENDENT_PREMIUM' | translate }}
+      <span>
+        {{ policyDto.currencyCode }} {{ policyDto.dependentPremium | number:'1.2-2' }}
+      </span>
+    </h5>
+  </div>
+
+</div>
+
+<div class="ig-polasegcont" *ngFor="let member of members">
+
+  <div class="ig-asegucont animated slideInUp">
+
+    <div class="row">
+
+      <div class="col-md-7">
+        <h6 class="ig-relac">
+          {{'POLICY.RELATIONTYPE.' | concatenate: member.relationType | replacespaces: '_' | uppercase | translate}}<span>
+            - {{member.firstName}} {{member.middleName ? member.middleName : ''}}
+            {{member.lastName}}</span>
+        </h6>
+      </div>
+
+      <div class="col-md-3">
+        <!-- <div class="row justify-content-center">
+          <h6 style="font-weight: 700;">
+            {{'POLICY.MEMBERSTATUS.' | concatenate:member.memberStatus | uppercase | translate}}
+          </h6>
+        </div> -->
+      </div>
+
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-md-3">
+        <div class="ig-membirth">
+          <h5>
+            {{member.dob |dateTranslate}} - <span> {{member.dob |calculateAge}}
+              {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.YEARS' | translate }} </span>
+          </h5>
+        </div>
+        <p>
+          {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.BIRTH_DAY' | translate }}
+        </p>
+      </div>
+
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-4"
+            *ngIf="!policyDto.isGroupPolicy && isDiffGroupAdminAgentRole && (member.relationTypeId == 2 || member.relationTypeId == 3)">
+            <h5 class="ig-valores">
+              {{ policyDto.currencyCode }} {{member.premiumValue | number:'1.2-2' }}
+            </h5>
+            <p>
+              {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.PRIME' | translate }}
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="ig-valores">
+              {{ member.benefitCurrencyCode }} {{member.deductibleValue | number:'1.2-2' }}
+            </h5>
+            <p>
+              {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.DEDUCTIBLE' | translate }}
+            </p>
+          </div>
+          <div class="col-md-4">
+            <h5 class="ig-valores">
+              {{ member.benefitCurrencyCode }} {{member.maximumCoverageValue | number:'1.2-2' }}
+            </h5>
+            <p>
+              {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.MAXCOVERAGE' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2" *ngIf="member.memberStatusId !== 0  && printIdCard !== 0">
+        <button (click)="showCards(member.memberId,1)" class="ig-botones ig-principalbtn" *ngIf="printIdCard===1">
+          <i class="material-icons">payment</i> {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.CARDS.OPTION1' | translate }}
+        </button>
+        <button (click)="showCards(member.memberId,2)" class="ig-botones ig-principalsegundariobtn"
+          *ngIf="hasGeoBlueIdCard===1">
+          <i class="material-icons">local_printshop</i>
+          {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.CARDS.OPTION2' | translate }}
+        </button>
+      </div>
+
+    </div>
+
+    <div class="ig-numpoliza">
+
+      <div class="row align-items-center">
+
+        <div class="col-md-10">
+          <div class="row align-items-center">
+
+            <div class="col-md-4">
+              <h6>{{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.PLAN' | translate }}: {{member.planDescription}}</h6>
+            </div>
+
+            <div class="col-md-3">
+              <div class="row justify-content-center">
+                <h6>{{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.WAIT_PERIOD' | translate }}:
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.BOOLEANS.'  | concatenate:member.wWperiod | translate}} </h6>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <h6 *ngIf="member.startDate || member.endDate" style="display: inline;">
+                {{'POLICY.VIEW_POLICY_DETAILS.MEMBERS.COVERED' | translate}}
+              </h6>
+              <h6 *ngIf="member.startDate" style="display: inline;">
+                {{'POLICY.VIEW_POLICY_DETAILS.MEMBERS.COVERED_FROM' | translate}}
+                {{member.startDate | dateTranslate:'APP.DATE_FORMAT'}}
+              </h6>
+              <h6 *ngIf="member.endDate" style="display: inline;">
+                {{'POLICY.VIEW_POLICY_DETAILS.MEMBERS.COVERED_TO' | translate}}
+                {{member.endDate | dateTranslate: 'APP.DATE_FORMAT'}}
+              </h6>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-2" *ngIf="showSearchBenefit">
+          <button class="ig-botones ig-principalbtn" (click)="showSearchBenefits(policyId, member.memberId);">
+            <i class="material-icons">book</i>
+            {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.SEARCH_BENEFITS' | translate }}
+          </button>
+        </div>
+
+      </div>
+
+      <div class="row  align-items-center">
+        <div class="col-md-7">
+          <div class="ig-detallebtn" (click)="toggleSlideDetail(member);">
+            {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.TYPE_LIMITATIONS' | translate }}
+            <i class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-12 p-0">
+    <div class="ig-detallereclamo" id="ig-detalleExclusiones-{{member.memberId}}">
+      <div>
+
+        <div class="ig-resultilt" *ngFor="let sc of member.filterSpecialConditions">
+          <div class="row align-items-start">
+
+            <div class="col-md-12">
+
+              <h5 *ngIf="sc.limitationName">
+                {{ sc.limitationName }}
+              </h5>
+
+              <!-- <h5>
+                {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.SPECIAL_CONDITIONS.' | concatenate:sc.limitationName | replacespaces: '_' |  uppercase  | translate}}
+              </h5> -->
+
+            </div>
+
+            <div class="col-md-12">
+              <div class="ig-detallelimt">
+                <div class="row">
+                  <div class="col-md-4">
+                    <h6>
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.EFFECTIVENESS_DATE' | translate }}
+                    </h6>
+                    <p>
+                      {{sc.effectiveDate | dateTranslate: 'APP.DATE_FORMAT'}}
+                    </p>
+                  </div>
+                  <div class="col-md-8">
+                    <h6>
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.DESCRIPTION' | translate }}
+                    </h6>
+                    <p>
+                      {{sc.description}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ig-resultilt"
+          *ngIf="member.specialConditions.length === 0 || member.filterSpecialConditions.length === 0">
+          <div class="col-md-12">
+
+            <div class="row">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.WITHOUT_LIMITATION_MESSAGE' | translate }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

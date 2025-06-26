@@ -1,0 +1,338 @@
+<section class="bp-mainpolicy" *ngIf="formPolicyDocs">
+    <form class="was-validated: false" [formGroup]="formPolicyDocs">
+        <article class="row">
+
+            <div class="col-md-12">
+                <div class="bp-itemtitle mt-4">
+                    <h2 class="bp-titlepolicy">
+                        {{'POLICY.POLICY_DOCUMENTS.TITLE' | translate}}
+                    </h2>
+                </div>
+                <br>
+                <p [innerHtml]="'POLICY.POLICY_DOCUMENTS.SUBTITLE' | translate"></p>
+            </div>
+
+            <div class="col-md-12 mt-4">
+                <div class="" formGroupName="filterCriteria">
+                    <div class="row align-items-end">
+
+                        <div class="col-md" *ngIf="docTypeArray">
+                            <div class="form-group">
+                                <label>{{'POLICY.POLICY_DOCUMENTS.DOC_TYPE_CTRL' | translate}}</label>
+                                <ng-select #docTypeSelect [selectOnTab]="true" [items]="docTypeArray" bindLabel="name"
+                                    bindValue="value" formControlName="documentType" class="form-control"
+                                    [placeholder]="getControl(FILTER_CRITERIA_FG, DOC_TYPE_CTRL).value !== null && getControl(FILTER_CRITERIA_FG, DOC_TYPE_CTRL).value !== '' ? '': 'POLICY.POLICY_DOCUMENTS.DOC_TYPE_CTRL_PH' | translate ">
+                                </ng-select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md" *ngIf="docYearArray">
+                            <div class="form-group">
+                                <label>{{'POLICY.POLICY_DOCUMENTS.DOC_YEAR_CTRL' | translate}}</label>
+                                <ng-select #docYearSelect [selectOnTab]="true" [items]="docYearArray" bindValue="year"
+                                    bindLabel="year" formControlName="documentYear" class="form-control"
+                                    [placeholder]="getControl(FILTER_CRITERIA_FG, DOC_YEAR_CTRL).value !== null && getControl(FILTER_CRITERIA_FG, DOC_YEAR_CTRL).value !== '' ? '': 'POLICY.POLICY_DOCUMENTS.DOC_YEAR_CTRL_PH' | translate">
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class=" col-md" *ngIf="docMontshArray$">
+                            <div class="form-group">
+                                <label>{{'POLICY.POLICY_DOCUMENTS.DOC_MONTH_CTRL' | translate}}</label>
+                                <ng-select #docMonthSelect [items]="docMontshArray$ | async" [selectOnTab]="true"
+                                    bindValue="id" bindLabel="name.value" formControlName="documentMonth"
+                                    class="form-control"
+                                    [placeholder]="getControl(FILTER_CRITERIA_FG, DOC_MONTH_CTRL).value !== null && getControl(FILTER_CRITERIA_FG, DOC_MONTH_CTRL).value !== '' ? '': 'POLICY.POLICY_DOCUMENTS.DOC_MONTH_CTRL_PH' | translate">
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3" *ngIf="agentArray">
+                            <div class="form-group">
+                                <label>{{'POLICY.POLICY_DOCUMENTS.AGENT_CTRL' | translate}}</label>
+                                <ng-select #agentSelect [items]="agentArray" [selectOnTab]="true" bindValue="agentId"
+                                    bindLabel="companyName" formControlName="Agent" class="form-control"
+                                    [placeholder]="getControl(FILTER_CRITERIA_FG, AGENT_CTRL).value !== null && getControl(FILTER_CRITERIA_FG, AGENT_CTRL).value !== '' ? '': 'POLICY.POLICY_DOCUMENTS.AGENT_CTRL_PH' | translate">
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <button class="bp-btn bp-btnprimary" [ngClass]="{disabled: filterCriteriaInvalid()}"
+                                (click)="generatePoliciesRequest(firstPageIndex, false)">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </div>
+
+                        <div class="col-md-1">
+                            <button class="bp-btn bp-btnsecondary" [ngClass]="{disabled: filterCriteriaEmpty()}"
+                                (click)="cleanFilterValuesAndSearch()">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 my-4 ig-validation" *ngIf="sucessSearch">
+
+                <div class="ig-titulotabs my-3">
+                    <h6> {{'POLICY.POLICY_DOCUMENTS.POLICY_COUNTER' | translate}}: ({{policySearchResponse.count}})
+                    </h6>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="bp-btn bp-btnprimary" (click)="checkAll(1)">
+                            {{'POLICY.POLICY_DOCUMENTS.CHECK_ALL_BTN_TITLE' | translate}}
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="bp-btn bp-btnsecondary" (click)="checkAll(0)">
+                            {{'POLICY.POLICY_DOCUMENTS.UNCHECK_ALL_BTN_TITLE' | translate}}
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="bp-bgtilt" style="margin: 15px 0;" *ngIf="policySearchResponse.data">
+                    <div class="" formArrayName="policiesList">
+                        <div *ngFor="let item of policySearchResponse.data ; let i = index;">
+
+                            <div class="row align-items-start" [formGroupName]="i">
+
+
+                                <div class="col-md-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-md">
+                                            <div class="bp-status bp-status-active">
+                                                <h6><span>
+                                                        {{'POLICY.POLICYSTATUS.' | concatenate: item.policyStatus | replacespaces: '_' | uppercase | translate}}</span>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <div class="bp-status-item" *ngIf="item.documents.length > 0">
+                                                <h6 *ngIf="item.documents[0].lastSentDate">
+                                                    {{'POLICY.POLICY_DOCUMENTS.SEND_DATE_LABEL' | translate}} |
+                                                    <span>
+                                                        {{item.documents[0].lastSentDate | dateTranslate}}
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-1 p-0 text-center">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input"
+                                                    [ngClass]="{disabled: handleDownloadDocumentsBtn(item)}"
+                                                    type="checkbox" id="check-{{i}}" [value]="true"
+                                                    formControlName="check"
+                                                    (change)="handlePolicyCheck( $event.target.checked, i, item )">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md p-0">
+
+                                            <div class="bp-status-item">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.HOLDER_LABEL' | translate}} |
+                                                    <span>
+                                                        {{item.firstName}} {{item.middleName}} {{item.lastName}}
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                            <div class="bp-status-item">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.POLICY_NUM_LABEL' | translate}} |
+                                                    <span>
+                                                        {{ item.policyReference }}
+                                                        <app-custom-popover class="" [title]=""
+                                                            *ngIf="item.legacyNumber"
+                                                            [content]="['POLICY.POLICY_DOCUMENTS.LEGACY_POLICY_NUM_LABEL', item.legacyNumber]">
+                                                        </app-custom-popover>
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                            <div class="bp-status-item" *ngIf="validateIsGroup(item)">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.GROUP_LABEL' | translate}} |
+                                                    <span>
+                                                        {{ item.groupId }} - {{ item.groupName }}
+                                                    </span>
+                                                </h6>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md">
+
+                                            <div class="bp-status-item">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.DEDUCTIBLE_LABEL' | translate}} |
+
+                                                    <span>
+                                                        {{item.currencyCode}}
+                                                        {{item.policyPremium | currency: 'USD':''}}
+                                                    </span>
+                                                </h6>
+                                            </div>
+
+
+                                            <div class="bp-status-item">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.PAY_METHOD_LABEL' | translate}} |
+
+
+                                                    <span>
+                                                        {{'EMPLOYEE.QUOTE.PAYMENT_METHOD.' | concatenate: item.modeOfPayment | uppercase | translate}}
+                                                    </span>
+
+                                                </h6>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md">
+
+                                            <div class="bp-status-item">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.AGENT_LABEL' | translate}} |
+                                                    <span>
+                                                        {{item.agent.agentName}}
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                            <div class="bp-status-item">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.PLAN_LABEL' | translate}} |
+                                                    <span>
+                                                        {{item.planDescription}}
+                                                    </span>
+                                                </h6>
+                                            </div>
+                                            <div class="bp-status-item">
+                                                <h6>
+                                                    {{'POLICY.POLICY_DOCUMENTS.RENEWAL_DATE_LABEL' | translate}} |
+                                                    <span>
+                                                        {{handleRenewalDate(item) | dateTranslate}}
+                                                    </span>
+                                                </h6>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md p-0">
+
+
+
+                                            <div class="form-group">
+                                                <label>{{'POLICY.POLICY_DOCUMENTS.EMAIL_CTRL_LABEL' | translate}}</label>
+                                                <app-custom-popover class="" [title]=""
+                                                    [content]="['POLICY.POLICY_DOCUMENTS.EMAIL_TOOLTIP_MSG' | translate]">
+                                                </app-custom-popover>
+                                                <input type="text" class="form-control"
+                                                    [ngClass]="{disabled: handleDownloadDocumentsBtn(item), 'is-invalid': getNestedControl(i,EMAIL_CTRL).invalid && showValidations}"
+                                                    formControlName="email" maxCharsAllowed="500"
+                                                    [placeholder]="getNestedControl(i,EMAIL_CTRL).value !== null && getNestedControl(i,EMAIL_CTRL).value !== '' ? '': 'POLICY.POLICY_DOCUMENTS.EMAIL_CTRL_PH' | translate">
+                                            </div>
+                                            <small class="alert alert-danger d-block text-center"
+                                                *ngIf="this.getNestedControl(i, this.EMAIL_CTRL).errors?.invalidEmail">
+                                                {{'POLICY.POLICY_DOCUMENTS.EMAIL_CTRL_INVALID' | translate}}
+                                            </small>
+
+                                        </div>
+
+                                        <div class="col-md-1 p-0"  *ngIf="!handleDownloadDocumentsBtn(item)">
+                                            <button class="ig-principalsegundariobtn ig-botones btnclean"
+                                                [disabled]="handleDownloadDocumentsBtn(item)"
+                                                (click)="handleDownloadFile(item)" style="width: 65px; float: right;">
+                                                <i class="material-icons">vertical_align_bottom</i>
+                                                 <span
+                                                    class="tooltiptext">{{ handleDownloadDocumentsTooltip(item) | translate }}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="bp-alertform" *ngIf="handleDownloadDocumentsBtn(item)">
+                              <div class="card-message3"><i class="material-icons">
+                                info</i> {{'POLICY.POLICY_DOCUMENTS.INFO_NO_DOCUMENTS' | translate}}
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-2"
+                    *ngIf="showValidations && formPolicyDocs.get(this.POLICIES_LIST_FA).invalid">
+                    <div class="bp-alertform">
+                        <div class="alert alert-danger" role="alert">
+                            <i class="material-icons">info</i>
+                            {{ 'POLICY.POLICY_DOCUMENTS.INFO_INCOMPLETE' | translate }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-5 p-0">
+                    <div class="row">
+                        <div class="col-md-4 offset-md-4">
+                            <button class="bp-btn bp-btnprimary" (click)="handleSendEmails()">
+                                {{ 'POLICY.POLICY_DOCUMENTS.SEND_EMAILS_BTN_TITLE' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 p-0" *ngIf="sucessSearch">
+                <div class="ig-paymentnav">
+                    <ul *ngIf="pager" class="pagination">
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <button type="button" [disabled]="pager.currentPage === 1" (click)="handleNextPage(1)">
+                                <i class="material-icons">first_page</i>
+                            </button>
+                        </li>
+                        <li [ngClass]="{disabled:pager.currentPage === 1}">
+                            <button type="button" [disabled]="pager.currentPage === 1"
+                                (click)="handleNextPage(pager.currentPage - 1)">
+                                <i class="material-icons">chevron_left</i>
+                            </button>
+                        </li>
+                        <li
+                            [ngClass]="{disabled:pager.currentPage === pager.totalPages || policySearchResponse.data === firstPageSize}">
+                            <button type="button"
+                                [disabled]="pager.currentPage === pager.totalPages || policySearchResponse.data === firstPageSize"
+                                (click)="handleNextPage(pager.currentPage + 1)">
+                                <i class="material-icons">chevron_right</i>
+                            </button>
+                        </li>
+                        <li
+                            [ngClass]="{disabled:pager.currentPage === pager.totalPages || policySearchResponse.data === firstPageSize}">
+                            <button type="button"
+                                [disabled]="pager.currentPage === pager.totalPages || policySearchResponse.data === firstPageSize"
+                                (click)="handleNextPage(pager.totalPages)">
+                                <i class="material-icons">last_page</i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </article>
+    </form>
+</section>

@@ -1,0 +1,62 @@
+<!-- MODAL PREHOME PARA PROVEEDORES -->
+<div class="modal-body" *ngIf="user && user.role =='Provider'">
+
+  <div class="row ig-prehome-item">
+
+    <div class="col-md-12">
+      <article class="ig-bienvenida">
+
+        <h3>{{ 'AGENT.HOME.WELCOME' | translate }} {{ user.name }}!</h3>
+
+      </article>
+    </div>
+
+
+    <div class="col-md-12 ig-requestpre">
+
+      <h6 style="font-weight: normal;" [innerHTML]="'MENUOPTIONS.PREHOME.PROVIDER_INFO_MSG' | translate | replaceParams: 0: splitRedirectUrl | replaceParams: 1: providersMail | replaceParams: 2: goToHomeTitleOffsideBusiness"></h6>
+
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="row ig-pre-card no-gutters border rounded overflow-hidden flex-md-row shadow-sm position-relative">
+        <div class="col-md-12 d-flex flex-column position-static">
+          <figure class="figure" style="height: 100%">
+            <img class="img-fluid" [src]="'assets/images/'+ authformCurrentBusiness.toString()" alt="">
+          </figure>
+
+          <a href="" class="texto p-2 ig-btnptre rounded" (click)="cancel();" [routerLink]="['/']">
+            <h3> {{ goToHomeTitleCurrentBusiness }}</h3>
+            <p class="card-text">
+              {{ 'MENUOPTIONS.PREHOME.GOTOHOME_MESSAGE_STAYHERE' |translate }}</p>
+            <div class="ig-chevronrig d-none d-sm-block">
+              <i class="material-icons">chevron_right</i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row ig-pre-card no-gutters border rounded overflow-hidden flex-md-row shadow-sm position-relative">
+        <div class="col-md-12 d-flex flex-column position-static">
+          <figure class="figure" style="height: 100%">
+            <img class="img-fluid" [src]="'assets/images/'+ authformOffsideBusiness.toString()" alt="">
+          </figure>
+
+          <a href={{splitRedirectUrl}} class="texto p-2 ig-btnptre rounded" (click)="cancel();">
+            <h3> {{ goToHomeTitleOffsideBusiness }}</h3>
+            <p class="card-text">
+              {{ 'MENUOPTIONS.PREHOME.GOTOHOME_MESSAGE_REDIRECT' |translate }}</p>
+            <div class="ig-chevronrig d-none d-sm-block">
+              <i class="material-icons">chevron_right</i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

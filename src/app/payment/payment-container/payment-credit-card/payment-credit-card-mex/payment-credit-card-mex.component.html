@@ -1,0 +1,16 @@
+<div class="row">
+
+  <div id="iframe-webpay" class="container-iframe">
+    <div id="iframePaymentMexico" class="processingPaymentWrapper text-center" *ngIf="showLoading">
+      <img src="assets/images/PaymentLoadingMex.png" class="img-fluid-loading-payment-mex"/>
+      <p class="processingPayment">{{ 'PAYMENTS.CONTAINER.PAYMENT_PROCESSING_MEX' | translate }}<span>.</span><span>.</span><span>.</span></p>
+    </div>
+    <iframe id="iframe-internal-webpay" class="responsive-iframe" [src]="payurl | domSecurity: payurl" seamless="seamless" allowfullscreen></iframe>
+  </div>
+
+</div>
+<div class="row">
+  <div class="backpay-brands-mex text-center">
+    <img src="assets/images/SafeKey_Amex_150.png" />
+  </div>
+</div>

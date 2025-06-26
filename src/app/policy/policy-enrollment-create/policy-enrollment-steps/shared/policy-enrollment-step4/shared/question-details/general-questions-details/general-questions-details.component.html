@@ -1,0 +1,159 @@
+<div class="row align-items-end">
+  <div class="col-md-9">
+    <h4 class="bp-contentitle">
+      <i class="material-icons" *ngIf="showValidation && this.getDetails().invalid"
+      [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().invalid}">info</i>
+      {{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_INFO_ADITIONAL' | translate }}
+      <p>{{ 'POLICY.POLICY_ENROLLMENT.STEP4.INFO_EXPLANATION_DETAIL' | translate }}</p>
+    </h4>
+    <hr style="border-color: #0079c8;">
+  </div>
+  <div class="col-md-3">
+    <div class="row align-items-center">
+      <div class="col-md-3">
+        <button class="ig-icondiagnosminim" (click)="changeValueIsExpanded()"
+          type="button"
+          data-toggle="collapse"
+          [attr.data-target]="'#'+question.medicalQuestionReference"
+          aria-expanded="false"
+          [attr.aria-controls]="question.medicalQuestionReference">
+          <i class="material-icons">{{isExpanded ? 'keyboard_arrow_up': 'keyboard_arrow_down'}}</i>
+        </button>
+      </div>
+      <div class="col-md-9">
+        <button class="bp-btn bp-btnprimary" type="button" (click)="addDetail()">
+          <i class="material-icons">add_circle</i> {{ 'APP.BUTTON.ADD_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div  class="collapse" [ngClass]="{'show': isExpanded || showValidation}" data-parent="#accordion"  id="{{question.medicalQuestionReference}}" [formGroup]="questionForm">
+  <div formArrayName="details">
+    <div class="row align-items-center my-3"
+      *ngFor="let detail of getDetails().controls; let i = index; last as lastIndex"
+      [formGroupName]="i">
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12">
+            <h6 style="font-weight: 700;">
+              <i class="material-icons" *ngIf="showValidation && this.getDetails().controls[i].invalid"
+              [ngClass]="{ 'bp-contentitledanger' : showValidation && this.getDetails().controls[i].invalid}">info</i>
+              {{this.getDetails().controls[i].get('memberFullName').value}}
+            </h6>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="member">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEMBER' | translate }}</label>
+              <ng-select #ownerNationalitySelect
+                [items]="members"
+                [selectOnTab]="true"
+                bindValue="applicationMemberGuid"
+                bindLabel="fullName"
+                formControlName="member"
+                class="form-control"
+                [placeholder]="this.getDetails().controls[i].get('member').value !== null && this.getDetails().controls[i].get('member').value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate"
+                (change)="hangleChangedMember($event, i)">
+              </ng-select>
+            </div>
+
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="diseaseMedicalProblem{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_ILLNESS_MEDICAL' | translate }}</label>
+              <textarea cols="30" rows="1" class="form-control"
+                id="diseaseMedicalProblem{{i}}{{question.medicalQuestionReference}}"
+                formControlName="diseaseMedicalProblem"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_ILLNESS_MEDICAL' | translate }}"
+                [required]="this.getDetails().controls[i].get('diseaseMedicalProblem').hasError('required')"
+                maxlength="150"></textarea>
+            </div>
+
+            <div class="form-group"[ngClass]="{'was-validated':showValidation}">
+              <label for="treatment{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_TREATMENT' | translate }}</label>
+              <textarea cols="30" rows="1" class="form-control"
+                id="treatment{{i}}{{question.medicalQuestionReference}}"
+                formControlName="treatment"
+                [required]="this.getDetails().controls[i].get('treatment').hasError('required')"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_TREATMENT' | translate }}"
+                maxlength="285"></textarea>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="dateOfFirstSymptom">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_FIRST_DATE_SYMPTOM' | translate }}</label>
+              <app-custom-popover [content]="['POLICY.POLICY_ENROLLMENT.STEP4.HELP_TOOLTIP']" [icon]="'error'" colorHex="#009ee0"></app-custom-popover>
+              <app-datepicker-wrapper formControlName="dateOfFirstSymptom"
+                [hasErrors]="this.getDetails().controls[i].get('dateOfFirstSymptom').errors"
+                [showValidations]="showValidation"
+                [maxDate] = "maxDateFirstSymptom">
+              </app-datepicker-wrapper>
+              <small class="text-danger" *ngIf="this.getDetails().controls[i].get('dateOfFirstSymptom').hasError('valid') && showValidation">
+                {{'APP.MESSAGE.WRONG_FORMAT' | translate }}
+              </small>
+            </div>
+            <div class="form-group">
+              <label for="treatmentStartDate">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_START_DATE_TREATMENT' | translate }}</label>
+              <app-custom-popover [content]="['POLICY.POLICY_ENROLLMENT.STEP4.HELP_TOOLTIP']" [icon]="'error'" colorHex="#009ee0"></app-custom-popover>
+              <app-datepicker-wrapper formControlName="treatmentStartDate"
+                [hasErrors]="this.getDetails().controls[i].get('treatmentStartDate').errors"
+                [showValidations]="showValidation">
+              </app-datepicker-wrapper>
+              <small class="text-danger" *ngIf="this.getDetails().controls[i].get('treatmentStartDate').hasError('valid') && showValidation">
+                {{'APP.MESSAGE.WRONG_FORMAT' | translate }}
+              </small>
+            </div>
+
+          <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+            <label for="treatmentEndDate{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_END_DATE_TREATMENT' | translate }}</label>
+            <input class="form-control"
+              type="text"
+              id="treatmentEndDate{{i}}{{question.medicalQuestionReference}}"
+              formControlName="treatmentEndDate"
+              placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_END_TREATMENT' | translate }}"
+              [required]="this.getDetails().controls[i].get('treatmentEndDate').hasError('required')"
+              maxlength="57">
+          </div>
+
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="nameOfDoctor{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_NAME_MEDICAL' | translate }}</label>
+              <input type="text" class="form-control"
+                id="nameOfDoctor{{i}}{{question.medicalQuestionReference}}"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_NAME_MEDICAL' | translate }}"
+                formControlName="nameOfDoctor"
+                maxlength="100"
+                pattern="[a-zA-ZAÁÉÍÓÚñÑáéíóú.\s]+"
+                [required]="this.getDetails().controls[i].get('nameOfDoctor').hasError('required')">
+            </div>
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="specialtyOfDoctor{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_SPECIALTY' | translate }}</label>
+              <input type="text" class="form-control"
+                id="specialtyOfDoctor{{i}}{{question.medicalQuestionReference}}"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_SPECIALTY' | translate }}"
+                formControlName="specialtyOfDoctor"
+                maxlength="50"
+                pattern="[a-zA-ZAÁÉÍÓÚñÑáéíóú\s]+"
+                [required]="this.getDetails().controls[i].get('specialtyOfDoctor').hasError('required')">
+            </div>
+            <div class="form-group" [ngClass]="{'was-validated':showValidation}">
+              <label for="phoneNumber{{i}}{{question.medicalQuestionReference}}">{{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_PHONE_NUMBER' | translate }}</label>
+              <input type="tel" class="form-control"
+                id="phoneNumber{{i}}{{question.medicalQuestionReference}}"
+                placeholder="{{ 'POLICY.POLICY_ENROLLMENT.STEP4.PH_PHONE_NUMBER' | translate }}"
+                formControlName="phoneNumber"
+                maxlength="23"
+                [required]="this.getDetails().controls[i].get('phoneNumber').hasError('required')">
+            </div>
+          </div>
+          <div class="col-md-12"><hr></div>
+        </div>
+      </div>
+      <div class="col-md-2" *ngIf="ifGreaterThanCero(i)">
+        <button class="ig-icondiagnosminim" style="cursor: pointer;" type="button" (click) = "deleteDetail(i)">
+          <i class="material-icons"> delete_forever </i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

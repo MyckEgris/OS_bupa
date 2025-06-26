@@ -1,0 +1,57 @@
+{
+    "pageIndex": 1,
+    "pageSize": 10,
+    "count": 17824,
+    "data": [
+        {
+            "id": 1,
+            "code": "0001F ",
+            "description": "Heart failure assessed (includes assessment of all the following components) (CAD): Blood pressure measured (2000F) Level of activity assessed (1003F) Clinical symptoms of volume overload (excess) assessed (1004F) Weight, recorded (2001F) Clinical signs o"
+        },
+        {
+            "id": 5,
+            "code": "0005F ",
+            "description": "Osteoarthritis assessed (OA) Includes assessment of all the following components: Osteoarthritis symptoms and functional status assessed (1006F) Use of anti-inflammatory or over-the-counter (OTC) analgesic medications assessed (1007F) Initial examination "
+        },
+        {
+            "id": 11,
+            "code": "00100 ",
+            "description": "Anesthesia for procedures on salivary glands, including biopsy"
+        },
+        {
+            "id": 14,
+            "code": "00102 ",
+            "description": "Anesthesia for procedures involving plastic repair of cleft lip"
+        },
+        {
+            "id": 15,
+            "code": "00103 ",
+            "description": "Anesthesia for reconstructive procedures of eyelid (eg, blepharoplasty, ptosis surgery)"
+        },
+        {
+            "id": 16,
+            "code": "00104 ",
+            "description": "Anesthesia for electroconvulsive therapy"
+        },
+        {
+            "id": 18,
+            "code": "00120 ",
+            "description": "Anesthesia for procedures on external, middle, and inner ear including biopsy; not otherwise specified"
+        },
+        {
+            "id": 25,
+            "code": "00124 ",
+            "description": "Anesthesia for procedures on external, middle, and inner ear including biopsy; otoscopy"
+        },
+        {
+            "id": 26,
+            "code": "00126 ",
+            "description": "Anesthesia for procedures on external, middle, and inner ear including biopsy; tympanotomy"
+        },
+        {
+            "id": 29,
+            "code": "0012F ",
+            "description": "Community-acquired bacterial pneumonia assessment (includes all of the following components) (CAP): Co-morbid conditions assessed (1026F) Vital signs recorded (2010F) Mental status assessed (2014F) Hydration status assessed (2018F)"
+        }
+    ]
+}

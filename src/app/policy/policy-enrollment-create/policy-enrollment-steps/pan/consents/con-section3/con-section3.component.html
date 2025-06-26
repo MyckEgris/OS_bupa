@@ -1,0 +1,120 @@
+<div class="bp-mainpolicy">
+  <form [formGroup]="wizard.enrollmentForm">
+    <div formGroupName="{{STEP_NAME}}">
+      <div class="bp-itemcontsect2 bp-aviso" formGroupName="{{SECTION_NAME}}">
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <h4 class="bp-contentitle">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.TITLE2' | translate }}
+            </h4>
+          </div>
+          <div class="col-md-4">
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.PARAGRAPH1' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.PARAGRAPH2' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.PARAGRAPH3' | translate }}
+            </p>
+          </div>
+          <div class="col-md-4">
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.PARAGRAPH4' | translate }}
+            </p>
+
+            <div class="col-md-12 my-3" [ngClass]="{ 'border-danger': !getControl(RECOGNITION_AND_AUTHORIZATION_1).value && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="{{RECOGNITION_AND_AUTHORIZATION_1}}" value="" formControlName="{{RECOGNITION_AND_AUTHORIZATION_1}}">
+                <label class="form-check-label" for="{{RECOGNITION_AND_AUTHORIZATION_1}}">
+                  {{'POLICY.POLICY_ENROLLMENT.STEP8.RECOGNITION_AND_AUTH' | translate }}
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12" [ngClass]="{'form-group': true, 'border-danger': getControl(RECOGNITION_AND_AUTHORIZATION_2).invalid && showErrorMsg }">
+                  <p>{{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.PARAGRAPH5' | translate }}</p>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="question1" value="true"
+                      formControlName="{{RECOGNITION_AND_AUTHORIZATION_2}}">
+                    <label class="form-check-label" for="question1">Si</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="question2" value="false"
+                       formControlName="{{RECOGNITION_AND_AUTHORIZATION_2}}">
+                    <label class="form-check-label" for="question2">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="bp-contentitle"> {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.TITLE3' | translate }} </h4>
+            <div class="bp-itemsectpoli">
+              <p> {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.SUBTITLE2' | translate }} </p>
+            </div>
+
+            <div [ngClass]="{'form-group': true, 'border-danger': getControl(PAPERLESS_QUESTION).invalid && showErrorMsg }">
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" value="true" id="paperlessYes"
+                    formControlName="{{PAPERLESS_QUESTION}}">
+                <label class="form-check-label" for="paperlessYes">
+                    {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.QUESTION_01_YES' | translate }}
+                </label>
+              </div>
+
+              <div class="bp-itemsectpoli">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" value="false" id="paperlessNo" formControlName="{{PAPERLESS_QUESTION}}">
+                  <label class="form-check-label" for="paperlessNo">
+                      {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_03.QUESTION_01_NO' | translate }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 p-0"
+          *ngIf="(showErrorMsg && getFormGroup().invalid) || (this.showErrorMsg && getValueDisclaimer())">
+          <div class="bp-alertform">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i>
+              {{'POLICY.POLICY_ENROLLMENT.STEP8.INFORMATION_INCOMPLETE' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 p-0 mt-5">
+          <div class="row">
+            <div class="col-md-4 offset-md-4">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnsecondary" (click)="back()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.BACK' | translate">
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnprimary" (click)="next()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.NEXT' | translate ">
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

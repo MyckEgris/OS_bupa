@@ -1,0 +1,9 @@
+{
+    "count" : 10,
+    "pageindex" : 1,
+    "pageSize" : 10,
+    "data" : [
+        {"policyId":360648,"policyReference":"BGEMX2-15-360648-MEX","policyStatus":"Grace Period","modeOfPayment":"Monthly","modeOfPaymentId":0,"paymentStatus":"","paymentDate":"2018-12-01T00:00:00","daysToPay":0,"isGroupPolicy":0,"amountToPay":12591.37500000000000000,"currencySymbol":"MxP","currencyId":0,"exchangeRate":0.0,"members":[{"memberId":0,"firstName":"ONBC","middleName":null,"lastName":"CESTWE EEPL","fullName":null,"dob":"0001-01-01T00:00:00","policyId":null,"policyNumber":null,"isGroupPolicy":false,"applicationId":null,"contactBaseId":0,"memberStatus":null,"policyStatus":null,"policyCountryId":0,"policyCountry":null,"insuranceBusinessName":null,"insuranceBusinessId":0,"relationTypeId":0,"relationType":null,"genderId":0,"gender":null,"searchDate":"0001-01-01T00:00:00","referenceNumber":null,"requesterName":null,"transactionId":0}],"payments":[]},
+        {"policyId":659120,"policyReference":"BGEMX2-15-360648-MEX","policyStatus":"Grace Period","modeOfPayment":"Monthly","modeOfPaymentId":0,"paymentStatus":"","paymentDate":"2018-12-01T00:00:00","daysToPay":0,"isGroupPolicy":0,"amountToPay":12591.37500000000000000,"currencySymbol":"MxP","currencyId":0,"exchangeRate":0.0,"members":[{"memberId":0,"firstName":"ONBC","middleName":null,"lastName":"CESTWE EEPL","fullName":null,"dob":"0001-01-01T00:00:00","policyId":null,"policyNumber":null,"isGroupPolicy":false,"applicationId":null,"contactBaseId":0,"memberStatus":null,"policyStatus":null,"policyCountryId":0,"policyCountry":null,"insuranceBusinessName":null,"insuranceBusinessId":0,"relationTypeId":0,"relationType":null,"genderId":0,"gender":null,"searchDate":"0001-01-01T00:00:00","referenceNumber":null,"requesterName":null,"transactionId":0}],"payments":[]}
+            ]
+}

@@ -1,0 +1,119 @@
+<section class="bp-mainpolicy">
+  <div class="row align-items-center my-3">
+    <div class="col-md-12">
+      <div class="bp-itemtitle">
+        <!-- <div class="bp-titlenum">
+          {{currentStep}}
+        </div> -->
+        <h2 class="bp-titlepolicy">
+          {{ 'POLICY.POLICY_ENROLLMENT.STEP10.SUBTITLE' | translate }}
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <article class="row">
+
+    <div class="col-md-12">
+      <app-policy-enrollment-info></app-policy-enrollment-info>
+    </div>
+
+    <div class="col-md-12">
+      <div class="bp-itemcontsect2">
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="bp-contentitle">
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP10.H4' | translate }}
+                </h4>
+                <p>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH1' | translate }}
+                </p>
+
+              </div>
+
+              <div class="col-md-8 offset-md-2">
+
+                <div class="row">
+
+                  <div class="col-md-12 my-3">
+                    <div class="row align-items-center">
+                      <div class="col-md-9">
+                        <h6>
+                          {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH2' | translate }}
+                        </h6>
+                        <p>
+                          {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH2_1' | translate }}
+                        </p>
+                      </div>
+                      <div class="col-md-3">
+                        <button class="bp-btn bp-btnsecondary" (click)="downloadFile()">
+                          <i class="material-icons"> vertical_align_bottom </i>
+                          {{ 'POLICY.POLICY_ENROLLMENT.STEP10.LBL_BUTTON' | translate }}
+                        </button>
+                      </div>
+                    </div>
+                    <hr style="border-top: 1px solid rgba(0, 0, 0, 0.5);">
+                  </div>
+
+                  <div class="col-md-12 my-3">
+                    <h6>
+                      {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH3' | translate }}
+                    </h6>
+                    <p [innerHTML] = "'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH3_1' | translate"> </p>
+                    <hr style="border-top: 1px solid rgba(0, 0, 0, 0.5);">
+                  </div>
+
+                  <div class="col-md-12 my-3">
+                    <h6>
+                      {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH5' | translate }}
+                    </h6>
+                    <ng-container *ngIf="wizard.policyApplicationModel.petitioner.petitionerTypeId === petitionerPolicyHolder || wizard.policyApplicationModel.petitioner.petitionerTypeId === petitionerIndividual">
+                      <p> {{'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH5_1' | translate}} 
+                        <a [href]="'POLICY.POLICY_ENROLLMENT.STEP10.LINK_FORM_INDIVIDUAL' | translate" target="_blank"> - Descargar</a> 
+                      </p>
+                    </ng-container>
+                    <ng-container *ngIf="wizard.policyApplicationModel.petitioner.petitionerTypeId === petitionerCompany"> 
+                      <p> {{'POLICY.POLICY_ENROLLMENT.STEP10.PARAGRAPH5_2' | translate}} 
+                        <a [href]="'POLICY.POLICY_ENROLLMENT.STEP10.LINK_FORM_COMPANY' | translate" target="_blank"> - Descargar</a> 
+                      </p>
+                    </ng-container>
+                    <hr style="border-top: 1px solid rgba(0, 0, 0, 0.5);">
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4 offset-md-4">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <button type="button" class="bp-btn bp-btnsecondary" (click)="back()">
+                      {{'POLICY.POLICY_ENROLLMENT.BACK' | translate}}
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="button" class="bp-btn bp-btnprimary" (click)="createPolicyApplication()">
+                      {{ 'POLICY.POLICY_ENROLLMENT.STEP10.LBL_BUTTON2' | translate }}
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,88 @@
+{
+    "pageIndex": 1,
+    "pageSize": 10,
+    "count": 6,
+    "data": [
+        {
+            "policyId": 81472,
+            "legacyNumber": "04180624       ",
+            "policyReference": "VS1-04-028840-VIR",
+            "policyStatus": "Active",
+            "modeOfPayment": "Semi Annual",
+            "policyCountry": "Ecuador",
+            "modeOfPaymentId": 0,
+            "paymentStatus": null,
+            "paymentDate": null,
+            "daysToPay": null,
+            "isGroupPolicy": 0,
+            "amountToPay": 0.64000000000000000,
+            "policyPremium": 0.64000000000000000,
+            "amountUSDToPay": 0.640000000,
+            "groupId": 0,
+            "groupName": "APG HealthCare Plan",
+            "currencySymbol": "$",
+            "currencyId": 192,
+            "exchangeRate": 1.0000000000000000000,
+            "plan": "VS1",
+            "printIdCard" : true,
+            "hasGeoBlueIdCard" : true,
+            "policyDates": [
+                {
+                    "applicationReceived": "08/14/2018"
+                },
+                {
+                    "policyIssueDate": "08/14/2018"
+                },
+                {
+                    "renewalDate": "08/14/2018"
+                }
+            ],
+            "agent": {
+                "agentName": "Harold Robbins"
+            },
+            "members": [
+                {
+                    "memberId": 194823,
+                    "firstName": "SSTCIFP",
+                    "middleName": null,
+                    "lastName": "LRIGRJ",
+                    "fullName": null,
+                    "dob": "0001-01-01T00:00:00",
+                    "policyId": null,
+                    "policyNumber": null,
+                    "isGroupPolicy": false,
+                    "applicationId": null,
+                    "contactBaseId": 0,
+                    "memberStatus": null,
+                    "policyStatus": null,
+                    "countryId": 0,
+                    "country": null,
+                    "insuranceBusinessName": null,
+                    "insuranceBusinessId": 0,
+                    "relationTypeId": 0,
+                    "relationType": null,
+                    "genderId": 0,
+                    "gender": null,
+                    "searchDate": "0001-01-01T00:00:00",
+                    "referenceNumber": null,
+                    "requesterName": null,
+                    "transactionId": 0,
+                    "address": "123 Happy Road at Bupa",
+                    "email": null
+                }
+            ],
+            "payments": [{
+                "amount": 7341.04,
+                "currencySymbol": "$",
+                "paymentDate": "2018-11-19T10:59:48.913",
+                "paymentMethod": "Online Credit Card",
+                "accountNumber": "8004",
+                "confirmationNumber": "247028",
+                "reference": "",
+                "paymentStatus": "Closed",
+                "policyId": 50446,
+                "paymentId": 10489769
+            }]
+        }
+    ]
+}

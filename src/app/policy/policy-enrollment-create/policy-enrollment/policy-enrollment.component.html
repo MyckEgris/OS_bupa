@@ -1,0 +1,10 @@
+<!-- <button class="btn btn-light" [routerLink]="'/policies/enrollment-application-view'">&lt; {{ 'POLICY.APPLICATION.ONLINE_APPLICATION_ENROLLMENT' | translate }}</button> -->
+<section class="ig-policyapp ig-wizarsolicitud animated fadeIn">
+  <ng-container *ngIf="!isSummary">
+    <app-multi-step-wizard [currentStep]="currentStep" 
+      [checkPoint] = "wizard.policyApplicationModel?.currentStepCompleted">
+
+    </app-multi-step-wizard>
+  </ng-container>
+  <router-outlet></router-outlet>
+</section>

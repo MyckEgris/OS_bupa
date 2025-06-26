@@ -1,0 +1,14 @@
+<div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+  <label for="policyOwnerGenre">
+    {{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.CIVIL_STATUS' | translate }}
+  </label>
+  <ng-select #maritalStatusSelect 
+    [items]="wizard.listMaritalStatus$ | translateObservableListMaritalStatusPipe | async" 
+    [selectOnTab]="true"
+    bindValue="maritalStatusId" 
+    bindLabel="name" 
+    [formControl]="getControl(formControlNameCustom)"
+    class="form-control" 
+    [placeholder]="getControl(formControlNameCustom).value !== null && getControl(formControlNameCustom).value !== '' ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+  </ng-select>
+</div>

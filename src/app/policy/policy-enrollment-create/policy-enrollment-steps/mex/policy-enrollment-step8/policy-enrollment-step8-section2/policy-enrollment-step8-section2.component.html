@@ -1,0 +1,130 @@
+<div class="bp-mainpolicy">
+  <form [formGroup]="wizard.enrollmentForm">
+    <div formGroupName="{{STEP_NAME}}">
+      <div class="bp-itemcontsect2 bp-aviso" formGroupName="{{SECTION_NAME}}">
+        <div class="row">
+          <div class="col-md-12">
+       
+            <h4 class="bp-contentitle mb-2"  [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.SUBTITLE' | translate"></h4>
+      
+            
+          </div>
+
+          <div class="col-md-4">
+
+
+            <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.DISCLAIMER1' | translate"> </p>
+          </div>
+          <div class="col-md-4">
+            <div [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.DISCLAIMER2' | translate">
+            </div>
+            <div [ngClass]="{ 
+                  'border-danger': getControl(QUESTION_HABEAS).invalid && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="CHECK_YES" value="true"
+                  formControlName="{{QUESTION_HABEAS}}">
+                <label class="form-check-label"
+                  for="CHECK_YES">{{'POLICY.POLICY_ENROLLMENT.STEP8.CHECK_YES' | translate }}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="CHECK_NO" value="false"
+                  formControlName="{{QUESTION_HABEAS}}">
+                <label class="form-check-label"
+                  for="CHECK_NO">{{'POLICY.POLICY_ENROLLMENT.STEP8.CHECK_NO' | translate }}</label>
+              </div>
+            </div>
+            <div class="col-md-12 p-0" *ngIf="getControl(QUESTION_HABEAS).value==='false'">
+              <div class="bp-alertform">
+                <div class="card-message2" role="alert">
+                  <i class="material-icons">warning</i>
+                  {{'POLICY.POLICY_ENROLLMENT.STEP8.NO_AUTH_INFO' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.DISCLAIMER3_1' | translate">
+            </p>
+            <div [ngClass]="{ 
+                  'border-danger': getControl(QUESTION_OBLIGATION).invalid && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="QUESTION_OBLIGATION_YES" value="true"
+                  formControlName="{{QUESTION_OBLIGATION}}">
+                <label class="form-check-label"
+                  for="QUESTION_OBLIGATION_YES">{{'POLICY.POLICY_ENROLLMENT.STEP8.CHECK_YES' | translate }}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="QUESTION_OBLIGATION_NO" value="false"
+                  formControlName="{{QUESTION_OBLIGATION}}">
+                <label class="form-check-label"
+                  for="QUESTION_OBLIGATION_NO">{{'POLICY.POLICY_ENROLLMENT.STEP8.CHECK_NO' | translate }}</label>
+              </div>
+            </div>
+            <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.DISCLAIMER3_2' | translate">
+            </p>
+            <div [ngClass]="{ 
+                  'border-danger': getControl(QUESTION_SCOPES_AND_FUNCTIONS).invalid && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="QUESTION_SCOPES_AND_FUNCTIONS_YES" value="true"
+                  formControlName="{{QUESTION_SCOPES_AND_FUNCTIONS}}">
+                <label class="form-check-label"
+                  for="QUESTION_SCOPES_AND_FUNCTIONS_YES">{{'POLICY.POLICY_ENROLLMENT.STEP8.CHECK_YES' | translate }}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="QUESTION_SCOPES_AND_FUNCTIONS_NO" value="false"
+                  formControlName="{{QUESTION_SCOPES_AND_FUNCTIONS}}">
+                <label class="form-check-label"
+                  for="QUESTION_SCOPES_AND_FUNCTIONS_NO">{{'POLICY.POLICY_ENROLLMENT.STEP8.CHECK_NO' | translate }}</label>
+              </div>
+            </div>
+
+            <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.DISCLAIMER3_3' | translate">
+            </p>
+          </div>
+          <div class="col-md-12 my-4" [ngClass]="{ 
+                'border-danger': !getControl(DISCLAIMER_CHECK).value && showErrorMsg }">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="{{DISCLAIMER_CHECK}}" value=""
+                formControlName="{{DISCLAIMER_CHECK}}">
+              <label class="form-check-label"
+                for="disclaimerCheck">{{'POLICY.POLICY_ENROLLMENT.STEP8.ACCEPT_TERMS_AND_SCOPES' | translate }}</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 p-0"
+          *ngIf="showErrorMsg && getFormGroup().invalid || showErrorMsg && !this.getControl(DISCLAIMER_CHECK).value ">
+          <div class="bp-alertform">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i>
+              {{'POLICY.POLICY_ENROLLMENT.STEP8.INFORMATION_INCOMPLETE' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 p-0 mt-2">
+          <div class="row">
+            <div class="col-md-4 offset-md-4">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnsecondary" (click)="back()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.BACK' | translate">
+
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnprimary" (click)="next()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.NEXT' | translate ">
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "5F3W9QA56L.mx.com.bupa.bupamexico",
+                "paths": ["/activationAccount", "/resetPassword", "/deleteAccount"]
+            }
+        ]
+    }
+}

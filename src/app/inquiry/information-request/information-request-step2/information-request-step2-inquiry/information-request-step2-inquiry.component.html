@@ -1,0 +1,98 @@
+<section class="ig-informationrequest">
+  <form class="ig-requestdatos">
+    <div class="col-md-12 ig-enviarcon">
+
+      <div class="row" *ngIf="wizard.infoRequestForm.controls['policyNumber'].value && wizard.member">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.INSURED' | translate }} </h5>
+          <p> {{ wizard.member.policyReference }} <br>
+            {{ wizard.member.fullName }} ({{ wizard.member.dob | dateTranslate }}) </p>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="oldInquiry">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.RELATED' | translate }} </h5>
+          <p> {{ oldInquiry.ticketNumber }} </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.TITLE' | translate }} </h5>
+          <p> {{ wizard.infoRequestForm.controls['title'].value }} </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.SUBJECT' | translate }} </h5>
+          <p> {{ wizard.subject.text }} </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.DETAILS' | translate }} </h5>
+          <p> {{ wizard.infoRequestForm.controls['details'].value }} </p>
+        </div>
+
+      </div>
+
+      <div class="row" *ngIf="wizard.documents && wizard.documents.length > 0">
+        <div class="col-md-12">
+          <h5 class="ig-datos"> {{ 'INQUIRY.INFORMATION_REQUEST.DOCUMENTS' | translate }} </h5>
+          <p class="ig-files-scroll" #fileScroll>
+            <span *ngFor="let document of wizard.documents"
+              [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+              {{ document.file.name }} - {{ getFileSize(document.file) }}
+              <span *ngIf="document.loadingStatus === 'LOADING'">({{ document.progress }} %) </span>
+              <span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span>
+              <br> </span>
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"
+                (change)="changeConfirm($event)">
+              <label class="form-check-label" for="defaultCheck1">
+                <p style="margin-bottom: 0;" [innerHTML]="'INQUIRY.INFORMATION_REQUEST.STEP_2.TYC_HTML' | translate">
+                </p>
+              </label>
+              <div class="col-md-12">
+                <small class="text-danger" *ngIf="showError">
+                  {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-7 offset-md-5">
+          <div class="row">
+            <div class="col-md-4">
+              <button style="width: 100%;" class="ig-principalbtn ig-botones" type="button" (click)="cancel()">
+                {{ 'INQUIRY.INFORMATION_REQUEST.CANCEL' | translate }} </button>
+            </div>
+            <div class="col-md-4">
+              <button style="width: 100%;" class="ig-principalsegundariobtn ig-botones" type="button" (click)="back()">
+                {{ 'INQUIRY.INFORMATION_REQUEST.GO_BACK' | translate }} </button>
+            </div>
+            <div class="col-md-4">
+              <button style="width: 100%;" class="ig-principalbtn ig-botones" type="button" (click)="save()"
+                [ngClass]="'ig-principalbtn ig-botones'">
+                {{ 'INQUIRY.INFORMATION_REQUEST.SUBMIT' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</section>

@@ -1,0 +1,336 @@
+<section>
+    <article class="col-md-12">
+
+        <div class="ig-memberbtn" *ngIf="buttonVisible">
+            <div class="col-md-4 offset-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="ig-botones ig-principalbtn"
+                            (click)="printEligibility();">{{ 'APP.IMPRIMIR' | translate }}</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="ig-botones ig-principalsegundariobtn"
+                            onclick="window.close();">{{ 'APP.CERRAR' | translate }}</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <img class="img-fluid" src="https://www.bupasalud.com.mx/sites/default/files/logo.png" alt="">
+            </div>
+        </div>
+
+        <h4 class="ig-bold">{{ 'APP.VOE_TITLE' | translate }}</h4>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="ig-membold">
+                    <p>{{ 'APP.NOMBRE_ASEGURADO' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="ig-memlig">
+                    <p>{{memberName}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-membold">
+                    <p>{{ 'APP.NOMBRE_PROVEEDOR' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="ig-memlig">
+                    <p>{{requesterName}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="ig-membold">
+                    <p>{{ 'APP.NUMERO_POLIZA' | translate }}:</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-memlig">
+                    <p>{{policyNumber}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-membold">
+                    <p>{{ 'APP.NUMERO_REFERENCIA' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-memlig">
+                    <p>{{referenceNumber}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-membold">
+                    <p>{{ 'APP.DOB' | translate }}:</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-memlig">
+                    <p>{{ memberBirthDate}}</p>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="ig-membold">
+                    <p>{{ 'APP.FECHA_VOE' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-memlig">
+                    <p>{{today}} EST</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-membold">
+                    <p>{{ 'APP.ESTADO_ELEGIBILIDAD' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="ig-membold" style="color: black">
+                    <p>{{memberStatus}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="ig-membold" style="color: black">
+                    <p>{{ 'APP.VALIDO_24_HORAS' | translate }}</p>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 ig-requestpre2" *ngIf="isEligibility">
+
+                <div class="ig-mainben" *ngIf="!mainBenefitsError || !otherBenefitsError">
+
+                    <div class="col-md-12 p-0 ">
+
+                        <div class="" *ngIf="mainBenefits && !mainBenefitsError">
+
+                            <div class="ig-title">
+                                <h5>{{ 'POLICY.BENEFITS.PRINCIPAL_BENEFTIS_TITLE' | translate }}</h5>
+                            </div>
+
+                            <br>
+
+                            <div class="" *ngFor="let mainBenefit of mainBenefits.data">
+
+                                <div class="col-md-12 p-0">
+                                    <div class=" row col-md-12"
+                                        *ngIf="mainBenefit.accumulatorDescription || mainBenefit.accumulatorBenefitByLanguages">
+                                        <h5>
+                                            {{ filterParameterByLanguaje(ACCUMULATOR_BENEFIT, mainBenefit.accumulatorBenefitByLanguages, mainBenefit.accumulatorDescription) | titlecase }}
+                                        </h5>
+                                    </div>
+                                    <div class="row align-items-end"
+                                        *ngFor="let mainScope of mainBenefit.benefitScopes">
+                                        <div class="col" *ngIf="validateScopeDescription(mainScope.scope)">
+                                            <p div class="ig-valores">
+                                                {{mainScope.scope}}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.SCOPE' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{mainScope.valueType}}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.UNIT' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{mainScope.limitValue | currency: 'USD' }}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.LIMIT_VALUE' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{mainScope.usedValue | currency: 'USD' }}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.USED_VALUE' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{mainScope.limitValue - mainScope.usedValue | currency: 'USD' }}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.PROV_REMAIND' | translate }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="" *ngIf="mainBenefitsError">
+
+                            <div class="ig-title">
+                                <h5>{{ 'POLICY.BENEFITS.PRINCIPAL_BENEFTIS_TITLE' | translate }}</h5>
+                            </div>
+
+                            <br>
+
+                            <div class="ig-searchresul">
+                                <p>{{ 'POLICY.BENEFITS.PROV_MAIN_ERROR_MSG' | translate }}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 p-0">
+
+                        <div class="ig-border-top" *ngIf="otherBenefits && !otherBenefitsError">
+
+                            <div class="ig-title">
+                                <h5>{{ 'POLICY.BENEFITS.OTHER_BENEFITS_TITLE' | translate }}</h5>
+                            </div>
+                            
+                            <br>
+
+                            <div class="" *ngFor="let otherBenefit of otherBenefits.data">
+
+                                <div class="col-md-12 p-0">
+                                    <div class=" row col-md-12"
+                                        *ngIf="otherBenefit.accumulatorDescription || otherBenefit.accumulatorBenefitByLanguages">
+                                        <h5>
+                                            {{ filterParameterByLanguaje(ACCUMULATOR_BENEFIT, otherBenefit.accumulatorBenefitByLanguages, otherBenefit.accumulatorDescription) | titlecase }}
+                                        </h5>
+                                    </div>
+                                    <div class="row align-items-end"
+                                        *ngFor="let otherScope of otherBenefit.benefitScopes">
+                                        <div class="col" *ngIf="validateScopeDescription(otherScope.scope)">
+                                            <p div class="ig-valores">
+                                                {{otherScope.scope}}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.SCOPE' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{otherScope.valueType}}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.UNIT' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{otherScope.limitValue | currency: 'USD' }}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.LIMIT_VALUE' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{otherScope.usedValue | currency: 'USD' }}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.USED_VALUE' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col">
+                                            <p div class="ig-valores">
+                                                {{otherScope.limitValue - otherScope.usedValue | currency: 'USD' }}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.PROV_REMAIND' | translate }}
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-12 mt-2" *ngIf="otherScope.diagnosticByLanguages.length > 0">
+                                            <p>
+                                                {{ filterParameterByLanguaje(DIAGNOSTIC, otherScope.diagnosticByLanguages) }}
+                                            </p>
+                                            <h6>
+                                                {{ 'POLICY.BENEFITS.ILLNESS' | translate }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="" *ngIf="otherBenefitsError">
+
+                            <div class="ig-title">
+                                <h5>{{ 'POLICY.BENEFITS.OTHER_BENEFITS_TITLE' | translate }}</h5>
+                            </div>
+
+                            <br>
+
+                            <div class="ig-searchresul">
+                                <p>{{ 'POLICY.BENEFITS.PROV_OTHER_ERROR_MSG' | translate }}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="" *ngIf="mainBenefitsError && otherBenefitsError">
+
+                    <div class="ig-searchresul">
+                        <p>{{ 'POLICY.BENEFITS.PROV_ERROR_MSG' | translate }}</p>
+                    </div>
+
+                </div>
+
+                <div class="" *ngIf="riders">
+                    <div class="ig-riders">
+                        <h5>{{ 'POLICY.BENEFITS.OTHER_BENEFITS_RIDER_MSG' | translate }}</h5>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+           <!-- <div class="ig-avisoimport p-3">
+                <h5>{{ 'APP.AVISO_IMPORTANTE' | translate }}</h5>
+                <p [innerHtml]=" 'APP.CONTENIDO_AVISO_IMPORTANTE' | translate ">
+                </p>
+            </div>-->
+
+        </div>
+
+    </article>
+</section>

@@ -1,0 +1,232 @@
+<section class="ig-datosend ig-formulario">
+  <article class="row">
+    <!-- Información solicitante  -->
+
+    <div class="col-md-6" *ngIf="itemsContacts">
+      <div class="row">
+
+        <div class="col-md-12">
+          <h6 class="ig-infotil"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.TITLE' | translate }} </h6>
+        </div>
+        <div class="col-md-12">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_3.INSURED_NAME' | translate }} </p>
+          <h6>
+            {{  wizard.member.fullName}}
+          </h6>
+        </div>
+        <div class="col-md-6">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_3.POLICY_NUMBER' | translate }} </p>
+          <!--<h6>
+            {{ getControlMember().get('policyNumber').value }}
+          </h6>-->
+          <h6>
+            {{ wizard.policyDto.policyReference }}
+          </h6>
+        </div>
+        <div class="col-md-6">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.COUNTRY' | translate }} </p>
+          <h6>
+            {{ (getControlMember().get('country').value).countryName }}
+          </h6>
+        </div>
+
+        <div *ngIf="itemsProvider && itemsProvider.controls.length > 0">
+          <div class="col-md-12">
+            <hr>
+            <h5>
+              {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.OTHER' | translate }}
+            </h5>
+          </div>
+          <!-- Información Proveedor -->
+          <div class="col-md-12">
+            <div class="row ig-preautoconte" *ngFor="let p of itemsProvider.controls; let i = index">
+
+              <div class="col-md-12">
+                <h6 class="ig-preautotitle">
+                    {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_3.PROVIDER' | translate }} {{ i + 1 }}
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.NAME_PROVIDER' | translate }} </p>
+                <h6>
+                  {{ p.get('facilityName').value }}
+                </h6>
+              </div>
+
+              <div class="col-md-6">
+                <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.NAME_MEDICAL' | translate }} </p>
+                <h6>
+                  {{ p.get('physicianName').value }}
+                </h6>
+              </div>
+              <div class="col-md-6">
+                <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_PROVIDER' | translate }} </p>
+                <h6>
+                  {{ p.get('phoneNumberProvider').value }}
+                </h6>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Contacto asegurado -->
+
+        <div class="col-md-12">
+          <hr>
+          <h5>
+            {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.CONTACT_INSURED' | translate }}
+          </h5>
+        </div>
+        <div class="col-md-12">
+          <div class="row ig-preautoconte"  *ngFor="let c of itemsContacts.controls; let i = index">
+          
+            <div class="col-md-12">
+              <h6 class="ig-preautotitle">
+                  {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_3.CONTACT' | translate }} {{ i + 1 }}
+              </h6>
+            </div>
+          
+            <div class="col-md-4">
+              <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_CONTACT_NAME' | translate }} </p>
+              <h6>
+                {{ c.get('emergencyContactName').value }}
+              </h6>
+            </div>
+          
+            <div class="col-md-4">
+              <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_IN_COUNTRY' | translate }} </p>
+              <h6>
+                {{ c.get('phoneInCountry').value }}
+              </h6>
+            </div>
+          
+            <div class="col-md-4">
+              <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMAIL_ADDRESS' | translate }} </p>
+              <h6>
+                {{ c.get('emailAddress').value }}
+              </h6>
+            </div>
+          
+            <div class="col-md-4">
+              <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_CONTACT_PHONE' | translate }} </p>
+              <h6>
+                {{ c.get('emergencyContactPhone').value }}
+              </h6>
+            </div>
+          
+            <div class="col-md-4">
+              <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_OUT_COUNTRY' | translate }} </p>
+              <h6>
+                {{ c.get('phoneOutCountry').value }}
+              </h6>
+            </div>
+          
+            <div class="col-md-4">
+              <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.EMERGENCY_RELATION_CUSTOMER' | translate }} </p>
+              <h6>
+                {{ c.get('emergencyRelationToTheCustomer').value }}
+              </h6>
+            </div>
+          
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Información medica  -->
+    <div class="col-md-6">
+      <div class="row">
+
+        <div class="col-md-12">
+          <h6 class="ig-infotil"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.TITLE' | translate }} </h6>
+        </div>
+        <div class="col-md-4">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.INCURRED_DATE' | translate }} </p>
+          <h6>
+            {{ getMedicalInformation().get('incurredDate').value | dateTranslate: 'APP.DATE_FORMAT'}}
+          </h6>
+        </div>
+        <div class="col-md-4">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.ADMISSION_DATE' | translate }} </p>
+          <h6>
+            {{ getMedicalInformation().get('admissionDate').value | dateTranslate: 'APP.DATE_FORMAT'}}
+          </h6>
+        </div>
+        <div class="col-md-4">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.LENGTH_STAY_REQUESTED' | translate }} </p>
+          <h6>
+            {{ getMedicalInformation().get('lengthOfStayRequested').value }}
+          </h6>
+        </div>
+        <div class="col-md-4" *ngIf="wizard.requestType">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.REQUEST_TYPE' | translate }} </p>
+          <h6>
+            {{'CLAIMS.PRE_AUTHORIZATION.REQUEST_TYPE.' | concatenate: wizard.requestType?.description | replacespaces: '_' | uppercase | translate }}
+          </h6>
+        </div>
+        <div class="col-md-6" *ngIf="wizard.serviceType">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.SERVICE_TYPE' | translate }} </p>
+          <h6>
+            {{'CLAIMS.PRE_AUTHORIZATION.SERVICE_TYPE.' | concatenate: wizard.serviceType?.description | replacespaces: '_' | uppercase | translate}}
+          </h6>
+        </div>
+        <div class="col-md-12" *ngIf="wizard.documents && wizard.documents.length > 0">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.DOCUMENTS' | translate }} </p>
+          <ul class="ig-files-scroll" #fileScroll>
+            <li *ngFor="let document of wizard.documents"
+              [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+              {{ document.file.name }} - {{ getFileSize(document.file) }}
+          
+              <span *ngIf="document.loadingStatus === 'LOADING'">({{ document.progress }} %) </span>
+              <span *ngIf="document.loadingStatus === 'LOADED'"><i class="fa fa-check-circle"></i></span>
+              <br>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12" *ngIf="wizard.listDiagnosticSelected && wizard.listDiagnosticSelected.length > 0">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.DIAGNOSTICS' | translate }} </p>
+          <ul>
+            <li *ngFor="let diag of wizard.listDiagnosticSelected">
+                <strong> {{ diag.code }} - </strong> {{ diag.description }}
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12" *ngIf="wizard.listProcedureSelected && wizard.listProcedureSelected.length > 0">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.PROCEDURES' | translate }} </p>
+          <ul>
+            <li *ngFor="let proc of wizard.listProcedureSelected">
+                <strong> {{ proc.code }} </strong> - {{ proc.description }}
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12">
+          <p> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.NOTES' | translate }} </p>
+          <h6> {{ getMedicalInformation().get('notes').value }} </h6>
+        </div>
+
+      </div>
+    </div>
+
+    <br>
+    <br>
+    <div class="col-md-12">
+      <div class="col-md-4 offset-md-8">
+        <div class="row">
+          <div class="col-md-6">
+            <button class="ig-principallinkbtn ig-botones" style="width: 100%;" type="button" (click)="back()">
+              {{ 'CLAIMS.PRE_AUTHORIZATION.BACK' | translate }} </button>
+          </div>
+          <div class="col-md-6">
+            <button style="width: 100%;" type="button"
+              [disabled]="((wizard.preAuthForm.invalid))"
+              [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : ((wizard.preAuthForm.invalid))  }"
+              (click)="submit()"> {{ 'CLAIMS.PRE_AUTHORIZATION.SUBMIT' | translate }} </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

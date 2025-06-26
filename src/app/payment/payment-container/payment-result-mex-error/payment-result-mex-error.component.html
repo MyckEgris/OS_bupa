@@ -1,0 +1,44 @@
+<div class="container" >
+  <app-payment-credit-card-steps [currentStep]="2"></app-payment-credit-card-steps>
+  <div class="row p-1 text-center">
+    <p class="w-100"></p>
+  </div>
+  <div class="row justify-content-center">
+
+    <div class="col-md-5 cardmsg">
+      <div class="row">
+        <figure><img src="assets/images/DeclinePaymentMex.png" alt=""></figure>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <p class="notification-payment-mex">{{ 'PAYMENTS.OK_RESULT.DECLINED_MEX' | translate }}</p>
+            <p class="h6"><strong>{{ 'PAYMENTS.OK_RESULT.DECLINED_MEX_MESSAGE' | translate }}</strong></p>
+            <p class="h6">
+              {{ 'PAYMENTS.OK_RESULT.DECLINED_MEX_RAZON' | translate }}
+            </p>
+            <p class="h6">{{ error }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+  <div class="row p-5 text-center">
+    <p class="h6" [innerHTML]="'PAYMENTS.ERRORS.PAYMENT_DECLINED_CONTACT' | translate">
+    </p>
+  </div>
+  
+  <div class="row">
+
+    <div [ngClass]="{ 'col-md-4':  true, 'mx-auto': true }">
+      <a  class="ig-botones ig-principalbtn" *ngIf="isAuserAnonymous"
+        (click)="goToBack()">{{ 'PAYMENTS.OK_RESULT.BACK_LOGIN' | translate }}</a>
+
+        <a  class="ig-botones ig-principalbtn" *ngIf="!isAuserAnonymous"
+        (click)="goToBack()">{{  'PAYMENTS.OK_RESULT.BACK_PAYMENTS' | translate }}</a>
+    </div>
+  </div>
+</div>

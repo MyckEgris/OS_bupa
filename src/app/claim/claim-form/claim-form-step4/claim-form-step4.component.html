@@ -1,0 +1,87 @@
+<section class="ig-requestpre setup-content animated fadeIn" id="step-4">
+    <form action="">
+        <div class="col-md-12">
+            <div class="bp-itemcontsect2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p [innerHtml]="'CLAIMFORM.STEP4TITLE' | translate"></p>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="add-documents">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 botton-div">
+
+                                <div class="row align-items-center">
+                                    <div class="col-md-7">
+                                        <h6>{{ 'CLAIMFORM.STEP3DESCFILE' | translate }}</h6>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="upload">
+                                            <app-upload [typeAttachment]="type3"></app-upload>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+                                    <div class="ig-file-scroll">
+                                        <div class="row">
+                                            <div class="col-md-12" *ngFor="let document of documents">
+                                                <div class="inline-text-icon" *ngIf="document.category === type3">
+                                                    <i class="fa" [ngClass]="document.icon"></i>
+                                                    <span class="text-list">
+                                                        {{document.file.name}}
+                                                        <div class="ig-icofile">
+                                                            <a href="#" title="Eliminar"
+                                                                (click)="removeDocument(document, $event)">
+                                                                <i class="material-icons">delete</i>
+                                                            </a>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>{{ 'CLAIMFORM.UPLOAD_FILES_MSG' | translate }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="row">
+                <div class="col-md-12">
+
+                    <div class="row align-items-end">
+                        <div class="col-md-4">
+                            <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="cancel()">
+                                {{ 'CLAIMFORM.BTNS.CANCEL' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="back()">
+                                {{ 'CLAIMFORM.BTNS.BACK' | translate }}
+                            </button>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button class="ig-botones ig-principalbtn" type="button" (click)="next()">
+                                {{ 'CLAIMFORM.BTNS.CONTINUE' | translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </form>
+</section>

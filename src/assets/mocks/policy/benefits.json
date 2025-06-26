@@ -1,0 +1,75 @@
+{
+    "pageIndex": 1,
+    "pageSize": 5,
+    "count": 2,
+    "data": [
+        {
+            "policyId": 28184,
+            "memberId": 74870,
+            " groupBenefitType ": 1,
+            " benefitType ": "Deductible",
+            "accumulatorDefinitionId": 164,
+            "accumulatorDescription": "DEDUCT. PER POLICY YR PER INSU",
+            "benefitScopes": [
+                {
+                    "scope": "In Country",
+                    "limitValue": 5000.00,
+                    "usedValue": 0.00,
+                    "remainderValue": 5000.00,
+                    "diagnosticName ": null,
+                    "valueType": "USD"
+                },
+                {
+                    "scope": "Out Of Country",
+                    "limitValue": 5000.00,
+                    "usedValue": 0.00,
+                    "remainderValue": 5000.00,
+                    "diagnosticName ": null,
+                    "valueType": "USD"
+                }
+            ],
+            "accumulatorBenefitByLanguages": [
+                {
+                    "languageId": 1,
+                    "accumulatorDefinitionId": 164,
+                    "accumulatorDescription": "Deductible per Person"
+                },
+                {
+                    "languageId": 2,
+                    "accumulatorDefinitionId": 164,
+                    "accumulatorDescription": "Deducible por Persona"
+                }
+            ]
+        },
+        {
+            "policyId": 28184,
+            "memberId": 74870,
+            "groupBenefitType": 1,
+            "benefitType": "Deductible",
+            "accumulatorDefinitionId": 166,
+            "accumulatorDescription": "DEDUCT PER POLICY YEAR - 2 MAX",
+            "benefitScopes": [
+                {
+                    "scope": "unique",
+                    "limitValue": 10000.00,
+                    "usedValue": 0.00,
+                    "remainderValue": 10000.00,
+                    "diagnosticName": null,
+                    "valueType": "USD"
+                }
+            ],
+            "accumulatorBenefitByLanguages": [
+                {
+                    "languageId": 1,
+                    "accumulatorDefinitionId": 166,
+                    "accumulatorDescription": "Deductible per Family"
+                },
+                {
+                    "languageId": 2,
+                    "accumulatorDefinitionId": 166,
+                    "accumulatorDescription": "Deducible por Familia"
+                }
+            ]
+        }
+    ]
+}

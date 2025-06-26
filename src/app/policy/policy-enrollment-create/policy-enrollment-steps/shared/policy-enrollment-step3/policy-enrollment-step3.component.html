@@ -1,0 +1,101 @@
+<section class="bp-mainpolicy" *ngIf="wizard.enrollmentForm">
+  <form [formGroup]="wizard.enrollmentForm">
+    <article class="row" formGroupName="policyApplicationDependents">
+
+      <div class="col-md-12">
+        <div class="bp-itemtitle">
+          <!-- <div class="bp-titlenum">
+            {{ currentStep }}
+          </div> -->
+          <h2 class="bp-titlepolicy">
+            {{ 'POLICY.POLICY_ENROLLMENT.STEP3.SUBTITLE' | translate }}
+          </h2>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <app-policy-enrollment-info></app-policy-enrollment-info>
+      </div>
+
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+          <div class="row align-items-end">
+            <div class="col-md-10">
+              <h4 class="bp-contentitle">
+                {{ 'POLICY.POLICY_ENROLLMENT.STEP3.SUB_TITLE' | translate }}
+              </h4>
+              <hr>
+            </div>
+            <div class="col-md-2">
+              <button class="bp-btn bp-btnprimary" type="button" (click)="prevalidateAddMember()">
+                <i class="material-icons">add_circle</i> {{ 'POLICY.POLICY_ENROLLMENT.STEP3.ADD' | translate }}
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <p> {{ 'POLICY.POLICY_ENROLLMENT.STEP3.ADD_TOOLTIP' | translate }} </p>
+            </div>
+          </div>
+
+          <div class="col-md-12 bp-alertform  mt-0"
+            *ngIf="showValidations && wizard.enrollmentForm.get('policyApplicationDependents').invalid && showValidationsAdd">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i> {{ 'POLICY.POLICY_ENROLLMENT.ALERT_COMPLETE_FORM' | translate }}
+            </div>
+          </div>
+
+          <div class="col-md-12 bp-alertform  mt-0" *ngIf="showMsgOnlySpouse">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP3.MESSAGES.MSG_ONLY_ONE_SPOUSE' | translate }}
+            </div>
+          </div>
+
+          <div formArrayName="items">
+            <div *ngFor="let item of getItems().controls; let i = index; last as isLast" style="margin-top: 20px"
+              class="animated fadeInUp">
+              <app-member [numberIndexMember]="i" [currentStep]="currentStep" [showValidations]="showValidations"
+                [isLastDependent]="isLast" >
+              </app-member>
+            </div>
+          </div>
+
+          <div class="col-md-12 bp-alertform  mt-0"
+            *ngIf="showValidations && wizard.enrollmentForm.get('policyApplicationDependents').invalid && showValidationsNext">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i> {{ 'POLICY.POLICY_ENROLLMENT.ALERT_COMPLETE_FORM' | translate }}
+            </div>
+          </div>
+
+          <div class="col-md-12 bp-alertform  mt-0" *ngIf="showMsgOnlySpouse">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP3.MESSAGES.MSG_ONLY_ONE_SPOUSE' | translate }}
+            </div>
+          </div>
+
+          <div class="col-md-12 mt-5">
+            <div class="row">
+              <div class="col-md-4 offset-md-4">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <button class="bp-btn bp-btnsecondary" (click)="back()">
+                      {{'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="bp-btn bp-btnprimary" (click)="next()">
+                      {{'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </form>
+</section>

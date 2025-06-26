@@ -1,0 +1,246 @@
+<section class="bp-mainpolicy">
+  <article class="row">
+    <div class="col-md-12">
+      <form class="was-validated' : formInvalid" [formGroup]="formAddNetworks" novalidate>
+
+        <div class="col-md-12">
+          <div class="bp-itemtitle mt-4">
+            <h2 class="bp-titlepolicy">
+              {{ 'NETWORK.ADD_NETWORKS.TITLE_01' | translate }}
+            </h2>
+          </div>
+          <p class="mt-2">
+            {{ 'NETWORK.ADD_NETWORKS.TITLE_02' | translate }}
+          </p>
+        </div>
+
+        <div formGroupName="filterCriteria">
+          <div class="col-md-12 my-4">
+            <div class="row align-items-end">
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label>{{ 'NETWORK.ADD_NETWORKS.BUSSINESS_CTRL_LBL' | translate }}</label>
+                  <ng-select #selectBussinessId [items]="bussinessResponse" [selectOnTab]="true" bindValue="id"
+                    bindLabel="name" formControlName="bussinessId" class="form-control">
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label>{{ 'NETWORK.ADD_NETWORKS.PRODUCT_CTRL_LBL' | translate }}</label>
+                  <ng-select #selectProductKey [items]="productsResponse" [selectOnTab]="true" bind="product"
+                    bindLabel="name" formControlName="product" class="form-control">
+                  </ng-select>
+                </div>
+              </div>
+
+              <div class="col-md-1">
+                <button class="bp-btn bp-btnprimary" [ngClass]="{disabled: filterCriteriaInvalid()}"
+                  (click)="generateNetworksRequest(INIT_PAGE, false)">
+                  <i class="material-icons">search</i>
+                </button>
+              </div>
+
+              <div class="col-md-1">
+                <button class="bp-btn bp-btnsecondary" [ngClass]="{disabled: filterCriteriaEmpty()}"
+                  (click)="cleanFilterValuesAndSearch(false)">
+                  <i class="material-icons">delete</i>
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-12 my-3" *ngIf="sucessSearch">
+            <div class="row align-items-start">
+              <div class="col-md-12">
+                <h6 style="font-weight: 700;">
+                  {{ 'NETWORK.ADD_NETWORKS.PRODUCT_DETAIL' | translate }}
+                </h6>
+              </div>
+
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <Label> {{ 'NETWORK.ADD_NETWORKS.PRODUCT_EXTERNAL_ID' | translate }}</Label>
+                  <input type="text" disabled=true class="form-control" formControlName="externalProductId">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <Label>  {{ 'NETWORK.ADD_NETWORKS.PRODUCT' | translate }}</Label>
+                  <input type="text" disabled= true formControlName="description" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-4"
+                [ngClass]="{
+                'border-danger': getControl(this.FILTER_CRITERIA_FG, IS_PRODUCT_CLOSED).invalid && formInvalid && filterCriteriaInvalid()  }">
+                <div class="form-group">
+                  <label style="width: 100%;">
+                    {{ 'NETWORK.ADD_NETWORKS.IS_CLOSED_PRODUCT' | translate }}
+                  </label>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="CHECK_YES" value='true'
+                      formControlName="{{IS_PRODUCT_CLOSED}}">
+                    <label class="CHECK_YES" for="inlineCheckbox1">{{ 'NETWORK.ADD_NETWORKS.YES' | translate }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="CHECK_NO" value='false'
+                      formControlName="{{IS_PRODUCT_CLOSED}}">
+                    <label class="form-check-label" for="CHECK_NO">{{ 'NETWORK.ADD_NETWORKS.NOT' | translate }}</label>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+
+          <div class="row align-items-end" *ngIf="sucessSearch">
+
+            <div class="col-md-10">
+              <h6 style="font-weight: 700;">
+                {{ 'NETWORK.ADD_NETWORKS.NETWORKS_TITLE' | translate }}
+              </h6>
+              <hr>
+            </div>
+
+            <div class="col-md-2">
+              <div class="row align-items-center">
+                <div class="col-md-10 offset-2">
+                  <button class="bp-btn bp-btnprimary" type="button" data-toggle="modal"
+                    data-target=".bd-example-modal-lg" (click)="openModalExcludedNetworks()">
+                    <i class="material-icons">add_circle</i>
+                    {{ 'NETWORK.ADD_NETWORKS.NETWORKS_BTN' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="bp-netprov" *ngIf="networksResponse.data.length > 0">
+            <div class="row align-items-center">
+              <div class="col-md-12 mt-2" formArrayName="networksList">
+                <table class="table">
+
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col"> {{ 'NETWORK.ADD_NETWORKS.NETWORK_NAME' | translate }} </th>
+                      <th scope="col"> {{ 'NETWORK.ADD_NETWORKS.NETWORK_ID' | translate }} </th>
+                      <th scope="col"> {{ 'NETWORK.ADD_NETWORKS.NETWORK_DEDUCTIBLE' | translate }} </th>
+                      <th scope="col"> {{ 'NETWORK.ADD_NETWORKS.NETWORK_COINSURANCE' | translate }} </th>
+                      <th scope="col"> {{ 'NETWORK.ADD_NETWORKS.NETWORK_FROM_DATE' | translate }} </th>
+                      <th scope="col"> {{ 'NETWORK.ADD_NETWORKS.NETWORK_TO_DATE' | translate }} </th>
+                      <th scope="col" *ngIf="false">Accion</th>
+                    </tr>
+                  </thead>
+
+                  <tbody *ngFor="let item of networksResponse.data ; let i = index;">
+                    <tr [formGroupName]="i">
+
+                      <th scope="row">
+                        {{item.network.networkName}}
+                      </th>
+
+                      <td>
+                        {{item.network.networkId}}
+                      </td>
+
+                      <td class="form-group">
+                        <input type="text" class="form-control" placeholder="" formControlName="deductibleAmount"
+                          [ngClass]="{'is-invalid': getNestedControl(i, DEDUCTIBLE_CTRL).invalid && formInvalid,  'is-valid': getNestedControl(i, DEDUCTIBLE_CTRL).valid && formInvalid}">
+                      </td>
+
+                      <td class="form-group">
+                        <input type="text" class="form-control" placeholder="" formControlName="coinsurancePercent"
+                          [ngClass]="{'is-invalid': getNestedControl(i, COINSURANCE_CTRL).invalid && formInvalid,  'is-valid': getNestedControl(i, COINSURANCE_CTRL).valid && formInvalid}">
+                      </td>
+
+                      <td class="form-group">
+                        <app-datepicker-wrapper formControlName="fromDate"
+                          [dateValue]="getNestedControl(i, FROM_DATE_CTRL).value"
+                          [hasErrors]="getNestedControl(i, FROM_DATE_CTRL).errors ? true: false"
+                          [showValidations]="formInvalid">
+                        </app-datepicker-wrapper>
+                      </td>
+
+                      <td class="form-group">
+                        <app-datepicker-wrapper formControlName="toDate"
+                          [dateValue]="getNestedControl(i, TO_DATE_CTRL).value"
+                          [hasErrors]="getNestedControl(i, TO_DATE_CTRL).errors ? true: false"
+                          [showValidations]="formInvalid">
+                        </app-datepicker-wrapper>
+                      </td>
+
+                      <td *ngIf="false">
+                        <button class="ig-icondiagnosminim" style="cursor: pointer;" type="button">
+                          <i class="material-icons">
+                            delete_forever
+                          </i>
+                        </button>
+                      </td>
+
+                    </tr>
+                  </tbody>
+
+                </table>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="networksResponse.data.length > 0">
+            <div class="col-md-12" *ngIf="formInvalid && formAddNetworks.get(this.NETWORKS_LIST_FA).invalid">
+              <div class="bp-alertform">
+                <div class="alert alert-danger text-center">
+                  <i class="material-icons">info</i>
+                  {{ 'NETWORK.ADD_NETWORKS.ALERT_COMPLETE_FORM' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="networksResponse.data.length > 0">
+            <div class="col-md-12">
+              <div *ngIf="collectionSize > PAGE_SIZE"
+                style="justify-content: center;display: flex;width: 100%; margin-top:15px;">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="PAGE_SIZE"
+                  [pageSize]="PAGE_SIZE" [rotate]="true" [boundaryLinks]="true"
+                  (pageChange)="generateNetworksRequest($event, true)">
+                </ngb-pagination>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12" *ngIf="sucessSearch">
+            <div class="row">
+              <div class="col-md-12 ig-searchresul animated fadeIn" *ngIf="networksResponse.data.length === 0">
+                <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+                <p>{{ 'NETWORK.ADD_NETWORKS.DIAGNOSTIC_NOT_FOUND' | translate }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="sucessSearch">
+            <div class="col-md-2 offset-md-5">
+              <button class="ig-botones ngclass ig-principalbtn" type="button" (click)="continue()">
+                {{ 'NETWORK.ADD_NETWORKS.SUBMIT_NETWORKS_BTN' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+
+      </form>
+    </div>
+  </article>
+</section>

@@ -1,0 +1,155 @@
+<div class="bp-mainpolicy">
+  <form [formGroup]="wizard.enrollmentForm">
+    <div formGroupName="{{STEP_NAME}}">
+      <div class="bp-itemcontsect2 bp-aviso" formGroupName="{{SECTION_NAME}}">
+        <div class="row ">
+          <div class="col-md-4">
+            <div class="bp-itemsectpoli">
+              <div class="row align-items-center">
+                <div class="col-md-4">
+                  <img class="img-fluid" src="./assets/images/declaracion.png" alt="">
+                </div>
+                <div class="col-md-8 p-0">
+                  <h4 class="bp-contentitle">
+                    {{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.TITLE1' | translate}}
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <h6 class="mt-3">
+              {{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.SUBTITLE1' | translate}}
+            </h6>
+            <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.DISCLAIMER1' | translate"></p>
+            <div class="col-md-12 mt-5" [ngClass]="{
+              'border-danger': !getControl(DISCLAIMER_LAWFUL).value && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="{{DISCLAIMER_LAWFUL}}"
+                  formControlName="{{DISCLAIMER_LAWFUL}}" value="">
+                <label class="form-check-label" for="{{DISCLAIMER_LAWFUL}}">
+                  {{'POLICY.POLICY_ENROLLMENT.STEP8.ACCEPT_LAWFUL_OF_RESOURCES' | translate}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <h4 class="bp-contentitle">
+                  {{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.TITLE2' | translate}}
+                </h4>
+                <h4 class="bp-contentitle">
+                  {{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.SUBTITLE2' | translate}}
+                </h4>
+              </div>
+              <div class="col-md-6">
+
+                <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.DISCLAIMER2' | translate"></p>
+              </div>
+              <div class="col-md-6">
+                <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.DISCLAIMER3' | translate"></p>
+                <br>
+
+                <div class="">
+
+                  <div class="form-group"
+                    [ngClass]="{ 'was-validated' : getControl(PROMOTER_KEY).invalid && showErrorMsg }">
+                    <label>{{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.PROMOTER_KEY' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="{{PROMOTER_KEY}}" [placeholder]="getControl(PROMOTER_KEY).value !== null && getControl(PROMOTER_KEY).value !== ''
+                      ? '': 'POLICY.POLICY_ENROLLMENT.STEP8.PROMOTER_KEY_EX' | translate "
+                      [required]="getControl(PROMOTER_KEY).hasError('required')"
+                      [pattern]="getValidatorValue(PROMOTER_KEY, 'pattern')" [ngClass]="{'is-invalid': getControl(PROMOTER_KEY).invalid && showErrorMsg ,
+                      'is-valid': getControl(PROMOTER_KEY).valid && showErrorMsg }">
+
+                    <div class="invalid-feedback" *ngIf="getControl(PROMOTER_KEY).hasError('pattern')">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(PROMOTER_KEY, 'pattern') | uppercase | translate}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl(PROMOTER_KEY).hasError('maxlength')">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(PROMOTER_KEY, 'maxLength') | uppercase | translate}}
+                      {{getControl(PROMOTER_KEY).errors?.maxlength.requiredLength}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl(PROMOTER_KEY).hasError('minlength')">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(PROMOTER_KEY, 'minLength') | uppercase | translate}}
+                      {{getControl(PROMOTER_KEY).errors?.minlength.requiredLength}}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="{{EMAIL_CONSENTS}}">
+                      {{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.EMAIL' | translate}}
+                    </label>
+                    <input type="text" class="form-control" formControlName="{{EMAIL_CONSENTS}}" [placeholder]="getControl(EMAIL_CONSENTS).value !== null && getControl(EMAIL_CONSENTS).value !== ''
+                      ? '': 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_EMAIL' | translate "
+                      [required]="getControl(EMAIL_CONSENTS).errors?.required"
+                      [maxLength]="getValidatorValue(EMAIL_CONSENTS, 'maxLength')"
+                      [minlength]="getValidatorValue(EMAIL_CONSENTS, 'minlength')"
+                      [pattern]="getValidatorValue(EMAIL_CONSENTS, 'pattern')" [ngClass]="{'is-invalid': getControl(EMAIL_CONSENTS).invalid && showErrorMsg ,
+                      'is-valid': getControl(EMAIL_CONSENTS).valid && showErrorMsg }">
+
+                    <div class="invalid-feedback" *ngIf="getControl(EMAIL_CONSENTS).errors?.invalidEmail">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(EMAIL_CONSENTS, 'emailPatternValidator') | uppercase | translate}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl(EMAIL_CONSENTS).errors?.maxlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(EMAIL_CONSENTS, 'maxLength') | uppercase | translate}}
+                      {{getControl(EMAIL_CONSENTS).errors?.maxlength.requiredLength}}
+                    </div>
+                    <div class="invalid-feedback" *ngIf="getControl(EMAIL_CONSENTS).errors?.minlength">
+                      {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(EMAIL_CONSENTS, 'minLength') | uppercase | translate}}
+                      {{getControl(EMAIL_CONSENTS).errors?.minlength.requiredLength}}
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-md-12 mt-5" [ngClass]="{
+                  'border-danger': !getControl(DISCLAIMER_RECOGNITION).value && showErrorMsg }">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="{{DISCLAIMER_RECOGNITION}}" value=""
+                      formControlName="{{DISCLAIMER_RECOGNITION}}">
+                    <label class="form-check-label" for="{{DISCLAIMER_RECOGNITION}}">
+                      {{'POLICY.POLICY_ENROLLMENT.STEP8.RECOGNITION_AND_AUTH' | translate}}</label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-12 p-0">
+          <div class="bp-alertform"
+            *ngIf="(showErrorMsg && getFormGroup().invalid)||(showErrorMsg  && getValueDisclaimer())">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i>
+              {{'POLICY.POLICY_ENROLLMENT.STEP8.INFORMATION_INCOMPLETE' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 p-0 mt-5">
+          <div class="row">
+            <div class="col-md-4 offset-md-4">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnsecondary" (click)="back()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.BACK' | translate">
+
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnprimary" (click)="next()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate ">
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+</div>

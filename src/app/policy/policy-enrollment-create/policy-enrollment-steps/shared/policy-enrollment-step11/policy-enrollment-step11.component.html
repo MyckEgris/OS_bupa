@@ -1,0 +1,182 @@
+<section class="bp-mainpolicy bp-mainpolicyadjunt ">
+  <form class="" [formGroup]="wizard.enrollmentForm">
+    <div class="row align-items-center">
+      <div class="col-md-12">
+        <div class="bp-itemtitle">
+          <div class="bp-titlenum">
+            {{currentStep}}
+          </div>
+          <h2 class="bp-titlepolicy">
+            {{'POLICY.POLICY_ENROLLMENT.STEP11.TITLE' | translate }}
+          </h2>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <app-policy-enrollment-info></app-policy-enrollment-info>
+      </div>
+    </div>
+
+
+    <article class="row">
+
+      <div class="col-md-12">
+
+        <div class="bp-itemcontsect">
+
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <h4 class="bp-contentitle">
+                {{'POLICY.POLICY_ENROLLMENT.STEP11.IMPORTANT' | translate }}
+              </h4>
+            </div>
+
+            <div class="col-md-10">
+              <div class="bp-itemsectpoli">
+                <figure>
+                  <img src="assets/images/001-file.svg" alt="">
+                </figure>
+                <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP11.LEGEND' | translate ">
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+          <h4 class="bp-contentitle mb-3">
+            {{'POLICY.POLICY_ENROLLMENT.STEP11.INSTRUCTIONS' | translate }}
+          </h4>
+          <p [innerHtml]="'POLICY.POLICY_ENROLLMENT.STEP11.LIBRARY' | translate "></p>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <div
+                    *ngIf="wizard.policyApplicationModel.petitionerTypeId === 3 || wizard.policyApplicationModel.petitionerTypeId === 1 ">
+                    <h6>
+                      {{'POLICY.POLICY_ENROLLMENT.STEP11.PHYSICAL_TITLE' | translate }}
+                    </h6>
+
+                    <div class="col-md-12 bp-heigadjunt" *ngIf="rulesByPhysicalPetitioner.length > 0">
+                      <div class="form-group form-check" *ngFor="let rule of rulesByPhysicalPetitioner">
+                        <input type="checkbox" class="form-check-input" [id]="rule.rulesByBusinessId" [value]="rule"
+                          [checked]="setChecked(rule)" (change)="addOrRemoveRulesDocuments(1, rule, $event)">
+                        <label class="form-check-label" [for]="rule.rulesByBusinessId">
+                          {{ rule.ruleDescription }}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="wizard.policyApplicationModel.petitionerTypeId === 2">
+                    <h6>
+                      {{'POLICY.POLICY_ENROLLMENT.STEP11.MORAL_TITLE' | translate }}
+                    </h6>
+                    <div class="col-md-12 bp-heigadjunt" *ngIf="rulesByMoralPetitioner.length > 0">
+                      <div class="form-group form-check" *ngFor="let rule of rulesByMoralPetitioner">
+                        <input type="checkbox" class="form-check-input" [id]="rule.rulesByBusinessId" [value]="rule"
+                          [checked]="setChecked(rule)" (change)="addOrRemoveRulesDocuments(2, rule, $event)">
+                        <label class="form-check-label" [for]="rule.rulesByBusinessId">
+                          {{ rule.ruleDescription }}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h6>
+                    {{'POLICY.POLICY_ENROLLMENT.STEP11.OWNER_TITLE' | translate }}
+                  </h6>
+
+                  <div class="bp-heigadjunt" *ngIf="rulesByOwner.length > 0">
+                    <div class="form-group form-check" *ngFor="let rule of rulesByOwner">
+                      <input type="checkbox" class="form-check-input" [id]="rule.rulesByBusinessId" [value]="rule"
+                        [checked]="setChecked(rule)" (change)="addOrRemoveRulesDocuments(3, rule, $event)">
+                      <label class="form-check-label" [for]="rule.rulesByBusinessId">
+                        {{ rule.ruleDescription }}</label>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <h6 *ngIf="documents.length > 0">
+                    {{'POLICY.POLICY_ENROLLMENT.STEP11.LOADED' | translate }}
+                  </h6>
+
+                  <div class="bp-heigadjunt bp-scrollable" *ngIf="documents.length > 0">
+                    <div class="bp-itemsectpoli my-2" *ngFor="let document of documents">
+                      <i class="material-icons" style="margin-right: 10px; color: gray;">description</i>
+                      <p style="width: 220px;" [title]="document.file.name">
+                        {{getFileName(document.file.name)}} - {{ getFileSize(document.file) }}
+                      </p>
+                      <a href="" style="margin-left: 20px; text-align: left;"
+                        (click)="removeDocument(document, $event)">
+                        <i class="material-icons"> delete_forever </i>
+                      </a>
+                    </div>
+                    <hr>
+                  </div>
+
+                  <div class="col-md-7 offset-md-2">
+                    <div class="upload">
+                      <app-upload [typeAttachment]="'type1'" [fileTypes]="'policyAplicationFileTypes'"
+                        [maxFileSize]="10">
+                      </app-upload>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12" *ngIf="showValidateMessage">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i>{{'POLICY.POLICY_ENROLLMENT.STEP11.VALIDATE' | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12" *ngIf="showMinDocumentsMessage">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i>
+                  {{'POLICY.POLICY_ENROLLMENT.STEP11.VALIDATE_MIN' | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12" *ngIf="showValidateMessage">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i>
+                  {{'POLICY.POLICY_ENROLLMENT.STEP11.VALIDATE_MAX' | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4 offset-md-4">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <button class="bp-btn bp-btnsecondary" (click)="back()">
+                        {{'POLICY.POLICY_ENROLLMENT.STEP11.BACK' | translate }}
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <button class="bp-btn bp-btnprimary" (click)="next()">
+                        {{'POLICY.POLICY_ENROLLMENT.STEP11.NEXT' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </article>
+  </form>
+</section>

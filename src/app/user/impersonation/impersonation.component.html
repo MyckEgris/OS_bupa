@@ -1,0 +1,76 @@
+<div class="ig-impers ig-validation">
+
+  <div class="ig-adminselect ig-searchpol">
+    <div class="col-md-12">
+    <div>
+        <h4>{{'USER.IMPERSONATION.TITLE' | translate }}</h4>
+      <p>
+          {{'USER.IMPERSONATION.MESSAGE.TITLE' | translate }}
+      </p>
+    </div>
+
+    <br>
+    <div class="p-0">
+
+      <form [formGroup]="impersonationForm" (ngSubmit)="newFilterUserImpersonation(impersonationForm.value)" novalidate
+        class="">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <select class="custom-select form-control" id="userSearchType" formControlName="userSearchType"
+                required="" (change)="onChangeTypeOfUser($event)">
+                <option *ngFor="let searchType of userSearchType" [ngValue]="searchType" >
+                  {{'USER.IMPERSONATION.ROLES.'
+                    | concatenate: searchType.value | uppercase | translate }}</option>
+              </select>
+              <div class="invalid-feedback">
+                Validar Campo
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4" *ngIf="selectedTypeOfUser !== 0">
+            <div class="form-group mb-3">
+              <input type="text" class="form-control" id="agentId" placeholder="{{'USER.IMPERSONATION.LABEL.' | concatenate: impersonationForm.value.userSearchType.value | uppercase | translate }}" value=""
+                required="" formControlName="agentId" appOnlyNumber="true">
+              <div class="invalid-feedback">
+                Validar Campo
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-sm-2 col-6">
+            <button type="submit"
+              [disabled]="impersonationForm.invalid || impersonationForm.value.userSearchType.id==userSearchType[0]"
+              [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : impersonationForm.invalid || impersonationForm.value.userSearchType==userSearchType[0]  }"><i
+                class="material-icons" style="font-size: 24px">search</i></button>
+          </div>
+
+          <div class="col-lg-1 col-sm-2 col-6">
+            <button type="button" (click)="clearFields(true)" class="ig-principalsegundariobtn ig-botones btnclean" data-toggle="tooltip" data-placement="top">
+              <i class="material-icons" style="font-size: 24px"> delete_sweep </i>
+              <!-- <span class="tooltiptext"> {{ 'POLICY.VIEW_POLICY_DETAILS.CLEAN_FILTER' | translate }}</span> -->
+            </button>
+          </div>
+
+          <div class="col-md-12" *ngIf="userImpersonalized">
+              <div class="form-group form-check" *ngFor="let user of userImpersonalized">
+                  <input type="radio" (change)="selectUser($event)" class="form-check-input" formControlName="user" value="{{user.id}}" id={{user.id}}>
+                  <label class="form-check-label" for="{{user.id}}">
+                      {{ user.name }}
+                  </label>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 offset-md-9">
+          <button type="button" (click)="validImpersonationUser()" [disabled]="diseabledImpersonation"
+          class="btn btn-lg btn-block btn-outline-primary" >
+            {{'USER.IMPERSONATION.BUTTON' | translate }}
+            </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>

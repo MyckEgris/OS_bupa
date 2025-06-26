@@ -1,0 +1,60 @@
+<section class="bp-mainpolicy" *ngIf="wizard.enrollmentForm">
+  <form [formGroup]="wizard.enrollmentForm" novalidate (ngSubmit)="next()">
+    <article class="row">
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12 mb-2">
+                  <h4 class="bp-contentitle">
+                    {{ 'POLICY.POLICY_ENROLLMENT.STEP10.CORPORATE_STRUCTURE.TITLE' | translate }}
+                  </h4>
+                  <p> {{ 'POLICY.POLICY_ENROLLMENT.STEP10.CORPORATE_STRUCTURE.SUBTITLE' | translate }}
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Principales funcionarios y consejeros -->
+              <app-main-officers-advisors [showValidations]="showValidations"></app-main-officers-advisors>
+
+              <!-- Porcentaje que representa su participación en el Capital Social -->
+              <app-main-sharedholders [showValidations]="showValidations"></app-main-sharedholders>
+            </div>
+
+            <div class="col-md-12" 
+              *ngIf="showValidations && (formEnrollmentPetitioner.get('itemsOfficerAdvisors').invalid 
+                        || formEnrollmentPetitioner.get('itemsSharedholders').invalid)">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i> {{ 'POLICY.POLICY_ENROLLMENT.ALERT_COMPLETE_FORM' | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4 offset-md-4">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <button class="bp-btn bp-btnsecondary" (click)="back()" type="button">
+                        {{'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <button class="bp-btn bp-btnprimary" type="submit">
+                        {{'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </article>
+  </form>
+</section>

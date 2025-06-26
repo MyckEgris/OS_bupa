@@ -1,0 +1,42 @@
+<svg id="calculatorbl" xmlns="http://www.w3.org/2000/svg" width="46" height="63.333" viewBox="0 0 46 63.333">
+  <g id="Grupo_447" data-name="Grupo 447">
+    <g id="Grupo_446" data-name="Grupo 446">
+      <path id="Trazado_226" data-name="Trazado 226" d="M83.24,0H42.76A2.984,2.984,0,0,0,40,3.167v57a2.984,2.984,0,0,0,2.76,3.167H83.24A2.984,2.984,0,0,0,86,60.167v-57A2.984,2.984,0,0,0,83.24,0Zm.92,60.167a1,1,0,0,1-.92,1.056H42.76a1,1,0,0,1-.92-1.056v-57a1,1,0,0,1,.92-1.056H83.24a1,1,0,0,1,.92,1.056Z" transform="translate(-40)" fill="#114065"/>
+    </g>
+  </g>
+  <g id="Grupo_449" data-name="Grupo 449" transform="translate(4.6 3.68)">
+    <g id="Grupo_448" data-name="Grupo 448">
+      <path id="Trazado_227" data-name="Trazado 227" d="M115.88,32H80.92a.92.92,0,0,0-.92.92V44.88a.92.92,0,0,0,.92.92h34.96a.92.92,0,0,0,.92-.92V32.92A.92.92,0,0,0,115.88,32Zm-.92,11.96H81.84V33.84h33.12Z" transform="translate(-80 -32)" fill="#114065"/>
+    </g>
+  </g>
+  <g id="Grupo_459" data-name="Grupo 459" transform="translate(9.2 25.984)">
+    <g id="Grupo_458" data-name="Grupo 458">
+      <path id="Trazado_232" data-name="Trazado 232" d="M125.52,195.68V192h-1.84v3.68H120v1.84h3.68v3.68h1.84v-3.68h3.68v-1.84Z" transform="translate(-120 -192)" fill="#114065"/>
+    </g>
+  </g>
+  <g id="Grupo_461" data-name="Grupo 461" transform="translate(9.896 48.391)">
+    <g id="Grupo_460" data-name="Grupo 460">
+      <path id="Trazado_233" data-name="Trazado 233" d="M133.863,351.365l-1.3-1.3-2.6,2.6-2.6-2.6-1.3,1.3,2.6,2.6-2.6,2.6,1.3,1.3,2.6-2.6,2.6,2.6,1.3-1.3-2.6-2.6Z" transform="translate(-126.056 -350.064)" fill="#114065"/>
+    </g>
+  </g>
+  <g id="Grupo_463" data-name="Grupo 463" transform="translate(28.304 48.392)">
+    <g id="Grupo_462" data-name="Grupo 462" transform="translate(0 0)">
+      <rect id="Rectángulo_142" data-name="Rectángulo 142" width="9.2" height="1.84" transform="matrix(0.707, -0.707, 0.707, 0.707, 0, 6.505)" fill="#114065"/>
+    </g>
+  </g>
+  <g id="Grupo_465" data-name="Grupo 465" transform="translate(28 29.975)">
+    <g id="Grupo_464" data-name="Grupo 464" transform="translate(0 0)">
+      <rect id="Rectángulo_143" data-name="Rectángulo 143" width="9" height="2" transform="translate(0 0.025)" fill="#114065"/>
+    </g>
+  </g>
+  <g id="Grupo_467" data-name="Grupo 467" transform="translate(26.68 44.966)">
+    <g id="Grupo_466" data-name="Grupo 466">
+      <path id="Trazado_234" data-name="Trazado 234" d="M274.76,336a2.76,2.76,0,1,0,2.76,2.76A2.76,2.76,0,0,0,274.76,336Zm0,3.68a.92.92,0,1,1,.92-.92A.92.92,0,0,1,274.76,339.68Z" transform="translate(-272 -336)" fill="#114065"/>
+    </g>
+  </g>
+  <g id="Grupo_469" data-name="Grupo 469" transform="translate(32.2 52.293)">
+    <g id="Grupo_468" data-name="Grupo 468">
+      <path id="Trazado_235" data-name="Trazado 235" d="M322.76,384a2.76,2.76,0,1,0,2.76,2.76A2.76,2.76,0,0,0,322.76,384Zm0,3.68a.92.92,0,1,1,.92-.92A.92.92,0,0,1,322.76,387.68Z" transform="translate(-320 -384)" fill="#114065"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,297 @@
+<section class="ig-validation ">
+  <form action="" class="ig-searchpolconten">
+
+    <div class="col-md-3">
+      <div class="">
+        <a (click)="goToBack()" style="cursor: pointer;" class="ig-botones ig-secundariobtn"
+          *appHideIfRole="'PolicyHolder,GroupPolicyHolder'">
+          <i class="material-icons">chevron_left</i> {{ 'APP.GO_BACK' | translate }}
+        </a>
+      </div>
+    </div>
+
+    <div class="ig-polizasseardetall" *ngIf="policyDto">
+      <div class="ig-resultados">
+
+        <div class="ig-polizaagent" style="width:100%;">
+          <div class="row  align-items-center">
+            <div class="col-md-3">
+              <h5>{{policyDto.policyReference}}
+                <app-custom-popover [title]="" [content]="tooltip" *ngIf="policyDto.legacyNumber"></app-custom-popover>
+              </h5>
+            </div>
+            <div class="col-md-9">
+              <h6 *ngIf="policyDto.agent!==null"><span>{{ 'POLICY.VIEW_POLICY_DETAILS.AGENT' | translate }}:</span>
+                {{policyDto.agent?.agentName}} -
+                {{policyDto.agent?.agentId }}
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="ig-resultpolizaagent">
+
+          <div class="ig-resultpolizacont">
+
+            <div class="row align-items-center">
+
+              <div class="col-md-3">
+                <h6 class="active-status ig-procesotext"
+                  *ngIf="policyDto.policyStatusId !== 0 && policyDto.policyStatus !== ''">
+                  {{'POLICY.POLICYSTATUS.' | concatenate: policyDto.policyStatus | replacespaces: '_' | uppercase |
+                  translate}}
+                </h6>
+              </div>
+
+              <div class="col-md-5">
+                <h6>
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.PLAN' | translate }}: {{policyDto.planDescription}}
+                </h6>
+              </div>
+
+              <div class="col-md-3 text-right">
+                <h6 class="ig-grupo" style="color:#9da719; font-weight: 700;" *ngIf="policyDto.isGroupPolicy === 1">
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.GROUP' | translate }} {{ policyDto.groupId }} -
+                  {{ policyDto.groupName }}
+                </h6>
+              </div>
+
+              <div class="col-md-2">
+                <h6>
+                  {{policyDto.policyCountry}}
+                </h6>
+              </div>
+
+            </div>
+
+            <div class="row align-items-center">
+
+              <div class="col-md-3">
+                <h5 *ngIf="mainMember">
+                  {{mainMember.firstName}} <br>
+                  {{mainMember.middleName ? mainMember.middleName : ''}} <br *ngIf="mainMember.middleName">
+                  {{mainMember.lastName}}
+                </h5>
+                <p class="textosmall">
+                  {{policyDto.policyReference}}
+                </p>
+              </div>
+
+              <div class="col-md-3">
+                <div class="row">
+
+                  <div class="col-md-8" *ngIf="policyDto.isGroupPolicy === 0">
+                    <h4 class="ig-processvalor">
+                      {{ policyDto.currencyCode}} {{policyDto.policyPremium | number:'1.2-2'}}
+                    </h4>
+                    <p class="textosmall">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.PRIME' | translate }}
+                    </p>
+                  </div>
+
+                  <div class="col-md-12">
+                    <p class="textosmall">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.PAYMENT_TYPE' | translate }}:
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.MODE_OF_PAYMENT.' | concatenate:policyDto.modeOfPayment | uppercase | translate }}
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="row align-items-center" *ngFor="let date of policyDto.policyDates">
+                  <div class="col-md-6"
+                    *ngIf="(listDatesToShow.indexOf(date.policyDateId) > -1) && date.policyDateValue">
+                    <h6>
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.'| concatenate: date.policyDateName | replacespaces: '_' | uppercase |
+                      translate}}
+                    </h6>
+                  </div>
+                  <div class="col-md-6 text-right"
+                    *ngIf="(listDatesToShow.indexOf(date.policyDateId) > -1) && date.policyDateValue">
+                    <h6>
+                      {{ date.policyDateValue | dateTranslate: 'APP.DATE_FORMAT'}}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2">
+                <div class="row align-items-center" *ngIf="handleShowCertificateBtn()">
+                  <div class="col-md-12">
+                    <button class="ig-botones ig-principalbtn" type="button" (click)="generateCertificate()">
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.GENERATE_CERTIFICATE_COVERAGE' | translate}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row align-items-center">
+
+              <div class="col-md-9" *ngIf="policyDto.receivedMethodId">
+                <h6><span>{{ 'POLICY.VIEW_POLICY_DETAILS.RECEIVED_METHOD' | translate }}:</span> {{  policyDto.receivedMethodId | receivedMethod | translate | uppercase }}</h6>
+              </div>
+
+            </div>
+          </div>
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info"
+                aria-selected="true"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.GENERAL_INFORMATION' | translate }}</a>
+            </li>
+            <ng-container *ngIf="showTabMembersByPolicyStatus(policyDto.policyStatus)">
+              <li class="nav-item">
+                <a class="nav-link" id="asegurados-tab" data-toggle="tab" href="#asegurados" role="tab"
+                  aria-controls="asegurados" aria-selected="false">
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.MEMBERS' | translate }}
+                </a>
+              </li>
+            </ng-container>
+            <li class="nav-item">
+              <a class="nav-link" id="documentos-tab" data-toggle="tab" href="#documentos" role="tab"
+                aria-controls="documentos" aria-selected="false" (click)="getDocumentsByPolicyId()">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.DOCUMENTS' | translate }}
+              </a>
+            </li>
+
+            <ng-container>
+              <!--<li class="nav-item" *ngIf="policyDto.isGroupPolicy !== 1 && bupaInsuranceValid && isDiffGroupAdminAgentRole"></li>-->
+              <li class="nav-item" *ngIf="policyDto.isGroupPolicy !== 1 && bupaInsuranceValid">
+                <a class="nav-link" id="historypayments-tab" data-toggle="tab" href="#historypayments" role="tab"
+                  aria-controls="historypayments" aria-selected="false" (click)="getPaymentsByPolicyId()">
+                  {{ 'POLICY.PAYMENT_HISTORY' | translate }}
+                </a>
+              </li>
+
+              <!--<li class="nav-item" *ngIf="policyDto.isGroupPolicy !== 1 && bupaInsuranceValid && isDiffGroupAdminAgentRole">-->
+              <li class="nav-item" *ngIf="policyDto.isGroupPolicy !== 1 && bupaInsuranceValid">
+                <a class="nav-link" id="pay-tab" data-toggle="tab" href="#" role="tab" aria-controls="pay"
+                  aria-selected="true" (click)="getPolicyPaymentSatatusToPay()">
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.PAYMENTS.OPTION2' | translate }}</a>
+              </li>
+
+              <li class="nav-item" *ngIf="enabletaxdataupdate">
+                <a class="nav-link" id="taxdata-tab" data-toggle="tab" href="#taxdata" role="tab" 
+                  aria-controls="pay" aria-selected="true">
+                  {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.PAYMENTS.OPTION4' | translate }}</a>
+              </li>
+
+            </ng-container>
+
+            <li class="nav-item" *ngIf="viewClaimMethodPayment">
+            <!--<li class="nav-item">-->
+              <a #payee class="nav-link" id="financetab" data-toggle="tab" href="#finance" role="tab" aria-controls="finance"
+                aria-selected="false" (click)="getPayeesByPolicyId()">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.TITLE' | translate }}
+              </a>
+            </li>
+
+            <!--<li class="nav-item dropdown"
+              *ngIf="!policyDto.isGroupPolicy && bupaInsuranceValid && isDiffGroupAdminAgentRole">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.PAYMENTS.TITLE' | translate }}
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" [routerLink]="['/policy-payments-view-receipt']" [queryParams]="{
+                        policyNumber: policyDto.policyId
+                    }" target="_blank"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.PAYMENTS.OPTION1' | translate }}</a>
+
+                <a class="dropdown-item"
+                  (click)="getPolicyPaymentSatatusToPay()">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.PAYMENTS.OPTION2' | translate }}</a>
+              </div>
+            </li>-->
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+              <app-view-owner-information [policyDto]="policyDto">
+              </app-view-owner-information>
+            </div>
+
+            <div class="tab-pane fade" id="asegurados" role="tabpanel" aria-labelledby="asegurados-tab">
+              <app-view-members-information [policyDto]="policyDto">
+              </app-view-members-information>
+            </div>
+
+            <div class="tab-pane fade" id="documentos" role="tabpanel" aria-labelledby="documentos-tab">
+              <app-view-documents-information [documents]="documents" [documentsPermission]="documentsPermission">
+              </app-view-documents-information>
+            </div>
+
+            <ng-container>
+              <div class="tab-pane fade" id="historypayments" role="tabpanel"
+                aria-labelledby="historypayments-tab">
+                <!--<div class="ig-numpoliza" *ngIf="policyDto.isGroupPolicy !== 1"></div>-->
+                <div class="ig-numpoliza">
+                  <div class="row  align-items-center">
+                    <div class="col-md-12">
+                      <div class="ig-detallereclamo" id="ig-detallePago-{{policyDto.policyId}}"
+                        style="display: block !important;">
+
+                        <div class="row align-items-center">
+
+                          <div class="col-md-9">
+                            <h5 class="ig-texthistorial" *ngIf="policyDto.payments">
+                              {{ 'POLICY.PAYMENT_HISTORY' | translate }}
+                              <span>({{ policyDto.payments.length }})</span>
+                            </h5>
+                          </div>
+
+                          <div class="col-md-2">
+                            <div class="row align-items-center" *ngIf="handleShowPaymentStatusBtn()">
+                              <div class="col-md-12">
+                                <button class="ig-botones ig-principalbtn" type="button"
+                                  (click)="generatePaymentStatus()">
+                                  {{ 'POLICY.VIEW_POLICY_DETAILS.GENERATE_PAYMENT_STATUS' | translate}}
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <app-policy-payments-historical [payments]="policyDto.payments"
+                              [showToPayMexicanPeso]="showToPayMexicanPeso" [fixedRate]="policyDto.fixedRate"
+                              [isRoleEmployeeOrAdmin]="isRoleEmployeeOrAdmin()">
+                            </app-policy-payments-historical>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <div class="tab-pane fade" id="finance" role="tabpanel" aria-labelledby="financetab">
+              <div *ngIf="payees">
+                <app-view-payee-information [payees]="payees" [policy]="policyDto"></app-view-payee-information>
+              </div>
+            </div>
+
+            <div *ngIf="enabletaxdataupdate" class="tab-pane fade" id="taxdata" role="tabpanel" aria-labelledby="documentos-tab">              
+              <app-view-tax-information 
+                [policyId]="policyDto.policyId"
+                [agentId]="policyDto.agent.agentId"
+                [policyCountry]="policyDto.policyCountry"
+                [ownerDob]="policyDto.ownerDob"
+                [insuranceBusinessId]="policyDto.insuranceBusinessId"></app-view-tax-information>              
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+</section>

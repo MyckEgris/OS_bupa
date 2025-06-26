@@ -1,0 +1,336 @@
+<section class="bp-mainpolicy" *ngIf="wizard.enrollmentForm">
+  <form [formGroup]="wizard.enrollmentForm" novalidate (ngSubmit)="next()">
+    <article class="row" formGroupName="policyApplicationOwnerStep">
+      <div class="col-md-12" formGroupName="policyOwner">
+        <div class="bp-itemcontsect2">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-4">
+                  <h4 class="bp-contentitle">
+                    {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.TITLE' | translate }}
+                  </h4>
+                </div>
+
+                <div class="col-md-8">
+                  <h4 class="bp-contentitle">
+                    {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.ECONOMIC_INFORMATION' | translate }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-12">
+                  <ng-container *ngIf="isControlVisible('homePhoneCountry')">
+                    <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                      <label for="countryId">
+                        {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.COUNTRY' | translate }}
+                      </label>
+                      <ng-select #countrySelect [items]="wizard.countries$ | async" [selectOnTab]="true"
+                        bindValue="countryId" bindLabel="countryName" formControlName="homePhoneCountry"
+                        class="form-control " (change)="handleCountryChangeHome($event)" [placeholder]="getControl('homePhoneCountry').value !== null && getControl('homePhoneCountry').value !== ''
+                                          ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                      </ng-select>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="isControlVisible('homePhoneCity')">
+                    <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                      <label for="cityName">
+                        {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.CITY' | translate }}
+                      </label>
+                      <ng-select #citiesSelect [items]="citiesHome$ | async" [selectOnTab]="true" bindValue="cityId"
+                        bindLabel="cityName" formControlName="homePhoneCity" class="form-control "
+                        (change)="handleCityChange($event)" [placeholder]="getControl('homePhoneCity').value !== null && getControl('homePhoneCity').value !== ''
+                                  ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                      </ng-select>
+                    </div>
+                  </ng-container>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ng-container *ngIf="isControlVisible('homePhoneAreaCode')">
+                        <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                          <label for="areaCodeId">
+                            {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.AREA_CODE' | translate }}
+                          </label>
+                          <ng-select #areaCodeSelect [items]="wizard.areaCodes$ | async" [selectOnTab]="true"
+                            bindValue="areaCodeId" bindLabel="areaCode" formControlName="homePhoneAreaCode"
+                            class="form-control" [placeholder]="getControl('homePhoneAreaCode').value !== null && getControl('homePhoneAreaCode').value !== ''
+                                        ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                          </ng-select>
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="col-md-6">
+                      <ng-container *ngIf="isControlVisible('homePhoneNumber')">
+                        <div class="form-group">
+                          <label for="homePhoneNumber">
+                            {{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PHONE' | translate }}
+                          </label>
+                          <input type="text" class="form-control" id="homePhoneNumber"
+                            placeholder="{{ 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_PHONE' | translate }}"
+                            formControlName="homePhoneNumber"
+                            [maxlength]="getValidatorValue('homePhoneNumber', 'maxLength')"
+                            [pattern]="getValidatorValue('homePhoneNumber', 'pattern')"
+                            [minlength]="getValidatorValue('homePhoneNumber', 'minLength')"
+                            [required]="getControl('homePhoneNumber').errors?.required"
+                            [ngClass]="{'is-invalid': getControl('homePhoneNumber').invalid && showValidations,  'is-valid': getControl('homePhoneNumber').valid && showValidations}">
+                          <div class="invalid-feedback" *ngIf="getControl('homePhoneNumber').errors?.pattern">
+                            {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('homePhoneNumber', 'pattern') | uppercase | translate}}
+                          </div>
+                          <div class="invalid-feedback" *ngIf="getControl('homePhoneNumber').errors?.maxlength">
+                            {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('homePhoneNumber', 'maxLength') | uppercase | translate}}
+                            {{getControl('homePhoneNumber').errors?.maxlength.requiredLength}}
+                          </div>
+                          <div class="invalid-feedback" *ngIf="getControl('homePhoneNumber').errors?.minlength">
+                            {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('homePhoneNumber', 'minLength') | uppercase | translate}}
+                            {{getControl('homePhoneNumber').errors?.minlength.requiredLength}}
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <ng-container *ngIf="isControlVisible('policyOwnerEmail')">
+                    <div class="form-group">
+                      <label for="policyOwnerEmail">
+                        {{'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.EMAIL' | translate }}
+                      </label>
+                      <input type="text" class="form-control" formControlName="policyOwnerEmail"
+                        [placeholder]="'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_EMAIL' | translate "
+                        [ngClass]="{'is-invalid': getControl('policyOwnerEmail').invalid && showValidations,
+                                    'is-valid': getControl('policyOwnerEmail').valid && showValidations}"
+                        [required]="getControl('policyOwnerEmail').errors?.required">
+                      <small class="text-danger"
+                        *ngIf="getControl('policyOwnerEmail').errors?.invalidEmail && showValidations">
+                        {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyOwnerEmail', 'emailPatternValidator') | uppercase | translate}}
+                      </small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <ng-container *ngIf="isControlVisible('employmentProfessionBusiness')">
+                <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                  <label for="employmentProfessionBusiness">
+                    {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.OCCUPATION' | translate }}
+                  </label>
+                  <input type="text" class="form-control" id="employmentProfessionBusiness"
+                    placeholder="{{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.PH_OCCUPATION' | translate }}"
+                    formControlName="employmentProfessionBusiness"
+                    [maxlength]="getValidatorValue('employmentProfessionBusiness', 'maxLength')"
+                    [pattern]="getValidatorValue('employmentProfessionBusiness', 'pattern')"
+                    [minlength]="getValidatorValue('employmentProfessionBusiness', 'minLength')"
+                    [required]="getControl('employmentProfessionBusiness').hasError('required')">
+                  <div class="invalid-feedback" *ngIf="getControl('employmentProfessionBusiness').errors?.pattern">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('employmentProfessionBusiness', 'pattern') | uppercase | translate}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('employmentProfessionBusiness').errors?.maxlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('employmentProfessionBusiness', 'maxLength') | uppercase | translate}}
+                    {{getControl('employmentProfessionBusiness').errors?.maxlength.requiredLength}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('employmentProfessionBusiness').errors?.minlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('employmentProfessionBusiness', 'minLength') | uppercase | translate}}
+                    {{getControl('employmentProfessionBusiness').errors?.minlength.requiredLength}}
+                  </div>
+                </div>   
+              </ng-container>
+              <ng-container *ngIf="isControlVisible('averageAnnualIncome')">
+                <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                  <label for="averageAnnualIncome">
+                    {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_AVG_ANNUAL_INCOME' | translate }} </label>
+                  <input type="text" class="form-control" id="averageAnnualIncome"
+                    placeholder="{{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.PH__AVG_ANNUAL_INCOME' | translate }}"
+                    formControlName="averageAnnualIncome"
+                    [maxlength]="getValidatorValue('averageAnnualIncome', 'maxLength')"
+                    [pattern]="getValidatorValue('averageAnnualIncome', 'pattern')"
+                    [minlength]="getValidatorValue('averageAnnualIncome', 'minLength')"
+                    [required]="getControl('averageAnnualIncome').hasError('required')">
+                  <div class="invalid-feedback" *ngIf="getControl('averageAnnualIncome').errors?.pattern">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('averageAnnualIncome', 'pattern') | uppercase | translate}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('averageAnnualIncome').errors?.maxlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('averageAnnualIncome', 'maxLength') | uppercase | translate}}
+                    {{getControl('averageAnnualIncome').errors?.maxlength.requiredLength}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('averageAnnualIncome').errors?.minlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('averageAnnualIncome', 'minLength') | uppercase | translate}}
+                    {{getControl('averageAnnualIncome').errors?.minlength.requiredLength}}
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="isControlVisible('placeWherePayTaxes')">
+                <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                  <label for="placeWherePayTaxes">
+                    {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_PLACE_WORK' | translate }} </label>
+                  <input type="text" class="form-control" id="placeWherePayTaxes"
+                    placeholder="{{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.PH_PLACE_WORK' | translate }}"
+                    formControlName="placeWherePayTaxes"
+                    [maxlength]="getValidatorValue('placeWherePayTaxes', 'maxLength')"
+                    [pattern]="getValidatorValue('placeWherePayTaxes', 'pattern')"
+                    [minlength]="getValidatorValue('placeWherePayTaxes', 'minLength')"
+                    [required]="getControl('placeWherePayTaxes').hasError('required')">
+                  <div class="invalid-feedback" *ngIf="getControl('placeWherePayTaxes').errors?.pattern">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('placeWherePayTaxes', 'pattern') | uppercase | translate}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('placeWherePayTaxes').errors?.maxlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('placeWherePayTaxes', 'maxLength') | uppercase | translate}}
+                    {{getControl('placeWherePayTaxes').errors?.maxlength.requiredLength}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('placeWherePayTaxes').errors?.minlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('placeWherePayTaxes', 'minLength') | uppercase | translate}}
+                    {{getControl('placeWherePayTaxes').errors?.minlength.requiredLength}}
+                  </div>
+                </div>
+              </ng-container>
+
+              <div class="row ">
+                <div class="col-md-6">
+                  <ng-container *ngIf="isControlVisible('identificationType')">
+                    <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                      <label for="identificationType">
+                        {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_ID_TYPES' | translate }}
+                      </label>
+                      <ng-select #identificationTypeSelect [items]="identificationsTypes" [selectOnTab]="true"
+                        bindValue="identificationTypeId" bindLabel="typeName" formControlName="identificationType"
+                        [required]="getControl('identificationType').errors?.required" class="form-control" [placeholder]="getControl('identificationType').value !== null && getControl('identificationType').value !== ''
+                                        ? '': 'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+                      </ng-select>
+                    </div>
+                  </ng-container>
+                </div>
+                <div class="col-md-6">
+                  <ng-container *ngIf="isControlVisible('identificationNumber')">
+                    <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                      <label for="identificationNumber">
+                        {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_ID_NUMBER' | translate }} </label>
+                      <input type="text" class="form-control" id="identificationNumber"
+                        placeholder="{{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.PH_ID_NUMBER' | translate }}"
+                        formControlName="identificationNumber"
+                        [maxlength]="getValidatorValue('identificationNumber', 'maxLength')"
+                        [pattern]="getValidatorValue('identificationNumber', 'pattern')"
+                        [minlength]="getValidatorValue('identificationNumber', 'minLength')"
+                        [required]="getControl('identificationNumber').hasError('required')">
+                      <div class="invalid-feedback" *ngIf="getControl('identificationNumber').errors?.pattern">
+                        {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('identificationNumber', 'pattern') | uppercase | translate}}
+                      </div>
+                      <div class="invalid-feedback" *ngIf="getControl('identificationNumber').errors?.maxlength">
+                        {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('identificationNumber', 'maxLength') | uppercase | translate}}
+                        {{getControl('identificationNumber').errors?.maxlength.requiredLength}}
+                      </div>
+                      <div class="invalid-feedback" *ngIf="getControl('identificationNumber').errors?.minlength">
+                        {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('identificationNumber', 'minLength') | uppercase | translate}}
+                        {{getControl('identificationNumber').errors?.minlength.requiredLength}}
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <ng-container *ngIf="isControlVisible('isPEP')">
+                <div class="mt-4" [ngClass]="{'border-danger':getControl('isPEP')?.invalid && showValidations}">
+
+                  <div class="form-group">
+                    <label for="isPEP1">
+                      {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_IS_PEP' | translate }}
+                    </label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="isPEP1" value="true"
+                      formControlName="isPEP">
+                    <label class="form-check-label" for="isPEP1">Si</label>
+                  </div>
+
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="isPEP2" value="false"
+                      formControlName="isPEP">
+                    <label class="form-check-label" for="isPEP2">No</label>
+                  </div>
+                  <br>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="isControlVisible('relationshipPEP')">
+                <div [ngClass]="{'border-danger':getControl('relationshipPEP')?.invalid && showValidations}">
+                  <div class="form-group">
+                    <label for="relationshipPEP1">
+                      {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_RELATIONSHIP_PEP' | translate }}
+                    </label>
+                  </div>
+  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="relationshipPEP1" value="true"
+                      formControlName="relationshipPEP">
+                    <label class="form-check-label" for="relationshipPEP1">Si</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="relationshipPEP2" value="false"
+                      formControlName="relationshipPEP">
+                    <label class="form-check-label" for="relationshipPEP2">No</label>
+                  </div>
+                  <br>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="isControlVisible('associatedPEP')">
+                <div [ngClass]="{'border-danger':getControl('associatedPEP')?.invalid && showValidations}">
+                  <div class="form-group">
+                    <label for="associatedPEP1">
+                      {{ 'POLICY.POLICY_ENROLLMENT.ECONOMIC_INFO.LBL_ASSOCIATED_PEP' | translate }}
+                    </label>
+                  </div>
+  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="associatedPEP1" value="true"
+                      formControlName="associatedPEP">
+                    <label class="form-check-label" for="associatedPEP1">Si</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="associatedPEP2" value="false"
+                      formControlName="associatedPEP">
+                    <label class="form-check-label" for="associatedPEP2">No</label>
+                  </div>
+                  <br>
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="col-md-12 mt-2" *ngIf="showValidations && getForm().invalid">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP2.INFO_INCOMPLETE' | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 mt-5">
+              <div class="row">
+                <div class="col-md-4 offset-md-4">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <button class="bp-btn bp-btnsecondary" type="button" (click)="back()">
+                        {{ 'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <button class="bp-btn bp-btnprimary" type="submit">
+                        {{ 'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </form>
+</section>

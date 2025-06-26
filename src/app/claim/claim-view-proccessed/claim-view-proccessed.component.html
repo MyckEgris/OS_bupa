@@ -1,0 +1,151 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="ig-searchresul" *ngIf="collectionSize !== null && claims.count === 0">
+      <h4>{{ 'CLAIMS.SEARCH_RESULT.TITLE' | translate }}:</h4>
+      <p>{{ 'CLAIMS.SEARCH_RESULT.MESSAGE' | translate }}</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div *ngIf="claims.data.length > 0">
+
+  <div class="ig-titulotabs">
+    <h6>
+      {{ 'CLAIMS.PROCESSED_CLAIMS.TITLE' | translate }} <span>({{ claims.count | valueOrMoney:'number':'' }})</span>
+    </h6>
+  </div>
+
+
+
+  <div class="ig-resultados animated fadeInUp" *ngFor="let claim of claims.data">
+    <div class="ig-procesconte">
+      <div class="row align-items-end">
+
+        <div class="col-md-12">
+          <p class="ig-procesotext">
+            {{ 'CLAIMS.PROCESSED_CLAIMS.STATUS.' | concatenate:claim.statusName | uppercase | translate }}
+          </p>
+        </div>
+
+        <div class="col-md-3">
+          <h6>
+            {{ claim.payment.billingProviderName }}
+          </h6>
+          <p>
+            {{ claim.accountNumber }}
+          </p>
+          <p>
+            {{ 'CLAIMS.PROCESSED_CLAIMS.BUPA_CLAIM_NUMBER' | translate }}: {{ claim.claimNumber }}
+          </p>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-6" [style.display]="claim.currencyId === currencyUsdId ? 'none' : 'initial'">
+              <h5 class="ig-processvalor">
+                {{ claim.billedAmount * claim.exchangeRate | currency:currencyUsdSymbol:true:'1.2-2'}}
+              </h5>
+
+            </div>
+            <div class="col-md-6 col-6" [style.display]="claim.currencyId === currencyUsdId ? 'none' : 'initial'">
+              <h5 class="ig-processvalor">
+                {{ claim.netCoveredAmount * claim.exchangeRate | currency:currencyUsdSymbol:true:'1.2-2'}}
+              </h5>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <h5 class="ig-processvalor" [style.display]="claim.currencyId === currencyUsdId ? 'none' : 'initial'">
+                {{ claim.billedAmount | currency:claim.currencySymbol:true:'1.2-2'}}
+              </h5>
+              <h5 class="ig-processvalor" [style.display]="claim.currencyId !== currencyUsdId ? 'none' : 'initial'">
+                {{ claim.billedAmount | currency:claim.currencySymbol:true:'1.2-2'}}
+              </h5>
+              <p>
+                {{ 'CLAIMS.PROCESSED_CLAIMS.BILLED' | translate }}
+              </p>
+            </div>
+            <div class="col-md-6 col-6">
+              <h5 class="ig-processvalor" [style.display]="claim.currencyId === currencyUsdId ? 'none' : 'initial'">
+                {{ claim.netCoveredAmount | currency:claim.currencySymbol:true:'1.2-2'}}
+              </h5>
+              <h5 class="ig-processvalor" [style.display]="claim.currencyId !== currencyUsdId ? 'none' : 'initial'">
+                {{ claim.netCoveredAmount | currency:claim.currencySymbol:true:'1.2-2'}}
+              </h5>
+              <p>
+                {{ 'CLAIMS.PROCESSED_CLAIMS.COVERED' | translate }}
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-3">
+          <h6>
+            {{ claim.member.firstName | titlecase }} {{ claim.member.middleName | titlecase }} <br>
+            {{ claim.member.lastName }}
+          </h6>
+          <p>
+            {{ 'CLAIMS.PROCESSED_CLAIMS.CLAIMER' | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ig-numpoliza">
+
+      <div class="row">
+        <div class="col-md-3 col-6">
+          <div class="ig-detallebtn" (click)="toggleSlideDetail(claim);">
+            {{ 'CLAIMS.PROCESSED_CLAIMS.CLAIM_DETAIL' | translate }}<i class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="ig-detallepagobtn" (click)="toggleSlidePayment(claim.claimNumber);">
+            {{ 'CLAIMS.PROCESSED_CLAIMS.PAY_DETAIL' | translate }}<i class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+
+        <div class="col-md-4 offset-md-1 col-10">
+          <div class="ig-fecha">
+            <strong> {{ 'CLAIMS.PROCESSED_CLAIMS.SERVICE_DATE' | translate }} </strong> {{ claim.serviceFrom |
+            dateTranslate }} <span> - </span> {{ claim.serviceTo |
+            dateTranslate }}
+          </div>
+        </div>
+
+        <div class="col-md-1 col-2">
+          <a (click)="getClaimEob(claim.claimDetailId, claim.insuranceBusinessId);" href="#">EOB</a>
+        </div>
+
+        <div class="col-md-12">
+          <div class="ig-detallereclamo" id="ig-detallereclamo-{{claim.claimNumber}}">
+            <div>
+              <app-claim-view-details [claimDetails]="claim.claimLinesDetails" [currencySymbol]="claim.currencySymbol"
+                [number]="claim.claimNumber" [currencySymbolUsd]="currencyUsdSymbol" [exchangeRate]="claim.exchangeRate"
+                [isLocalUsd]="claim.currencyId === currencyUsdId" [policy]="claim.policy.policyNumber">
+              </app-claim-view-details>
+            </div>
+            <div>
+              {{ errorDetail }}
+            </div>
+          </div>
+          <div class="ig-detallepago" id="ig-detallepago-{{claim.claimNumber}}">
+            <app-claim-view-payment [order]="claim.payment.paymentNumber" [date]="claim.payment.paymentDate"
+              [method]="claim.payment.paymentMethod" [amount]="claim.payment.amount"
+              [currencySymbol]="claim.currencySymbol" [number]="claim.claimNumber">
+            </app-claim-view-payment>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="collectionSize > 0">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [pageSize]="5" [rotate]="true"
+    [boundaryLinks]="true" (pageChange)="getClaimsByProviderIdAndStateMemberName($event);"></ngb-pagination>
+</div>

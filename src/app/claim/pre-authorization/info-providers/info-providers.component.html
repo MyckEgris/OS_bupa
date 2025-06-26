@@ -1,0 +1,117 @@
+<article *ngIf="wizard.preAuthForm" style="margin-top: 20px">
+  <div class="row" [formGroup]="wizard.preAuthForm.get('infoProviderForm')">
+    <div class="col-md-12" formArrayName="items">
+      <div class="row align-items-center">
+        <div class="col-md-10">
+          <h6 class="ig-infotil">
+            {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.OTHER' | translate }}
+          </h6>
+        </div>
+        <div class="col-md-2">
+          <button class="ig-principalbtn ig-botones" (click)="addItem()" type="button">
+            <i class="material-icons">add_circle </i> {{ 'CLAIMS.PRE_AUTHORIZATION.ADD' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <p *ngIf="isProvider()"> {{ 'CLAIMS.PRE_AUTHORIZATION.MESSAGE.INFO_PROVIDER_PROVIDER' | translate}} </p>
+          <p *ngIf="!isProvider()"> {{ 'CLAIMS.PRE_AUTHORIZATION.MESSAGE.INFO_PROVIDER' | translate}} </p>
+        </div>
+      </div>
+
+      <div *ngFor="let item of wizard.preAuthForm.get('infoProviderForm').get('items').controls; let i = index;"
+        style="margin-top: 20px" class="animated fadeInUp">
+        
+        <div class="row align-items-start" [formGroupName]="i">
+
+
+          <div class="col-md-4">
+
+            <div class="form-group">
+              <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.NAME_PROVIDER' | translate }}
+              </label>
+              <input id="nombreProvider" class="form-control" formControlName="facilityName" autofocus
+                placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.NAME_PROVIDER' | translate }}" type="text"
+                maxCharsAllowed="{{MAX_CHARS_FACILITY_NAME}}">
+
+              <small class="text-danger" 
+                      *ngIf="(wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('facilityName').touched 
+                                && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('facilityName').invalid 
+                                && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('facilityName').errors?.required)
+                              || (
+                                wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('facilityName').invalid 
+                                && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('facilityName').errors?.required
+                                && showValidations
+                              )">
+                {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-3">
+
+            <div class="form-group">
+              <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.NAME_MEDICAL' | translate }}
+              </label>
+              <input id="nameMedical" class="form-control" formControlName="physicianName" autofocus [attr.required]="isProvider()"
+                placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.NAME_MEDICAL' | translate }}" type="text"
+                maxCharsAllowed="{{MAX_CHARS_PHYSICIAN_NAME}}">
+              <small class="text-danger" 
+                  *ngIf="(wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('physicianName').touched 
+                            && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('physicianName').invalid 
+                            && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('physicianName').errors?.required)
+                          || (
+                            wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('physicianName').invalid 
+                            && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('physicianName').errors?.required
+                            && showValidations
+                          )">
+                {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+
+          <div class="col-md-2" *ngIf="false">
+            <div class="form-group">
+              <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.ADDRESS_PROVIDER' | translate }}
+              </label>
+              <input id="addressprovider" class="form-control" formControlName="addressProvider"
+                placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.ADDRESS_PROVIDER' | translate }}" type="text"
+                maxCharsAllowed="{{MAX_CHARS_ADDRESS}}">
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_PROVIDER' | translate }}
+              </label>
+              <input id="phoneProvider" class="form-control" formControlName="phoneNumberProvider" autofocus [attr.required]="isProvider()"
+                placeholder="{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.PHONE_PROVIDER' | translate }}" type="text"
+                maxCharsAllowed="{{MAX_CHARS_PHONE}}">
+              <small class="text-danger" 
+                      *ngIf="(wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('phoneNumberProvider').touched 
+                              && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('phoneNumberProvider').invalid 
+                              && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('phoneNumberProvider').errors?.required)
+                            || (
+                              wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('phoneNumberProvider').invalid 
+                              && wizard.preAuthForm.get('infoProviderForm').get('items').controls[i].get('phoneNumberProvider').errors?.required
+                              && showValidations
+                            )">
+                {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+              </div>
+          </div>
+
+          <div class="col-md-1 align-self-center" *ngIf="!isProvider() || (isProvider() && i !== 0)">
+            <button class="ig-icondiagnosminim" (click)="removeItem(i)" style="cursor: pointer;" type="button">
+              <i class="material-icons"> delete_forever </i>
+            </button>
+          </div>
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</article>

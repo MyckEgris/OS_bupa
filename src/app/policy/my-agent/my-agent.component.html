@@ -1,0 +1,156 @@
+<section class="ig-myagent">
+    <div class="col-md-12" *ngIf="currentAgent !== undefined">
+        <form [formGroup]="formAgent">
+            <div class="ig-solicituddatos">
+                <div class="ig-title">
+                    <h5>{{ 'POLICY_HOLDER.MY_AGENT.TITLE' | translate }}</h5>
+                </div>
+                <br>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ig-solicituddatos">
+                                        <h6>{{ 'POLICY_HOLDER.MY_AGENT.SUBTITLE1' | translate }}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.FULL_NAME' | translate }}</label>
+                                        <!--<input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.FULL_NAME' | translate }}"
+                                            type="text" formControlName="fullName"> -->
+                                        <div class="form-control"  > {{ formAgent.get('fullName').value }} </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.EMAIL' | translate }}</label>
+                                       <!-- <input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.EMAIL' | translate }}" type="text"
+                                            formControlName="email"> -->
+                                            <div class="form-control">{{ formAgent.get('email').value }}</div>   
+                                   
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3" *ngIf="formAgent.value.email !== ''">
+
+                                    <div class="form-group">
+                                        <a href="mailto:{{formAgent.value.email}}"
+                                            class="btn btn-link btnsend">{{ 'POLICY_HOLDER.MY_AGENT.BUTTON' | translate }}</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ig-solicituddatos">
+                                        <h6>{{ 'POLICY_HOLDER.MY_AGENT.SUBTITLE2' | translate }}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.FULL_ADDRESS' | translate }}
+                                        </label>
+                                        <!-- <input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.FULL_ADDRESS' | translate }}"
+                                            type="text" formControlName="address"> -->
+                                            <div class="form-control"> {{ formAgent.get('address').value }}</div>    
+                               
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.CITY' | translate }}</label>
+                                        <!-- <input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.CITY' | translate }}" type="text"
+                                            formControlName="postalCity"> -->
+                                            <div class="form-control">{{ formAgent.get('postalCity').value }}</div>    
+                                
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.STATE' | translate }}</label>
+                                        <!-- <input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.STATE' | translate }}" type="text"
+                                            formControlName="postalState"> -->
+                                            <div class="form-control"> {{ formAgent.get('postalState').value }}</div>    
+                                                                         
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class=""
+                                        for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.COUNTRY' | translate }}</label>
+                                    <!-- <input class="form-control" id="inputText"
+                                        placeholder="{{ 'POLICY_HOLDER.MY_AGENT.COUNTRY' | translate }}" type="text"
+                                        formControlName="postalCountry"> -->
+                                        <div class="form-control">  {{ formAgent.get('postalCountry').value }}</div>    
+                               
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="ig-solicituddatos">
+                                        <h6>{{ 'POLICY_HOLDER.MY_AGENT.SUBTITLE3' | translate }}</h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.OFFICE_PHONE' | translate }}</label>
+                                        <!-- <input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.OFFICE_PHONE' | translate }}"
+                                            formControlName="phoneOffice" type="text"> -->
+                                            <div class="form-control">  {{ formAgent.get('phoneOffice').value }}</div>   
+                                    
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.FAX_NUMBER' | translate }}</label>
+                                        <!-- <input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.FAX_NUMBER' | translate }}"
+                                            type="text" formControlName="phoneFax"> -->
+                                            <div class="form-control">  {{ formAgent.get('phoneFax').value }} </div>   
+                                      
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class=""
+                                            for="inputText">{{ 'POLICY_HOLDER.MY_AGENT.CELL_PHONE_NUMBER' | translate }}</label>
+                                        <!-- <input class="form-control" id="inputText"
+                                            placeholder="{{ 'POLICY_HOLDER.MY_AGENT.CELL_PHONE_NUMBER' | translate }}"
+                                            type="text" formControlName="cellPhone"> -->
+                                            <div class="form-control">  {{ formAgent.get('cellPhone').value }}  </div>   
+                                     
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

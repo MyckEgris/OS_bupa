@@ -1,0 +1,14 @@
+
+<article class="ig-quickacessbtn">
+    <div class="row align-item-center " >
+        <a *ngFor="let option of options" class="nav-link col-md-2 col-6" [routerLink]="" 
+           (click)="goTo(option.pathURL)" >
+            <div class="ig-icon" >
+                <img class="medium quick-access-icon" [src]="option.pathIcon" alt="">
+            </div>
+            <span >
+               {{ 'AGENT.HOME.QUICK_ACCESS_LINKS.' | concatenate: option.name | translate }}  
+            </span>
+        </a>
+    </div>
+</article>

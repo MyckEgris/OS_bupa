@@ -1,0 +1,54 @@
+<div class="row align-items-center">
+  <div class="col-md-8">
+    <div class="form-group">
+      <label>{{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.WEIGHT' | translate }}</label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" [value]="3" id="radioKg"
+        name="{{formControlNameSystemMeasure}}" [formControl]="getControl(formControlNameSystemMeasure)">
+      <label class="form-check-label"
+        for="radioKg">{{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.KG' | translate}}</label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" [value]="4" id="radioLb"
+        name="{{formControlNameSystemMeasure}}" [formControl]="getControl(formControlNameSystemMeasure)">
+      <label class="form-check-label" for="radioLb">
+        {{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.LB' | translate}}
+      </label>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <div class="custom-slider">
+        <ng5-slider id="{{formControlNameWeight}}" [formControl]="getControl(formControlNameWeight)" [options]="optionsWeight">
+        </ng5-slider>
+      </div>
+      <small class="text-danger"
+        *ngIf="!isFieldValueGreaterThanCero(formControlNameWeight) && showValidations">
+        {{ 'POLICY.POLICY_ENROLLMENT.STEP2.SECTION_01.VALUE_GREATER_THAN_CERO' | translate }}
+      </small>
+    </div>
+  </div>
+</div>
+
+<div class="row align-items-center">
+  <div class="col-md-8">
+    <div class="form-group">
+      <label>{{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.HEIGHT' | translate }}</label>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <ng5-slider id="{{formControlNameHeight}}" [formControl]="getControl(formControlNameHeight)" [options]="optionsHeight">
+      </ng5-slider>
+      <small class="text-danger"
+        *ngIf="!isFieldValueGreaterThanCero(formControlNameHeight) && showValidations">
+        {{ 'POLICY.POLICY_ENROLLMENT.STEP2.SECTION_01.VALUE_GREATER_THAN_CERO' | translate }}
+      </small>
+    </div>
+  </div>
+</div>

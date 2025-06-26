@@ -1,0 +1,36 @@
+{
+    "aggrementsDto": [
+        {
+            "agreementId": 1,
+            "agreementLanguage": "SPA",
+            "agreementUrl": "/agreements/spa/terms-of-use.html",
+            "agreementVersionId": 2,
+            "canUserBeLocked": false,
+            "retryCount": 0,
+            "roleAgreementsOutputDto": [
+                {
+                    "roleId": 2,
+                    "roleName": "Agent"
+                }
+            ],
+            "title": "Bupa CONVENIO DE ACCESO PARA EL USUARIO (V2)",
+            "version": "2"
+        },
+        {
+            "agreementId": 2,
+            "agreementLanguage": "SPA",
+            "agreementUrl": "/agreements/spa/producer-agreement.html",
+            "agreementVersionId": 6,
+            "canUserBeLocked": true,
+            "retryCount": 3,
+            "roleAgreementsOutputDto": [
+                {
+                    "roleId": 2,
+                    "roleName": "Agent"
+                }
+            ],
+            "title": "Acuerdos del Productor (V2)",
+            "version": "2"
+        }
+    ]
+}

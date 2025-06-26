@@ -1,0 +1,64 @@
+<section class="ig-requestpre setup-content animated fadeIn" *ngIf="wizard" id="step-1">
+    <form [formGroup]="wizard.searchForm" (submit)="searchPolicyMembers()">
+        <div class="col-md-12 ig-formulario">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ig-titlepolicy">
+                        <h5>{{currentStep}}. {{ 'CLAIMSUBMISSION.STEP1DESC' | translate }} </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ig-resulsearchnone"
+                *ngIf="wizard.memberSearchResult && wizard.memberSearchResult.length === 0">
+                <h6>{{ 'CLAIMSUBMISSION.STEP1RESULTTITLETEXT' | translate}}</h6>
+                <small>{{ 'CLAIMSUBMISSION.STEP1RESULTTEXT' | translate}}</small>
+            </div>
+
+            <div class="row ig-resulsearch" [ngClass]="{'show-scroll' : wizard.memberSearchResult && wizard.memberSearchResult.length > 5 }" *ngIf="wizard.memberSearchResult && wizard.memberSearchResult.length > 0">
+
+                <label>{{ 'CLAIMSUBMISSION.STEP1SELECTMEMBER' | translate}}</label>
+
+                <div class="col-md-8 ig-check" *ngFor="let member of wizard.memberSearchResult; let i = index">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio{{ i }}" name="selectedMember{{ i }}" class="custom-control-input" [checked]="member === wizard.member" (change)="selectMember(member)">
+                        <label class="custom-control-label" for="customRadio{{ i }}" *ngIf="member.fullName">
+                            {{ member.fullName }} ({{ member.dob | dateTranslate }})
+                        </label>
+                        <label class="custom-control-label" for="customRadio{{ i }}" *ngIf="!member.fullName">
+                            {{ member.firstName + ' ' + member.lastName }} ({{ member.dob | dateTranslate }})
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" *ngIf="wizard.memberSearchResult && wizard.memberSearchResult.length > 0">
+                <div class="col-md-8" *ngIf="countries">
+                    <label> {{ 'CLAIMSUBMISSION.STEP1SELECTCOUNTRY' | translate}}</label>
+                    <div class="form-group ">
+                        <select [(ngModel)]="wizard.countryOfServiceId " #country [ngModelOptions]="{standalone: true} " class="form-control form-control-sm " (change)="selectCountry($event, country.value) ">
+                            <option *ngFor="let country of countries "
+                                [value]="country.countryId ">
+                                {{country.countryName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <button class="ig-botones ig-principalbtn" type="button" (click)="next()" [disabled]="!wizard.member || wizard.searchForm.invalid">
+                                {{ 'CLAIMSUBMISSION.STEP1BUTTONCLAIM' | translate}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</section>

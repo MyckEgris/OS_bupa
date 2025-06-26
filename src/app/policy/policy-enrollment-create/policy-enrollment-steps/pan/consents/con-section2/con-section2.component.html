@@ -1,0 +1,107 @@
+<div class="bp-mainpolicy">
+  <form [formGroup]="wizard.enrollmentForm">
+    <div formGroupName="{{STEP_NAME}}">
+      <div class="bp-itemcontsect2 bp-aviso" formGroupName="{{SECTION_NAME}}">
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="bp-contentitle">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.HEAD4' | translate }}
+            </h4>
+            <br>
+            <h6>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.HEAD6' | translate }}
+            </h6>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH1' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH2' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH3' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH4' | translate }}
+            </p>
+          </div>
+          <div class="col-md-4">
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH5' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH6' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH7' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH8' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH9' | translate }}
+            </p>
+            <div class="mt-5" [ngClass]="{'border-danger': !getControl(SHARE_MEDICAL_INFORMATION_2).value && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="{{SHARE_MEDICAL_INFORMATION_2}}" formControlName="{{SHARE_MEDICAL_INFORMATION_2}}">
+                <label class="form-check-label" for="{{SHARE_MEDICAL_INFORMATION_2}}"> {{'POLICY.POLICY_ENROLLMENT.STEP8.TEXT_CONSENT' | translate}} </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h6>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.HEAD6_2' | translate }}
+            </h6>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH10' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH11' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH12' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_02.PARAGRAPH13' | translate }}
+            </p>
+            <div class="my-5" [ngClass]="{'border-danger': !getControl(SHARE_MEDICAL_INFORMATION_1).value && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="{{SHARE_MEDICAL_INFORMATION_1}}" formControlName="{{SHARE_MEDICAL_INFORMATION_1}}">
+                <label class="form-check-label" for="{{SHARE_MEDICAL_INFORMATION_1}}"> {{'POLICY.POLICY_ENROLLMENT.STEP8.ACCEPT_ALL_CONSENTS' | translate}} </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 p-0"
+          *ngIf="showErrorMsg && getFormGroup().invalid || showErrorMsg && !this.getControl(SHARE_MEDICAL_INFORMATION_1).value ">
+          <div class="bp-alertform">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i>
+              {{'POLICY.POLICY_ENROLLMENT.STEP8.INFORMATION_INCOMPLETE' | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 p-0 mt-2">
+          <div class="row">
+            <div class="col-md-4 offset-md-4">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnsecondary" (click)="back()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.BACK' | translate">
+
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnprimary" (click)="next()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.NEXT' | translate ">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

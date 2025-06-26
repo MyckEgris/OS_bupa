@@ -1,0 +1,91 @@
+<div class="container">
+  <app-payment-credit-card-steps [currentStep]="2"></app-payment-credit-card-steps>
+  <div class="text-center" *ngIf="isProcessing">
+    <img src="assets/images/PaymentLoadingMex.png" class="img-fluid-loading-payment-ok-mex"/>
+    <p class="processingPayment">{{ 'PAYMENTS.CONTAINER.PAYMENT_PROCESSING_MEX_OK' | translate }}<span>.</span><span>.</span><span>.</span></p>
+  </div>
+  <div *ngIf="!isProcessing">
+    <div class="row p-1 text-center">
+      <p class="w-100" *ngIf="isPaymentCompleted">{{ 'PAYMENTS.OK_RESULT.SUCCESS_MEX_MESSAGE' | translate }}</p>
+      <p class="w-100 h6" *ngIf="!isPaymentCompleted">{{ 'PAYMENTS.OK_RESULT.SUCCESS_MEX_MESSAGE_PROCESS' | translate }}
+      </p>
+    </div>
+
+    <div class="row justify-content-center">
+
+      <div class="col-md-5 cardmsg">
+        <div class="row">
+          <figure *ngIf="isPaymentCompleted"><img src="assets/images/OkPaymentMex.png" alt=""></figure>
+          <figure *ngIf="!isPaymentCompleted"><img src="assets/images/TimeoutPaymentMex.png" alt=""></figure>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <p class="notification-payment-mex" *ngIf="isPaymentCompleted">
+                {{ 'PAYMENTS.OK_RESULT.SUCCESS_MEX' | translate }}</p>
+              <p class="notification-payment-mex" *ngIf="!isPaymentCompleted">
+                {{ 'PAYMENTS.OK_RESULT.PROCESSING_MEX' | translate }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-5 offset-md-1 cardates" *ngIf="isPaymentCompleted">
+        <div class="form-group">
+          <label class="tags-ok-mex">{{ 'PAYMENTS.OK_RESULT.PAYMENT_REFERENCE_MEX' | translate }}</label>
+          <p>{{ paymentReference }}</p>
+        </div>
+        <div class="form-group">
+          <label class="tags-ok-mex">{{ 'PAYMENTS.OK_RESULT.PAYMENT_DATE_MEX' | translate }}</label>
+          <p>{{ datePayment }}</p>
+        </div>
+        <div class="form-group">
+          <label class="tags-ok-mex">{{ 'PAYMENTS.OK_RESULT.PAYMENT_AMOUNT_MEX' | translate }}</label>
+          <p><span>{{ amount }}&nbsp;MXN</span></p>
+        </div>
+        <div class="form-group">
+          <label class="tags-ok-mex">{{ 'PAYMENTS.OK_RESULT.CARD_TYPE_MEX' | translate }}</label>
+          <p>{{ brand }}</p>
+        </div>
+        <div class="form-group">
+          <label class="tags-ok-mex">{{ 'PAYMENTS.OK_RESULT.CARD_NUMBER_MEX' | translate }}</label>
+          <p>************{{ cardNumber }}</p>
+        </div>
+        <div class="form-group">
+          <label class="tags-ok-mex">{{ 'PAYMENTS.OK_RESULT.AUTHORIZATION_NUMBER_MEX' | translate }}</label>
+          <p>{{ authorization }}</p>
+        </div>
+        <div class="form-group">
+          <label class="tags-ok-mex">{{ 'PAYMENTS.OK_RESULT.OPERATION_NUMBER_MEX' | translate }}</label>
+          <p>{{ operation }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row p-5 text-center" *ngIf="isPaymentCompleted">
+      <p class="h6">{{ 'PAYMENTS.OK_RESULT.GRATEFUL_MSG_MEX' | translate }}<br>
+        {{ 'PAYMENTS.OK_RESULT.CONTACT_US_MEX' | translate }}</p>
+    </div>
+    <div class="row p-5 text-center" *ngIf="!isPaymentCompleted">
+      <p class="h6">{{ 'PAYMENTS.OK_RESULT.TRANSACTION_PROCESS_CONTACT_US_MEX' | translate }}<br>
+        <b>{{ 'PAYMENTS.OK_RESULT.TRANSACTION_PROCESS_WARNING_MESSAGE' | translate }}</b></p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 offset-md-2" *ngIf="isPaymentCompleted">
+        <a class="ig-botones ig-principalbtn" [routerLink]="['/policy-payments-view-receipt']" [queryParams]="{
+        policyNumber: policyId,
+        paymentId: paymentId}" target="_blank">{{'PAYMENTS.OK_RESULT.PRINT_BTN' | translate }} </a>
+      </div>
+
+      <div [ngClass]="{ 'col-md-4':  true, 'mx-auto': true }">
+        <a class="ig-botones ig-principalbtn" *ngIf="isAuserAnonymous"
+          (click)="goToBack()">{{ 'PAYMENTS.OK_RESULT.BACK_LOGIN' | translate }}</a>
+
+        <a class="ig-botones ig-principalbtn" *ngIf="!isAuserAnonymous"
+          (click)="goToBack()">{{  'PAYMENTS.OK_RESULT.BACK_PAYMENTS' | translate }}</a>
+      </div>
+    </div>
+  </div>
+
+</div>

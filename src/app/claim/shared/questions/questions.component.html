@@ -1,0 +1,14 @@
+<div id="accordion">
+
+    <div class="mb-5" *ngIf="currentSection === 5">
+        <h4 class="bp-contentitle">
+            {{ 'POLICY.POLICY_ENROLLMENT.STEP4.LABEL_MEDICAL_HISTORY' | translate }}
+        </h4>
+    </div>
+    <ng-container *ngIf="questions">
+        <ng-container *ngFor="let question of questions; index as i; trackBy:trackByFn">
+            <app-question [index]="i" [question]="question" [questionForm]="questionForm" [medicalQuestionaryName]="medicalQuestionaryName" [showValidation]="showValidation" [members]="members" [isEdit]="isEdit" [policyApplicationModel]="policyApplicationModel">
+            </app-question>
+        </ng-container>
+    </ng-container>
+</div>

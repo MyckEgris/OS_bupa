@@ -1,0 +1,42 @@
+<section class="ig-wizard ig-wizarsolicitud animated fadeIn">
+
+  <article class="" *ngIf="wizard">
+    <div class="col-md-3" *ngIf="wizard.optionType === subStepInquiry">
+      <a class="ig-botones ig-secundariobtn" (click)="goToSearch()">
+        <i class="material-icons">arrow_back</i>
+        {{ 'INQUIRY.INFORMATION_REQUEST.GO_TO_SEARCH_INFORMATION_REQUEST' | translate }}
+      </a>
+    </div>
+  </article>
+
+  <br>
+
+  <article class="">
+    <div class="col-md-12">
+      <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 1 ? 'btn-primary' : 'btn-defaul'">1</span>
+            <p *ngIf="wizard.optionType === subStepInquiry">
+              {{ 'INQUIRY.INFORMATION_REQUEST.STEP_1.TITLE' | translate}}
+            </p>
+            <p *ngIf="wizard.optionType === subStepTelemedicine">
+              {{ 'INQUIRY.INFORMATION_REQUEST.STEP_1.TITLE_02' | translate}}
+            </p>
+          </div>
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 2 ? 'btn-primary' : 'btn-defaul'">2</span>
+            <p *ngIf="wizard.optionType === subStepInquiry">
+              {{ 'INQUIRY.INFORMATION_REQUEST.STEP_2.TITLE' | translate}}
+            </p>
+            <p *ngIf="wizard.optionType === subStepTelemedicine">
+              {{ 'INQUIRY.INFORMATION_REQUEST.STEP_2.TITLE_02' | translate}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </article>
+  
+</section>

@@ -1,0 +1,118 @@
+<section class="ig-requestpre">
+  <form [formGroup]="wizard.policyChangesForm">
+    <div class="col-md-12 ig-formulario" formGroupName="step2">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ig-titlepolicy">
+            <h5> {{ 'POLICY.POLICY_CHANGES.STEP2.DEFAULT_TITLE' | translate }} </h5>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label> {{ 'POLICY.POLICY_CHANGES.STEP1.TYPE_CHANGE_SUBTITLE' | translate }} </label>
+            <p> {{ wizard.policyChange.description }} </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">
+              {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_DESCRIPTION' | translate }}
+            </label>
+            <br>
+            <small> {{ 'POLICY.POLICY_CHANGES.STEP2.CHANGE_DESCRIPTION_TOOLTIP' | translate }} </small>
+            <textarea class="form-control" formControlName="description" id="exampleFormControlTextarea1" rows="6"
+              maxCharsAllowed="{{MAX_CHARS_ALLOWED_DESC}}"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <h6 *ngIf="wizard.policyChange.messageLanguage"> {{ wizard.policyChange.messageLanguage }} </h6>
+            <div class="row" *ngFor="let doc of wizard.policyChange.documentsLanguage">
+   
+              <div class="col-md-12">
+                  <i style="font-size: 20px" class="material-icons">check_circle_outline</i>
+                  <a style="font-size: 14px" href="{{doc.documentPath}}" target="_blank"> {{ doc.documentName }} </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="add-documents">
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 botton-div">
+                <div class="row align-items-center">
+                  <div class="col-md-7">
+                    <label> {{ 'POLICY.POLICY_CHANGES.STEP2.ATTACHMENT' | translate }} </label>
+                    <small> {{ 'POLICY.POLICY_CHANGES.STEP2.ATTACHMENT_TOOLTIP' | translate }} </small>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="upload">
+                      <app-upload [typeAttachment]="type1" [fileTypes]="'changePolicyFileTypes'" [maxFileSize]="25">
+                      </app-upload>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items" *ngIf="documents.length > 0">
+                  <div class="ig-file-scroll">
+                    <div class="row">
+                      <div class="col-md-12" *ngFor="let document of documents">
+                        <div class="inline-text-icon">
+                          <i class="fa" [ngClass]="document.icon"></i>
+                          <span class="text-list">
+                            {{ document.file.name }}
+                            <div class="ig-icofile">
+                              <a href="#" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                                  class="material-icons">delete</i></a>
+                            </div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4 offset-md-8">
+            <div class="row">
+              <div class="col-md-6">
+                <button class="ig-principalsegundariobtn ig-botones" style="width: 100%;" type="button"
+                  (click)="back()">
+                  {{ 'POLICY.POLICY_CHANGES.BACK' | translate }} </button>
+              </div>
+              <div class="col-md-6">
+                <button type="button" [disabled]="wizard.policyChangesForm.get('step2').invalid"
+                  [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : wizard.policyChangesForm.get('step2').invalid }"
+                  (click)="next()"> {{ 'POLICY.POLICY_CHANGES.NEXT' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,180 @@
+<div class="ig-contentprofile" *ngIf="providerInformation">
+
+  <div class="ig-profile">
+    <h3> {{ 'USER.PROFILEVIEW.MYPROFILE' | translate }} </h3>
+  </div>
+
+  <div class="ig-profile2">
+    <div class="row align-items-center">
+      <div class="col-md-2">
+        <i class="material-icons ig-user">person</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="ig-provider">
+
+    <h5>{{ 'USER.PROFILEVIEW.GENERALINFOTITLE' | translate }}</h5>
+
+    <div class="row">
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+
+          <p>{{ 'USER.PROFILEVIEW.PROVIDER' | translate }}</p>
+
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.name}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.WEBSITE' | translate }} </p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p><a target="_blank" [href]="providerInformation.webSite">{{providerInformation.webSite}}</a> </p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.LANGUAGE' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.language}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.COUNTRY' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.country}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.PAYMENTMETHOD' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.paymentMethod}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.TAXNUMBER' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.taxNumber}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <h5>{{ 'USER.PROFILEVIEW.PROVIDERACCOUNTTITLE' | translate }}</h5>
+  
+    <div class="row">
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.ACCOUNTNAME' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.accountName}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.ACCOUNTTITLE' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.accountTitle}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.ACCOUNTPHONE' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.accountPhone}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="ig-itembold">
+          <p>{{ 'USER.PROFILEVIEW.ACCOUNTEMAIL' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <p>{{providerInformation.accountEmail}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-8">
+      <small class="text-danger">
+        {{errorMessage | translate }}
+      </small>
+    </div>
+
+    <br>
+
+    <div class="ig-estatus">
+      <div class="row">
+
+        <div class="col-md-2">
+          <p class="ig-itembold">{{ 'USER.PROFILEVIEW.STATUS' | translate }}</p>
+        </div>
+
+        <div class="col-md-4">
+          <a href=""> {{ 'USER.PROFILEVIEW.READEDANDACCEPTED' | translate }}</a>
+          {{actualDate | dateTranslate : 'APP.DATE_FORMAT'}}
+        </div>
+
+      </div>
+    </div>
+
+    <h6>{{ 'USER.PROFILEVIEW.FOOTERLEGEND' | translate }}
+      <a [href]="'mailto:' + mailTo">providersupdate@bupalatinamerica.com</a>
+    </h6>
+
+  </div>
+
+</div>

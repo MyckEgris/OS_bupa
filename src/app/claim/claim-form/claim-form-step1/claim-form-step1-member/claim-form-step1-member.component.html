@@ -1,0 +1,152 @@
+<section class="bp-mainpolicy" *ngIf="wizard" #idSectionStep21>
+  <form [formGroup]="wizard.searchForm">
+    <article class="row" *ngIf="policyHolder">
+
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="policyOwnerCob">
+                  {{'CLAIMFORM.STEP2GLOBALMEMBERS' | translate }}
+                </label>
+                <select [(ngModel)]="member" #memberList [ngModelOptions]="{standalone: true}" class="form-control"
+                  id="memeberList" (change)="selectMember()">
+                  <option value="null" disabled selected>
+                    {{ 'CLAIMFORM.SEARCH_TYPE.SELECT' | translate }}
+                  </option>
+                  <option *ngFor="let member of wizard.policyHolder.members" [ngValue]="member">
+                    {{ member.firstName }} {{ member.middleName }} {{ member.lastName }} -
+                    {{member.dob | date:'dd-MM-yyyy'}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-12">
+  
+          <div class="bp-itemcontsect2">
+  
+            <div class="row">
+              <div class="col-md-12">
+                <p *ngIf="rolIsPolicyMember" [innerHTML]="'CLAIMFORM.STEP1INFORMATIONCONTACTMEMBER' | translate"></p>
+                <p *ngIf="rolIsPolicyHolder || rolIsGroupPolicyHolder"
+                  [innerHTML]="'CLAIMFORM.STEP1INFORMATIONCONTACTMEMBERHOLDER' | translate">
+                </p>
+              </div>
+            </div>
+  
+            <div class="row align-items-end">
+              <div class="col-md-3">
+                <div class="form-group">
+  
+                  <label class="" for="inputText">
+                    {{ 'CLAIMFORM.STEP1CONTACTNAME' | translate }}
+                  </label>
+  
+                  <input type="text" class="form-control" id="inputTextName" formControlName="firstName"
+                    value="{{ wizard.policyContact.firstName }}" readonly>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+  
+                  <label class="" for="inputText">
+                    {{ 'CLAIMFORM.STEP1CONTACTSURNAME' | translate }}
+                  </label>
+  
+                  <input type="text" class="form-control" id="inputTextSurName" formControlName="surName"
+                    value="{{ wizard.policyContact.lastName }}" readonly>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="" for="inputText">
+                    {{ 'CLAIMFORM.STEP1EMAILMEMBER' | translate }}</label>
+                  <input type="text" class="form-control" id="inputTextMail" formControlName="mailMember"
+                    value="{{ wizard.policyContact.email }}" readonly>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="" for="inputText">
+                    {{ 'CLAIMFORM.STEP1PHONEMEMBER' | translate }}</label>
+                  <input type="text" class="form-control" id="inputTextPhone" formControlName="phone"
+                    value="{{  wizard.policyContact.phone }}" readonly>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div> -->
+      <div class="col-md-12">
+        <div class="bp-itemcontsect2">
+
+          <div class="row">
+            <div class="col-md-12">
+              <p [innerHTML]="'CLAIMFORM.STEP1INFORMATIONMEMBER' | translate"></p>
+            </div>
+          </div>
+
+          <div class="row align-items-end">
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1CONTACTNAME' | translate }}
+                </label>
+
+                <input type="text" class="form-control" id="inputTextName" formControlName="firstName"
+                  value="{{ this.wizard.policyContact.firstName }}" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1CONTACTSURNAME' | translate }}
+                </label>
+
+                <input type="text" class="form-control" id="inputTextSurName" formControlName="surName"
+                  value="{{ this.wizard.policyContact.lastName }}" readonly>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="" for="inputText">
+                  {{ 'CLAIMFORM.STEP1EMAILMEMBER' | translate }}</label>
+                <input type="text" class="form-control" id="inputTextMail" formControlName="mailMember"
+                  value="{{ this.wizard.policyContact.email }}" readonly>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </article>
+
+
+    <article class="row align-items-center justify-content-center">
+
+      <div class="col-md-3 col-12">
+        <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="cancel()">
+          {{ 'CLAIMFORM.BTNS.CANCEL' | translate }}
+        </button>
+      </div>
+
+      <div class="col-md-3 col-12">
+        <button class="ig-botones ig-principalbtn" type="button" (click)="next()"
+          [disabled]="!this.member || !this.wizard.policyHolder">
+          {{ 'CLAIMFORM.BTNS.CONTINUE' | translate}}
+        </button>
+      </div>
+
+    </article>
+
+  </form>
+</section>

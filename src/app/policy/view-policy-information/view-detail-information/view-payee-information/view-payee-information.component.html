@@ -1,0 +1,40 @@
+<div class="ig-polidetaleinfo">
+  <h3>
+    {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.TITLE' | translate }} </h3>
+</div>
+<div class="ig-polidetaleinfoda">
+  <p class="font-weight-normal ml-3">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.LEGEND' | translate }}
+  </p>
+  <div class="col-md-12" *ngIf="payeeInformation">
+
+    <app-view-offshore-ach [payeeInformation]="payeeInformation" *ngIf="offshoreAch"></app-view-offshore-ach>
+    <app-view-offshore-wt [payeeInformation]="payeeInformation" *ngIf="offshoreWt"></app-view-offshore-wt>
+    <app-view-onshore-ach [payeeInformation]="payeeInformation" *ngIf="onshoreAch"></app-view-onshore-ach>
+
+  </div>
+  <div class="col-md-12 mt-4 mb-2" *ngIf="!payeeInformation">
+
+    <div class="alert alert-danger mt-3">
+      {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.REMINDER' | translate }}
+    </div>
+
+  </div>
+  <div class="col-md-12 mt-3">
+    <div class="row align-items-start justify-content-center">
+
+      <div class="col-md-3" *ngIf="canDeactivateAccount">
+        <button class="bp-btn bp-btnsecondary" type="button" (click)="deactivateAccount()"
+          [disabled]="!payeeInformation">
+          {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.DEACTIVATE_ACCOUNT' | translate }}
+        </button>
+      </div>
+
+      <div class="col-md-3" *ngIf="canRegisterAccount">
+        <button class="bp-btn bp-btnprimary" type="button" (click)="registerNewAccount()" [disabled]="!this.policy">
+          {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.REGISTER_ACCOUNT' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

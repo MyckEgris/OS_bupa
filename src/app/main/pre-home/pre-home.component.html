@@ -1,0 +1,62 @@
+<div class="modal-body" *ngIf="options">
+
+  <div class="row ig-prehome-item">
+
+    <div class="col-md-12">
+      <article class="ig-bienvenida">
+
+        <h3>{{ 'AGENT.HOME.WELCOME' | translate }} {{ user.name }}!
+          <span>
+            {{'AGENT.HOME.WHAT_YOU_WANT_TO_DO' | translate }}
+          </span>
+        </h3>
+        <h6>
+          {{ 'MENUOPTIONS.PREHOME.LAST_LOGIN_MESSAGE' | translate}}
+          {{  lastLogin | dateTranslate : 'APP.DATE_TIME_FORMAT' }}
+        </h6>
+
+      </article>
+    </div>
+
+    <div class="col-md-12 ig-requestpre" *ngIf="validateUserBussiness()">
+      <label [innerHTML]="'MENUOPTIONS.PREHOME.MEX_INFO_MSG' | translate">
+      </label>
+    </div>
+
+    <div class="col-md-10">
+      <a class="ig-principalbtn ig-botones" [routerLink]="" (click)="onNavigate(npsSurveyUrl)">
+        <i class="material-icons">assignment_turned_in</i>
+        {{'AGENT.HOME.SURVEY_BTN' | translate}}
+      </a>    
+    </div>   
+
+
+    <div class="col-md-6" *ngFor="let option of options">
+      <div class="row ig-pre-card no-gutters border rounded overflow-hidden flex-md-row shadow-sm position-relative">
+        <div class="col-md-12 d-flex flex-column position-static">
+          <figure class="figure" style="height: 100%">
+            <img class="img-fluid" [src]="option.pathIcon" alt="">
+          </figure>
+
+          <a href="" class="texto p-2 ig-btnptre rounded" (click)="cancel();" [routerLink]="[option.pathURL]">
+            <h3> {{ 'MENUOPTIONS.PREHOME.'  | concatenate: option.name | concatenate:'_TITLE' |translate }}</h3>
+            <p class="card-text">
+              {{ 'MENUOPTIONS.PREHOME.'  | concatenate: option.name | concatenate:'_MESSAGE' |translate }}</p>
+            <div class="ig-chevronrig d-none d-sm-block">
+              <i class="material-icons">chevron_right</i>
+            </div>
+          </a>
+          <div class="" style="display:none;">
+            <h3> {{ 'MENUOPTIONS.PREHOME.'  | concatenate: option.name | concatenate:'_TITLE' |translate }}</h3>
+            <p class="card-text">
+              {{ 'MENUOPTIONS.PREHOME.'  | concatenate: option.name | concatenate:'_MESSAGE' |translate }}</p>
+            <a href="#" class="btn btn-primary btn-lg" (click)="cancel();" [routerLink]="[option.pathURL]">
+              {{ 'MENUOPTIONS.PREHOME.'  | concatenate: option.name | translate }} </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

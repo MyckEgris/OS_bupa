@@ -1,0 +1,64 @@
+<hr>
+<div class="row align-items-center">
+    <div class="col-lg-4 offset-lg-8">
+        <ul class="ig-redes">
+            <!-- <li>
+                                    <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                </li> -->
+        </ul>
+    </div>
+</div>
+<div class="row align-items-center">
+    <div class="col-lg-4 p-0">
+        <!--<div class="ig-browser">
+            <p> <i class="material-icons">devices</i>{{'FOOTER.DEVICE' | translate }}</p>
+        </div>-->
+        <div class="ig-copybupa">
+          <p> <i class="material-icons">copyright</i> {{anio}}{{'FOOTER.ALL_RIGHTS' | translate }}</p>
+          <!--<span (click)="navigate('Privacy')">{{'FOOTER.PRIVACY_BUPA' | translate }}</span>-->
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <ul class="ig-terminos">
+          <li> 
+            <span (click)="navigate('Privacy')">{{'FOOTER.PRIVACITY' | translate }}</span>
+            <!--<p id="tooltipPrivacyPolitics" placement="top" style="display:inline; cursor: pointer;" triggers="click" #tooltipPrivacyPolitics="ngbTooltip"
+              [ngbTooltip]="tooltipPrivacyContent">
+              {{'FOOTER.PRIVACITY' | translate }}
+            </p> -->
+          </li>
+          <li>
+              <span (click)="navigate('Terms')">{{ 'FOOTER.TERM' | translate }}</span>
+          </li>
+        </ul>
+    </div>
+    <div style="text-align:right" class="col-md-3">
+        <img class="img-fluid" src="https://bupadigitalstoragedev.blob.core.windows.net/login/Bupa-USAMED-digital.jpg" alt="">
+    </div>
+</div>
+
+
+<ng-template #tooltipPrivacyContent >
+ 
+ 
+   
+
+
+  <div (mouseleave)="closeTooltipPrivacyPolitics()">
+    <li>
+      <span (click)="navigate('Privacy')">{{'FOOTER.PRIVACY_BUPA' | translate }}</span>
+    </li>
+    <li>
+      <span (click)="navigate('Services')">{{'FOOTER.PRIVACY_SERVICES' | translate }}</span>
+    </li>
+  </div> 
+</ng-template>

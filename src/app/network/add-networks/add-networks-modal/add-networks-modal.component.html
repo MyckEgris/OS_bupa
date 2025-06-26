@@ -1,0 +1,70 @@
+<div class="modal-content">
+
+  <div class="modal-header">
+    <h4 class="modal-title"> {{ 'NETWORK.ADD_NETWORKS.TITLE_01_ADD' | translate }} </h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <p> {{ 'NETWORK.ADD_NETWORKS.TITLE_02_ADD' | translate }} </p>
+
+
+    <div class="row  ig-preauthorizationmod" *ngIf="searchProccess">
+      <div class="col-md-12">
+
+        <h6 style="font-weight: 700;"> {{ 'NETWORK.ADD_NETWORKS.RESULTS_ADD' | translate }}
+          <span> ({{ networksResponse.data.length | valueOrMoney:'number':'' }}) </span>
+        </h6>
+
+        <div *ngIf="networksResponse.data.length === 0 && searchProccess">
+          <div class="ig-searchresul animated fadeIn">
+            <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+            <p>{{ 'NETWORK.ADD_NETWORKS.DIAGNOSTIC_NOT_FOUND' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="div" *ngIf="networksResponse.data.length > 0">
+          <div class="form-check" *ngFor="let netw of networksResponse.data; let i = index;">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck{{i}}"
+              (change)="seletedNetwork(netw, $event)">
+            <label class="form-check-label" for="defaultCheck{{i}}">
+              <strong>
+                {{ netw.networkId }} - {{ netw.networkName }}
+              </strong>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="collectionSize > PAGE_SIZE" style="justify-content: center;display: flex;width: 100%; margin-top:15px;">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="PAGE_SIZE" [pageSize]="PAGE_SIZE"
+        [rotate]="true" [boundaryLinks]="true" (pageChange)="changePageOfExcludedNetworks($event);">
+      </ngb-pagination>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <button type="button" class="ig-principalsegundariobtn ig-botones" data-dismiss="modal"
+          (click)="activeModal.close()">
+          {{ 'NETWORK.ADD_NETWORKS.ADD_CANCEL_BTN' | translate }}
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="ig-botones ig-principalbtn"
+          [ngClass]="{ 'ig-secundariobtn ig-botones' : true, 'disabled' : (listSelectedNetworks.length < 1)  }"
+          (click)="acceptNetworksSelected()">
+          {{ 'NETWORK.ADD_NETWORKS.ADD_ADD_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

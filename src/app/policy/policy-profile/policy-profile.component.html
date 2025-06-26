@@ -1,0 +1,570 @@
+<section class="ig-myagent">
+    <article class="">
+        <div class="col-md-12">
+            <form *ngIf="user && policyHolder && policy" [formGroup]="formPolicyProfile" (ngSubmit)="reportChanges()">
+                <div class="ig-userperf">
+                    <div class="ig-user">
+                        <h4>{{ 'AGENT.PROFILE.TITLE' | translate }}</h4>
+                        <div class="row">
+                            <div class="col-md-12 messageText"> {{ 'AGENT.PROFILE.SUB_TITLE' | translate }} </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-1 p-0 text-center">
+                                <i class="material-icons">account_circle</i>
+                            </div>
+                            <div class="col-md-8 p-0">
+                                <div class="ig-contper">
+                                    <h5>{{ user.name }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="ig-utlconex">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-10 text-right">
+                                            <p>{{ 'AGENT.PROFILE.LAST_LOGIN' | translate }}</p>
+                                            <span>{{ user.last_login_date }}</span>
+                                        </div>
+                                        <div class="col-md-1 text-left">
+                                            <i class="material-icons">tv</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <article class="col-md-12  ig-solicituddatos">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="">
+                                        <h6>{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.SUBTITLE1' | translate }}
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class=""
+                                                    for="inputText">{{ 'USER.PROFILEVIEW.ACCOUNTNAME' | translate }}</label>
+                                                <div class="form-control"> {{ policyHolder.firstName }} </div>
+
+                                                <!-- <input type="text" formControlName="name" class="form-control"> -->
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class=""
+                                                    for="inputText">{{ 'USER.PROFILEVIEW.ACCOUNTLAST' | translate }}</label>
+
+                                                <div class="form-control"> {{ policyHolder.lastName }} </div>
+
+                                                <!-- <input type="text" formControlName="lastName" class="form-control"> -->
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class=""
+                                                        for="inputText">{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.DATE_BIRTH' | translate }}</label>
+                                                    <!-- <div class="input-group">
+                                                        <app-custom-date-picker class="w-100" formControlName="DOB"
+                                                            [minDate]="minDate" [maxDate]="maxDate"
+                                                            [dateValue]="currentDate">
+                                                        </app-custom-date-picker>
+                                                    </div> -->
+                                                    <div class="form-control">
+                                                        {{ policyHolder.dob | dateTranslate: 'APP.DATE_FORMAT' }} </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class=""
+                                                        for="inputText">{{ 'USER.PROFILEVIEW.ACCOUNTEMAIL' | translate }}</label>
+                                                    <input type="text" formControlName="mailShow" class="form-control"
+                                                        maxCharsAllowed="{{MAX_CHARS_ALLOWED_EMAIL}}">
+                                                    <small class="text-danger"
+                                                        *ngIf="(formPolicyProfile.controls['mailShow'].touched 
+                                                                                                    && formPolicyProfile.controls['mailShow'].errors?.invalidEmail)">
+                                                        {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.INVALID_MAIL' | translate}}
+                                                    </small>
+                                                    <small class="text-danger"
+                                                        *ngIf="(formPolicyProfile.controls['mailShow'].touched 
+                                                                                                    && formPolicyProfile.controls['mailShow'].errors?.maxlength)">
+                                                        {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                                    </small>
+                                                    <small class="text-danger"
+                                                        *ngIf="(formPolicyProfile.controls['mailShow'].touched 
+                                                                                                    && formPolicyProfile.controls['mailShow'].errors?.required)
+                                                                || (formPolicyProfile.controls['mailShow'].invalid && showValidations)">
+                                                        {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div formGroupName="Phones">
+                                        <div class="row">
+                                            <div class="col-md-12" formGroupName="Home">
+                                                <div class="row">
+                                                    <div class="ig-iconper">
+                                                        <i class="material-icons">home</i>
+                                                        <h5 class="col-10">
+                                                            {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.HOME' | translate }}
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-md-4" *ngIf="countries">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label class="" for="inputText">
+                                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}</label>
+                                                                <select class="form-control form-control-sm"
+                                                                    formControlName="countryId">
+                                                                    <option *ngFor="let country of countries"
+                                                                        [value]="country.countryId">
+                                                                        {{country.countryName}}
+                                                                    </option>
+                                                                </select>
+
+                                                                <small class="text-danger"
+                                                                    *ngIf="(formPolicyProfile.controls['Phones'].controls['Home'].controls['countryId'].touched 
+                                                                                && formPolicyProfile.controls['Phones'].controls['Home'].controls['countryId'].errors?.required)
+                                                                                || (formPolicyProfile.controls['Phones'].controls['Home'].controls['countryId'].invalid && showValidations)">
+                                                                    {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate}}
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="" for="inputText">
+                                                                {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.HOME_PHONE' | translate }}</label>
+                                                            <input type="text" formControlName="phoneNumber"
+                                                                class="form-control"
+                                                                maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                                                            <small class="text-danger"
+                                                                *ngIf="(formPolicyProfile.controls['Phones'].controls['Home'].controls['phoneNumber'].touched 
+                                                                           && formPolicyProfile.controls['Phones'].controls['Home'].controls['phoneNumber'].invalid)">
+                                                                {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class=""
+                                                                for="inputText">{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate }}</label>
+                                                            <input type="text" formControlName="ext"
+                                                                class="form-control"
+                                                                maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" formGroupName="Office">
+                                                <div class="row">
+
+                                                    <div class="ig-iconper">
+                                                        <i class="material-icons">business</i>
+                                                        <h5 class="col-10">
+                                                            {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.OFFICE' | translate }}
+                                                        </h5>
+                                                    </div>
+
+
+                                                    <div class="col-md-4" *ngIf="countries">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label class="" for="inputText">
+                                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}</label>
+                                                                <select class="form-control form-control-sm"
+                                                                    formControlName="countryId">
+
+                                                                    <option *ngFor="let country of countries"
+                                                                        [value]="country.countryId">
+                                                                        {{country.countryName}}
+                                                                    </option>
+                                                                </select>
+
+                                                                <small class="text-danger"
+                                                                    *ngIf="(formPolicyProfile.controls['Phones'].controls['Office'].controls['countryId'].touched 
+                                                                                && formPolicyProfile.controls['Phones'].controls['Office'].controls['countryId'].errors?.required)
+                                                                                || (formPolicyProfile.controls['Phones'].controls['Office'].controls['countryId'].invalid && showValidations)">
+                                                                    {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate}}
+                                                                </small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="" for="inputText">
+                                                                {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.OFFICE_PHONE' | translate }}</label>
+                                                            <input type="text" formControlName="phoneNumber"
+                                                                class="form-control"
+                                                                maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                                                            <small class="text-danger"
+                                                                *ngIf="(formPolicyProfile.controls['Phones'].controls['Office'].controls['phoneNumber'].touched 
+                                                                                        && formPolicyProfile.controls['Phones'].controls['Office'].controls['phoneNumber'].invalid)">
+                                                                {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class=""
+                                                                for="inputText">{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate }}</label>
+                                                            <input type="text" formControlName="ext"
+                                                                maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" formGroupName="Fax">
+                                                <div class="row">
+                                                    <div class="ig-iconper">
+                                                        <i class="material-icons">phone_in_talk</i>
+                                                        <h5 class="col-10">
+                                                            {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.FAX' | translate }}
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-md-4" *ngIf="countries">
+                                                        <div class="form-group">
+                                                            <label class="" for="inputText">
+                                                                {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}</label>
+                                                            <select class="form-control form-control-sm"
+                                                                formControlName="countryId">
+
+                                                                <option *ngFor="let country of countries"
+                                                                    [value]="country.countryId">
+                                                                    {{country.countryName}}
+                                                                </option>
+                                                            </select>
+
+                                                            <small class="text-danger"
+                                                                *ngIf="(formPolicyProfile.controls['Phones'].controls['Fax'].controls['countryId'].touched 
+                                                                            && formPolicyProfile.controls['Phones'].controls['Fax'].controls['countryId'].errors?.required)
+                                                                            || (formPolicyProfile.controls['Phones'].controls['Fax'].controls['countryId'].invalid && showValidations)">
+                                                                {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate}}
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class="" for="inputText">
+                                                                {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.FAX' | translate }}</label>
+                                                            <input type="text" formControlName="phoneNumber"
+                                                                class="form-control"
+                                                                maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}">
+                                                            <small class="text-danger"
+                                                                *ngIf="(formPolicyProfile.controls['Phones'].controls['Fax'].controls['phoneNumber'].touched 
+                                                                                                && formPolicyProfile.controls['Phones'].controls['Fax'].controls['phoneNumber'].invalid)">
+                                                                {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                                            </small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label class=""
+                                                                for="inputText">{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXT' | translate }}</label>
+                                                            <input type="text" formControlName="ext"
+                                                                maxCharsAllowed="{{MAX_CHARS_ALLOWED_PHONE}}"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="">
+                                        <h6>{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.SUBTITLE2' | translate }}
+                                        </h6>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" formGroupName="Addresses">
+                                    <div class="row" formGroupName="Home">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.PHYSICAL_ADDRRESS' | translate }}</label>
+                                                <!-- <input type="text" formControlName="addressLine" class="form-control"> -->
+                                                <div class="form-control"> {{ phisicalAddress?.addressLine }} </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" *ngIf="isMexico">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.INTERNO' | translate }}</label>
+                                                <div class="form-control"> {{ phisicalAddress?.interior }} </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" *ngIf="isMexico">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXTERNO' | translate }}</label>
+                                                <div class="form-control"> {{ phisicalAddress?.exterior }}</div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" *ngIf="countries">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}</label>
+                                                <!-- <select class="form-control form-control-sm"
+                                                    formControlName="countryId">
+
+                                                    <option *ngFor="let country of countries"
+                                                        [value]="country.countryId">
+                                                        {{country.countryName}}
+                                                    </option>
+                                                </select> -->
+                                                <div class="form-control"> {{ phisicalAddress?.country }} </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.ZIP_CODE' | translate }}</label>
+                                                <!-- <input type="text" formControlName="zipCode" class="form-control"> -->
+                                                <div class="form-control">{{ phisicalAddress?.zipCode }} </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.STATE' | translate }}</label>
+                                                <!-- <input type="text" formControlName="state" class="form-control"> -->
+                                                <div class="form-control"> {{ phisicalAddress?.state }} </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" *ngIf="!isMexico && phisicalAddressCities">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.CITY' | translate }}</label>
+                                                <!-- <select class="form-control form-control-sm" formControlName="cityId">
+
+                                                    <option *ngFor="let city of phisicalAddressCities"
+                                                        [value]="city.cityId">
+                                                        {{city.cityName}}
+                                                    </option>
+                                                </select> -->
+                                                <div class="form-control"> {{ phisicalAddress?.city }} </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" *ngIf="isMexico">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MUNICIPALITY' | translate }}</label>
+
+                                                <div class="form-control"> {{ phisicalAddress?.municipality }} </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" *ngIf="isMexico">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COLONY' | translate }}</label>
+                                                <div class="form-control">{{ phisicalAddress?.colony }}</div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="">
+                                        <h6>{{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.SUBTITLE3' | translate }}
+                                        </h6>
+                                    </div>
+                                    <div class="row" *ngIf="isMexicoCountry">
+                                        <div class="col-md-12 messageText">
+                                            {{ 'AGENT.PROFILE.PROFILE_MESSAGE_MAILING' | translate }} </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" formGroupName="Addresses">
+                                    <div class="row" formGroupName="Postal">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.PHYSICAL_ADDRRESS' | translate }}</label>
+                                                <input type="text" formControlName="addressLine" class="form-control">
+                                                <small class="text-danger"
+                                                    *ngIf="(formPolicyProfile.controls['Addresses'].controls['Postal'].controls['addressLine'].touched 
+                                                                && formPolicyProfile.controls['Addresses'].controls['Postal'].controls['addressLine'].invalid
+                                                                && formPolicyProfile.controls['Addresses'].controls['Postal'].controls['addressLine'].errors?.maxlength)">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                                </small>
+                                                <small class="text-danger"
+                                                    *ngIf="(formPolicyProfile.controls['Addresses'].controls['Postal'].controls['addressLine'].errors?.required)
+                                                        || (formPolicyProfile.controls['Addresses'].controls['Postal'].controls['addressLine'].invalid && showValidations)">
+                                                    {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6" *ngIf="isMexicoCountry">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.INTERNO' | translate }}</label>
+                                                <input type="text" formControlName="interior" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6" *ngIf="isMexicoCountry">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.EXTERNO' | translate }}</label>
+                                                <input type="text" formControlName="exterior" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6" *ngIf="countries">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COUNTRY' | translate }}</label>
+                                                <select class="form-control form-control-sm" formControlName="countryId"
+                                                    (change)="changeCountry($event)">
+                                                    <option *ngFor="let country of countries"
+                                                        [value]="country.countryId">
+                                                        {{country.countryName}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="row align-items-center">
+                                                <div
+                                                    [ngClass]="{ 'col-md-9' : isMexicoCountry, 'col-md-12' : !isMexicoCountry}">
+                                                    <div class="form-group">
+                                                        <label class="" for="inputText">
+                                                            {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.ZIP_CODE' | translate }}</label>
+                                                        <input type="text" formControlName="zipCode"
+                                                            class="form-control">
+                                                        <small class="text-danger"
+                                                            *ngIf="(formPolicyProfile.controls['Addresses'].controls['Postal'].controls['zipCode'].touched 
+                                                                                        && formPolicyProfile.controls['Addresses'].controls['Postal'].controls['zipCode'].errors?.maxlength)">
+                                                            {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                                        </small>
+                                                        <small class="text-danger"
+                                                            *ngIf="(formPolicyProfile.controls['Addresses'].controls['Postal'].controls['zipCode'].touched 
+                                                                        && formPolicyProfile.controls['Addresses'].controls['Postal'].controls['zipCode'].errors?.required)
+                                                                        || (formPolicyProfile.controls['Addresses'].controls['Postal'].controls['zipCode'].invalid && showValidations)">
+                                                            {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate}}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-1 col-sm-2 col-6" *ngIf="isMexicoCountry">
+                                                    <button type="button" (click)="searchByZip()"
+                                                        [disabled]="!getControl('Addresses', 'Postal').get('zipCode').value
+                                                                                            || getControl('Addresses', 'Postal').get('zipCode').invalid"
+                                                        [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : getControl('Addresses', 'Postal').get('zipCode').invalid }"><i
+                                                            class="material-icons">search</i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.STATE' | translate }}</label>
+
+                                                <div class="form-control" *ngIf="isMexicoCountry"> {{ getControl('Addresses','Postal').get('state').value }}</div>
+
+                                            
+                                                <input *ngIf="!isMexicoCountry" type="text" formControlName="state"
+                                                    class="form-control">
+                                                <small class="text-danger"
+                                                    *ngIf="(formPolicyProfile.controls['Addresses'].controls['Postal'].controls['state'].touched 
+                                                                                && formPolicyProfile.controls['Addresses'].controls['Postal'].controls['state'].invalid)">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MAXLENGTH' | translate}}
+                                                </small>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" *ngIf="mailingAddressCities && !isMexicoCountry">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.CITY' | translate }}</label>
+                                                <select class="form-control form-control-sm" formControlName="cityId">
+
+                                                    <option *ngFor="let city of mailingAddressCities"
+                                                        [value]="city.cityId">
+                                                        {{ city.cityName }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" *ngIf="isMexicoCountry">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.MUNICIPALITY' | translate }}</label>
+
+                                                    <div class="form-control"> {{ getControl('Addresses','Postal').get('municipality').value }}</div>
+                                            
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" *ngIf="isMexicoCountry">
+                                            <div class="form-group">
+                                                <label class="" for="inputText">
+                                                    {{ 'POLICY.VIEW_POLICY_DETAILS.GENERAL_INFORMATION.COLONY' | translate }}</label>
+                                                <select class="form-control form-control-sm" formControlName="colonyId">
+
+                                                    <option *ngFor="let c of colonies" [value]="c.colonyId">
+                                                        {{ c.colonyName }}
+                                                    </option>
+                                                </select>
+                                                <small class="text-danger"
+                                                    *ngIf="(formPolicyProfile.controls['Addresses'].controls['Postal'].controls['colonyId'].touched 
+                                                                && formPolicyProfile.controls['Addresses'].controls['Postal'].controls['colonyId'].errors?.required)
+                                                                || (formPolicyProfile.controls['Addresses'].controls['Postal'].controls['colonyId'].invalid && showValidations)">
+                                                    {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate}}
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="ig-perfilbtn">
+                    <div class="col-md-3 offset-5">
+                        <button type="submit"
+                            class="btn btn-primary btn-actualizar">{{ 'AGENT.PROFILE.UPDATE_INFORMATION_BUTTON' | translate }}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </article>
+</section>

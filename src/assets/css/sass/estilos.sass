@@ -1,0 +1,6931 @@
+﻿body
+  margin: 0
+
+h1
+  font-size: 2em
+  margin: 0.67em 0
+
+hr
+  box-sizing: content-box
+  height: 0
+  overflow: visible
+
+pre
+  font-family: monospace, monospace
+  font-size: 1em
+
+a
+  background-color: transparent
+
+abbr[title]
+  border-bottom: none
+  text-decoration: underline
+  text-decoration: underline dotted
+
+b,
+strong
+  font-weight: bolder
+
+code,
+kbd,
+samp
+  font-family: monospace, monospace
+  font-size: 1em
+
+small
+  font-size: 80%
+
+sub,
+sup
+  font-size: 75%
+  line-height: 0
+  position: relative
+  vertical-align: baseline
+
+sub
+  bottom: -0.25em
+
+sup
+  top: -0.5em
+
+img
+  border-style: none
+
+button,
+input,
+optgroup,
+select,
+textarea
+  font-family: inherit
+  font-size: 100%
+  line-height: 1.15
+  margin: 0
+
+button,
+input
+  overflow: visible
+
+button,
+select
+  text-transform: none
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"]
+  -webkit-appearance: button
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner
+  border-style: none
+  padding: 0
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring
+  outline: 1px dotted ButtonText
+
+fieldset
+  padding: 0.35em 0.75em 0.625em
+
+legend
+  box-sizing: border-box
+  color: inherit
+  display: table
+  max-width: 100%
+  padding: 0
+  white-space: normal
+
+progress
+  vertical-align: baseline
+
+textarea
+  overflow: auto
+
+[type="checkbox"],
+[type="radio"]
+  box-sizing: border-box
+  padding: 0
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button
+  height: auto
+
+[type="search"]
+  -webkit-appearance: textfield
+  outline-offset: -2px
+
+[type="search"]::-webkit-search-decoration
+  -webkit-appearance: none
+
+\::-webkit-file-upload-button
+  -webkit-appearance: button
+  font: inherit
+
+details
+  display: block
+
+summary
+  display: list-item
+
+template
+  display: none
+
+[hidden]
+  display: none
+
+@font-face
+  font-family: "FontAwesome"
+  src: url("assets/fonts/fontawesome-webfont.eot?") format("eot"), url("assets/fonts/fontawesome-webfont.woff2?") format("woff2"), url("assets/fonts/fontawesome-webfont.woff?") format("woff"), url("assets/fonts/fontawesome-webfont.ttf?") format("truetype"), url("assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg")
+
+@font-face
+  font-family: "icomoon"
+  src: url("assets/fonts/icomoon.eot?yfzdh6") format("eot"), url("assets/fonts/icomoon.woff?yfzdh6") format("woff"), url("assets/fonts/icomoon.ttf?yfzdh6") format("truetype"), url("assets/fonts/icomoon.svg?yfzdh6#icomoon") format("svg")
+
+.icon-paintbrush:before
+  content: "\e900"
+  font-family: 'icomoon' !important
+  speak: none
+  font-style: normal
+  font-weight: normal
+  font-variant: normal
+  text-transform: none
+  line-height: 1
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+html
+  height: 100%
+
+body
+  height: 100%
+  font-size: 16px
+  font-family: $font
+  font-weight: 300
+  color: $textos
+  margin: 0 auto
+  overflow-x: hidden
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  font-family: $font
+  font-weight: 500
+  color: #000000
+  margin: 0
+  padding: 0
+  word-wrap: break-word
+
+a
+  font-family: $font
+  font-weight: 400
+  color: $azulclaro
+
+p
+  font-size: 14px
+  font-weight: 400
+  color: $gris2
+
+  .bold
+    font-weight: 700
+
+.btnprincipal
+  background-color: $azulclaro
+  padding: 23px 20px
+  text-transform: uppercase
+  font-family: $font
+  font-weight: 300
+  font-weight: 300
+  width: 260px
+  margin-top: 40px
+  display: block
+
+.ig-servicioitemhtml
+  line-height: 1.15
+  -webkit-text-size-adjust: 100%
+
+.ig-header ul.nav.flex-column
+  height: 100vh
+  overflow: hidden
+
+.ig-header nav ul .nav-item
+  margin: 5px
+  width: 100%
+
+.ig-header nav .menuico
+  color: $azulclaro
+  display: block
+  text-align: center
+
+.ig-header nav .menuico i
+  font-size: 45px
+
+.ig-header nav
+  height: calc(100% - 150px)
+  overflow-y: hidden
+  position: relative
+
+.ig-header nav .menuico#up
+  position: absolute
+  width: 100%
+  height: 32px
+
+.ig-header nav .menuico#down
+  position: absolute
+  width: 100%
+  height: 32px
+  bottom: 0px
+
+.ig-header nav ul .nav-item a
+  display: block
+  text-decoration: none
+  color: #333333
+  font-family: $font
+  font-weight: 400
+  font-size: 12px
+  display: block
+  text-align: center
+  padding: 0
+
+.ig-header nav ul .nav-item a:hover
+  display: block
+  text-decoration: none
+  color: $azulclaro
+  font-family: $font
+  font-weight: 400
+
+.ig-header nav ul .nav-item a .ig-iconmenu:hover
+  color: $azulclaro
+  background-color: white
+
+.ig-header nav ul .nav-item.active
+  display: block
+  text-decoration: none
+  color: $azulclaro
+  font-family: $font
+  font-weight: 400
+
+.ig-header nav ul .nav-item a .ig-iconmenu
+  font-size: 30px
+  margin: 5px auto
+  background-color: transparent
+  width: 60px
+  height: 60px
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 50%
+  color: #333333
+  border: 1px solid #7d7d7d
+  background-size: 60px
+  background-repeat: no-repeat
+  background-position: center
+
+.ig-header nav ul .active a .ig-iconmenu
+  color: #fff
+  border: 1px solid $azulclaro
+  background-color: white
+
+.ig-header nav ul .active a
+  display: block
+  text-decoration: none
+  color: $azulclaro
+  font-family: $font
+  font-weight: 600
+
+.ig-header nav ul .nav-item a.active
+  color: #fff
+
+.ig-header nav ul .nav-item a.active .ig-iconmenu
+  color: #fff
+  border: 1px solid $azulclaro
+  background-color: $azulclaro
+
+.ig-close
+  margin: 0px
+  position: fixed
+  width: 120px
+  bottom: 0px
+
+.ig-close ul
+  margin: 0 15px
+  padding: 0
+
+.ig-close ul li
+  list-style: none
+  width: 100%
+  display: block
+  padding: 0px 0
+  margin-top: 10px
+  text-align: center
+
+.ig-close ul li a,
+.ig-close ul li p
+  display: block
+  text-decoration: none
+  color: white
+  font-size: 16px
+  font-family: $font
+  font-weight: 300
+  font-size: 14px
+  width: 100%
+
+.ig-close ul li a i,
+.ig-close ul li p i
+  margin-right: 10px
+
+.ig-close ul li p
+  color: white
+  padding: 0
+
+.ig-close ul li p span
+  font-family: $font
+  font-weight: 700
+
+.ig-close .ig-date
+  text-align: center
+  border-top: 2px solid $textos
+  margin: 0 15px
+  padding: 10px 0
+
+.ig-close .ig-date p
+  width: 100%
+  font-family: $font
+  font-weight: 400
+  font-size: 20px
+  margin: 0px
+  padding: 0
+  line-height: 40px
+  color: #00335b
+
+.ig-close .ig-date span
+  width: 100%
+  font-family: $font
+  font-weight: 700
+  font-size: 20px
+  margin: 0px
+  padding: 0
+  color: $textos
+
+.ig-header
+  height: 100%
+  background-color: white
+  position: fixed
+  border-right: 1px solid #adadad
+  width: 120px
+  left: 0px
+
+.ig-header h1
+  margin: 10px auto
+  text-align: center
+  width: 80%
+
+header .ig-topmenu
+  background-color: #eee
+  padding: 0 15px
+
+header .ig-topmenu ul
+  margin: 0
+  padding: 0
+  width: 100%
+
+header .ig-topmenu ul li
+  display: inline-block
+  vertical-align: top
+  padding: 5px
+  height: auto
+
+header .ig-topmenu ul li a
+  display: block
+  margin: 0 10px
+  text-decoration: none
+  font-size: 14px
+  color: #3f3f3f
+
+header .ig-topmenu .right li
+  border-right: 1px solid #808080
+  font-size: 14px
+  color: #3f3f3f
+
+.ig-formulario
+  margin: 20px 0 50px 0
+
+.ig-formulario h2
+  font-family: $font
+  font-weight: 300
+  margin-bottom: 50px
+
+.ig-formulario .ig-border
+  border-right: 1px solid #808080
+
+.ig-formulario .ig-formularioasegurado
+  background-color: #eee
+  padding: 30px 60px
+
+.ig-formulario .ig-formularioasegurado form label
+  font-family: $font
+  font-weight: 300
+
+.ig-formulario .ig-formularioasegurado form a
+  font-size: 12px
+  font-family: $font
+  font-weight: 300
+  margin: 10px 0
+  display: block
+  text-decoration: underline
+
+.ig-formulario .ig-formularioasegurado form .olvido
+  color: $azulclaro
+  margin-top: 20px
+  font-size: 14px
+  text-decoration: underline
+
+.ig-formulario .ig-formularioasegurado h5
+  margin-bottom: 20px
+
+.ig-formulario .ig-serviciosenlinea p
+  margin: 10px 0
+  font-family: $font
+  font-weight: 300
+
+.ig-formulario .ig-serviciosenlinea ul li
+  list-style: none
+  margin: 5px 0
+  display: inline-block
+  vertical-align: top
+
+.ig-formulario .ig-serviciosenlinea ul li:before
+  content: "\f00c"
+  font-family: FontAwesome
+  color: $azulclaro
+  display: inline-block
+  vertical-align: top
+
+.ig-formulario .ig-serviciosenlinea ul li p
+  display: inline-block
+  vertical-align: top
+  padding: 0px
+  margin: 0px
+
+.search-form .input-group
+  float: right !important
+  transition: all 0.35s, border-radius 0s
+  width: 32px
+  height: 32px
+  background-color: #fff
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset
+  border-radius: 25px
+  border: 1px solid #ccc
+
+.search-form .input-group input.form-control
+  margin-left: -25px
+  border: none
+  background: transparent
+  box-shadow: none
+  display: block
+  padding: 1rem 2rem
+
+.search-form .input-group input.form-control::-webkit-input-placeholder
+  display: none
+
+.search-form .input-group input.form-control:-moz-placeholder
+
+  display: none
+
+.search-form .input-group input.form-control::-moz-placeholder
+
+  display: none
+
+.search-form .input-group input.form-control:-ms-input-placeholder
+  display: none
+
+.search-form .input-group:hover,
+.search-form .input-group.hover
+  width: 100%
+  border-radius: 25px 25px 25px 25px
+
+.search-form .input-group span.form-control-feedback
+  position: absolute
+  top: -5px
+  bottom: 0px
+  right: -2px
+  left: 5px
+  display: block
+  width: 34px
+  height: 34px
+  line-height: 34px
+  text-align: center
+  color: #3596e0
+  left: initial
+  font-size: 14px
+
+.ig-404
+  text-align: center
+  float: left
+  width: 100%
+  height: 100%
+  padding-top: 10%
+
+.ig-404 .ig-textomensaje404
+  margin-top: 60px
+  display: block
+  border-right: 1px solid #d3d3d3
+
+.ig-404 .ig-textomensaje404 h2
+  font-size: 180px
+  padding: 30px 0 0 0
+  display: block
+  padding: 0
+  line-height: 110px
+  font-family: $font
+  font-weight: 300
+
+.ig-404 .ig-textomensaje404 p
+  color: $azulclaro
+  font-family: $font
+  font-weight: 300
+  font-size: 80px
+  padding: 0
+  margin: 0
+  line-height: 90px
+
+.ig-404 .ig-textomensaje
+  text-align: left
+  margin-top: 60px
+
+.ig-404 .ig-textomensaje p
+  padding: 0
+  margin: 0
+  font-family: $font
+  font-weight: 300
+
+.ig-404 footer
+  margin-top: 80px
+
+.ig-mensaje
+  margin: 20px 0 50px 0
+  text-align: center
+
+.ig-mensaje .ig-aviso
+  text-align: left
+
+.ig-mensaje .ig-aviso .aviso
+  font-size: 18px
+  padding: 0
+  margin: 10px 0 0 0
+  color: #d3d3d3
+  font-family: $font
+  font-weight: 300
+
+.ig-mensaje .ig-textomensaje h2
+  font-family: $font
+  font-weight: 300
+  text-transform: uppercase
+
+.ig-mensaje .ig-textomensaje p
+  color: #d3d3d3
+
+.ig-formulario1
+  margin: 20px 0 50px 0
+
+.ig-formulario1 .ig-textoformulariostep h2
+  font-family: $font
+  font-weight: 300
+
+.ig-formulario1 .ig-textoformulariostep p
+  color: #d3d3d3
+
+.ig-formulario1 .ig-formularioasegurado
+  padding: 30px 0px
+
+.ig-formulario1 .ig-formularioasegurado .ig-textocontra
+  color: #d3d3d3
+  font-size: 13px
+  padding: 0
+  margin: 70% 0 0 0
+
+.ig-formulario1 .ig-formularioasegurado form .ig-textovalida
+  color: #d3d3d3
+  font-size: 13px
+  padding: 0
+  margin-top: 5px
+  font-weight: 300
+
+.ig-formulario1 .ig-formularioasegurado form label
+  font-family: $font
+  font-weight: 300
+  text-transform: uppercase
+
+.ig-formulario1 .ig-formularioasegurado form .form-control
+  font-weight: 300
+  font-size: 14px
+
+.ig-formulario1 .ig-formularioasegurado form a
+  font-size: 12px
+  font-family: $font
+  font-weight: 300
+  margin: 10px 0
+  display: block
+  text-decoration: underline
+
+.ig-formulario1 .ig-formularioasegurado form .olvido
+  color: $azulclaro
+  margin-top: 20px
+  font-size: 14px
+  text-decoration: underline
+
+.ig-formulario1 .ig-formularioasegurado h5
+  margin-bottom: 20px
+
+.ig-formulario1 .ig-serviciosenlinea p
+  margin: 10px 0
+  font-family: $font
+  font-weight: 300
+
+.ig-formulario1 .ig-serviciosenlinea ul li
+  list-style: none
+  margin: 5px 0
+  display: inline-block
+  vertical-align: top
+
+.ig-formulario1 .ig-serviciosenlinea ul li:before
+  content: "\f00c"
+  font-family: FontAwesome
+  color: $azulclaro
+  display: inline-block
+  vertical-align: top
+
+.ig-formulario1 .ig-serviciosenlinea ul li p
+  display: inline-block
+  vertical-align: top
+  padding: 0px
+  margin: 0px
+
+.ig-info
+  background-color: $azulclaro
+  float: left
+  width: 100%
+  text-align: center
+  margin: 20px 0
+
+.ig-info ul
+  padding: 20px 0
+  margin: 0
+
+.ig-info ul li
+  display: inline-block
+  vertical-align: top
+  margin: 0 5px
+
+.ig-info ul li a
+  color: #fff
+  font-family: $font
+  font-weight: 300
+  font-size: 14px
+  display: block
+
+.ig-info ul li a:hover
+  text-decoration: underline
+
+.ig-info ul li:first-child a
+  font-family: $font
+  font-weight: 700
+
+.ig-contenido
+  margin-left: 120px
+  width: 100%
+  padding: 0 15px
+
+.ig-contenido .ig-contenedor .ig-bienvenida
+  padding: 20px
+  margin: 10px 0
+
+.ig-contenido .ig-contenedor .ig-bienvenida h3
+  font-size: 28px
+  font-weight: 700
+
+.ig-contenido .ig-contenedor .ig-bienvenida span
+  font-weight: 400
+
+.ig-contenido .ig-profile2
+  padding: 0 15px
+
+.ig-contenido .ig-profile2 .ig-user
+  font-size: 80px
+
+.ig-contenido .ig-profile2 p
+  padding: 0
+  margin: 0
+
+.ig-contenido .ig-profile2 .ig-utlconex
+  text-align: right
+
+.ig-contenido .ig-profile2 .ig-utlconex p
+  font-size: 12px
+
+.ig-contenido .ig-profile2 .ig-utlconex i
+  font-size: 40px
+
+.ig-contenido .ig-profile2 .ig-user-cont
+  margin-top: 20px
+
+.ig-contenido .ig-profile2 .ig-user-cont ul
+  margin: 0
+  padding: 0
+
+.ig-contenido .ig-profile2 .ig-user-cont ul li
+  list-style: none
+
+.ig-contenido .ig-profile
+  margin: 30px 0
+
+.ig-contenido .ig-provider p
+  padding: 0
+  margin: 0
+  height: 24px
+
+.ig-contenido .ig-provider .ig-itembold
+  color: $textos
+  font-weight: 600
+
+.ig-contenido .ig-provider h5
+  margin: 30px 0 15px 0px
+  font-weight: 700
+
+.ig-contenido .ig-provider ul
+  margin: 5px 0 0 0
+  padding: 0
+
+.ig-contenido .ig-provider ul li
+  list-style: none
+
+.ig-contenido .ig-provider ul li p
+  margin: 0
+  padding: 0
+
+.ig-contenido .ig-provider h6
+  margin-top: 30px
+
+.ig-contenido .ig-estatus
+  margin-top: 20px
+
+.ig-contenido .ig-estatus li
+  color: #808080
+  font-size: 12px
+
+.ig-contenido .ig-estatus li a
+  color: #808080
+  text-decoration: underline
+
+.ig-footer
+  margin: 20px 0
+  float: left
+  width: 100%
+  text-align: center
+
+.ig-footer .ig-politicas,
+.ig-footer ul
+  margin: 0
+  padding: 0
+
+.ig-footer .ig-politicas li,
+.ig-footer ul li
+  display: inline-block
+  vertical-align: top
+  margin: 0 20px
+
+.ig-footer .ig-politicas li a,
+.ig-footer ul li a
+  font-size: 11px
+  text-transform: uppercase
+  color: #d3d3d3
+  font-family: $font
+  font-weight: 300
+
+.ig-siguenos
+  margin: 20px auto
+  text-align: center
+  float: left
+  width: 100%
+
+.ig-siguenos p
+  text-align: center
+  font-size: 10px
+  color: #d3d3d3
+  margin: 20px 0
+
+.ig-siguenos ul
+  margin: 0
+  padding: 0
+
+.ig-siguenos ul li
+  display: inline-block
+  vertical-align: top
+
+.ig-siguenos ul li a
+  color: #fff
+  background-color: #109fe1
+  border-radius: 50%
+  font-size: 23px
+  margin: 0 10px
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  width: 50px
+  height: 50px
+
+.ig-siguenos ul li a:hover
+  border: 1px solid $azulclaro
+  background-color: #fff
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  color: $azulclaro
+  text-decoration: none
+
+.ig-footer1
+  border-top: 1px solid #d3d3d3
+  border-bottom: 1px solid #d3d3d3
+  margin: 20px 0
+  float: left
+  width: 100%
+
+.ig-footer1 h3
+  margin: 50px 0
+
+.ig-footer1 .ig-borderfooter
+  border-left: 1px solid #d3d3d3
+
+.ig-footer1 .ig-acercabupa h5
+  font-weight: 400
+  margin: 10px 20px
+  color: #109fe1
+  font-family: $font
+  font-weight: 400
+
+.ig-footer1 .ig-acercabupa h5 a
+  color: #109fe1
+  margin: 10px 0
+  display: block
+
+.ig-footer1 .ig-acercabupa ul li
+  list-style: none
+
+.ig-footer1 .ig-acercabupa ul li a
+  color: #3f3f3f
+  font-family: $font
+  font-weight: 300
+  font-size: 15px
+
+.ig-footer1 .ig-contactenos h5
+  color: $azulclaro
+  font-weight: 400
+
+.ig-footer1 .ig-contactenos h5 a
+  color: #109fe1
+  margin: 10px 0
+  display: block
+
+.ig-footer1 .ig-contactenos ul
+  margin: 0
+  padding: 0
+
+.ig-footer1 .ig-contactenos ul li
+  list-style: none
+
+.ig-footer1 .ig-contactenos ul li a
+  color: #109fe1
+  font-weight: 300
+  font-family: $font
+  font-weight: 300
+  font-size: 15px
+
+.ig-footer1 .ig-contactenos h6
+  color: #3f3f3f
+  font-weight: 300
+
+.ig-footer1 .ig-contactenos .ig-icocontacto
+  text-align: center
+  display: block
+  text-transform: uppercase
+  margin-top: 20px
+
+.ig-footer1 .ig-contactenos .ig-icocontacto .bupa-circle
+  height: 45px
+  width: 45px
+  left: 45px
+  top: 70px
+  position: absolute
+  background-color: rgba(204, 236, 249, 0.6)
+  border-radius: 50px
+  position: absolute
+  z-index: 0
+
+.ig-footer1 .ig-contactenos .ig-icocontacto a
+  color: #109fe1
+  font-size: 14px
+  font-weight: 700
+
+.ig-footer1 .ig-contactenos .ig-icocontacto a:hover
+  text-decoration: none
+  color: $azulclaro
+
+.ig-footer1 .ig-contactenos .ig-icocontacto a:hover img
+  transform: translate(0, -15px)
+  transform-origin: 100% 0%
+  transition-timing-function: ease-in
+  transition: 0.5s
+
+.ig-footer1 .ig-contactenos .ig-icocontacto img
+  width: 50%
+  display: block
+  text-align: center
+  margin: auto
+
+.ig-footer1 .ig-contactenos,
+.ig-footer1 .ig-acercabupa
+  padding: 30px
+
+.ig-validation
+  margin-top: 20px
+
+.ig-validation form
+  width: 100%
+
+.ig-validation .ig-titulotabs
+  display: block
+
+.ig-validation .ig-titulotabs h6
+  color: $textos
+  font-family: $font
+  font-weight: 700
+  font-size: 22px
+
+.ig-validation .ig-titulotabs h6 span
+  font-family: $font
+  font-weight: 400
+
+.ig-validation .progress .progress-bar
+  background-color: $azulclaro
+
+.ig-validation .ig-procesconte
+  background-color: white
+  padding: 20px 0px
+
+.ig-validation .ig-procesconte h4, .ig-validation .ig-procesconte h6
+  color: $textos
+
+.ig-validation .ig-searchpol
+  padding: 20px 0px
+  margin-bottom: 30px
+  width: 100%
+  position: relative
+  z-index: 9
+
+.ig-validation .ig-searchpol .btncalendar,
+.ig-date-picker .btncalendar,
+.ig-date-from-to .btncalendar
+  cursor: pointer
+  border: none
+  background-color: #f4fbff
+  display: flex
+  align-content: center
+  align-items: center
+  border-radius: 0 10px 10px 0
+  border-left: 1px solid #f4fbff
+  border: 1px solid $gris
+
+.ig-validation .ig-searchpol .btncalendar i,
+.ig-date-picker .btncalendar i,
+.ig-date-from-to .btncalendar i
+  color: #6a2ca1
+  font-size: 24px
+
+.ig-validation .ig-searchpol .ig-btnmasopciones
+  font-family: $font
+  font-weight: 700
+  font-size: 16px
+  margin: 10px 0 0 0
+  color: $azulclaro
+  display: flex
+  align-content: center
+  align-items: center
+  cursor: pointer
+
+.accordion .ig-btnmasopciones i
+  font-size: 45px
+
+.accordion .ig-btnmasopciones
+  font-family: $font
+  font-weight: 700
+  font-size: 16px
+  color: $azulclaro
+  display: flex
+  align-content: center
+  align-items: center
+  cursor: pointer
+
+.ig-validation .ig-searchpol .ig-textomasopciones
+  display: none
+  margin: 5px 0
+
+.ig-validation .ig-searchpol .form-group
+  margin-bottom: 0px
+
+.ig-validation .ig-searchpol .form-group .form-control
+  font-size: 16px
+  font-family: $font
+  font-weight: 400
+  font-style: italic
+  color: $textos
+
+.ig-validation .ig-searchpol .form-group .form-control ::-webkit-input-placeholder
+  font-size: 16px
+  font-family: $font
+  font-weight: 400
+  font-style: italic
+  color: $textos
+  opacity: 1
+
+.ig-validation .ig-searchpol .form-group .form-control ::-moz-placeholder
+  font-size: 16px
+  font-family: $font
+  font-weight: 400
+  font-style: italic
+  color: $textos
+  opacity: 1
+
+.ig-validation .ig-searchpol .form-group .form-control :-ms-input-placeholder
+  font-size: 16px
+  font-family: $font
+  font-weight: 400
+  font-style: italic
+  color: $textos
+  opacity: 1
+
+.ig-validation .ig-searchpol .form-group .form-control :-moz-placeholder
+  font-size: 16px
+  font-family: $font
+  font-weight: 400
+  font-style: italic
+  color: $textos
+  opacity: 1
+
+.form-control:disabled, .form-control[readonly]
+  background-color: white
+  opacity: 1
+
+.ig-validation .ig-searchpol .ig-btnsearch,
+.ig-validation .ig-searchpol .ig-btncalendar
+  background-color: $azulclaro
+  width: 100%
+  color: #fff
+  border: none
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 6px
+  font-size: 15px
+  height: 45px
+
+.ig-validation .ig-searchpol .ig-btnsearch.disabled,
+.ig-validation .ig-searchpol .ig-btnsearch.disabled:disabled
+  opacity: .65
+  cursor: not-allowed
+
+.ig-validation .ig-searchresul
+  background-color: #f4fbff
+  font-size: 15px
+  margin: 10px 0
+  padding: 20px 15px
+  border-radius: 5px
+
+.ig-validation .ig-searchresul h4
+  color: #3f3f3f
+  margin-bottom: 10px
+
+.ig-validation .pagination
+  justify-content: center
+  margin: 20px 0 30px 0
+
+.ig-validation .pagination .page-link
+  color: $azulclaro
+
+.ig-validation .pagination .active .page-link
+  background-color: $azulclaro
+  border: 1px solid $azulclaro
+  color: #fff
+
+.ig-validation .ig-resultados
+  margin: 20px 0px
+  border-bottom: 1px solid #adadad
+  padding: 10px 0
+
+.ig-validation .ig-elegilidad
+  margin: 30px 0px 30px 0
+  border-bottom: 1px solid #adadad
+  padding: 20px 0
+
+.ig-validation .ig-resultados h5,
+.ig-validation .ig-resultados h6
+  font-family: $font
+  font-weight: 500
+  color: #3f3f3f
+
+.ig-validation .ig-resultados .ig-processvalor
+  color: #ed7128
+
+.ig-validation .ig-resultados .border-right
+  border-right: 1px solid $azulclaro !important
+
+.ig-validation .card-header .border-right
+  border-right: 1px solid $azulclaro !important
+
+.ig-validation .ig-resultados p
+  margin: 0
+  padding: 0
+  font-size: 14px
+  color: $textos
+  font-family: $font
+  font-weight: 700
+
+  strong
+    width: 210px;
+    display: inline-block;
+
+.ig-validation .ig-resultados span
+  margin: 0
+  padding: 0
+  font-size: 12px
+  color: $textos
+  font-family: $font
+  font-weight: 100
+
+.ig-validation .ig-payment .ig-resultados span
+  font-size: 14px
+  display: block
+
+.ig-validation .ig-resultados .ig-procesotext
+  margin: 0
+  padding: 0
+  display: inline-block
+  font-family: $font
+  font-weight: 700
+  font-size: 16px
+  color: #678004
+  text-transform: uppercase
+
+.ig-validation .ig-resultados .ig-numpoliza
+  border-top: 1px solid #f0f0f0
+  margin: 10px 0px
+  padding: 10px 0px
+  font-size: 13px
+
+.ig-validation .ig-resultados .ig-numpoliza .nav-tabs
+  padding: 10px 0
+  position: relative
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-ref
+  font-size: 11px
+
+.ig-validation .ig-resultados .ig-numpoliza span
+  font-weight: 700
+  font-size: 13px
+  margin-left: 10px
+
+.ig-validation .ig-resultados .ig-numpoliza li
+  margin-right: 10px
+
+.ig-validation .ig-resultados .ig-numpoliza li a
+  display: flex
+  align-content: center
+  align-items: center
+  font-size: 12px
+  text-decoration: none
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-dateright
+  position: absolute
+  right: 0
+  display: inline-block
+  vertical-align: top
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-dateright a,
+.ig-validation .ig-resultados .ig-numpoliza .ig-dateright p
+  display: inline-block
+  vertical-align: top
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-dateright a
+  margin-left: 20px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallebtn,
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallepagobtn
+  font-size: 14px
+  color: $azulclaro
+  display: flex
+  align-content: center
+  align-items: center
+  font-weight: 700
+  cursor: pointer
+  font-family: $font
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallebtn i,
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallepagobtn i
+  color: $azulclaro
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-fecha
+  font-size: 12px
+  font-family: $font
+  font-weight: 500
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallepago
+  display: none
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo
+  height: 100%
+  padding: 30px 15px 0 15px
+  border-left: 1px solid $azulclaro
+  position: relative
+  display: none
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo h6
+  font-size: 14px
+  margin-top: 20px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-texthistorial span
+  font-family: $font
+  font-weight: 500
+  font-size: 18px
+  margin: 0
+  display: inline-block
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-texthistorial
+  font-family: $font
+  font-weight: 700
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo h6:before
+  content: ""
+  position: absolute
+  left: -4px
+  height: 8px
+  width: 8px
+  background-color: $azulclaro
+  border-radius: 10px
+  top: 24px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo .ig-avisopage
+  margin-top: 10px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo .ig-avisopage p
+  padding: 0
+  margin: 0
+  font-size: 13px
+  color: #3f3f3f
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo .ig-avisopage span
+  color: #333333
+  font-weight: 700
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo .ig-claim-detail h6
+  color: #3f3f3f
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallereclamo .ig-claim-detail h5
+  color: #ed7128
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallepago
+  margin-top: 20px
+  font-size: 14px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-detallepago .ig-bold
+  font-weight: 700
+
+.ig-validation .ig-resultados .ig-impresion
+  margin-bottom: 10px
+  border-radius: 50%
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  text-decoration: none
+  color: $azulclaro !important
+
+.ig-validation .ig-resultados .ig-impresion i
+  font-size: 25px
+
+.ig-validation .ig-elegilidad h6
+  font-family: $font
+  font-weight: 300
+
+.ig-validation .ig-elegilidad .ig-guion i
+  color: $azulclaro
+
+.ig-validation .ig-elegilidad .titulo
+  font-family: $font
+  font-weight: 500
+
+.ig-wizard
+  margin-top: 20px
+  margin-bottom: 20px
+
+.ig-wizard p
+  font-family: $font
+  font-weight: 300
+  font-size: 14px
+
+.ig-wizard .stepwizard
+  margin-bottom: 40px
+
+.ig-wizard .stepwizard-step
+  display: table-cell
+  text-align: center
+  position: relative
+
+.ig-wizard .stepwizard-step .btn
+  display: flex
+  justify-content: center
+  align-items: center
+  align-content: center
+  margin: auto
+  cursor: unset
+
+.ig-wizard .stepwizard-step p
+  margin-top: 10px
+
+.ig-wizard .stepwizard-step button[disabled]
+  opacity: 1
+  filter: alpha 100
+
+.ig-wizard .stepwizard-row
+  display: table-row
+
+.ig-wizard .stepwizard-row:before
+  top: 14px
+  bottom: 0
+  position: absolute
+  content: " "
+  width: 100%
+  height: 1px
+  background-color: #ccc
+  z-index: 0
+
+.ig-wizard .stepwizard-step .btn.disabled, .ig-wizard .stepwizard-step .btn:disabled
+  opacity: 1
+
+.ig-wizard .stepwizard
+  display: table
+  width: 100%
+  position: relative
+
+.ig-wizard .btn-circle
+  width: 40px
+  height: 40px
+  border-radius: 50%
+  padding: 6px 0
+  border: none !important
+  font-size: 12px
+  background-color: #869eb1
+  display: flex
+  justify-content: center
+  align-items: center
+  align-content: center
+  margin: auto
+  color: white
+
+.ig-wizard .btn-primary
+  background-color: $azuloscuro
+  display: flex
+  justify-content: center
+  align-items: center
+  align-content: center
+  margin: 0
+
+.ig-wizard .ig-avisotext
+  width: 100%
+
+.ig-wizard .setup-content .form-inline .form-control
+  margin-right: 20px
+
+.ig-wizard .setup-content .form-inline .btn-primary
+  background-color: $azulclaro
+  border: none
+
+.ig-wizard .setup-content .form-inline .btn-primary:hover
+  background-color: #007bd1
+
+.ig-wizard .files
+  position: relative
+
+.ig-wizard .files
+  cursor: pointer
+  outline: 2px dashed #92b0b3
+  outline-offset: -10px
+  -webkit-transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear
+  transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear
+  padding: 120px 0px 85px 0px
+  text-align: center !important
+  margin: 0
+  width: 100% !important
+
+.ig-wizard .files:hover
+  outline: 2px dashed #92b0b3
+  outline-offset: -10px
+  -webkit-transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear
+  transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear
+  border: 1px solid #92b0b3
+
+.ig-wizard input[type="file"]
+  display: none
+
+.ig-wizard .files.empty:after
+  pointer-events: none
+  position: absolute
+  top: 60px
+  left: 0
+  width: 50px
+  right: 0
+  height: 56px
+  content: ""
+  background-image: url("https://image.flaticon.com/icons/png/128/109/109612.png")
+  display: block
+  margin: 0 auto
+  background-size: 100%
+  background-repeat: no-repeat
+
+.ig-wizard .files.empty:before
+  position: absolute
+  bottom: 10px
+  left: 0
+  pointer-events: none
+  width: 40%
+  right: 0
+  height: 57px
+  content: "Suelta los archivos para añadirlos a la reclamación "
+  display: block
+  margin: 0 auto
+  color: #fff
+  font-size: 12px
+  font-weight: 600
+  text-transform: capitalize
+  text-align: center
+  background-color: $azulclaro
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  font-family: $font
+  font-weight: 300
+  padding: 20px
+  text-transform: inherit
+
+.ig-wizard .btnback
+  background-color: transparent
+  border: 1px solid $azulclaro
+  width: 100%
+  color: $azulclaro
+  font-size: 14px
+
+.ig-wizard .btnsiguiente
+  background-color: $azulclaro
+  width: 100%
+  font-size: 15px
+  border: none
+  border-radius: 30px
+  padding: 10px 20px
+
+.ig-wizard .btnsiguiente2
+  background-color: transparent
+  border: 1px solid $azulclaro
+  width: 100%
+  font-size: 15px
+  color: $azulclaro
+  border-radius: 30px
+  padding: 10px 20px
+
+.ig-wizard .btnsiguiente:hover
+  background-color: #007cd1
+
+.ig-wizard .btnsiguiente:disabled
+  opacity: .65
+  cursor: not-allowed
+
+.ig-wizard .ig-resulsearch
+  margin: 30px 0px
+  padding: 10px 0
+  width: 100%
+  display: block
+  overflow-y: auto
+  max-height: 330px
+
+.ig-wizard .ig-resulsearch .ig-check
+  border-radius: 10px
+  padding: 10px
+  border: 1px solid $azulclaro
+  display: block
+  margin: 10px 0
+  width: 70%
+
+.ig-check
+  border-radius: 10px
+  padding: 10px
+  border: 1px solid $azulclaro
+  display: block
+  margin: 10px 0
+  width: 100%
+  cursor: pointer
+
+.ig-wizard .ig-resulsearch .ig-check:hover
+  background-color: #effaff
+
+.ig-wizard .ig-resulsearch .ig-check,
+.ig-wizard .ig-resulsearch .ig-check *
+  cursor: pointer
+
+.ig-wizard .ig-resulsearch .ig-check label
+  width: 100%
+
+.ig-wizard .ig-resulsearchnone
+  margin: 30px 0px
+  padding: 15px
+  width: 100%
+  display: block
+  background-color: #e9ecef
+  border-radius: 10px
+
+.ig-wizard .ig-resulsearchnone h6,
+.ig-wizard .ig-resulsearchnone p
+  color: $azulclaro
+  padding: 0
+  margin: 0
+
+.ig-wizard .ig-infosize
+  background-color: #ecebeb
+  border-radius: 0px 0px 5px 5px
+  padding: 20px 10px
+  margin-bottom: 20px
+
+.ig-wizard .ig-infosize p
+  font-size: 13px
+  padding: 0
+  margin: 0
+
+.ig-wizard .ig-upfile
+  background-color: #f2f2f2
+  padding: 15px
+  position: relative
+  float: left
+  width: 100%
+
+.ig-wizard .ig-upfile.ig-file-dragging
+  border: #808080 2px dashed
+
+.ig-wizard .ig-upfile .ig-upfileitem
+  margin-bottom: 10px
+
+.ig-wizard .ig-upfile .ig-file-scroll
+  max-height: 400px
+  overflow-y: auto
+  overflow-x: hidden
+  min-height: 100px
+
+.ig-wizard .ig-upfile p
+  padding: 0
+  margin: 0
+  display: flex
+  align-content: center
+  align-items: center
+  font-size: 14px
+
+.ig-wizard .ig-upfile p i
+  margin-right: 10px
+  color: $azulclaro
+
+.ig-wizard .ig-upfile a
+  display: flex
+  align-content: center
+  align-items: center
+  text-decoration: none
+  justify-content: flex-end
+  color: $azulclaro
+  font-size: 14px
+
+.ig-wizard .ig-upfile a i
+  margin-left: 5px
+
+.ig-wizard .ig-upfile .ig-file
+  background-color: #dedede
+  padding: 15px 10px
+  margin-top: 10px
+  border-radius: 6px
+  width: 150px
+  height: 150px
+  margin: 5px
+  position: relative
+  display: inline-block
+  vertical-align: top
+  -webkit-animation-duration: .2s
+  animation-duration: .2s
+
+.ig-wizard .ig-upfile .ig-file .ig-textofile
+  font-size: 12px
+  text-decoration: underline
+  text-align: center
+  overflow-x: hidden
+  margin: 0px 10px
+  height: 110px
+  overflow-y: hidden
+
+.ig-wizard .ig-upfile .ig-file .ig-icofile
+  position: absolute
+  top: 5px
+  right: 5px
+
+.ig-wizard .ig-upfile .ig-file .ig-filesize
+  position: absolute
+  bottom: 0px
+  background-color: #404040
+  width: 100%
+  right: 0px
+  border-radius: 0px 0px 5px 5px
+  color: #fff
+  text-align: right
+  font-size: 11px
+  padding-right: 5px
+
+.ig-wizard .ig-upfile .ig-file .ig-textofile i.fa
+  font-size: 72px
+
+.ig-wizard .ig-upfile .ig-fileporcargar
+  background-color: #808080
+  padding: 15px 10px
+  margin-top: 10px
+  border-radius: 6px
+  position: absolute
+  left: 50px
+  right: 50px
+  top: 40%
+  text-align: center
+  cursor: pointer
+  transition: top .2s ease
+
+.ig-wizard .ig-upfile .ig-fileporcargar:hover
+  background-color: #9a9a9a
+
+.ig-wizard .ig-upfile .ig-fileporcargar.ig-file-loaded
+  bottom: -50px
+  left: auto
+  width: 200px
+  right: 10px
+  height: 40px
+  padding: 6px
+  top: 105%
+
+.cdk-overlay-pane .ig-wizard .ig-upfile .ig-fileporcargar.ig-file-loaded
+  bottom: -50px
+  left: auto
+  width: 200px
+  right: 10px
+  height: 40px
+  padding: 6px
+  top: 145%
+
+.ig-wizard .ig-upfile .ig-fileporcargar .ig-textofile
+  font-size: 12px
+  text-decoration: none
+  color: #fff
+
+.ig-wizard .ig-upfile .ig-fileporcargar .ig-attach-icon
+  position: absolute
+  right: 10px
+
+.ig-wizard .ig-files-scroll
+  max-height: 250px
+  overflow-y: auto
+
+.ig-wizard .ig-document-loading
+  font-weight: bold
+
+.ig-avisotext
+  margin: 50px 0
+  padding-top: 20px
+  border-top: 1px solid #d3d3d3
+
+.ig-avisotext p
+  font-size: 14px
+  margin: 5px 0
+  padding: 0
+  font-weight: 300
+
+  strong
+  font-weight: bolder
+  font-weight: 500
+
+.ig-avisotext .ig-avisodocu
+  margin-top: 20px
+
+.up
+  position: fixed
+  bottom: 10px
+  right: 20px
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  text-decoration: none
+  color: $azulclaro
+
+.up:hover
+  text-decoration: none
+
+.custom-select
+  background: white url("data:image/pngbase64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAABGklEQVR4Ae3RAcZCQRiF4buDfwshBGi+2UQgcIGAVtpSIuS/KyilG+UTcbk6zIH3GQBm3mM6AAAAAAAAAACA+eqf/yZBXcV/2XeCVPYx1FXj/FjGUMd45AQp/1HHGGLZNL+e61jHnKDmv8652YT1IvPfE2LX/Sh27/ycsF60yT/lk58JYn6eU4MJccjnlAmZ/33i0OAH4jg9Qcw/5g9YJpS+m6n0xvzpCfVe+nn59S7kGyYo+YYJWz3fO+E2PaFs9XzPhMy/6fmWCXq+YUJs9HzrhLh+JsQmrnq+bYKeb52g53snXPR88wQ93z9Bz/dP0PP9E/R89wQ93zpBz7dO0POtE/R86wQ93zpBzzdP+MoHAAAAAAAAAADAExTnTW20AtjhAAAAAElFTkSuQmCC") no-repeat right 0.7rem center
+  background-size: 15px 15px
+
+.modal-legal .modal-body
+  font-size: 12px
+
+@media (min-width: 750px) and (max-width: 1050px)
+  .itemseleccion
+    width: 45% !important
+
+@media only screen and (max-width: 768px)
+  .itemseleccion
+    width: 88% !important
+
+  .container-wizard
+    display: none !important
+
+  .ig-iconoti
+    display: none !important
+
+  .ig-wizard .stepwizard
+    display: none
+
+  .bp-mainpolicy
+    margin: 0
+
+  body .btnprincipal
+    width: 100%
+  body header .ig-topmenu li
+    display: block
+    width: 100%
+    border-bottom: 1px solid #d3d3d3
+  body header .ig-topmenu .right li
+    display: inline-block !important
+    vertical-align: top
+    width: auto
+  body header .ig-topmenu .right li a
+    font-size: 10px
+  body header .ig-topmenu .right li a i
+    font-size: 14px
+  body header .ig-topmenu .right li:first-child
+    width: 100%
+    display: block
+    border: none
+  body header h1
+    text-align: center
+  body .ig-formulario
+    margin: 10px 0
+  body .ig-formulario h2
+    text-align: center
+    margin-bottom: 10px
+  body .ig-formulario .ig-formularioasegurado
+    padding: 20px
+  body .ig-serviciosenlinea
+    margin: 20px 0
+  body .ig-serviciosenlinea ul
+    margin: 0
+    padding: 0
+  body .ig-serviciosenlinea ul li
+    display: inline-block
+    vertical-align: top
+  body .ig-siguenos ul
+    margin: 0
+    padding: 0px
+  body .ig-siguenos ul li
+    width: 48px
+    height: 48px
+  body .ig-siguenos ul li a
+    font-size: 26px
+
+.ig-member
+  font-size: 16px
+
+.ig-member h4,
+.ig-member h5
+  text-align: center
+  margin: 60px 0
+
+.ig-member p
+  margin: 0
+  padding: 0
+
+.ig-member .ig-membold
+  font-family: $font
+  font-weight: 700
+  color: $azulclaro
+
+.ig-member .ig-memlig p
+  font-size: 14px
+
+.ig-member .ig-avisoimport
+  margin: 20px 0
+  padding: 0 15px
+
+.ig-member .ig-avisoimport p
+  display: block
+  margin-top: 10px
+
+.ig-member .ig-memberbtn
+  margin: 20px 0
+  display: block
+
+.ig-member .ig-memberbtn .btn-print
+  background-color: $azulclaro
+  width: 100%
+  color: #fff
+  text-decoration: none
+
+.ig-member .ig-memberbtn .btn-print:hover
+  background-color: #007bd1
+  color: #fff
+
+.ig-member .ig-memberbtn .btn-cerrar
+  background-color: #fff
+  width: 100%
+  border: 1px solid $azulclaro
+  color: $azulclaro
+  text-decoration: none
+
+.ig-member .ig-memberbtn .btn-cerrar:hover
+  background-color: #007bd1
+  color: #fff
+
+.mat-progress-bar-fill::after
+  background-color: $azulclaro !important
+
+.mat-progress-bar-buffer
+  background-color: #d0e8f3 !important
+
+.ig-resultvalid
+  max-height: 412px
+  overflow-y: auto
+  overflow-x: hidden
+
+.ig-claim-detail h5
+  font-size: 14px
+  margin-top: 15px
+
+// .ig-claim-detail-group-detail h5
+//   margin-top: 0px
+
+.ig-date-picker-hidden
+  position: absolute
+  opacity: 0
+  height: 33px
+  z-index: -1
+
+.input-group > .custom-select:not(:first-child), .input-group > .form-control:not(:first-child)
+  border-top-left-radius: 10px
+  border-bottom-left-radius: 10px
+
+.aggrement-content-modal
+  overflow-y: auto
+  height: 450px
+
+.ig-contentprofile
+  padding: 15px
+
+.ig-modal-xl > .modal-dialog
+  max-width: 1490px !important
+  min-width: 971px !important
+  width: 85% !important
+  max-height: 100vh
+
+.form-group.ig-date-from-to .ig-picker-popup
+  position: absolute
+  width: 510px
+  z-index: 1
+  top: 50px
+  background: #fff
+  border-radius: 5px
+  box-shadow: 1px 1px 5px #9a9a9a
+  display: none
+
+.form-group.ig-date-from-to .ig-picker-popup.ig-show-picker
+  display: flex
+  display: -ms-flexbox
+  flex-wrap: wrap
+
+.form-group.ig-date-from-to
+  max-width: 520px
+  position: relative
+
+.ig-picker-popup input
+  width: 100%
+  margin-bottom: 5px
+
+.ig-picker-popup .col-6
+  padding: 10px
+  padding-bottom: 45px
+
+.ig-validation .ig-searchpol .ig-picker-popup .ig-btncalendar
+  background-color: $azulclaro !important
+  display: block
+  width: 90px
+  margin-left: 10px
+  height: 33px
+
+.ig-validation .ig-searchpol .ig-picker-popup .ig-btncalendar.ig-btncalendar-cancel
+  background-color: #ebeced !important
+  color: #000
+
+.ig-riders h5
+  font-weight: bold
+  padding: 20px 0px 45px
+
+.ig-datepicker-buttons
+  position: absolute
+  bottom: 0px
+  right: 0px
+  display: flex
+  padding: 0px 10px 5px
+  font-size: 7px
+  color: red
+  font-weight: bold
+
+.dropdown-item.active, .dropdown-item:active
+  background-color: transparent
+
+.ig-date-picker input.form-control,
+.ig-date-from-to input.form-control
+  margin-right: 0px !important
+
+.ig-eob-container .modal-content
+  height: 700px
+
+.ig-bglogin
+  background-color: red
+  /* background-image: url("https://www.bupa.com/~/media/images/site-specific-images/corporate-images/welcome-screen-images/family-laughing.jpg")*/
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  float: left
+  width: 100%
+
+.ig-bglogin .ig-tillogin
+  text-align: center
+  margin: 20px 0 40px 0
+  display: block
+
+.ig-bglogin .ig-tillogin h5
+  font-family: $font
+  font-weight: 300
+
+.ig-bglogin .ig-tillogin h3
+  text-transform: uppercase
+
+.ig-bglogin .ig-tillogin p
+  font-family: $font
+  font-weight: 300
+  font-size: 14px
+
+.ig-bglogin .ig-formlogin
+  background-color: rgba(255, 255, 255, 0.92)
+  padding: 30px 70px 20px 70px
+  border-radius: 10px 10px 0 0
+
+.ig-formlogin label
+  font-size: 13px
+
+.ig-bglogin .ig-formlogin .btnprincipal
+  width: 100%
+  padding: 12px
+  margin-bottom: 20px
+
+.ig-bglogin .ig-formlogin a
+  text-align: center
+  display: block
+  margin: 10px 0
+  color: #3f3f3f
+  font-size: 13px
+  text-decoration: underline
+
+.ig-bglogin .ig-signlogin
+  background-color: rgba(255, 255, 255, 0.92)
+  padding: 20px
+  margin: 5px 0 0px 0px
+  text-align: center
+  border-bottom: 1px solid lightgray
+  border-radius: 0
+
+.ig-bglogin .ig-signlogin a
+  color: #3f3f3f
+  font-family: $font
+  font-weight: 300
+  text-align: center
+  font-size: 13px
+
+.ig-bglogin .ig-signlogin a.ig-registrologin
+  text-decoration: underline
+  font-family: $font
+  font-weight: 700
+
+.ig-bglogin .ig-servicelogin
+  background-color: rgba(255, 255, 255, 0.92)
+  padding: 20px
+  margin: 0px 0 30px 0
+  text-align: left
+  border-radius: 0px 0px 10px 10px
+
+.ig-bglogin .ig-servicelogin a
+  color: #3f3f3f
+  text-align: left
+  font-size: 12px
+  text-decoration: underline
+  font-family: $font
+  font-weight: 700
+
+.ig-bglogin .ig-servicelogin a span
+  font-family: $font
+  font-weight: 300
+  display: block
+
+.ig-helplogin .btn-help
+  position: absolute
+  right: 10px
+  top: 50%
+
+.ig-helplogin .collapse
+  position: absolute
+  right: 0
+  top: 0
+  bottom: 0
+
+.ig-bglogin footer
+  float: left
+  width: 100%
+  background-color: rgba(255, 255, 255, 0.92)
+
+/* Estilos oficinas de BUPA*/
+
+.ig-office
+  height: 100%
+
+.ig-tabsofficebg
+  background-color: #ececec
+  height: 100%
+  padding: 30px 0
+
+.ig-office .ig-tabsoffice .nav-tabs
+  margin-bottom: 40px
+  justify-content: end
+
+.ig-office .ig-cardoffice
+  margin: 20px 0
+  background-color: white
+  padding: 15px
+
+.ig-office .ig-cardoffice .ig-itemoffice
+  margin-top: 10px
+
+.ig-office .ig-cardoffice .ig-itemoffice p
+  font-size: 13px
+  margin: 0
+  padding: 0
+
+.ig-office .ig-cardoffice .ig-itemoffice ul
+  margin: 0
+  padding: 0
+
+.ig-office .ig-cardoffice .ig-itemoffice ul li
+  list-style: none
+  padding: 0
+  margin: 0
+
+/* Estilos agreement*/
+
+.ig-contagreement
+  height: 100%
+  padding: 50px 0
+
+.ig-contagreement .ig-textoagreement
+  max-height: 450px
+  overflow-y: scroll
+
+.ig-contagreement .ig-textoagreement span
+  display: block
+
+.ig-agreementcheck
+  margin-top: 30px
+
+.ig-agreementcheck span
+  font-family: $font
+  font-weight: 300
+  font-size: 13px
+  display: block
+  color: #838383
+
+.ig-agreementcheck label
+  font-family: $font
+  font-weight: 700
+
+.ig-wizardregistro
+  margin: 20px 0
+
+.ig-wizardregistro .ig-registrohelp
+  background-color: #e9ecef
+  padding: 20px
+  margin: 20px 0
+
+.ig-wizardregistro .ig-registrohelp span
+  font-family: $font
+  font-weight: 400
+
+.ig-wizardregistro .ig-registrohelp p
+  padding: 0
+  margin: 0
+
+.ig-wizardregistro .ig-registroform .ig-textovalida
+  color: #3f3f3f
+  font-size: 13px
+  padding: 0
+  margin: 10px 0 10px 0
+  font-weight: 300
+
+.ig-wizardregistro .ig-registroform label
+  font-family: $font
+  font-weight: 400
+
+.ig-wizardregistro .ig-registroform .ig-textovalida p
+  padding: 0
+  margin: 0
+
+.ig-wizardregistro .ig-agreementcheck
+  margin: 40px 0
+
+.ig-wizardregistro .ig-agreementcheck a
+  font-family: $font
+  font-weight: 300
+  text-decoration: underline
+  color: #3f3f3f
+
+.ig-wizardregistro .ig-agreementcheck label
+  font-family: $font
+  font-weight: 300
+
+.ig-passwordolvido
+  padding: 20px 0
+  height: 100%
+
+.ig-passwordolvido .ig-registroform label
+  font-family: $font
+  font-weight: 400
+  text-align: left
+
+.ig-passwordolvido .ig-registroform
+  padding: 10px 0
+
+.ig-passwordolvido .ig-registroform .btnsiguiente
+  width: 60%
+  margin: 0 auto
+
+.ig-passwordolvido .ig-registrohelp
+  background-color: #e9ecef
+  padding: 20px
+  margin: 50px 0
+
+.ig-passwordolvido .ig-registrohelp span
+  font-family: $font
+  font-weight: 400
+
+.ig-passwordolvido .ig-registrohelp p
+  padding: 0
+  margin: 0
+
+.ig-passwordolvido .ig-registroform .ig-textovalida
+  color: #3f3f3f
+  font-size: 13px
+  padding: 0
+  margin: 30px 0 10px 0
+  font-weight: 300
+
+.ig-passwordolvido .ig-registroform .ig-textovalida p
+  padding: 0
+  margin: 0px
+
+.ig-enviobandeja
+  margin: 20px 0
+
+.ig-enviobandeja #ig-bandejacorreo
+  margin: 20px 0
+
+.ig-enviobandeja #ig-bandejacorreo ul
+  margin: 0
+  padding: 0
+
+.ig-enviobandeja #ig-bandejacorreo .card
+  border: none
+  padding: 0 15px
+
+#ig-soporte
+  z-index: 1000
+  position: absolute
+  right: 0
+  width: 0
+  height: 100%
+  top: 0
+  padding: 20px
+  margin-right: 0px
+  overflow-y: auto
+  background: #e9ecef
+  text-align: left
+  display: none
+
+#ig-soporte-ayuda.ig-toggled #ig-soporte
+  width: 400px
+  display: block
+  text-align: left
+
+#menu-toggle
+  position: absolute
+  right: -43px
+  z-index: 999999
+  -ms-transform: rotate(-90deg) !important
+  -webkit-transform: rotate(-90deg) !important
+  transform: rotate(-90deg) !important
+  top: 50%
+  background-color: #007bd1
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5)
+
+#menu-toggle.toggled1
+  position: absolute
+  right: 337px
+  z-index: 999999
+  -ms-transform: rotate(-90deg)
+  -webkit-transform: rotate(-90deg)
+  transform: rotate(-90deg)
+  top: 50%
+
+#ig-soporte .ig-preguntas .card h5 a
+  font-family: $font
+  font-weight: 400
+  color: #3f3f3f
+  text-decoration: none
+  font-size: 16px
+
+#ig-soporte .ig-preguntas h4
+  margin: 20px 0
+  padding: 10px 0
+  border-bottom: 1px solid lightgray
+
+#ig-soporte .ig-preguntas .card-body a
+  text-decoration: underline
+
+#ig-soporte .ig-preguntas .card-body
+  font-size: 14px
+  background-color: white
+
+.ig-changepass
+  margin: 20px 0
+
+.ig-changepass .ig-registroform .ig-textovalida
+  color: #3f3f3f
+  font-size: 13px
+  padding: 0
+  margin: 5px 0 10px 0
+  font-weight: 300
+  color: #dc3545
+
+.ig-changepass .ig-textopass
+  color: #3f3f3f
+  font-size: 12px
+  padding: 0
+  margin: 30px 15px 10px 15px
+  font-weight: 300
+
+.ig-changepass .ig-textopass ul
+  padding: 0
+  margin: 0
+
+.ig-changepass .ig-textopass h6
+  font-family: $font
+  font-weight: 400
+  color: #3f3f3f
+  font-size: small
+  margin-bottom: 10px
+
+.ig-changepass .ig-contenchangepass
+  padding: 20px 0
+
+.ig-changepass .ig-contenchangepass .input-group-text i
+  color: #6a2ca1
+
+.ig-changepass .ig-contenchangepass .input-group-text
+  background-color: #f4fbff
+  border: 1px solid $gris
+
+.ig-changepass .ig-registroform .form-group
+  margin: 15px 0
+  height: 101px
+
+.ig-changepass .ig-registroform label
+  font-family: $font
+  font-weight: 400
+
+.ig-changepass .ig-registroform .ig-textovalida p
+  padding: 0
+  margin: 0px
+
+.ig-changepass .ig-registroform .btnsiguiente
+  width: 50%
+  margin: 30px auto
+  font-size: 14px
+
+.ig-changepass .ig-title p
+  font-size: 14px
+  margin-top: 8px
+
+.ig-iconvalidator
+  background-color: transparent
+  border: none
+  position: absolute
+  padding: 10px
+  right: -48px
+  top: 30px
+
+.form-group
+  position: relative
+
+.red-border
+  border: red
+
+.ig-servicioitem
+  position: relative
+  width: 100%
+  margin: 10px 0
+
+.ig-servicioitem .card h5
+  margin: 0
+  padding: 0px
+  font-size: 14px
+
+.ig-servicioitem .card .img-card
+  width: 100%
+
+.ig-servicioitem .card .card-body
+  padding: 12px
+
+.ig-navegaciontabs
+  padding: 0 20px
+  background-color: #f4fbff
+
+.ig-navegaciontabs .nav-tabs
+  border-bottom: none
+  padding: 0px 20px
+  margin-bottom: 5px
+
+.ig-navegaciontabs .nav-tabs .nav-item
+  margin: 0 10px
+
+.ig-navegaciontabs .nav-tabs .nav-item a
+  padding: 20px 5px
+  font-family: $font
+  font-weight: 500
+  color: $textos
+  font-size: 14px
+  display: block
+  border-bottom: 2px solid transparent
+  background-color: none
+
+.ig-navegaciontabs .nav-tabs .nav-item a:hover
+  color: $azulclaro
+  font-weight: 700
+  border: none
+  border-bottom: 2px solid $azulclaro
+
+.ig-navegaciontabs .nav-tabs .nav-item a.active
+  font-weight: 700
+  color: $azulclaro
+  background-color: transparent
+  border: none
+  border-bottom: 2px solid $azulclaro
+
+.nav-item .dropdown-menu1
+  left: -22px
+
+.ig-quicklinks-scroll
+  display: block
+  position: absolute
+  overflow-y: hidden
+  top: 32px
+  bottom: 32px
+  width: 100%
+
+.ig-quicklinks-scroll ul
+  position: absolute
+  top: 0
+  transition: 0.2s top ease
+  width: 100%
+
+.ig-selecidioma img
+  height: 16px
+
+.ig-menutabs
+  margin: 40px 0
+
+.ig-userperf
+  padding: 0 15px
+  margin: 60px 0 20px 0
+  display: block
+
+.ig-userperf .ig-user
+  margin: 20px 0
+
+.ig-userperf .ig-user h4
+  margin: 20px 0 40px 0
+  font-family: $font
+  font-weight: 700
+  margin-bottom: 6px
+  font-size: 27px
+
+.ig-userperf .ig-user .btncambiar
+  text-decoration: underline
+
+.ig-userperf .ig-user .ig-utlconex i
+  font-size: 50px
+
+.ig-userperf .ig-user .ig-utlconex i
+  font-size: 50px
+
+.ig-userperf .ig-user .ig-utlconex p
+  margin: 0
+  padding: 0px
+
+.ig-userperf .ig-user .ig-contper p
+  font-size: 14px
+
+.ig-userperf .ig-user .ig-userperdt h6
+  margin-bottom: 5px
+
+.ig-userperf .ig-user .ig-userperdt .ig-title .formulario
+  margin-top: 25px
+
+.ig-userperf .ig-user .ig-userperdt .ig-title label,
+.ig-userperf .ig-user .ig-userperdt .ig-title .form-control
+  font-size: 13px
+
+.ig-userperf .ig-user .ig-userperdt .ig-title .form-control
+  padding: 6px
+  line-height: 1
+  height: 40px
+
+.ig-userperf .ig-user .ig-userperdt
+  margin-top: 40px
+
+.ig-userperf .ig-user .ig-userperdt p
+  margin: 0
+  padding: 0px
+  font-size: 14px
+
+.ig-userperf .ig-user .ig-userperdt a
+  text-decoration: underline
+
+.ig-userperf .ig-user .ig-userperdt span
+  font-size: 12px
+  color: gray
+  margin-left: 10px
+
+.ig-perfilbtn .btn-actualizar
+  background-color: $azulclaro
+  font-size: 14px
+  border: none
+  margin: 30px 10px 10px 10px
+  padding: 10px 20px
+
+.ig-perfilbtn .btn-outline-primary
+  border-color: $azulclaro
+  font-size: 14px
+  margin: 0 10px
+  padding: 10px 20px
+  color: $azulclaro
+
+.ig-perfilbtn .btn-outline-primary:hover
+  color: white
+  background-color: $azulclaro
+
+.ig-duplicateclaim
+  margin: 40px 0
+
+.ig-duplicateclaim h5
+  margin: 20px 0
+
+.ig-duplicateclaim ul
+  margin: 0px
+  padding: 0px
+
+.ig-duplicateclaim ul li
+  list-style: none
+
+.ig-duplicateclaim ul li h6
+  font-family: $font
+  font-weight: 400
+  color: $azulclaro
+  margin: 10px 0
+
+.ig-duplicateclaim ul li h6 span
+  font-family: $font
+  font-weight: 300
+  color: #3f3f3f
+
+.ig-duplicateclaim .ig-fileload
+  margin: 40px 0px 0px 0px
+
+.ig-duplicateclaim .ig-fileload p
+  margin: 0px
+  padding: 0px
+  font-size: 14px
+
+.ig-duplicateclaim .ig-reali
+  margin: 40px 0px 0px 0px
+
+.ig-duplicateclaim .ig-reali h6
+  font-family: $font
+  font-weight: 400
+  color: $azulclaro
+  margin: 10px 0
+
+.ig-duplicateclaim .ig-reali .btn-actualizar
+  background-color: $azulclaro
+  font-size: 14px
+  border: none
+  margin: 0 10px
+  padding: 10px 20px
+
+.ig-duplicateclaim .ig-reali .btn-outline-primary
+  border-color: $azulclaro
+  font-size: 14px
+  margin: 0 10px
+  padding: 10px 20px
+  color: $azulclaro
+
+.ig-duplicateclaim .ig-reali .btn-outline-primary:hover
+  color: white
+  background-color: $azulclaro
+
+.form-control .ng-select-container
+  background-color: transparent !important
+  border: none !important
+  box-shadow: none !important
+
+ng-select.form-control
+  padding: 6.5px 0px
+
+.ng-select.ng-select-disabled
+  background-color: $grisFieldInactive
+  opacity: 1
+  padding: 6.5px 0px
+
+.form-control .ng-select-container input
+  color: #495057 !important
+
+.form-control .ng-placeholder
+  color: #757d84 !important
+
+.form-control.ng-select-focused
+  color: #495057
+  background-color: #fff
+  border-color: #80bdff
+  outline: 0
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25)
+
+.form-control ng-dropdown-panel
+  border: none !important
+
+.modal-claimsubmission-step3 .modal-footer
+  text-align: center
+  display: block
+
+.modal-claimsubmission-step3 .ig-modal-scroll
+  max-height: 100px
+  overflow-y: auto
+
+.ig-second-line
+  padding: 10px
+
+.ng-select .ng-dropdown-panel.form-control
+  height: auto !important
+  background-color: #f9f9f9
+  top: 40px
+  padding: 0px !important
+
+.ng-select .ng-dropdown-panel.form-control .ng-option
+  margin: 5px 0
+  padding: 8px !important
+  border-bottom: solid 1px #dedede !important
+
+.ng-select .ng-dropdown-panel.form-control .ng-option:hover
+  background-color: #f1f1f1
+
+.ng-dropdown-panel
+  box-sizing: border-box
+  position: absolute
+  opacity: 0
+  width: 100%
+  z-index: 1050
+  -webkit-overflow-scrolling: touch
+  background: #f4fbff
+  left: 0px
+
+.ng-dropdown-panel .scroll-host
+  background: #f5fbff
+  padding: 10px
+
+
+.ng-select .ng-select-container
+  padding-top: 7px
+
+.selected-date
+  display: inherit
+  font-size: 12px
+
+.toppadding
+  padding-top: 4px !important
+
+.ig-validation .ig-payment
+  background-color: white
+  padding: 20px 0
+  margin-top: 50px
+  border-top: 1px solid lightgray
+
+.ig-validation .ig-payment .ig-btnpago
+  display: block
+  margin: auto
+  text-align: center
+
+.ig-validation .ig-payment .ig-btnpago .btnpago
+  width: 70%
+  margin: auto
+  background-color: #009ee0
+  color: white
+  padding: 5px
+  font-size: 14px
+  margin: 10px 0
+
+.ig-validation .ig-payment .ig-historialpay h5
+  font-size: 18px
+
+.ig-validation .ig-payment .ig-historialpay .textpay
+  display: flex
+  align-content: center
+  align-items: center
+  font-size: 14px
+
+.ig-validation .ig-payment .ig-numpoliza .ig-recibobtn
+  font-size: 13px
+  color: #191919
+  display: flex
+  align-content: center
+  align-items: center
+  font-weight: 700
+  cursor: pointer
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibobtn i
+  color: #009ee0
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibodetalle
+  height: 100%
+  padding: 30px 15px 0 15px
+  border-left: 1px solid #009ee0
+  position: relative
+  display: none
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibodetalle h6
+  font-size: 14px
+  margin-top: 20px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibodetalle h6:before
+  content: ""
+  position: absolute
+  left: -4px
+  height: 8px
+  width: 8px
+  background-color: #009ee0
+  border-radius: 10px
+  top: 24px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibodetalle .ig-avisopage
+  margin-top: 10px
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibodetalle .ig-avisopage p
+  padding: 0
+  margin: 0
+  font-size: 13px
+  color: #3f3f3f
+
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibodetalle .ig-claim-detail h5,
+.ig-validation .ig-resultados .ig-numpoliza .ig-recibodetalle .ig-claim-detail h6
+  color: #3f3f3f
+
+.ig-procesodepago .ig-proces-tabs .tab-pane .ig-processdetalle
+  border-top: 1px solid lightgrey
+  border-bottom: 1px solid lightgrey
+  padding: 20px 0
+  margin: 30px 0
+  display: block
+  font-size: 14px
+
+.ig-procesodepago .ig-proces-tabs .tab-pane
+  margin: 20px 0
+
+.ig-procesodepago .ig-proces-tabs form label
+  font-weight: 700
+
+.ig-process-cuentadetal
+  background-color: $azulclaro2
+  padding: 20px
+  padding-right: 0px !important
+
+.ig-process-cuentadetal .ig-itemval
+  font-weight: 700
+  text-transform: uppercase
+
+.ig-process-cuentadetal .ig-procesuser
+  margin: 10px 0
+
+.ig-process-cuentadetal .ig-procesuser h5
+  font-weight: 600
+  text-transform: uppercase
+  color: #000
+  font-size: 15px
+
+.ig-process-cuentadetal .ig-procesuser span
+  font-weight: 300
+
+.ig-process-cuentadetal .ig-processpayto h5
+  font-weight: 600
+  text-transform: uppercase
+  color: #000
+
+.ig-process-cuentadetal .ig-processpayto span
+  font-weight: 300
+  color: gray
+  font-size: 14px
+
+.ig-procesodepago .ig-proceend .ig-procesenddeta
+  margin: 20px 0
+  display: block
+  border-bottom: 1px solid lightgray
+
+.ig-procesodepago .ig-proceend .ig-procesenddeta p
+  margin: 0
+  padding: 0
+
+.ig-procesodepago .ig-proceend .ig-procesenddeta .ig-procesenddetatext
+  margin: 20px 0
+
+.ig-procesodepago .ig-proceend .ig-procesenddetapoliza
+  margin: 20px 0
+  border-bottom: 1px solid lightgray
+
+.ig-procesodepago .ig-proceend .ig-procesenddetapoliza ul
+  margin: 0
+  padding: 0
+
+.ig-procesodepago .ig-proceend .ig-procesenddetapoliza ul li
+  list-style: none
+
+.ig-procesodepago .ig-proceend .ig-procesenddetapoliza .ig-iconos
+  margin: 20px 0
+
+.ig-procesodepago .ig-proceend .ig-procesenddetapoliza .ig-iconos a
+  display: block
+  text-decoration: none
+
+.ig-procesodepago .ig-proceend .btnvolver
+  display: flex
+  align-content: center
+  align-items: center
+  font-size: 15px
+
+.ig-cartera
+  margin-top: 20px
+  padding: 0 30px
+
+.ig-cartera .tab-pane .ig-itemcartera
+  margin: 20px 0
+
+.ig-cartera .tab-pane .ig-itemcartera
+  margin: 30px 0
+  padding: 0
+
+.ig-cartera .tab-pane .ig-itemcartera li
+  display: inline-block
+  vertical-align: top
+  list-style: none
+  margin: 0 20px
+
+.ig-cartera .tab-pane .ig-itemcartera li:first-child
+  margin-left: 0px
+
+.ig-cartera .tab-pane .ig-itemcartera li a
+  color: lightslategray
+  text-decoration: none
+  border-bottom: 1px solid transparent
+  padding: 10px 0
+
+.ig-cartera .tab-pane .ig-itemcartera li a:hover
+  border-bottom: 1px solid #3f3f3f
+
+.ig-cartera .tab-pane .ig-itemcartera li a.active
+  color: #191919
+  border-bottom: 1px solid #3f3f3f
+
+.ig-cartera .cartera .ig-resultados
+  margin: 30px 0px 30px 0
+  background-color: #f4fbff
+  padding: 20px
+
+.ig-cartera .cartera .ig-resultados p
+  margin: 0
+  padding: 0
+  font-size: 14px
+  color: $textos
+  font-family: $font
+  font-weight: 700
+
+.ig-cartera .cartera .ig-resultados h5,
+.ig-cartera .cartera .ig-resultados h6
+  color: #3f3f3f
+
+.ig-cartera .cartera .ig-resultados .border-right
+  border-right: 1px solid #009ee0
+
+.ig-cartera .cartera .ig-resultados p
+  margin: 0
+  padding: 0
+  font-size: 14px
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza
+  border-top: 1px solid #d3d3d3
+  margin: 10px 20px
+  padding: 10px 0px
+  font-size: 13px
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza .nav-tabs
+  padding: 10px 0
+  position: relative
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza p
+  margin: 0
+  padding: 0
+  display: inline-block
+  font-size: 12px
+  color: #009ee0
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza a
+  text-decoration: underline
+  font-family: 'Gotham-Bold'
+  color: #3f3f3f
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza .ig-ref
+  font-size: 11px
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza span
+  font-weight: 700
+  font-size: 13px
+  margin-left: 10px
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza li
+  margin-right: 10px
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza li a
+  display: flex
+  align-content: center
+  align-items: center
+  font-size: 12px
+  text-decoration: none
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza .ig-dateright
+  position: absolute
+  right: 0
+  display: inline-block
+  vertical-align: top
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza .ig-dateright a,
+.ig-cartera .cartera .ig-resultados .ig-numpoliza .ig-dateright p
+  display: inline-block
+  vertical-align: top
+
+.ig-cartera .cartera .ig-resultados .ig-numpoliza .ig-dateright a
+  margin-left: 20px
+
+.ig-cartera .cartera .ig-carteratotal .switch
+  background-color: whitesmoke
+  padding: 0
+  margin: 0
+  border-radius: 30px
+  display: flex
+  align-items: center
+  align-content: center
+  width: 185px
+  justify-content: flex-end
+
+.ig-cartera .cartera .ig-carteratotal .switch li
+  list-style: none
+
+.ig-cartera .cartera .ig-carteratotal .switch li a
+  background-color: transparent
+  display: block
+  border-radius: 30px
+  padding: 10px 20px
+  color: #212529
+  text-decoration: none
+
+.ig-cartera .cartera .ig-carteratotal .switch li a.active
+  background-color: lightgray
+  display: block
+  border-radius: 30px
+  padding: 10px 20px
+
+.ig-cartera .cartera .ig-datoscartera
+  margin: 20px 0
+
+.ig-cartera .cartera .ig-datoscartera .ig-detalle-agente a
+  text-align: center
+  display: block
+  width: 100%
+  margin: 20px 0
+
+.ig-cartera .cartera .ig-datoscartera .ig-detalle-agente .ig-detallemasagente
+  width: 100%
+
+.ig-cartera .cartera .ig-datoscartera .ig-detalle-agente .ig-detallemasagente .dropdown
+  position: relative
+
+.ig-cartera .cartera .ig-datoscartera .ig-detalle-agente .ig-detallemasagente i
+  cursor: pointer
+  position: relative
+
+.ig-cartera .cartera .ig-carteracards .ig-cards
+  background-color: #f4fbff
+  padding: 20px
+  border-radius: 20px
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2)
+  height: 495px
+
+.ig-cartera .cartera .ig-carteracards .ig-cards ul li
+  margin: 10px 0
+
+.ig-cartera .cartera .ig-carteracards .ig-cards .item
+  list-style: none
+
+.ig-cartera .ig-carteratotal .ig-processvalor
+  color: #ed7128
+  font-weight: 600
+
+.ig-cartera-child-agent
+  text-align: center
+  display: block
+  width: 100%
+  margin: 0px 0 !important
+
+.ig-cartera .messageText
+  text-align: justify
+  font-size: 13px
+
+.input-group-text-info
+  cursor: pointer
+  font-size: 9px !important
+
+.input-group-text-info i
+  color: #888888
+  font-size: 19px
+
+.ig-processvalor .input-group-text-info i
+  color: #00335b
+
+.grace-period-status
+  color: #f6b880 !important
+
+.pending-payment-status, .active-status
+  color: #678004 !important
+
+.canceled-status
+  color: #d81e05 !important
+
+.portfolio-chart-bottom
+  padding-bottom: 20px
+
+.subagent-link
+  text-align: center
+  margin: 0 0 !important
+
+.ig-closemenu
+  display: none
+
+.custom-popover
+  margin-bottom: 1rem
+  font-size: 12px
+  background-color: #dee2e6
+  max-width: 380px
+
+  .row
+    background-color: #fff
+
+.ig-paymentnav button
+  background-color: white
+  width: 40px
+  height: 40px
+  color: $azulclaro
+  border-radius: 50%
+  border: 1px solid $azulclaro
+  display: flex
+  justify-content: center
+  align-content: center
+  align-items: center
+  cursor: pointer
+
+.ig-paymentnav button:hover
+  background-color: $azulclaro
+  color: white
+  border-radius: 50%
+  border: 1px solid $azulclaro
+
+.ig-paymentnav
+  padding: 12px 20px
+  border-top: 1px solid lightgray
+  margin-top: 30px
+
+.grace-period-status
+  color: #f6b880 !important
+
+.canceled-status
+  color: #d81e05 !important
+
+.portfolio-chart-bottom
+  padding-bottom: 10px
+
+.subagent-link
+  text-align: center
+  margin: 0 0 !important
+
+.ig-validation .ig-resultados .ig-plan
+  margin: 0
+  padding: 0
+  display: inline-block
+  font-family: $font
+  font-weight: 700
+  font-size: 16px
+  color: #6a2ca1
+  text-transform: uppercase
+
+.ig-validation .ig-application .ig-resultados
+  padding: 20px 0
+
+.ig-validation .ig-application .ig-resultados
+  margin: 10px 0px
+
+.ig-validation .ig-application .ig-texthistorial
+  font-family: $font
+  font-weight: 700
+  color: #3f3f3f
+  margin: 20px 0
+  margin-left: 20px
+
+.ig-validation .ig-application .ig-texthistorial span
+  font-family: $font
+  font-weight: 500
+
+.ig-validation .ig-application
+  padding: 20px 0px
+  border-top: 1px solid lightgray
+
+.ig-wizarsolicitud
+  margin: 40px 0
+  display: block
+
+.ig-solicitudpol
+  margin: 30px 0px
+  padding: 15px
+  width: 100%
+  display: block
+  background-color: #f3f3f3
+  border-radius: 6px
+
+.ig-solicitudpol h6
+  font-family: $font
+  font-weight: 700
+  color: $textos
+
+.ig-solicitudpol h6 span
+  font-weight: 500
+
+.ig-wizarsolicitud .ig-solicituddatos h6
+  border-bottom: 1px solid #000000
+  display: block
+  padding: 10px 0
+  font-weight: 700
+  margin-bottom: 20px
+  font-size: 19px
+  color: #000000
+
+.ig-wizarsolicitud .ig-solicituddatos label
+  font-size: 14px
+  font-weight: 500
+
+.ig-wizarsolicitud .add-documents .mat-raised-button
+  box-shadow: none
+  color: $azulclaro
+  border-radius: 30px
+  background-color: white
+  border: 1px solid $azulclaro
+  width: 100%
+  text-align: center
+  font-size: 12px
+
+.ig-wizarsolicitud .add-documents h5
+  font-family: $font
+  font-weight: 700
+  font-size: 19px
+
+.ig-wizard .btn-link
+  background-color: transparent
+  border: none
+  width: 100%
+  color: $azulclaro
+  font-size: 16px
+  text-decoration: underline
+
+.ig-wizarsolicitud .ig-solicituddatos .ig-datos
+  border-bottom: none
+  font-weight: 500
+  margin-bottom: 0px
+
+.ig-procesodepago .ig-procesenddetapoliza h6
+  font-weight: 600
+
+.ig-procesodepago .ig-iconos .btnimprimir
+  background-color: white
+  border: 2px solid $azulclaro
+  color: $azulclaro
+  border-radius: 20px
+  padding: 7px 15px
+  display: flex !important
+  align-items: center
+  align-items: center
+  justify-content: center
+  text-align: center
+  font-weight: 600
+
+.ig-procesodepago .ig-iconos .btnimprimir i
+  font-size: 30px
+  margin-right: 10px
+  margin-top: 5px
+
+.ig-procesodepago .btnenviar
+  background-color: white
+  border: 2px solid $azulclaro
+  color: $azulclaro
+  border-radius: 20px
+  padding: 7px 15px
+  display: flex !important
+  align-items: center
+  align-items: center
+  justify-content: center
+  text-align: center
+  width: 200px
+  font-weight: 600
+
+.ig-procesodepago .btnenviar i
+  font-size: 26px
+  margin-right: 5px
+  margin-top: 5px
+
+.ig-procesodepago .ig-procesenddetapolizafinal
+  margin: 20px 0
+
+.ig-procesodepago .ig-procesenddetapolizafinal .btnfinalizar
+  background-color: $azulclaro
+  color: white
+  border-radius: 20px
+  padding: 7px 15px
+  display: flex !important
+  align-items: center
+  align-items: center
+  justify-content: center
+  text-align: center
+  width: 200px
+  font-weight: 600
+  text-decoration: none
+
+.ig-procesodepago .ig-procesenddetapolizafinal .btnfinalizar i
+  font-size: 26px
+  margin-right: 5px
+  margin-top: 5px
+
+.ig-procesodepago .btncancelar
+  color: $azulclaro
+  text-decoration: underline
+  padding: 7px 15px
+  display: flex !important
+  align-items: center
+  align-items: center
+  justify-content: center
+  text-align: center
+  font-weight: 600
+  background-color: transparent
+
+.ig-wizarsolicitud .ig-solicituddatos
+  padding: 20px
+  margin: 10px 0
+
+.ig-wizarsolicitud .ig-archivos
+  margin: 20px 0
+  padding: 0 15px
+  width: 100%
+  display: block
+
+label.form-check-label
+  font-size: 16px
+
+.ig-procesodepago .btnpagar
+  background-color: $azulclaro
+  color: white !important
+  border-radius: 20px
+  padding: 7px 15px
+  display: flex !important
+  align-items: center
+  align-items: center
+  justify-content: center
+  text-align: center
+  font-weight: 500
+  text-decoration: none
+  width: 100%
+  margin-top: 10px
+
+.ig-procesodepago .btnpagar i
+  margin-left: 10px
+
+.ig-policidetails
+  margin: 30px 0
+
+.ig-policidetails h3
+  margin: 10px 0
+
+.ig-policidetails .ig-detallepago
+  margin-top: 50px
+
+.ig-policidetails .btnimprimir
+  background-color: $azulclaro
+  color: white !important
+  border: none
+  border-radius: 20px
+  padding: 7px 15px
+  display: flex !important
+  align-items: center
+  align-content: center
+  justify-content: center
+  text-align: center
+  font-weight: 600
+  margin: 20px 0
+
+.ig-policidetails .btncancelar
+  color: $azulclaro !important
+  text-decoration: underline !important
+  padding: 7px 15px
+  display: flex !important
+  align-items: center
+  align-content: center
+  justify-content: center
+  text-align: center
+  font-weight: 600
+  background-color: transparent
+
+.setup-content .upload
+  margin: 10px 10px 10px 10px
+
+.setup-content .add-documents
+  margin: 20px 10px
+  width: 100%
+
+.setup-content .botton-div
+  margin-bottom: 20px
+
+.text-list-highlight:hover
+  background-color: $azulclaro
+  color: white
+
+.text-list-highlight a:hover
+  background-color: $azulclaro
+  color: white
+
+.text-list
+  font-size: 13px
+  margin-left: 5px
+
+.text-list-item
+  border-bottom: 1px dashed #ccc
+  margin: 0px 20px
+
+.inline-text-icon
+  display: inline
+
+.ig-upfiled-items .inline-text-icon .ig-icofile
+  position: absolute
+  right: 20px
+  top: 0px
+  font-size: 11px
+
+.ig-wizard .ig-files-scroll-summary
+  min-height: 0px
+  max-height: 150px
+  overflow-x: auto
+  overflow-y: auto
+
+.confirm-declaration
+  padding: 5px 5px 5px 5px
+  display: inline-flex
+
+.ig-wizard .ig-upfiled-items
+  background-color: #f2f2f2
+  padding: 15px
+  position: relative
+  min-height: 150px
+  max-height: 150px
+  overflow-x: auto
+  overflow-y: auto
+
+.ig-comisiones
+  padding: 0 30px
+
+.ig-comisiones .ig-comisires
+  margin: 20px 0
+  border-bottom: 1px solid lightgray
+  padding: 20px 0
+
+.ig-comisiones .ig-comisires h6
+  font-weight: 700
+  color: $textos
+  font-size: 20px
+
+.ig-comisiones .ig-comisires .ig-processvalor
+  color: #ed7128
+
+.ig-comisiones .ig-comisires .btnexport i
+  padding: 0 5px !important
+
+.ig-comisiones .ig-comisioreporte
+  width: 100%
+
+.ig-comisiones .ig-comisioreporte .ig-itemreportetil
+  margin-top: 40px
+
+.ig-comisiones .ig-comisioreporte .ig-itemreportetil h5
+  font-weight: 700
+  color: $textos
+  font-size: 18px
+
+.ig-comisiones .ig-comisioreporte .ig-itemreporte
+  margin: 20px 0
+  padding: 10px 0
+
+.ig-comisiones .ig-comisioreporte .ig-itemreporte h6
+  font-weight: 500
+  color: $textos
+
+.ig-comisiones .ig-comisioreporte .ig-itemreporte .card
+  border: none
+  border-top: 1px solid lightgray
+  margin-top: 20px
+
+.ig-comisiones .ig-comisioreporte .ig-itemreporte .ig-processvalor
+  color: #ed7128
+
+.ig-comisiones .ig-comisioreporte .ig-itemreporte .btndown
+  background-color: transparent
+  color: $textos
+  border: none
+  padding: 0
+
+.ig-comisiones .ig-comisioreporte .ig-itemreporte .btndown i
+  font-size: 40px
+
+.ig-searchpolconten .ig-btnsearch1
+  background-color: transparent !important
+  color: $azulclaro !important
+  text-decoration: underline
+  border: none
+
+.ig-polizasseardetall .ig-resultpolizacont
+  padding: 15px
+  margin: 10px 0
+  border-bottom: 1px solid #f0f0f0
+
+.ig-polizasseardetall .ig-polizaagent
+  width: 100%
+  padding: 20px 15px
+  margin: 20px 0px
+  border-bottom: 1px solid lightgray
+
+.ig-polizasseardetall .ig-polizaagent h5
+  font-family: $font
+  font-weight: 700
+
+.ig-polizasseardetall .ig-polizaagent h6
+  font-family: $font
+  font-weight: 400
+
+.ig-polizasseardetall .ig-resultpolizacont .ig-datepay
+  font-weight: 700
+
+.ig-polizasseardetall .ig-resultpolizacont .ig-pais
+  font-family: $font
+  font-weight: 700
+
+.ig-polizasseardetall .ig-resultpolizacont .textosmall2
+  font-family: $font
+  font-size: 16px
+  font-weight: 400
+
+.ig-polizasseardetall .ig-resultpolizacont .ig-chevron
+  display: block
+  text-align: center
+
+.ig-polizasseardetall .ig-resultpolizacont .ig-chevron i
+  font-size: 80px
+
+.ig-polizasseardetall .ig-resultpolizacont p
+  margin: 0
+  padding: 0
+  font-size: 12px
+  color: #333333
+  font-family: $font
+  font-weight: 700
+
+.ig-polizasseardetall .ig-resultpolizaagent #asegurados
+  background-color: #eaf7ff
+
+.ig-polizasseardetall .ig-resultpolizaagent .nav-tabs
+  padding: 10px 0
+
+.ig-polizasseardetall .ig-resultpolizaagent .nav-tabs
+  padding: 10px 0
+
+.ig-polizasseardetall .ig-resultpolizaagent .nav-tabs .nav-item
+  display: flex
+  align-content: center
+  align-items: center
+
+.ig-polizasseardetall .ig-resultpolizaagent .nav-tabs .nav-item:after
+  width: 1px
+  height: 15px
+  content: ""
+  background-color: lightgray
+  display: block
+
+.ig-polizasseardetall .ig-resultpolizaagent .nav-tabs .nav-item.show .nav-link, .ig-polizasseardetall .ig-resultpolizaagent .nav-tabs .nav-link.active
+  color: $azuloscuro
+  border: none
+
+.ig-polizasseardetall .ig-resultpolizaagent .nav-tabs .nav-link:focus, .ig-polizasseardetall .ig-resultpolizaagent .nav-tabs .nav-link:hover
+  border-color: white
+  color: $azuloscuro
+
+.ig-polizasseardetall .ig-resultpolizaagent .nav-tabs .nav-link
+  color: $azulclaro3
+  font-weight: 700
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-campinfo
+  margin: 20px 0
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-campinfo h6
+  font-weight: 700
+  font-size: 16px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-campinfo p
+  font-weight: 400
+  font-size: 13px
+
+.ig-polizasseardetall .ig-resultpolizaagent .tab-pane .ig-polidetaleinfo
+  background-color: #eaf7ff
+  padding: 23px
+  margin-bottom: 20px
+
+.ig-polizasseardetall .ig-resultpolizaagent .tab-pane .ig-polidetaleinfoda
+  padding: 0 15px
+
+.ig-polizasseardetall .ig-resultpolizaagent .tab-pane .ig-polidetaleinfoda .ig-bgprefere
+  background-color: #f4fbff
+  padding: 40px 20px
+
+.ig-polizasseardetall .ig-resultpolizaagent .tab-pane .ig-polidetaleinfoda .ig-bgprefere ul
+  margin: 0
+  padding: 0
+  text-align: center
+
+.ig-polizasseardetall .ig-resultpolizaagent .tab-pane .ig-polidetaleinfoda .ig-bgprefere ul li
+  display: inline-block
+  margin: 0 5px
+
+.ig-bgprefere
+  ul
+    margin: 0
+    padding: 0
+    li
+      list-style: none
+
+.ig-bgprefere li a
+  font-size: 22px
+  background-color: transparent
+  width: 40px
+  display: flex
+  height: 40px
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 50%
+  text-decoration: none
+
+.ig-bgprefere li a.guardar
+  background-color: transparent
+  border: 1px solid #678004
+  color: #678004
+
+.ig-bgprefere li a.edit
+  background-color: transparent
+  border: 1px solid #ed7128
+  color: #ed7128
+
+.ig-bgprefere li a.delt
+  background-color: transparent
+  border: 1px solid #ed2828
+  color: #ed2828
+
+.ig-polizasseardetall .ig-resultpolizaagent .tab-pane .ig-polidetaleinfo h3
+  color: $azuloscuro
+  font-weight: 700
+  font-size: 21px
+  margin: 0
+  padding: 0
+  text-transform: uppercase
+
+.ig-polizasseardetall .ig-resultpolizaagent div .ig-docpoli:last-child
+  border-bottom: none
+
+.ig-polizasseardetall .ig-resultpolizaagent div .ig-docpoli
+  margin: 20px 0
+  padding: 20px
+  border-bottom: 1px solid lightgray
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-docpoli h6
+  text-transform: uppercase
+  font-weight: 700
+  font-size: 16px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-docpoli p
+  font-weight: 400
+  font-size: 16px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont
+  margin: 12px 0
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-detallereclamo
+  background-color: #f2f1f1
+  padding: 20px
+  display: none
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-detallereclamo .ig-resultilt h5
+  text-transform: uppercase
+  font-weight: 700
+  font-size: 16px
+  color: $azuloscuro
+  margin: 20px 0
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-numpoliza
+  margin-top: 20px
+  padding-top: 15px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont
+  padding: 15px 20px 0px 20px
+  margin: 12px 0
+  border-left: 8px solid $azuloscuro
+  background-color: white
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-valores
+  color: $naranja
+  font-weight: 600
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-membirth
+  color: $textos
+  font-weight: 400
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-membirth span
+  font-weight: 700
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-relacest
+  color: $textos
+  font-weight: 700
+  text-transform: uppercase
+  font-size: 16px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-relac
+  color: #c6007e
+  font-weight: 700
+  text-transform: uppercase
+  font-size: 16px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-relactive
+  color: #c6007e
+  font-weight: 700
+  text-transform: uppercase
+  font-size: 16px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-relcancel
+  color: #e80000
+  font-weight: 700
+  text-transform: uppercase
+  font-size: 16px
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont .ig-relac span
+  color: $textos
+  font-weight: 400
+
+.ig-polizasseardetall .ig-resultpolizaagent .ig-polasegcont .ig-asegucont:first-child
+  margin-top: 0px
+
+.ig-polizasseardetall .ig-resultpolizaagent #asegurados .ig-polidetaleinfo
+  margin-bottom: 0px
+
+.ig-polizasseardetall .ig-polasegcont .ig-asegucont .ig-detallelimit
+  display: none
+  margin-top: 20px
+
+.ig-polizasseardetall .ig-polasegcont .ig-asegucont .ig-detallelimit h5
+  margin: 10px 0
+
+.ig-polizasseardetall .ig-polasegcont .ig-asegucont .ig-detallelimit .ig-resultilt
+  border-bottom: 2px solid lightgray
+  margin: 5px 0
+  padding: 20px 0
+
+.ig-polizasseardetall .ig-polasegcont .ig-resultilt .ig-detallelimt h6
+  text-transform: uppercase
+  font-weight: 700
+  font-size: 16px
+
+.ig-polizasseardetall .ig-polasegcont .ig-resultilt .ig-detallelimt p
+  font-weight: 400
+  text-transform: uppercase
+  font-size: 16px
+
+.ig-polizasseardetall .ig-polasegcont .ig-resultilt .ig-detallelimt
+  background-color: white
+  padding: 20px
+
+.ig-polizasseardetall .ig-texthistorial, .ig-polizasseardetall .ig-texthistorial span
+  display: inline-block !important
+  vertical-align: top
+  font-size: 22px !important
+
+.ig-polizasseardetall .ig-texthistorial
+  font-weight: 700 !important
+
+.ig-polizasseardetall .ig-texthistorial span
+  font-weight: 400 !important
+
+.ig-poliza .estado
+  position: absolute
+  top: 74px
+  z-index: -2
+
+.ig-poliza .dropdown-toggle
+  background-color: #f4fbff
+  width: 100%
+  border-color: #f1efeb
+  background-color: #f4fbff
+  width: 100%
+  border-color: #f1efeb
+  font-size: 16px
+  font-family: $font
+  font-weight: 400
+  font-style: italic
+  color: #333333
+
+.ig-poliza .dropdown
+  position: relative
+
+.ig-poliza .dropdown-menu
+  width: 100%
+  z-index: 9999
+
+.ig-poliza .dropdown-menu .form-check
+  display: flex
+  align-content: center
+  align-items: center
+  margin: 10px 0
+
+.ig-poliza .dropdown-menu .form-check label
+  margin-left: 10px
+  font-size: 14px
+
+.ig-poliza .show > .btn-secondary.dropdown-toggle
+  color: #333333 !important
+  background-color: #f4fbff !important
+  border-color: #f1efeb !important
+
+.ig-poliza .show > .btn-secondary.dropdown-toggle:focus
+  box-shadow: none
+
+.ig-home
+  padding: 0 30px
+
+.ig-home h5
+  color: $textos
+  font-weight: 700
+  margin: 10px 0
+
+.ig-hcliente
+  padding: 50px 30px
+
+.ig-hcliente h5, .ig-home .ig-hmedia h5
+  font-size: 25px
+
+.ig-hcliente .ig-hcard
+  margin: 20px 0
+  display: block
+  text-decoration: none
+  position: relative
+
+.ig-hcliente .ig-hcard .ig-hover
+  display: none
+
+.ig-hcliente .ig-hcard:hover .ig-hover
+  background-color: rgba($azuloscuro, 0.8)
+  display: block
+  z-index: 2
+  width: 100%
+  height: 100%
+  position: absolute
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+
+.ig-hcliente .ig-hcard:hover .ig-hover i
+  color: white
+  font-size: 120px
+
+.ig-hcliente .ig-hcard img
+  width: 100%
+
+.ig-hcliente .ig-hcard .ig-bodycard
+  background-color: $azulclaro2
+  padding: 20px
+  width: 100%
+
+.ig-hcliente .ig-hcard .ig-bodycard p
+  color: $azuloscuro
+  font-size: 18px
+  font-weight: 700
+  margin: 0
+  padding: 0
+  width: 100%
+
+.ig-hcliente .ig-hcard .ig-bodycard h6
+  color: $azulclaro
+  font-size: 25px
+  font-weight: 700
+  margin: 0
+  padding: 0
+
+.ig-home .ig-hmedia
+  margin: 30px 0 20px 0
+
+.ig-home .ig-hmedia .ig-hmediabg
+  padding: 40px
+  background-color: $azulclaro2
+
+.ig-home .ig-hmedia .ig-hmediabg span
+  color: $azuloscuro
+  font-size: 27px
+  font-weight: 700
+  margin: 0
+  padding: 0
+
+.ig-home .ig-hmedia .ig-hmediabg h4
+  color: $azuloscuro
+  font-size: 67px
+  font-weight: 700
+  margin-bottom: 18px
+  padding: 0
+  line-height: 60px
+
+.ig-home .ig-hmedia .ig-hmediabg p
+  color: $azulclaro
+  font-size: 22px
+  font-weight: 700
+  margin: 0
+  padding: 0
+
+.ig-home .ig-hmedia .ig-hmediabg .ig-hbtn
+  background-color: $azulclaro
+  padding: 10px 20px
+  color: white
+  text-decoration: none
+  margin: 12px 0
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  width: 200px
+  font-weight: 600
+  font-size: 18px
+
+.ig-home .ig-hitems
+  margin: 20px 0
+
+.ig-home .ig-hitems .ig-itemser
+  padding: 20px
+
+.ig-home .ig-hitems .ig-itemser span
+  font-weight: 700
+  font-size: 20px
+  margin-bottom: 12px
+
+.ig-home .ig-hitems .ig-itemser h4
+  font-weight: 700
+  font-size: 25px
+  margin: 20px 0
+
+.ig-home .ig-hitems .ig-itemser .ig-icon
+  text-align: right
+
+.ig-home .ig-hitems .ig-itemser .ig-icon i
+  font-size: 60px
+  color: $azuloscuro
+
+.ig-quickacessbtn .ig-icon img
+  width: 60%
+
+.ig-quickacessbtn .row
+  padding-left: 5%
+  padding-right: 5%
+
+.ig-quickacessbtn .row a
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+.ig-quickacessbtn .row a .ig-icon
+  text-align: center
+
+.ig-home .ig-hitems .ig-bgblue
+  background-color: $azulclaro
+
+.ig-home .ig-hitems .ig-bgblue span
+  color: $azuloscuro
+
+.ig-home .ig-hitems .ig-bgblue h4
+  color: white
+
+.ig-home .ig-hitems .ig-bggray span
+  color: $azulclaro
+
+.ig-home .ig-hitems .ig-bggray h4
+  color: $azuloscuro
+
+.ig-home .ig-quictilhome
+  margin: 10px 0px
+  padding: 10px 0px
+  border-bottom: 1px solid lightgray
+
+.ig-home .ig-quictilhome h4
+  color: black
+  font-size: 26px
+  font-weight: 700
+
+.ig-home .ig-quictilhome a
+  font-size: 18px
+  justify-content: flex-end
+  margin: 0
+
+.ig-home .ig-quicval
+  margin: 10px 0px
+  padding: 10px 0px
+  border-bottom: 1px solid #e6e6e6
+
+.ig-home .ig-quicval .form-control
+  background-color: transparent
+  border: none
+  border-radius: 0
+  font-weight: 600
+  padding: 0
+  text-decoration: none
+  color: #009ee0
+
+.ig-home .ig-quicval select.form-control:not([size]):not([multiple])
+  height: 26px
+
+.ig-home .ig-quicval h5
+  color: black
+  font-size: 20px
+  font-weight: 700
+  margin: 5px 0
+
+.ig-home .ig-quicval .dropdown
+  padding: 0
+  margin: 0
+
+.ig-home .ig-quicval .dropdown-menu
+  padding: 10px
+  margin: 0
+
+.ig-home .ig-quicval a, .ig-home .ig-quicval .dropdown-menu a
+  font-weight: 600
+  padding: 0
+  text-decoration: none
+  color: $azulclaro
+
+.ig-home .ig-quicval .ig-valor
+  font-weight: 600
+  padding: 0
+  text-decoration: none
+  color: $naranja
+
+.ig-home .ig-quicgrap
+  margin: 20px 0
+
+.ig-home .ig-quicgrap .nav-tabs
+  border: none
+  margin-bottom: 15px
+  justify-content: flex-end
+
+.ig-home .ig-quicgrap .nav-item
+  margin: 0 6px
+
+.ig-home .ig-quicgrap .nav-tabs .nav-link, .ig-home .ig-quicgrap .nav-tabs .nav-link.active
+  display: flex
+  align-content: center
+  align-items: center
+  background-color: transparent
+  border: 2px solid $azulclaro
+  width: 100%
+  font-weight: 600
+  justify-content: center
+  color: $azulclaro
+  padding: 10px 20px
+  font-size: 16px
+  border-radius: 30px
+
+.ig-home .ig-quicgrap .nav-tabs .nav-link.active
+  background-color: $azulclaro
+  border: 2px solid $azulclaro
+  justify-content: center
+  color: white
+
+.ig-home .ig-quicgrap .ig-statu
+  border-bottom: 1px solid lightgray
+  margin: 10px 0
+  padding: 10px 0
+
+.ig-home .ig-quicgrap .ig-statu h6
+  color: black
+  font-size: 16px
+  font-weight: 700
+
+.ig-home .ig-quicgrap .ig-statusresul h6, .ig-home .ig-quicgrap .ig-statusresul h5
+  color: black
+  font-size: 16px
+  font-weight: 400
+  margin: 5px 0
+  padding: 0
+
+.ig-home .ig-quicgrap .ig-statusresul h5
+  color: $naranja
+  font-weight: 600
+
+.ig-title
+  margin: 10px 0
+
+.ig-title h5
+  font-family: $font
+  font-weight: 700
+  margin-bottom: 6px
+  font-size: 27px
+
+.ig-poliza
+  padding: 0 30px
+
+.ig-aproba
+  padding: 0 30px
+  margin: 30px 0
+
+.ig-aproba .ig-campinfo h6
+  text-transform: uppercase
+  font-weight: 700
+  font-size: 16px
+
+.ig-aproba .ig-campinfo p
+  font-weight: 400
+  font-size: 16px
+
+.ig-aproba form label
+  font-weight: 700
+  font-size: 16px
+
+#documentos .pagination li
+  margin: 0 5px
+
+#documentos .ig-paymentnav
+  border-top: none
+
+.modal-cards-collection .modal-lg, .modal-cards-collection .modal-xl
+  max-width: 90%
+
+.modal-cards-collection .userpoli
+  position: fixed
+  background: #cfe9fa
+  padding: 10px
+  display: block
+
+.disabled
+  pointer-events: none
+  cursor: default
+  opacity: 0.6
+
+.ig-content404
+  overflow: hidden
+
+.ig-4042
+  display: flex
+  align-content: center
+  align-items: center
+
+.ig-content404 header
+  display: block
+  margin: 20px 0
+  width: 100%
+
+.ig-content404 h1
+  text-align: center
+  margin-bottom: 40px
+
+.ig-content404 .ig-textomensaje
+  display: block
+  width: 100%
+  padding: 0 15px
+
+.ig-content404 .ig-textomensaje h3
+  font-weight: 600
+  font-size: 24px
+  margin: 6px 0
+  color: #00335b
+
+.ig-content404 .ig-textomensaje h4
+  font-weight: 600
+  font-size: 20px
+  margin: 6px 0
+  color: #00335b
+  padding-top: 15px
+
+.ig-content404 .ig-textomensaje p, .ig-content404 .ig-textomensaje li
+  margin: 0
+  padding: 0
+  font-weight: 300
+  font-size: 18px
+  margin: 6px 0
+  color: #1e9de5
+
+.ig-content404 .ig-texto .margenLi
+  padding-left: 15px
+
+.ig-content404 .ig-textomensaje .ig-texto
+  margin: 10px 0px
+  padding: 10px 0
+
+.ig-content404 .ig-textomensaje .ig-texto a
+  color: #00335b
+  text-decoration: underline
+  font-weight: 600
+
+.ig-content404 .ig-textomensaje .ig-texto:after
+  width: 150px
+  background-color: #00335b
+  height: 5px
+  display: block
+  content: ""
+  margin-top: 20px
+
+@media print
+  .modal-cards-collection .userpoli
+    display: none !important
+
+.ig-home-elegibilidad
+  padding: 0 20px
+
+.ig-home-elegibilidad h5
+  color: #333333
+  font-weight: 700
+  margin: 10px 0
+
+.ig-home-elegibilidad .ig-hcliente .ig-hcard
+  margin: 20px 0
+
+.ig-home-elegibilidad .ig-hcliente .ig-hcard img
+  width: 100%
+
+.ig-home-elegibilidad .ig-hcliente .ig-hcard .ig-bodycard
+  background-color: #f1efeb
+  padding: 20px
+  width: 100%
+
+.ig-home-elegibilidad .ig-hcliente .ig-hcard .ig-bodycard p
+  color: #00335b
+  font-size: 18px
+  font-weight: 500
+  margin: 0
+  padding: 0
+  width: 100%
+
+.ig-home-elegibilidad .ig-hcliente .ig-hcard .ig-bodycard h6
+  color: #1e9de5
+  font-size: 30px
+  font-weight: 700
+  margin: 0
+  padding: 0
+
+.ig-home-elegibilidad .ig-hmedia .ig-hmediabg
+  padding: 20px
+  background-color: #f1efeb
+
+.ig-home-elegibilidad .ig-hmedia .ig-hmediabg span
+  color: #00335b
+  font-size: 18px
+  font-weight: 500
+  margin: 0
+  padding: 0
+
+.ig-home-elegibilidad .ig-hmedia .ig-hmediabg h4
+  color: #00335b
+  font-size: 90px
+  font-weight: 700
+  margin: 0
+  padding: 0
+
+.ig-home-elegibilidad .ig-hmedia .ig-hmediabg p
+  color: #1e9de5
+  font-size: 18px
+  font-weight: 500
+  margin: 0
+  padding: 0
+
+.ig-home-elegibilidad .ig-hitems
+  margin: 20px 0
+
+.ig-home-elegibilidad .ig-hitems .ig-itemser
+  padding: 20px
+  background-color: #f1efeb
+
+.ig-home-elegibilidad .ig-resultados
+  padding: 20px 0px
+  border-bottom: 1px solid gray
+
+.ig-home-elegibilidad .ig-resultados .ig-procesconte
+  padding: 20px 0
+  margin: 10px 0
+  border-bottom: 1px solid lightgray
+
+.ig-home-elegibilidad .ig-resultados .ig-procesconte h6, .ig-home-elegibilidad .ig-resultados .ig-procesconte .ig-processvalor
+  text-transform: uppercase
+  font-size: 21px
+  font-weight: 500
+  color: #333333
+
+.ig-home-elegibilidad .ig-resultados .ig-procesconte .ig-processvalor
+  color: #ed7128
+  margin: 0
+  padding: 0
+  font-weight: 600
+
+.ig-home-elegibilidad .ig-resultados .ig-procesconte
+  font-size: 16px
+  font-weight: 700
+  color: #333333
+
+.ig-home-elegibilidad .ig-resultados .ig-numpoliza .ig-ref
+  font-weight: 700
+  color: #333333
+
+.ig-home-elegibilidad .ig-resultados .ig-numpoliza .ig-ref span
+  font-weight: 400
+  color: #333333
+
+.ig-home-elegibilidad .ig-claims, .ig-home-elegibilidad .ig-claims2
+  margin: 10px 0
+  border-top: 1px solid lightgray
+  padding: 10px 0
+  border-bottom: 1px solid lightgray
+  padding-bottom: 40px
+
+.ig-home-elegibilidad .ig-claims h3, .ig-home-elegibilidad .ig-claims2 h3
+  font-weight: 700
+  color: #333333
+
+.ig-home-elegibilidad .ig-claims2
+  border-top: none
+
+.ig-home-elegibilidad .ig-searchresul
+  background-color: #e9ecef
+  font-size: 15px
+  margin: 10px 0
+  padding: 20px 15px
+  border-radius: 5px
+
+.ig-home-elegibilidad .btncalendar i, .ig-date-picker .btncalendar i, .ig-date-from-to .btncalendar i
+  color: #6a2ca1
+  font-size: 24px
+
+.ig-home-elegibilidad .ig-searchpol
+  margin: 15px 0
+
+.ig-home-elegibilidad .ig-searchpol label
+  font-size: 16px
+  font-weight: 700
+  color: #333333
+
+.ig-home-elegibilidad .ig-searchpol .btncalendar, .ig-date-picker .btncalendar, .ig-date-from-to .btncalendar
+  cursor: pointer
+  border: none
+  background-color: transparent
+  display: flex
+  align-content: center
+  align-items: center
+  border-radius: 0px
+  border-left: none
+  border: none
+
+.ig-home-elegibilidad .ig-searchpol .ig-btnsearch, .ig-home-elegibilidad .ig-searchpol .ig-btncalendar
+  background-color: #409bd6
+  width: 100%
+  color: #fff
+  border: none
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 6px
+  font-size: 15px
+  height: 45px
+  margin-top: 30px
+
+.ig-polizassear .ig-titulotabs
+  margin: 20px 0
+
+.ig-polizassear .ig-titulotabs h6
+  color: #333333
+  font-family: $font
+  font-weight: 700
+  font-size: 22px
+
+.ig-polizassear .ig-titulotabs h6 span
+  font-family: $font
+  font-weight: 400
+  font-size: 22px !important
+  display: inline-block !important
+  vertical-align: top !important
+
+.ig-polizassear .ig-member2
+  background-color: $azulclaro2
+  padding: 20px
+  margin: 10px 0
+
+.ig-polizassear .ig-titulotabs2
+  margin: 10px 0
+
+.ig-polizassear .ig-titulotabs2 h6
+  color: #333333
+  font-family: $font
+  font-weight: 700
+  font-size: 16px
+
+.ig-polizassear .ig-titulotabs2 h6 span
+  font-family: $font
+  font-weight: 400
+  font-size: 16px !important
+  display: inline-block !important
+  vertical-align: top !important
+
+.ig-searchpol .dropdown-toggle
+  background-color: #f4fbff
+  width: 100%
+  border-color: #f1efeb
+  background-color: #f4fbff
+  width: 100%
+  border-color: #f1efeb
+  font-size: 16px
+  font-family: $font
+  font-weight: 400
+  font-style: italic
+  color: #333333
+  padding: 9px
+
+.btnclean
+  position: relative
+  display: inline-block
+
+.btnclean .tooltiptext
+  visibility: hidden
+  width: 120px
+  background-color: $azulclaro3
+  color: #fff
+  text-align: center
+  border-radius: 6px
+  padding: 5px 0
+  bottom: -32px
+  right: 0
+  font-size: 12px
+
+  /* Position the tooltip */
+  position: absolute
+  z-index: 1
+
+.btnclean:hover .tooltiptext
+  visibility: visible
+
+.ig-comisires .dropdown-item
+  cursor: pointer
+
+.ig-home .ig-quickacessbtn .ig-icon2
+  border-radius: 50%
+  width: 100px
+  height: 100px
+  border: 2px solid #019ee0
+  display: flex
+  justify-content: center
+  align-content: center
+  align-items: center
+  margin: 0 auto
+  text-align: center
+
+.ig-home .ig-quickacessbtn .ig-icon2 i
+  font-size: 62px
+
+.agreement-title
+  font-weight: bold
+
+.agreement-title-center
+  font-weight: bold
+  text-align: center
+
+.ig-modalprehome .ig-bienvenida
+  font-family: $font
+  font-weight: 500
+  color: #000000
+  padding: 0
+  word-wrap: break-word
+
+.ig-modalprehome .ig-bienvenida h3
+  font-family: $font
+  font-weight: 700
+  color: #000000
+  margin: 5px 0 10px 0
+  padding: 0
+  word-wrap: break-word
+
+.ig-modalprehome .ig-bienvenida h6
+  font-weight: 400
+
+.ig-modalprehome .ig-bienvenida h3 span
+  font-family: $font
+  font-weight: 400
+  color: #000000
+  margin: 0 0 30px 0
+  padding: 0
+  word-wrap: break-word
+
+.ig-modalprehome .modal-body
+  background-color: $azulclaro2
+
+.ig-modalprehome
+  height: 95%
+
+.ig-modalprehome .ig-pre-card
+  background-color: white
+
+.ig-modalprehome .ig-chevronrig
+  position: absolute
+  z-index: 66
+  top: 23%
+  right: 0
+
+.ig-modalprehome .ig-chevronrig i
+  font-size: 40px
+
+.ig-pre-card .ig-btnptre
+  border: 2px solid $azulclaro
+  margin: 20px
+  text-decoration: none
+  position: relative
+
+.ig-pre-card .ig-btnptre h3, .ig-pre-card .ig-btnptre p
+  color: $azulclaro
+  padding: 0
+  margin: 0
+
+.ig-pre-card .ig-btnptre h3
+  font-weight: 600
+
+.ig-pre-card h3
+  margin: 10px 0
+
+.ig-modalprehome .modal-lg , .ig-modalagreement .modal-lg
+  max-width: 1000px
+
+.ig-adminselect2
+  margin: 30px 0
+
+.ig-adminselect2 .btn-outline-primary
+  color: #009ee0
+  border-color: #009ee0
+
+.ig-adminselect2 .btn-outline-primary:hover
+  color: white
+  background-color: #009ee0
+  border-color: #009ee0
+
+.ig-adminselect h4, .ig-adminselect2 h4
+  color: black
+  font-size: 25px
+  font-weight: 700
+  margin-bottom: 15px
+
+.ig-adminselect2 .card-body
+  padding: 2%
+
+.ig-adminselect2 .card-body .btnprim
+  background-color: #009ee0
+  width: 100%
+  color: #fff
+  border: none
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 6px
+  font-size: 15px
+  height: 45px
+
+.ig-validation .ig-aseguser .input-group-text-info
+  display: inline-block !important
+
+.breadcrumb
+  background-color: $azulclaro2
+
+.breadcrumb .breadcrumb-item a
+  color: $azuloscuro2
+  font-weight: 500
+  text-decoration: underline
+
+.breadcrumb .breadcrumb-item .activeEnrollment
+  color: #0079c8
+  font-weight: 600
+
+.breadcrumb-item
+  &.activeEnrollment
+    color: #0079c8
+    font-weight: 600
+
+  /* Customize the label (the container) */
+.container
+  display: block
+  position: relative
+  padding-left: 35px
+  // margin-bottom: 12px
+  cursor: pointer
+  font-size: 22px
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+/* Hide the browser's default checkbox */
+.container input
+  position: absolute
+  opacity: 0
+  cursor: pointer
+  height: 0
+  width: 0
+
+/* Create a custom checkbox */
+.checkmark
+  position: absolute
+  top: 0
+  left: 0
+  height: 25px
+  width: 25px
+  background-color: #dde3e6
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark
+  background-color: #ccc
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark
+  background-color: #2196F3
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after
+  content: ""
+  position: absolute
+  display: none
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after
+  display: block
+
+/* Style the checkmark/indicator */
+.container .checkmark:after
+  left: 9px
+  top: 5px
+  width: 5px
+  height: 10px
+  border: solid white
+  border-width: 0 3px 3px 0
+  -webkit-transform: rotate(45deg)
+  -ms-transform: rotate(45deg)
+  transform: rotate(45deg)
+
+  .claims-all-infinite-scroll
+    height: 100%!important
+    overflow-y: scroll!important
+
+.ig-pagosesion
+  padding: 0 20px
+  margin-top: 20px
+
+.ig-pagosesion .btncancel
+  background-color: transparent
+  border: 2px solid  #009ee0
+  border-radius: 30px
+  color: #009ee0
+  width: 100%
+
+.ig-pagosesion .btnconti
+  background-color: #009ee0
+  border: none
+  border-radius: 30px
+  color: white
+  width: 100%
+
+.ig-pagosesion .ig-botonespago
+  margin: 40px 0 0 0
+
+.ig-pagosesion .ig-pagosesionform
+  margin: 40px 0
+
+.ig-pagosesionform .form-inline, .ig-pagosesionform .form-group
+  width: 100%
+
+.ig-pagosesionform .form-group .idpoliza
+  width: 100%
+
+.ig-pagosesionform .form-group .dateinput .input-group
+  width: 573px
+
+.ig-prehome-item
+  justify-content: center
+
+.ig-reclamosconte label
+  font-size: 16px
+  margin-top: 8px
+
+.ig-myagent
+  margin-top: 20px
+
+.ig-myagent .ig-solicituddatos
+  width: 100%
+  margin-bottom: 15px
+
+.ig-myagent .ig-solicituddatos label
+  font-size: 14px
+  font-weight: 600
+
+// .ig-myagent .ig-solicituddatos .form-control
+//   border: none
+
+.ig-myagent .ig-solicituddatos h6
+  border-bottom: 1px solid #000000
+  display: block
+  padding: 10px 0
+  font-weight: 700
+  margin-bottom: 20px
+  font-size: 19px
+
+.ig-myagent .btnsend
+  margin-top: 32px
+  text-decoration: underline
+  font-weight: 500
+
+.ig-informationrequest .ig-requestdatos .nav-tabs
+  width: 100%
+  border-bottom: none
+  li
+    margin: 0 10px
+    a:after
+      content: ""
+      width: 1px
+      height: 20px
+      background-color: lightgray
+      margin-left: 30px
+  .nav-link
+    font-weight: 400
+    color: $azulclaro3
+    display: flex
+    align-items: center
+    align-content: center
+    padding: 0
+    font-size: 18px
+    &.active
+      font-weight: 700
+      border-radius: none
+      background-color: transparent
+      border: none
+    &:hover
+      font-weight: 700
+
+.nav-tabs .nav-link
+  &:focus, &:hover
+    border-color: transparent !important
+
+.ig-informationrequest .ig-requestdatos
+  margin-top: 20px
+  .tab-content
+    width: 100%
+  .ig-btnsolicitar
+    width: 100%
+    display: flex
+    align-content: center
+    align-items: center
+    justify-content: center
+    border-radius: 6px
+    font-size: 16px
+    height: 45px
+    font-family: $font
+    cursor: pointer
+    background-color: $azuloscuro
+    border: none
+    color: white
+    font-weight: 400
+  .ig-btnsolicitar i
+    margin-right: 6px
+  .ig-enviarcon
+    h5
+      padding: 6px 0
+      font-size: 16px
+      color: $azuloscuro
+      font-weight: 700
+      margin: 0
+    form
+      margin: 0 0 20px 0
+      padding: 0 15px
+      label
+        font-size: 14px
+        font-weight: 500
+    .ig-searchresul
+      background-color: $azulclaro2
+      font-size: 15px
+      margin: 10px 0
+      padding: 20px 15px
+      border-radius: 5px
+      width: 100%
+    .ig-registrohelp
+      background-color: #e4f2e3
+      padding: 20px
+      margin: 0 0 20px 0
+    .ig-registrohelp span
+      font-family: $font
+      font-weight: 400
+    .ig-registrohelp p
+      padding: 0
+      margin: 0
+
+.ig-informationrequest .ig-btncalendar
+  background-color: #009ee0
+  width: 100%
+  color: #fff
+  border: none
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 6px
+  font-size: 15px
+  height: 45px
+
+.ig-informationrequest ngx-treeview-item
+  margin: 10px 0
+  border-bottom: 1px solid lightgray
+  padding: 10px 0
+
+.ig-informationrequest .dropdown-menu.show
+  width: 100%
+
+.ig-informationrequest ngx-dropdown-treeview .btn-outline-secondary
+  background-color: #f4fbff
+  border: 1px solid #f1efeb
+  border-radius: 10px
+  height: 45px
+  font-family: $font
+  font-weight: 400
+
+.ig-informationrequest ngx-dropdown-treeview .btn-outline-secondary:hover
+  color: #212529
+
+.ig-informationrequest ngx-dropdown-treeview .btn-outline-secondary.dropdown-toggle
+  color: #495057
+  background-color: #f4fbff
+  border: 1px solid #f1efeb
+
+body .ig-informationrequest .ig-resultados .ig-name
+  font-family: $font
+  font-weight: 500
+  color: #3f3f3f
+
+body .ig-informationrequest .ig-resultados .ig-processvalor
+  color: $naranja
+  font-size: 1.25rem
+  font-weight: 500
+
+body .ig-informationrequest .ig-resultados .ig-requesttitle
+  font-weight: 300
+  margin-top: 15px
+
+.ig-button-as-message
+  background-color: transparent
+  border: 0px
+  font-size: 14px
+  color: red
+  font-weight: bold
+
+.ig-document
+  padding: 10px 15px
+
+.ig-document label
+  font-family: $font
+  font-weight: 500
+  color: #000000
+  margin: 0
+  padding: 0
+  word-wrap: break-word
+  font-size: 15px
+
+.ig-document form
+  margin: 40px 0
+
+.ig-document button
+  background-color: $azulclaro
+  color: #fff
+  margin-top: 25px
+  height: 100%
+
+.ig-document .ig-docpoli
+  padding: 20px
+  border-top: 1px solid lightgray
+
+.ig-document .ig-docpoli p
+  margin: 0
+
+.ig-document .pagination
+  justify-content: center
+
+.ig-searchpol .dropdown-menu .form-check label
+  margin: 5px 10px
+
+.ig-userperf .ig-infotil
+  border-bottom: 1px solid #000000
+  display: block
+  padding: 10px 0
+  font-weight: 700
+  margin-bottom: 22px
+  font-size: 20px
+  color: #000000
+
+.ig-infoprofile h6
+  display: block
+  font-weight: 600
+  margin-bottom: 10px
+  font-size: 18px
+  color: #000000
+
+.ig-btnsearch
+  background-color: #009ee0
+  width: 100%
+  color: #fff
+  border: none
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 6px
+  font-size: 15px
+  height: 45px
+
+.ig-btnsearch:hover
+  color: white
+
+.ig-modalprehome app-pre-home
+  height: 100%
+
+.add-documents .ig-new-buss p
+  padding: 0
+  margin: 0
+
+.add-documents .ig-new-buss
+  margin: 10px 0
+  padding: 10px
+
+.add-documents .ig-new-buss i
+  color: #00335b
+  font-size: 28px
+
+.ig-navtop
+  display: flex
+  justify-content: space-between
+
+.ig-iconoti
+  background: #f4fbff
+  padding: 0 20px
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  cursor: pointer
+
+  i
+    color: #00aeef
+    font-size: 38px
+
+.ig-notifi
+  margin: 20px 0
+
+  .ig-notfitem
+    margin: 5px 0
+    border-bottom: 1px solid lightgray
+    padding: 10px
+    cursor: pointer
+    background-color: #f4fbff
+
+    &:first-child
+      margin: 0px
+
+    &.active, &:hover
+      background-color: white
+
+  .ig-readcontent
+    margin: 0 15px
+
+    i
+      margin-left: 10px
+
+  .ig-notfitem.ig-readitem
+    background-color: white
+
+  .ig-notfbt
+    margin: 0
+    padding: 0
+    list-style: none
+    display: flex
+    justify-content: center
+    align-items: center
+    button
+      width: 40px
+      height: 40px
+      display: flex
+      align-items: center
+      align-content: center
+      justify-content: center
+      border-radius: 50%
+      margin: 0 12px
+      text-decoration: none
+      &.delt
+        background-color: transparent
+        border: 1px solid #ed2828
+        color: #ed2828
+        &:hover
+          background-color: #ed2828
+          border: 1px solid transparent
+          color: white
+      &.read
+        background-color: transparent
+        border: 1px solid #678004
+        color: #678004
+        &:hover
+          background-color: #678004
+          border: 1px solid transparent
+          color: white
+  .ig-notfitem
+
+    .card-body
+      background-color: white
+      margin: 10px 0
+      border-radius: 10px
+
+    .ig-icon
+      background-color: white
+      display: flex
+      justify-content: center
+      align-content: center
+      align-items: center
+      border-radius: 50%
+      width: 50px
+      height: 50px
+      border: 1px solid #9e9e9e
+      color: #9e9e9e
+
+    .ig-link
+      color: #009ee0
+      cursor: pointer
+
+      &:hover
+        text-decoration: underline
+
+.pagination
+  justify-content: center
+
+.ig-formulario
+
+  label
+    font-size: 12px
+    margin: 0
+    padding: 0
+    font-weight: 600
+
+  .form-control
+    background-color: #f4fbff
+    border: 1px solid #f1efeb
+    border-radius: 10px
+    height: 45px
+    font-family: $font
+    font-weight: 400
+    padding: 5px
+
+  .ig-infotil
+    border-bottom: 1px solid #000000
+    display: block
+    padding: 10px 0
+    font-weight: 700
+    margin-bottom: 22px
+    font-size: 20px
+    color: #000000
+
+.ig-formulario .add-documents .mat-raised-button
+  box-shadow: none
+  color: $azulclaro
+  border-radius: 30px
+  background-color: white
+  border: 1px solid $azulclaro
+  width: 100%
+  text-align: center
+  font-size: 12px
+
+
+.ig-mainben
+  p
+    margin: 0
+    padding: 0
+
+.ig-requestpre2
+  h6
+    padding: 2px 0
+    font-size: 14px
+    color: #464646
+    font-weight: 700
+    margin: 0
+
+.ig-requestpre
+  h6
+    padding: 6px 0
+    font-size: 16px
+    font-weight: 700
+    margin: 0
+
+  .ig-registrohelp
+    background-color: #e4f2e3
+    padding: 20px
+    margin: 0 0 20px 0
+  .ig-registrohelp span
+    font-family: $font
+    font-weight: 400
+  .ig-registrohelp p
+    padding: 0
+    margin: 0
+  a
+    cursor: pointer
+    color: $azulclaro
+    margin: 0
+
+.ig-requestpre .ig-btncalendar
+  background-color: #009ee0
+  width: 100%
+  color: #fff
+  border: none
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 6px
+  font-size: 15px
+  height: 45px
+
+.ig-diagnosticocontent .ig-titulodiag
+  font-weight: 700
+
+.ig-diagnosticocontent h6
+  font-weight: 400
+
+.ig-diagnosticocontent .ig-diagnosselec
+  border-bottom: 1px solid lightgray
+  margin: 5px 0px
+  padding: 5px 0px
+
+.ig-diagnosticocontent .ig-paymentnav
+  border-top: none
+
+.ig-diagnosticocontent .ig-paymentnav .pagination
+  justify-content: center
+
+.ig-diagnosticocontent .ig-diagnosselec .ig-icondiagnosminim
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  border-radius: 50%
+  width: 30px
+  height: 30px
+  background-color: red
+  text-decoration: none
+  color: white
+
+.ig-diagnosticocontent .ig-diagnosselec .ig-icondiagnosminim i
+  font-size: 20px
+
+.ig-requestpre
+  margin: 10px 0px
+  .ig-preautoup
+    position: relative
+    z-index: 99
+  label
+    display: inline-block
+    margin-bottom: .5rem
+    font-size: 12px
+    margin: 0
+    padding: 0
+    font-weight: 600
+
+.ig-datosend
+  p
+    margin: 0
+    padding: 0
+
+  h6
+    margin-bottom: 12px
+
+.ig-formulario .was-validated ng-select
+  border-color: #dc3545
+  padding-right: calc(1.5em + .75rem)
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E")
+  background-repeat: no-repeat
+  background-position: center right calc(.375em + .1875rem)
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem)
+
+.ig-preauthorizationmod
+  .form-check
+    margin: 10px 0
+    padding-top: 10px
+    border-bottom: 1px solid lightgray
+    padding-bottom: 10px
+
+.ig-searchresul
+  background-color: #f4fbff
+  padding: 20px
+  margin: 10px 0
+
+  p
+    margin: 0
+    padding: 0
+
+.ig-datosend
+
+  .ig-preautoconte
+    padding: 0px 20px
+
+    .ig-preautotitle
+      margin: 10px 0 10px 0
+      border-bottom: 1px solid #e8e8e8
+      padding: 5px 0
+      font-size: 16px
+      color: #00335b
+      font-weight: 700
+
+      &:before
+        content: ""
+        display: inline-block
+        width: 10px
+        height: 10px
+        border-radius: 50%
+        background-color: $azulclaro
+        padding-right: 10px
+        margin-right: 10px
+        margin-left: -21px
+
+.ig-formulario
+  textarea.form-control
+    height: auto
+
+.ig-iconper
+  display: flex
+  align-content: center
+  align-items: center
+  width: 100%
+  padding: 5px 0
+  margin: 5px 0
+  border-bottom: 1px solid lightgray
+
+  i
+    font-size: 20px
+  h5
+    font-weight: 600
+    font-size: 16px
+
+.ig-polasegcont
+  .ig-valores
+    color: #ed7128
+    font-weight: 400
+
+.ig-bold
+  margin: 10px 0
+  font-weight: 700
+
+.bp-comissionscont
+  p
+    font-size: 14px
+
+.bp-bgtilt, .bp-bgtilt2
+  box-shadow: 0 0 12px rgba(#d6d6d6, 0.5)
+  background-color: white
+  padding: 20px 30px
+  margin: 15px 20px
+  position: relative
+  z-index: 2
+
+  .bp-status-item
+    display: flex
+    align-content: center
+    align-items: center
+    flex-wrap: wrap
+
+    h4
+      color: #333333
+      font-weight: 400
+      font-size: 14px
+
+    h5
+      color: #333333
+      font-weight: 700
+      font-size: 16px
+
+    h6
+      color: #333333
+      font-weight: 700
+      font-size: 13px
+      width: 100%
+
+      span
+        font-weight: 500
+
+      .bp-status-item-blue
+        h6
+          color: #0079c8
+          font-weight: 700
+          font-size: 14px
+
+.bp-status-item-blue
+  color: #0079c8
+  font-weight: 700
+  font-size: 16px
+  h5
+    color: #0079c8
+    font-weight: 700
+    font-size: 16px
+  h6
+    color: #0079c8
+    font-weight: 700
+    font-size: 14px
+
+.bp-status-item-cot
+  display: flex
+  align-content: center
+  align-items: center
+  h5, span
+    color: white
+    font-weight: 600
+    font-size: 16px
+    padding: 0
+    margin: 0
+
+  h6
+    color: white
+    font-weight: 400
+    font-size: 16px
+    padding: 0
+    margin: 0
+
+  h4
+    color: white
+    font-weight: 700
+    font-size: 18px
+    padding: 0
+    margin: 0
+
+.bp-status-item-cotrig
+  h5, h6, h4
+    text-align: right
+    width: 100%
+
+
+.bp-bgtilt
+  .bp-status-item-blue2
+    color: #0079c8 !important
+    font-weight: 700 !important
+    font-size: 12px !important
+
+    p
+      color: #333333
+      font-size: 12px
+
+.bp-bgtilt2
+  height: 500px
+  overflow: auto
+
+.bp-bgtilt-selected
+  box-shadow: 0 0 12px rgba(#0079c8, 0.3)
+  padding: 20px 30px
+  margin: 15px 20px
+  position: relative
+  z-index: 2
+  border: 1px solid #0079c8
+
+.bp-status
+  background-color: gray
+  padding: 5px
+  display: flex
+  align-content: center
+  align-items: center
+  justify-content: center
+  width: 180px
+  margin: 12px 0
+
+  h6
+    font-weight: 400
+    color: white
+
+    span
+      font-weight: 700
+
+.bp-status-active
+  background-color: $azuloscuro2
+
+.bp-bgtilt-gray
+  background-color: #fbfbfb
+  margin: -13px 20px 20px 20px
+  position: relative
+  z-index: 0
+  box-shadow: none
+
+
+.bp-bgtilt-white
+  background-color: white
+  margin: -13px 20px 20px 20px
+  position: relative
+  z-index: 0
+
+.bp-bgtilt-blue
+  background-color: $azuloscuro
+  position: relative
+  z-index: 0
+  padding: 20px
+
+  hr
+    border-top: 4px solid white
+
+.table thead th
+  vertical-align: middle
+  border-bottom: 2px solid #dee2e6
+  font-size: 12px
+
+.table td, .table th
+  font-size: 12px
+
+.tachar-texto
+  opacity: 0.5
+
+.undo-remove
+  vertical-align: middle
+  font-size: 12px
+
+.modal-body-content
+  padding-bottom: 40px
+  word-break: break-word;
+
+.deductible-offered-container
+  padding: 0px 0px 20px 0px !important
+
+a.carousel-control-prev
+  opacity: 1
+  width: 0%
+  color: #0079c8
+
+  &:hover
+    color: #0079c8
+
+a.carousel-control-next
+  opacity: 1
+  width: 0%
+  color: #0079c8
+
+  &:hover
+    color: #0079c8
+
+.carousel-arrow
+  font-size: 24px !important
+
+  i.material-icons
+    font-size: 50px !important
+
+.carousel-arrow i.material-icons
+  color: #0079c8
+
+.bp-mainpolicy .was-validated ng-select.ng-invalid
+  border-color: #dc3545
+  padding-right: calc(1.5em + .75rem)
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23dc3545' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23dc3545' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E")
+  background-repeat: no-repeat
+  background-position: center right calc(.375em + .1875rem)
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem)
+
+.bp-mainpolicy .was-validated ng-select.ng-valid
+  border-color: #28a745
+  padding-right: calc(1.5em + .75rem)
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e")
+  background-repeat: no-repeat
+  background-position: center right calc(.375em + .1875rem)
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem)
+
+.bp-mainpolicy .was-validated .ng-select .ng-clear
+  display: none !important
+
+.ig-quote
+  .bp-itemtitle
+    flex-wrap: wrap
+
+.container-change-deductible
+  max-height: 280px
+  overflow-y: auto
+  overflow-x: hidden
+  padding-right: 5px
+  margin-right: -15px
+  height: 280px
+
+  .form-control
+    margin: 5px
+
+.container-change-deductible label
+  font-size: 12px
+  color: #333333
+  font-weight: 700
+
+.container-change-deductible .form-check
+  display: flex
+  align-content: center
+  align-items: center
+  border-bottom: 1px solid lightgray
+  margin: 10px 0
+  padding: 10px 0
+  flex-wrap: wrap
+
+
+.bp-status-item-error
+  h6
+    font-weight: 400
+    font-size: 13px
+    color: #db3907
+    margin-left: 22px
+
+.container-change-deductible .form-check .bp-status-item
+  margin-left: 20px
+
+.container-change-deductible::-webkit-scrollbar
+  width: 8px
+  height: 8px
+
+.container-change-deductible::-webkit-scrollbar-thumb
+  background: #ccc
+  border-radius: 4px
+
+.container-change-deductible::-webkit-scrollbar-thumb:hover
+  background: #b3b3b3
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2)
+
+.container-change-deductible::-webkit-scrollbar-thumb:active
+  background-color: #999999
+
+.container-change-deductible::-webkit-scrollbar-track
+  background: #e1e1e1
+  border-radius: 4px
+
+.container-change-deductible::-webkit-scrollbar-track:hover,
+.container-change-deductible::-webkit-scrollbar-track:active
+  background: #d4d4d4
+
+.card-message
+  font-size: 12px
+  font-family: "Montserrat", sans-serif
+  margin-top: -31px
+  margin-left: 20px
+  margin-right: 20px
+  z-index: 10
+  position: relative
+  padding: 12px
+  border-radius: 3px
+  color: white
+  background-color: #0079c8
+  min-height: 40px
+  font-weight: bold
+  display: block
+  right: 0
+  bottom: 0
+  left: 0
+
+.ig-quote
+  .card-message
+    background-color: #2eaff2
+
+
+.bp-itemcontsect2
+  .ng-option-label
+    font-weight: 400
+  .ng-value-label
+    font-weight: 400
+
+
+.input-group > .custom-select:not(:first-child), .input-group > .form-control:not(:first-child)
+  border-radius: 10px
+
+
+.ig-precioscot, .ig-precioscot-act
+  background-color: white
+  border: 1px solid #d0d0d0
+  border-radius: 5px
+  margin: 6px 0
+  overflow: hidden
+
+.ig-precioscot-act
+  box-shadow: 0 0 2px #409bd6
+  border: 1px solid #409bd6
+
+.bp-cot-white
+  height: 46px
+  padding-top: 10px
+  background: #fbfbfb
+  border-left: 1px solid #f3f3f3
+
+
+
+.bp-mainpolicy
+  margin: 20px 0
+
+
+.bp-aviso
+  .bp-padding
+    p
+      margin: 0px
+      padding: 0px
+
+
+.bp-padding-top-step p:first-child
+  margin-top: -16px
+
+
+.bp-itemcontsect2 h6
+  font-weight: 700
+  font-size: 14px
+
+.btnclean
+  i
+    margin: 0
+    padding: 0
+
+
+.card-message2
+  position: relative
+  display: flex
+  margin: 20px 0
+  width: 100%
+  font-weight: 400
+  font-size: 12px
+  font-family: "Montserrat", sans-serif
+  padding: 12px
+  border-radius: 3px
+  color: white
+  background-color: #0079c8
+  align-content: center
+  align-items: center
+
+.card-message2
+  p
+    color: white !important
+
+.card-message2
+  p
+    span
+      color: white !important
+
+
+.bp-step4med .bp-itemcontsect2 p
+  margin: 0px
+
+
+.bg-sectmed .bp-cust-til p
+  font-size: 16px
+
+.bg-sectmed .bp-cust-til p small
+  font-size: 12px
+.attach-div
+  max-height: 110px
+  overflow-y: auto
+
+.attach-div::-webkit-scrollbar
+  width: 8px
+  height: 8px
+
+.attach-div::-webkit-scrollbar-thumb
+  background: #ccc
+  border-radius: 4px
+
+.attach-div::-webkit-scrollbar-thumb:hover
+  background: #b3b3b3
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2)
+
+.attach-div::-webkit-scrollbar-thumb:active
+  background-color: #999999
+
+.attach-div::-webkit-scrollbar-track
+  background: #e1e1e1
+  border-radius: 4px
+
+.attach-div::-webkit-scrollbar-track:hover,
+.attach-div::-webkit-scrollbar-track:active
+  background: #d4d4d4
+
+.bp-align
+  display: flex
+  align-content: center
+  align-items: center
+  width: 100%
+
+  p
+    margin-right: 10px !important
+
+  .form-group
+    width: 100%
+
+// .bp-mainpolicy
+//   .form-check
+//     margin: 0.5rem
+
+//     input[type="radio"]
+//       position: absolute
+//       opacity: 0
+
+//       + .form-check-label:before
+//         content: ''
+//         background: #f4f4f4
+//         border-radius: 100%
+//         border: 1px solid #b4b4b4
+//         display: inline-block
+//         width: 1.5em
+//         height: 1.5em
+//         position: relative
+//         top: -0.0em
+//         margin-right: 5px
+//         vertical-align: top
+//         cursor: pointer
+//         text-align: center
+//         transition: all 250ms ease
+
+//       &:checked + .form-check-label:before
+//         background-color: #0079c8
+//         box-shadow: inset 0 0 0 4px #f4f4f4
+
+//       &:focus + .form-check-label:before
+//         outline: none
+//         border-color: #0079c8
+
+//       &:disabled + .form-check-label:before
+//         box-shadow: inset 0 0 0 4px #f4f4f4
+//         border-color: #b4b4b4
+//         background: #b4b4b4
+
+//       + .form-check-label:empty:before
+//         margin-right: 0
+
+
+.border-danger
+  border: none !important
+  border-bottom: 2px solid #dc3545 !important
+  border-radius: 0 !important
+
+.quote-bp-genero
+    display: flex
+    align-content: center
+    align-items: center
+
+    .bp-generoh
+        background-image: url(assets/images/hombre.png)
+        background-size: cover
+
+        &:hover
+            background-image: url(assets/images/hombre-select.png)
+
+    .bp-generom
+        background-image: url(assets/images/mujer.png)
+        background-size: cover
+
+        &:hover
+            background-image: url(assets/images/mujer-select.png)
+
+    .bp-generohselected
+        background-image: url(assets/images/hombre-select.png)
+        background-size: cover
+
+    .bp-generomselected
+        background-image: url(assets/images/mujer-select.png)
+        background-size: cover
+
+.quote-bp-genero a
+    width: 40px
+    height: 40px
+    display: block
+    margin: 0 3px
+
+.added-members
+  color: black
+  padding: 5px
+
+  a
+    width: 100%
+
+    i
+      color: transparent
+      width: 100%
+
+  &:hover
+    color: #333333
+
+    a
+      width: 100%
+
+      i
+        color: #333333
+        width: 100%
+
+.ig-quote
+  p
+    color: #333
+
+
+.bp-contentmember .bp-addmember
+  a
+    width: auto
+    display: inline-block
+    vertical-align: top
+    margin: 0 5px
+
+.bp-netprov
+  p
+    margin: 0
+    padding: 0
+
+    &:hover
+      width: auto !important
+      display: inline-block
+
+
+.bp-contentmember .bp-addmember:hover a
+  width: auto !important
+
+
+.bp-contentmember .container-change-deductible label
+  font-size: 10px
+
+.bp-contentmember .container-change-deductible .form-control
+  font-size: 10px
+
+
+.table td, .table th
+  padding: 10px
+  vertical-align: middle
+
+
+.bp-validate
+  width: 100%
+  margin-top: .25rem
+  font-size: 75%
+  color: #dc3545
+
+.reports-container
+  background-color: white
+  width: 100%
+  height: calc(100vh - 100px)
+
+  iframe
+    border: none
+
+.ig-quote
+  p
+    color: #333
+
+.card-message3
+  position: relative
+  display: flex
+  margin: 20px 0
+  width: 100%
+  font-weight: 400
+  font-size: 12px
+  font-family: "Montserrat", sans-serif
+  padding: 12px
+  border-radius: 3px
+  color: #3d79c8
+  background-color: #f4fbff
+  align-content: center
+  align-items: center
+
+wpwl-forms
+  background: #f8f8f8
+
+.wpwl-label-brand
+  display: none
+
+.wpwl-form-card
+  background: #f4fbff
+  border: 0px
+  box-shadow: none
+  padding: 70px 26px
+
+.wpwl-control, input.wpwl-control
+  background: white
+  border: none
+  border-bottom: solid 1px #ccc
+  box-shadow: none
+  border-radius: 0px
+  font-family: $font
+  text-transform: none
+  padding: 10px
+  font-size: 18px
+  height: 40px
+
+.input-text:focus
+  background-color: white
+
+input
+  &[type=text]:focus, &[type=tel]:focus, &[type=url]:focus, &[type=password]:focus, &[type=search]:focus
+    background-color: white
+
+textarea:focus
+  background-color: white
+
+.wpwl-brand-SOFORTUEBERWEISUNG, .wpwl-brand-GIROPAY
+  cursor: pointer
+
+.wpwl-brand, .wpwl-img
+  margin: 0 0 0 auto
+
+.backpay
+  background: #f4fbff
+  box-shadow: none
+  width: 70%
+  margin: 0 auto
+  padding: 6%
+
+.backpay-brands-mex
+  background: #f4fbff
+  box-shadow: none
+  width: 70%
+  margin: 0 auto
+  padding: 2%
+
+.backpay label
+  margin-top: 10px
+
+.cardmsg
+  text-align: center
+  align-content: center
+  justify-content: center
+  align-items: center
+  background: #F4FBFF
+  box-shadow: 1px 1px 5px #00000014
+
+.cardates
+  text-align: center
+  align-content: center
+  justify-content: center
+  align-items: center
+  background: #F4FBFF
+  box-shadow: 1px 1px 5px #00000014
+  height: 380px
+  padding: 4% 5%
+
+.cardates .form-group
+  display: flex
+  text-align: center
+  margin-bottom: 0px
+  margin-top: 0px
+  justify-content: space-between
+  font-size: 16px
+
+.cardates .form-group label
+  color: #707070
+  margin-right: 30px
+
+
+.processingPaymentWrapper
+  position: absolute
+  top: 5%
+  left: 15%
+  z-index: -1
+
+.processingPayment
+  font-size: 30px
+  color: #147cd4
+
+
+.processingPayment span
+  color: #147cd4
+  font-size: 50px
+  animation-name: blink
+  animation-duration: 1.4s
+  animation-iteration-count: infinite
+  animation-fill-mode: both
+
+  &:nth-child(2)
+    animation-delay: .2s
+
+  &:nth-child(3)
+    animation-delay: .4s
+
+@keyframes blink
+  0%
+    opacity: .2
+
+  20%
+    opacity: 1
+
+  100%
+    opacity: .2
+
+.cardmsg figure
+    width: 80%
+    margin: 15% auto 0 auto
+
+.cardates .form-group label
+    color: #707070
+    margin-right: 30px
+    font-size: 15px
+    font-weight: bold
+
+
+.cardates .form-group p
+    font-weight: bold
+    color: #000
+    margin-top: 10%
+    font-size: 20px
+
+.cardmsg .form-group p.rechazado
+    color: #e74c2c
+    font-size: 20px
+    font-weight: bold
+
+.cardmsg .form-group p.aprobado
+  color: #3f8385
+  font-size: 20px
+  font-weight: bold
+
+.cardmsg .form-group p.notification-payment-mex
+  color: #009ee0
+  font-size: 20px
+  font-weight: bold
+
+.embed-responsive:before
+  content: none
+  margin-top: 0
+
+.container-fluid
+  overflow-x: hidden
+
+.container-iframe
+  position: relative
+  width: 100%
+  overflow: hidden
+  padding-top: 56.25%
+  height: 774px
+
+  /* 16:9 Aspect Ratio
+
+.responsive-iframe
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  width: 100%
+  height: 800px
+  border: none
+
+.img-fluid-loading-payment-mex
+  max-width: 35%
+  height: auto
+
+.img-fluid-loading-payment-ok-mex
+  max-width: 23%
+  height: auto
+
+.ig-date-picker
+  .input-group
+    .form-control
+      border-radius: 10px
+      border-bottom-right-radius: 0px
+      border-bottom-left-radius: 0px
+
+    .input-group-btn
+      display: flex
+
+.bp-payicon
+  .bp-paylogo
+    display: block
+    width: 100%
+    min-height: 80px
+    background-size: 80%
+    background-position: center center
+
+  .bp-payameri
+    background-image: url(assets/images/america-hover.jpg)
+    background-repeat: no-repeat
+    background-size: 60%
+    &.active
+      background-image: url(assets/images/america.jpg)
+
+  .bp-paymaster
+    background-image: url(assets/images/master-hover.jpg)
+    background-repeat: no-repeat
+    &.active
+      background-image: url(assets/images/master.jpg)
+
+  .bp-payvisa
+    background-image: url(assets/images/visa-hover.jpg)
+    background-repeat: no-repeat
+    &.active
+      background-image: url(assets/images/visa.jpg)
+
+  .bp-paydinersclub
+    background-image: url(assets/images/dinergris-01.png)
+    background-repeat: no-repeat
+    &.active
+      background-image: url(assets/images/dinercolor-01.png)
+
+.cardates p
+  font-weight: normal !important
+  font-size: 15px !important
+  margin: 0px !important
+  text-align: right
+
+.cardates .form-group
+  margin-bottom: 10px
+
+.tooltip-payment-mex
+  position: relative
+  display: inline-block
+  padding: 12px
+
+.tooltip-payment-mex .tooltiptext
+  visibility: hidden
+  width: 247px
+  background-color: $azulclaro3
+  color: #fff
+  text-align: center
+  border-radius: 6px
+  padding: 10px
+  right: -104px
+  top: -61px
+  font-size: 12px
+
+  /* Position the tooltip */
+  position: absolute
+  z-index: 1
+
+.tooltip-payment-mex:hover .tooltiptext
+  visibility: visible
+
+
+.tooltip-payment-mex
+  i
+    margin: 0
+    padding: 0
+
+
+.tooltip-payment-mex .tooltiptext::after
+  content: ""
+  position: absolute
+  top: 100%
+  left: 50%
+  margin-left: -5px
+  border-width: 5px
+  border-style: solid
+  border-color: $azulclaro3 transparent transparent transparent
+
+.checkbox-widget-payment-mex
+  width: 24px
+  height: 16px
+
+.nuevapolizabupa
+    padding: 2%
+    margin-top: -30px
+
+.nuevapolizabupa h2, p
+    width: 100%
+
+.itemseleccion
+  padding: 25px
+  box-shadow: 3px 3px 7px #00000029
+  border-radius: 10px
+  margin: 15px
+  width: 29%
+  cursor: pointer
+
+.itemseleccion figure
+  width: 15%
+  float: left
+
+.itemseleccion .contentitem
+  float: right
+  width: 80%
+
+.itemseleccion .contentitem h3
+  width: 100%
+  font-size: 18px
+
+.itemseleccion .contentitem p
+  margin: 0px
+  font-size: 12px
+
+
+.wrap-element
+  position: relative
+  overflow: hidden
+  padding-top: 56.25%
+
+.wrapped-iframe
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  border: 0
+
+.listsolicitudes input
+  position: relative
+  opacity: 1
+
+.bp-itemcontsect2.listsolicitudes ul
+  padding: 0px
+  margin: 0px
+
+.bp-itemcontsect2.listsolicitudes ul li
+  list-style: none
+  float: left
+  margin: 0px 10px
+  font-size: 14px
+  font-weight: bolder
+  line-height: 18px
+
+.bp-itemcontsect2.listsolicitudes
+  margin-bottom: 25px !important
+
+.bp-itemcontsect2.listsolicitudes ul li span
+  font-size: 14px
+  margin-right: 6px
+  cursor: pointer
+
+.js-pscroll
+  position: relative
+  overflow: hidden
+
+.table100 .ps__rail-y
+  width: 9px
+  background-color: transparent
+  opacity: 1 !important
+  right: 5px
+
+.table100 .ps__rail-y::before
+  content: ""
+  display: block
+  position: absolute
+  background-color: #ebebeb
+  border-radius: 5px
+  width: 100%
+  height: calc(100% - 30px)
+  left: 0
+  top: 15px
+
+.table100 .ps__rail-y .ps__thumb-y
+  width: 100%
+  right: 0
+  background-color: transparent
+  opacity: 1 !important
+
+.table100 .ps__rail-y .ps__thumb-y::before
+  content: ""
+  display: block
+  position: absolute
+  background-color: #cccccc
+  border-radius: 5px
+  width: 100%
+  height: calc(100% - 30px)
+  left: 0
+  top: 15px
+
+.container-table100
+  width: 100%
+  background: #fff
+  display: -webkit-box
+  display: -webkit-flex
+  display: -moz-box
+  display: -ms-flexbox
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-wrap: wrap
+
+.wrap-table100
+  width: 1170px
+
+.table100
+  background-color: #fff
+
+table
+  width: 100%
+
+th, td
+  font-weight: unset
+  padding-right: 10px
+
+.column1
+  width: 12%
+  padding-left: 20px
+
+.column2
+  width: 11%
+  padding-left: 15px
+
+.column3
+  width: 11%
+  padding-left: 15px
+
+.column4
+  width: 25%
+  padding-left: 15px
+
+.column5
+  width: 16%
+
+.table100-head th
+  padding-top: 18px
+  padding-bottom: 18px
+
+.table100-body td
+  padding-top: 16px
+  padding-bottom: 16px
+
+.table100
+  position: relative
+  padding-top: 40px
+
+.table100-head
+  position: absolute
+  width: 100%
+  top: 0
+  left: 0
+
+.table100-body
+  max-height: 600px
+
+.table100.ver1 th
+  font-size: 18px
+  color: #fff
+  line-height: 1.4
+
+  background-color: #6c7ae0
+
+.table100.ver1 td
+  font-size: 15px
+  color: #808080
+  line-height: 1.4
+
+.table100.ver1 .table100-body tr:nth-child(even)
+  background-color: #f8f6ff
+
+.table100.ver1
+  border-radius: 10px
+  overflow: hidden
+  box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+
+.table100.ver1 .ps__rail-y
+  right: 5px
+
+.table100.ver1 .ps__rail-y::before
+  background-color: #ebebeb
+
+.table100.ver1 .ps__rail-y .ps__thumb-y::before
+  background-color: #cccccc
+
+.table100.ver2 .table100-head
+  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1)
+  -moz-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1)
+  -webkit-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1)
+  -o-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1)
+  -ms-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1)
+
+.table100.ver2 th
+  font-size: 18px
+  color: #fa4251
+  line-height: 1.4
+
+  background-color: transparent
+
+.table100.ver2 td
+  font-size: 15px
+  color: #808080
+  line-height: 1.4
+
+.table100.ver2 .table100-body tr
+  border-bottom: 1px solid #f2f2f2
+
+.table100.ver2
+  border-radius: 10px
+  overflow: hidden
+  box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+
+.table100.ver2 .ps__rail-y
+  right: 5px
+
+.table100.ver2 .ps__rail-y::before
+  background-color: #ebebeb
+
+.table100.ver2 .ps__rail-y .ps__thumb-y::before
+  background-color: #cccccc
+
+.table100.ver3
+  background-color: #393939
+
+.table100.ver3 th
+  font-size: 15px
+  color: #00ad5f
+  line-height: 1.4
+  text-transform: uppercase
+  background-color: #393939
+
+.table100.ver3 td
+  font-size: 15px
+  color: #808080
+  line-height: 1.4
+  background-color: #222222
+
+.table100.ver3
+  border-radius: 10px
+  overflow: hidden
+  box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+  -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15)
+
+.table100.ver3 .ps__rail-y
+  right: 5px
+
+.table100.ver3 .ps__rail-y::before
+  background-color: #4e4e4e
+
+.table100.ver3 .ps__rail-y .ps__thumb-y::before
+  background-color: #00ad5f
+
+.table100.ver4
+  margin-right: -20px
+
+.table100.ver4 .table100-head
+  padding-right: 20px
+
+.table100.ver4 th
+  font-size: 18px
+  color: #4272d7
+  line-height: 1.4
+
+  background-color: transparent
+  border-bottom: 2px solid #f2f2f2
+
+.table100.ver4 .column1
+  padding-left: 7px
+
+.table100.ver4 td
+  font-size: 15px
+  color: #808080
+  line-height: 1.4
+
+.table100.ver4 .table100-body tr
+  border-bottom: 1px solid #f2f2f2
+
+.table100.ver4
+  overflow: hidden
+
+.table100.ver4 .table100-bod
+  padding-right: 20px
+
+.table100.ver4 .ps__rail-y
+  right: 0px
+
+.table100.ver4 .ps__rail-y::before
+  background-color: #ebebeb
+
+.table100.ver4 .ps__rail-y .ps__thumb-y::before
+  background-color: #cccccc
+
+.table100.ver5 .table100-head
+  padding-right: 30px
+
+.table100.ver5 th
+  font-size: 14px
+  color: #000
+  line-height: 1.4
+  background-color: transparent
+  font-weight: bold
+
+.table100.ver5 td
+  font-size: 13px
+  color: #808080
+  line-height: 1.4
+  background-color: #53B2FF17
+
+.table100.ver5 .table100-body tr
+  overflow: hidden
+  border-bottom: 10px solid #fff
+  border-radius: 10px
+
+.table100.ver5 .table100-body table
+  border-collapse: separate
+  border-spacing: 0 10px
+.table100.ver5 .table100-body td
+    border: solid 1px transparent
+    border-style: solid none
+    padding-top: 10px
+    padding-bottom: 10px
+.table100.ver5 .table100-body td:first-child
+    border-left-style: solid
+    border-top-left-radius: 10px
+    border-bottom-left-radius: 10px
+.table100.ver5 .table100-body td:last-child
+    border-right-style: solid
+    border-bottom-right-radius: 10px
+    border-top-right-radius: 10px
+
+.table100.ver5 tr:hover td
+  background-color: #ebebeb
+  cursor: pointer
+
+.table100.ver5 .table100-head th
+  padding-top: 25px
+  padding-bottom: 25px
+  padding-left: 18px
+
+.table100.ver5
+  overflow: hidden
+
+.table100.ver5 .table100-bod
+  padding-right: 30px
+
+.table100.ver5 .ps__rail-y
+  right: 0px
+
+.table100.ver5 .ps__rail-y::before
+  background-color: #ebebeb
+
+.table100.ver5 .ps__rail-y .ps__thumb-y::before
+  background-color: #cccccc
+
+.bp-container
+  background: #FFFFFF 0% 0% no-repeat padding-box
+  box-shadow: 1px 1px 10px #00000029
+  border-radius: 4px
+  opacity: 1
+  padding: 20px
+  margin-left: 20px
+
+.bp-title
+  margin-bottom: 20px
+
+.bp-txt
+  margin-bottom: 20px
+  line-height: 30px
+  padding-left: 0
+
+.bp-respuesta
+  background: #F1F2F2 0% 0% no-repeat padding-box
+  display: flex
+  flex-direction: column
+  padding: 10px
+  white-space: pre-wrap
+
+
+.bp-respuesta p
+  padding: 2px 2px 2px 2px
+  margin: 2px 2px 2px 2px
+
+.bp-chat
+  margin: 10px 0px !important
+
+.bp-txtarea
+  background: #F4FBFF 0% 0% no-repeat padding-box
+  border: none
+  width: 100%
+
+.bp-descriptivo p
+  font: 12px solid bold
+
+
+.bp-btn.bp-btnterciary
+  background: none
+  border: none
+  border-bottom: 2px solid #0079c8
+  border-radius: 0
+  color: #0079c8
+
+.label-tipo-inquiry
+  margin: 2px 2px 2px 10px
+
+.div-inquiry-down
+  max-height: 75px
+  min-height: 50px
+  display: flex
+  flex-direction: column
+  overflow-y: auto
+
+.div-inquiry-up
+  max-height: auto
+  min-height: 50px
+  display: flex
+  flex-direction: column
+  overflow-y: auto
+
+.bp-negrilla strong
+  font-weight: bold
+  font-size: 12px!important
+
+.bp-negrilla label
+  margin-bottom: 0px
+  font-size: 12px!important
+
+.interaction-content
+  min-height: auto
+  max-height: 340px
+  overflow-y: auto
+
+.interaction-item-icon
+  font-size: 40px!important
+
+.bp-itemcontsect3
+  font-size: 13px!important
+  margin: 0px!important
+
+.bp-itemcontsect3 label
+  font-size: 13px!important
+  margin: 0px!important
+  height: auto
+
+.bp-container-documents
+  max-height: 115px
+  overflow-y: auto
+
+.bp-documents-view
+  font-size: 12px
+  color: #009ee0
+  display: flex!important
+  flex-direction: column
+  align-content: center
+  align-items: center
+  font-weight: 700
+  cursor: pointer
+  font-family: "Montserrat", sans-serif
+  margin-top: auto
+
+ul.nav.nav-tabs.left-tabs li
+  width: 100%
+
+ul.nav.nav-tabs.left-tabs li a
+  border: none
+  border-bottom: solid 1px #ccc
+  border-radius: 0
+  color: #909090
+
+ul.nav.nav-tabs.left-tabs li a.active
+  border-color: #3d79c8
+  border-right: solid 4px #3d79c8
+  color: #3d79c8
+
+ul.nav.nav-tabs.left-tabs li a:hover
+  border-color: #3d79c8
+  border-right: solid 4px #3d79c8
+  color: #3d79c8
+
+.itmgeo.bp-itemcontsect2
+  width: 47%
+  margin: 10px
+
+.container-wizard
+  padding: 10px 25px
+  width: -moz-fit-content
+  width: 100%
+  margin: -40px auto -20px auto
+  display: flex
+  justify-content: space-between
+
+ul.bupawizard li
+  list-style: none
+  float: left
+  padding: 10px
+  width: 100%
+  text-align: center
+
+ul.bupawizard li.check
+    background: #ecf6ff
+    border-right: solid 1px #fff
+    color: #0079c8
+
+ul.bupawizard
+  width: 100%
+  margin-top: 10px
+  border: solid 1px #ecf6ff
+  padding: 0
+  display: flex
+  justify-content: space-around
+
+ul.bupawizard li.current
+    background: #c8e4fd
+    border-right: solid 1px #fff
+    color: #0079c8
+    position: relative
+    z-index: 10
+
+li.current::after
+    content: ''
+    width: 0
+    height: 0
+    display: block
+    position: absolute
+    z-index: 10
+    border: 0
+    border-left: 10px solid transparent
+    border-right: 10px solid transparent
+    margin-left: -10px
+    left: 50%
+    border-top: 10px solid #c8e4fd
+    bottom: -13px
+    border-bottom-color: transparent !important
+
+.ajfinal .fechasbupa span strong
+  font-weight: bold
+
+.ajfinal .fechasbupa img
+  width: 70%
+  margin-left: 15%
+
+.ajfinal .fechasbupa span
+  font-size: 17px !important
+  width: 100%
+
+.ajfinal .fechasbupa
+  width: 80%
+  margin: 40px auto 0 auto
+
+.ajfinal h3 p
+    margin: 0 auto
+
+.ajfinal
+  text-align: center
+  margin-top: 30px
+
+.tags-ok-mex
+  width: 100%
+  margin-right: 0px !important
+  text-align: left
+
+.currency-mex-payment-widget
+  padding: 14px 0px 0px 10px
+
+.bupa-iconstep
+  background: #fff
+  width: 90px;
+  height: 90px;
+  border-radius: 90px;
+  text-align: center;
+  line-height: 90px;
+  margin: 0 auto;
+  border: solid 2px #114065;
+
+.bupa-iconstep img
+  width: 40%;
+
+.bupa-iconstep.completed
+  background: #114065
+
+  .bp-itemcontsect2 span
+    font-weight: normal !important
+
+.ig-wizarsolicitud .card-message
+  color: #000
+  background: none !important
+  padding: 0
+
+.bp-itemcontsect2p
+  margin: 10px 0
+
+.bp-netprov
+  overflow-x: scroll
+  height: auto
+  width: 1180px
+  height: 500px
+  position: relative
+
+  .table
+    margin-bottom: 1rem;
+    color: #212529;
+    max-width: 776px;
+    margin: 0 auto;
+    width: 800px !important;
+    position: relative;
+
+    .thead-light
+      white-space: nowrap
+      position: sticky
+      top: 0
+      z-index: 2
+
+      th
+        white-space: nowrap
+        position: sticky
+        top: 0
+        z-index: 2
+
+    td, th
+      white-space: pre-line
+
+      .input-group
+        width: 150px
+
+
+.popover-div
+  max-height: 300px
+  overflow-y: auto
+
+.popover-div::-webkit-scrollbar
+  width: 6px
+  height: 6px
+
+.popover-div::-webkit-scrollbar-thumb
+  background: #ccc
+  border-radius: 4px
+
+.popover-div::-webkit-scrollbar-thumb:hover
+  background: #b3b3b3
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2)
+
+.popover-div::-webkit-scrollbar-thumb:active
+  background-color: #999999
+
+.popover-div::-webkit-scrollbar-track
+  background: #e1e1e1
+  border-radius: 4px
+
+.popover-div::-webkit-scrollbar-track:hover,
+.popover-div::-webkit-scrollbar-track:active
+  background: #d4d4d4
+
+section.bp-mainpolicy .form-control
+  margin-top: -6px
+  margin-bottom: 15px
+
+section.bp-mainpolicy label
+  margin-bottom: 0
+
+.form-control:focus
+  border-color: #0079c8
+  box-shadow: none
+
+footer .ig-terminos p
+  font-weight: 600
+  font-size: 14px
+  color: #00335b
+  text-decoration: none
+
+
+#tooltipPrivacyPoliticsContent .tooltip
+  text-align:left !important
+
+#tooltipPrivacyPoliticsContent span
+  font-weight: 600
+  font-size: 14px
+  color: white
+  text-decoration: none
+
+
+#tooltipPrivacyPoliticsContent li:before
+  border-radius: 50px
+  width: 6px
+  height: 6px
+  content: ""
+  display: inline-block
+  vertical-align: middle
+  background-color: white
+
+#tooltipPrivacyPoliticsContent .bs-tooltip-top
+  padding: 5px 0
+  margin-top: -3px
+
+#tooltipPrivacyPoliticsContent .bs-tooltip-top .tooltip-inner
+  max-width: 200px !important
+  padding: 3px 8px !important
+  color: #ffffff !important
+  text-align: left !important
+  text-decoration: none !important
+  background-color: #007bd1 !important
+  border-radius: 4px !important
+  box-shadow: 0px 0px 5px !important
+
+
+#tooltipPrivacyPoliticsContent .bs-tooltip-top .arrow
+  position: absolute
+  width: 0
+  height: 0
+  border-color: transparent
+  border-style: solid
+
+
+#tooltipPrivacyPoliticsContent .bs-tooltip-top .arrow
+  bottom: 0
+  left: 50%
+  margin-left: -5px
+  border-top-color: #007bd1
+  border-width: 5px 5px 0
+
+
+#tooltipPrivacyPoliticsContent .bs-tooltip-top .arrow::before
+  position: absolute
+  width: 0
+  height: 0
+  border-color: transparent
+  border-style: solid
+
+
+
+.ig-generic-sticker
+    margin: 30px 0px
+    padding: 15px
+    width: 100%
+    display: block
+    background-color: #e9ecef
+    border-radius: 10px
+
+.ig-generic-sticker
+  h6, p
+    color: #009ee0
+    padding: 0
+    margin: 0
+
+.offsideModalP
+  font-size: smaller
+  margin-bottom: 0
+
+
+.offsideModalUL
+  font-size: smaller
+
+.cardHeaderCollapse
+  display: grid
+  align-content: center
+
+#tooltipBCBSContent .tooltip
+  text-align:center !important
+
+#tooltipBCBSContent .tooltipBCBSTitle
+  font-weight: bold
+  font-size: 14px
+  color: white
+  text-decoration: none
+  text-align: center
+  border-bottom: 1px solid black
+
+#tooltipBCBSContent .bs-tooltip-top
+  padding: 5px 0
+  margin-top: -3px
+
+#tooltipBCBSContent .bs-tooltip-top .tooltip-inner
+  width: 250px !important
+  padding: 3px 8px !important
+  color: #ffffff !important
+  text-align: left !important
+  text-decoration: none !important
+  background-color: #007bd1 !important
+  border-radius: 4px !important
+  box-shadow: 0px 0px 5px !important
+
+
+#tooltipBCBSContent .bs-tooltip-top .arrow
+  position: absolute
+  width: 0
+  height: 0
+  border-color: transparent
+  border-style: solid
+
+
+#tooltipBCBSContent .bs-tooltip-top .arrow
+  bottom: 0
+  left: 50%
+  margin-left: -5px
+  border-top-color: #007bd1
+  border-width: 5px 5px 0
+
+
+#tooltipBCBSContent .bs-tooltip-top .arrow::before
+  position: absolute
+  width: 0
+  height: 0
+  border-color: transparent
+  border-style: solid
+
+
+#tooltipBCBSContent .tooltip.show
+  opacity: 1 !important
+
+
+.footer-app
+  padding: 20px 60px
+  background-color: #f4fbff
+  position: fixed
+  bottom: 0
+  margin-top: 0px !important
+  width: 100%
+  height: 25%
+
+.generalTextColor
+  color: #00335b
+
+
+.centeredSection
+  text-align: center
+  width: 100%
+  height: 100%
+  position: fixed
+  height: 75%
+  overflow: overlay
+
+
+
+.centeredSection .middleText
+  padding: 25vh 0
+  position: absolute
+  word-wrap: break-word
+  height: 100%
+
+

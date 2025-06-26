@@ -1,0 +1,98 @@
+{
+    "agent": {
+        "agentId": 6206,
+        "agentNumber": null,
+        "fullName": null,
+        "firstName": null,
+        "lastName": null,
+        "email": null,
+        "phoneNumber": null,
+        "isAdministrator": false,
+        "statusId": null,
+        "countryId": null,
+        "insuranceBusinessId": null,
+        "agencyId": null,
+        "agencyName": null,
+        "dob": null,
+        "country": null,
+        "status": null,
+        "insuranceBusiness": null,
+        "addresses": null,
+        "eMails": null,
+        "phones": null,
+        "commissionPayments": [
+            {
+                "paymentDate": "12/15/2018",
+                "paymentType": "1026",
+                "paymentTypeName": "ACH",
+                "paymentTotal": "221.03",
+                "paymentNumber": 249401,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "12/15/2018",
+                "paymentType": "1026",
+                "paymentTypeName": "ACH",
+                "paymentTotal": "50.22",
+                "paymentNumber": 249499,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "12/15/2018",
+                "paymentType": "1025",
+                "paymentTypeName": "Check",
+                "paymentTotal": "111.52",
+                "paymentNumber": 249456,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "12/15/2018",
+                "paymentType": "1028",
+                "paymentTypeName": "Transfer",
+                "paymentTotal": "500.00",
+                "paymentNumber": 249488,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "12/14/2018",
+                "paymentType": "1026",
+                "paymentTypeName": "ACH",
+                "paymentTotal": "221.03",
+                "paymentNumber": 249402,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "12/08/2018",
+                "paymentType": "1025",
+                "paymentTypeName": "Check",
+                "paymentTotal": "221.03",
+                "paymentNumber": 249403,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "12/07/2018",
+                "paymentType": "1025",
+                "paymentTypeName": "Check",
+                "paymentTotal": "221.03",
+                "paymentNumber": 249404,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "11/30/2018",
+                "paymentType": "1026",
+                "paymentTypeName": "ACH",
+                "paymentTotal": "221.03",
+                "paymentNumber": 249405,
+                "Commissions": null
+            },
+            {
+                "paymentDate": "11/29/2018",
+                "paymentType": "1026",
+                "paymentTypeName": "ACH",
+                "paymentTotal": "221.03",
+                "paymentNumber": 249401,
+                "Commissions": null
+            }
+        ]
+    }
+}

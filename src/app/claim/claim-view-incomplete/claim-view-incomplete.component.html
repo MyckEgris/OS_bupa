@@ -1,0 +1,106 @@
+<div class="">
+  <div class="col-md-11">
+
+    <div class="ig-searchresul" *ngIf="collectionSize !== null && claims.count === 0">
+      <!--<h4>{{ 'CLAIMS.SEARCH_RESULT.TITLE' | translate }}:</h4>-->
+      <h4>{{ title }} ({{claims.count}})</h4>
+      <p>{{ 'CLAIMS.SEARCH_RESULT.MESSAGE' | translate }}</p>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="claims.count > 0">
+
+  <div class="ig-titulotabs">
+    <h6>
+      {{ title }} <span>({{ claims.count | valueOrMoney:'number':'' }})</span>
+    </h6>
+  </div>
+
+  <div class="ig-resultados animated fadeInUp" *ngFor="let claim of claims.data">
+
+    <div class="ig-procesconte">
+
+      <div class="row align-items-center">
+
+        <div class="col-md-3">
+          <h6>
+            {{ claim.payment.billingProviderName }}
+          </h6>
+          <p>
+            {{ claim.accountNumber }}
+          </p>
+        </div>
+
+
+        <div class="col-md-4">
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="ig-processvalor">
+                {{ claim.billedAmount | currency:claim.currencySymbol:true:'1.2-2'}}
+              </h5>
+              <p>
+                {{ 'CLAIMS.INCOMPLETE_OR_PENDING.BILLED_LABEL' | translate }}
+              </p>
+
+            </div>
+          </div>
+
+
+        </div>
+        <div class="col-md-3">
+
+          <h6>
+            {{ claim.member.firstName | titlecase }} {{ claim.member.middleName | titlecase }} <br>
+            {{ claim.member.lastName }}
+          </h6>
+          <p>
+            {{ 'CLAIMS.INCOMPLETE_OR_PENDING.CLAIMER_LABEL' | translate }}
+          </p>
+        </div>
+
+        <div class="col-md-2" *ngIf="false">
+          <button class="ig-principalsegundariobtn ig-botones" type="button" (click)="goToUpdateClaim(claim);">
+            {{ 'CLAIMS.AGENT.SUBMIT' | translate }}
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ig-numpoliza">
+      <div class="row">
+        <div class="col-md-3 col-6">
+          {{ 'CLAIMS.INCOMPLETE_OR_PENDING.BUPA_CLAIM_NUMBER' | translate }} <strong> {{ claim.claimNumber }}
+          </strong>
+        </div>
+
+
+        <div class="col-md-3 col-6">
+          {{ 'CLAIMS.INCOMPLETE_OR_PENDING.POLICY_NUMBER' | translate }} <strong> {{ claim.policy.policyNumber }}
+          </strong>
+        </div>
+
+        <div [ngClass]="{'col-md-6': state==='pending', 'col-md-5': state==='incomplete'}"
+          *ngIf="claim.serviceFrom || claim.serviceTo">
+          <strong> {{ 'CLAIMS.INCOMPLETE_OR_PENDING.SERVICE_DATE' | translate }} </strong>
+          <span *ngIf="claim.serviceFrom"> {{ claim.serviceFrom | dateTranslate }}</span>
+          <span *ngIf="claim.serviceTo"> - {{ claim.serviceTo | dateTranslate }} </span>
+        </div>
+
+        <div class="col-md-1" *ngIf="state==='incomplete'">
+          <a (click)="getClaimEob(claim.claimDetailId, claim.insuranceBusinessId);" href="#">EOB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="collectionSize > 0">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [rotate]="true"
+      [boundaryLinks]="true" [pageSize]="PAGE_SIZE" (pageChange)="getClaimsByProviderIdAndStateMemberName($event);">
+    </ngb-pagination>
+  </div>
+</div>

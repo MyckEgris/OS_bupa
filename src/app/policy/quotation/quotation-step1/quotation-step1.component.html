@@ -1,0 +1,447 @@
+﻿<form action="">
+  <div class="bp-bgtilt" *ngIf="wizard.policyDetail">
+    <div class="row align-items-center">
+
+      <div class="col-md-12">
+        <div class="bp-status bp-status-active" *ngIf="currentLanguageId === 1">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.POLICY_STATUS.' | concatenate:wizard.policyDetail.policyStatus | uppercase | translate }}
+            <span>
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.POLICY' | translate }}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status bp-status-active" *ngIf="currentLanguageId === 2">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.POLICY' | translate }}
+            <span>
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.POLICY_STATUS.' | concatenate:wizard.policyDetail.policyStatus | uppercase | translate }}
+            </span>
+          </h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.POLICY' | translate }} |
+            <span class="">
+              {{ wizard.policyDetail.policyReference }}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.OWNER' | translate }} |
+            <span>
+              {{ wizard.policyDetail.firstName }} {{ wizard.policyDetail.lastName }}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.CITY' | translate }} |
+            <span>
+              {{ cityName }}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.COUNTRY' | translate }} |
+            <span>
+              {{ wizard.policyDetail.policyCountry }}
+            </span>
+          </h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.RENEWAL_DATE' | translate }} |
+            <span *ngIf="wizard.policyDetail && wizard.policyDetail.policyDates">
+              {{ getPolicyDate(wizard.policyDetail.policyDates, 101) | dateTranslate }}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.PLAN' | translate }} |
+            <span>
+              {{wizard.policyDetail.productName}}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.PAYMENT_MODE' | translate }} |
+            <span>
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.PAYMENT_METHOD.' | concatenate:wizard.policyDetail.modeOfPayment | uppercase | translate}}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.ACTIVATION_DATE' | translate }} |
+            <span *ngIf="wizard.policyDetail && wizard.policyDetail.policyDates && wizard.policyDetail.policyDates.length > 0">
+              {{ wizard.policyDetail.policyDates[0].policyDateValue | dateTranslate }}
+            </span>
+          </h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bp-status-item" *appShowIfRole="'Agent,AgentAssistant'">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.AGENT' | translate }}
+            |
+            <span>
+              {{ wizard.policyDetail.agent.agentName }}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item" *ngFor="let deductible of deductibles">
+          <h6 *ngFor="let value of deductible.benefitScopes">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.DEDUCTIBLES.' | concatenate:deductible.benefitType | uppercase | translate }}
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.SCOPES.' | concatenate:value.scope | uppercase | translate }}
+            |
+            <span>
+              {{ value.limitValue | valueOrMoney:'money':value.valueType}}
+            </span>
+          </h6>
+        </div>
+        <div class="bp-status-item" *appShowIfRole="'Employee'">
+          <h6 *ngIf="wizard.policyDetail.discount && wizard.policyDetail.discount.discountValue">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.DISCOUNT' | translate }} |
+            <span *ngIf="wizard.policyDetail.discount">
+              {{ discount |  number }}
+              %
+            </span>
+            <span *ngIf="!wizard.policyDetail.discount">0 %</span>
+          </h6>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="ig-numpoliza">
+      <div class="row  align-items-center">
+        <div class="col-5">
+          <div class="ig-principalbtn ig-principallinkbtn2" (click)="toggleSlideDetail()">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.SPECIAL_CONDITIONS' | translate }}<i
+              class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+
+        <div class="col-12" *ngIf="currentLanguageId">
+          <div id="ig-detallereclamo2" class="ig-detallereclamo2"
+            *ngIf="wizard.policyDetail && wizard.policyDetail.riders && wizard.policyDetail.riders.length > 0">
+            <div class="row align-items-center" *ngFor="let sc of wizard.policyDetail.riders">
+              <div class="col-md-8">
+                <h6 *ngIf="currentLanguageId === 1">{{sc.descriptionEs}}</h6>
+                <h6 *ngIf="currentLanguageId === 2">{{sc.descriptionEN}}</h6>
+              </div>
+              <div class="col-md-4">
+                <h6>
+                  <!--{{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.ANNUAL_PREMIUM' | translate }}
+                  |-->
+                  {{ sc.amount | valueOrMoney:'money':wizard.policyDetail.currencyCode }}
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div id="ig-detallereclamo2" class="ig-detallereclamo2"
+            *ngIf="wizard.policyDetail && (!wizard.policyDetail.riders || wizard.policyDetail.riders.length === 0)">
+            <h6>
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.SPECIAL_CONDITIONS_NOT_EXISTS' | translate }}
+            </h6>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="bp-bgtilt bp-bgtilt-gray" *ngIf="wizard.policyDetail && wizard.policyDetail.members.length > 0">
+    <div class="row align-items-center" *ngIf="owner">
+      <div class="col-md-4">
+        <div class="bp-quot-titu">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.RELATIONTYPE.' | concatenate:owner.relationTypeId | uppercase | translate }}
+          </h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.NAME' | translate }} |
+            <span>
+              {{ owner.fullName }}
+            </span>
+          </h6>
+        </div>
+        <!-- <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.DOB' | translate }} |
+            <span>
+              {{owner.dob | dateTranslate }}
+            </span>
+          </h6>
+        </div> -->
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE' | translate }} |
+
+            <span>
+              {{ owner.dob | calculateAge }}
+              {{'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE_' | translate}}
+            </span>
+          </h6>
+        </div>
+
+      </div>
+      <div class="col-md-4" *ngIf="owner.premiumComponent && owner.memberStatus === 'Active'">
+        <div class="bp-status-item" *ngFor="let premium of owner.premiumComponent">
+          <h5 class="bp-item-dark"
+            *ngIf="premium.premiumComponentTypeId === 1035 || premium.premiumComponentTypeId === 1036">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.PREMIUMS.' | concatenate:premium.premiumTypeName | uppercase | translate }}
+            |
+            <span>
+              {{ getPremiumValueByMember(owner) | valueOrMoney:'money':wizard.policyDetail.currencyCode}}
+            </span>
+          </h5>
+          <h5 class="bp-item-dark"
+            *ngIf="premium.premiumComponentTypeId !== 1035 && premium.premiumComponentTypeId !== 1036">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.PREMIUMS.' | concatenate:premium.premiumTypeName | uppercase | translate }}
+            |
+            <span>
+              {{ premium.amount | valueOrMoney:'money':wizard.policyDetail.currencyCode}}
+            </span>
+          </h5>
+        </div>
+        <div class="bp-status-item" *ngIf="owner.relationType !== 'Dependent' && owner.premiumComponent.length > 1">
+          <h5 class="bp-status-item-blue" style="color: #0079c8;">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.TOTAL_PREMIUM' | translate }}
+            |
+            <span>
+              {{ getTotalForMember(owner) | valueOrMoney:'money':wizard.policyDetail.currencyCode }}
+            </span>
+          </h5>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="owner.memberStatus !== 'Active'">
+        <div class="bp-status-item">
+          <h5 class="bp-item-dark">
+            <span>
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.STATUS.' | concatenate:owner.memberStatus | uppercase | translate }}
+            </span>
+          </h5>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <hr>
+      </div>
+    </div>
+    <div class="row align-items-center" *ngIf="spouse">
+      <div class="col-md-4">
+        <div class="bp-quot-titu">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.RELATIONTYPE.' | concatenate:spouse.relationTypeId | uppercase | translate }}
+          </h6>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.NAME' | translate }} |
+            <span>
+              {{ spouse.fullName }}
+            </span>
+          </h6>
+        </div>
+        <!-- <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.DOB' | translate }} |
+            <span>
+              {{spouse.dob | dateTranslate }}
+            </span>
+          </h6>
+        </div> -->
+        <div class="bp-status-item">
+          <h6>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE' | translate }} |
+
+            <span>
+              {{ spouse.dob | calculateAge }}
+              {{'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE_' | translate}}
+            </span>
+          </h6>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="spouse.premiumComponent && spouse.memberStatus === 'Active'">
+        <div class="bp-status-item" *ngFor="let premium of spouse.premiumComponent">
+          <h5 class="bp-item-dark"
+            *ngIf="premium.premiumComponentTypeId === 1035 || premium.premiumComponentTypeId === 1036">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.PREMIUMS.' | concatenate:premium.premiumTypeName | uppercase | translate }}
+            |
+            <span>
+              {{ getPremiumValueByMember(spouse) | valueOrMoney:'money':wizard.policyDetail.currencyCode}}
+            </span>
+          </h5>
+          <h5 class="bp-item-dark"
+            *ngIf="premium.premiumComponentTypeId !== 1035 && premium.premiumComponentTypeId !== 1036">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.PREMIUMS.' | concatenate:premium.premiumTypeName | uppercase | translate }}
+            |
+            <span>
+              {{ premium.amount | valueOrMoney:'money':wizard.policyDetail.currencyCode}}
+            </span>
+          </h5>
+        </div>
+        <div class="bp-status-item" *ngIf="spouse.relationType !== 'Dependent' && spouse.premiumComponent.length > 1">
+          <h5 class="bp-status-item-blue" style="color: #0079c8;">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.TOTAL_PREMIUM' | translate }}
+            |
+            <span>
+              {{ getTotalForMember(spouse) | valueOrMoney:'money':wizard.policyDetail.currencyCode }}
+            </span>
+          </h5>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="spouse.memberStatus !== 'Active'">
+        <div class="bp-status-item">
+          <h5 class="bp-item-dark">
+            <span>
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.STATUS.' | concatenate:spouse.memberStatusId | translate }}
+            </span>
+          </h5>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <hr>
+      </div>
+    </div>
+    <div class="row align-items-center my-2" *ngIf="dependents && dependents.length > 0">
+      <div class="col-md-8">
+        <div class="row align-items-center my-3" *ngFor="let dependent of dependents; let i = index">
+          <div class="col-md-6">
+            <div class="bp-quot-titu">
+              <h6>
+                {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.RELATIONTYPE.' | concatenate:dependent.relationTypeId | uppercase | translate }}
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bp-status-item">
+              <h6>
+                {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.NAME' | translate }} |
+                <span>
+                  {{ dependent.fullName }}
+                </span>
+              </h6>
+            </div>
+            <!-- <div class="bp-status-item">
+              <h6>
+                {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.DOB' | translate }} |
+                <span>
+                  {{dependent.dob | dateTranslate }}
+                </span>
+              </h6>
+            </div> -->
+            <div class="bp-status-item">
+              <h6>
+                {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE' | translate }} |
+
+                <span>
+                  {{ dependent.dob | calculateAge }}
+                  {{'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.AGE_' | translate}}
+                </span>
+              </h6>
+            </div>
+
+          </div>
+          <div class="col-md-12" *ngIf="i < dependents.length - 1">
+            <hr>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="bp-status-item">
+          <h5 class="bp-item-dark">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.MEMBERS.DEPENDENTS_PREMIUM' | translate }}
+            <br>
+            <span>
+              {{ wizard.policyDetail.dependentPremium | valueOrMoney:'money':wizard.policyDetail.currencyCode }}
+            </span>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center" *ngIf="wizard"
+      style="margin-top: 21px;border-top: 1px solid #0079c8;padding-top: 20px;">
+      <div class="col-md-4 offset-md-8">
+        <div class="bp-status-item">
+          <h5 class="bp-status-item-blue" style="color: #0079c8;font-size: 18px;">
+            <span>
+              {{ 'EMPLOYEE.QUOTE.QUOTATION.CURRENT_INFORMATION.TOTAL_PREMIUM' | translate}}
+              |
+            </span>
+
+            <span *ngIf="wizard.policyDetail && wizard.policyDetail.policyPremium">
+              {{ wizard.policyDetail.policyPremium | valueOrMoney:'money':wizard.policyDetail.currencyCode }}
+            </span>
+            <span *ngIf="!wizard.policyDetail || !wizard.policyDetail.policyPremium">
+              {{ 0 }}
+            </span>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="bp-bgtilt" *ngIf="wizard">
+    <div class="row align-items-center">
+      <div class="col-md-6 offset-md-6">
+        <div class="ig-detallereclamo2">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5></h5>
+            </div>
+            <div class="col-md-4" *ngIf="wizard.policyDetail && wizard.policyDetail.policyPremium">
+              <h5>{{ wizard.policyDetail.policyPremium | valueOrMoney:'money':wizard.policyDetail.currencyCode }}</h5>
+            </div>
+            <div class="col-md-4" *ngIf="!wizard.policyDetail || !wizard.policyDetail.policyPremium">
+                <h5>{{ 0 }}</h5>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <br>
+  <div class="col-md-12 my-2">
+    <div class="bp-alertform">
+      <div class="card-message" role="alert">
+        <i class="material-icons">warning</i>
+        {{ 'EMPLOYEE.QUOTE.QUOTATION.POLICY_STATUS.PARAGRAPH' | translate }}
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+  <div class="col-md-12">
+    <div class="col-md-4 offset-md-4">
+      <div class="row">
+        <div class="col-md-6">
+          <button class="ig-botones ig-outlinebtn" type="button" (click)="back();">
+            <i class="material-icons">navigate_before</i>
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.CANCEL' | translate }}
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button type="button" (click)="goToStep2();" class="ig-botones ig-secundariobtn">
+            {{ 'EMPLOYEE.QUOTE.QUOTATION.BUTTONS.CONTINUE' | translate }}
+            <i class="material-icons">navigate_next</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

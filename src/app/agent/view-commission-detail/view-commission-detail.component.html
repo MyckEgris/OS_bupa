@@ -1,0 +1,87 @@
+<br>
+<br>
+
+<div class="bp-comissionscont" >
+
+
+  <table class="table table-responsive table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col"> {{ 'AGENT.COMMISSIONS.DETAILS.AGENT' | translate }}</th>
+        <th scope="col"> {{ 'AGENT.COMMISSIONS.DETAILS.DATE_OF_ELEGIBILITY' | translate }}</th>
+        <th scope="col"> {{ 'AGENT.COMMISSIONS.DETAILS.REFERENCE_POLICY_ID' | translate }}</th>
+        <th scope="col"> {{ 'AGENT.COMMISSIONS.DETAILS.POLICY_OWNER' | translate }}</th>
+        <th scope="col"> {{ 'AGENT.COMMISSIONS.DETAILS.PREMIUM_INVOICE' | translate }}</th>
+        <th scope="col"> {{ 'AGENT.COMMISSIONS.DETAILS.COMMISSION_PREMIUM_VALUE' | translate }}</th>
+        <th scope="col">{{ 'AGENT.COMMISSIONS.DETAILS.PERCENTAGE' | translate }} </th>
+        <th scope="col" *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+          {{ 'AGENT.COMMISSIONS.DETAILS.SUBTOTAL_MN' | translate }}</th>
+        <th scope="col" *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+          {{ 'AGENT.COMMISSIONS.DETAILS.VAT_MN' | translate }}</th>
+
+        <th scope="col" *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+          {{ 'AGENT.COMMISSIONS.DETAILS.VAT_RETENTION' | translate }}</th>
+
+        <th scope="col" *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+            {{ 'AGENT.COMMISSIONS.DETAILS.ISR_RETENTION' | translate }}</th>
+
+        <th scope="col" *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+           {{ 'AGENT.COMMISSIONS.DETAILS.TOTAL' | translate }}</th>
+
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let policy of commissionDetails">
+
+        <td>{{ policy.agentName }} <app-custom-popover [title]="" [content]="['ID: ' + policy.agentId]">
+          </app-custom-popover>
+        </td>
+
+        <td> {{ policy.eligibilityDate }}</td>
+        <td> {{ policy.policyReferenceId }} <app-custom-popover [title]="" [content]="['ID: ' + policy.policyId]">
+          </app-custom-popover>
+        </td>
+        <td>
+          {{ policy.policyOwnerFullName }}
+        </td>
+        <td>
+          {{ policy.invoiceNbr }}
+        </td>
+        <td>
+          {{ policy.commissionablePremiumValue | valueOrMoney:'money':policy.currencyCode }}
+        </td>
+        <td>
+          {{ policy.commissionPercentage }}
+        </td>
+        <td *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+          {{ policy.subtotal | valueOrMoney:'money':policy.currencyCode }}
+        </td>
+
+        <td *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+          {{ policy.iva | valueOrMoney:'money':policy.currencyCode }}
+        </td>
+
+        <td *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+          {{ policy.retentionIVA | valueOrMoney:'money':policy.currencyCode }}
+        </td>
+
+        <td *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+            {{ policy.retentionISR | valueOrMoney:'money':policy.currencyCode }}
+        </td>
+
+        <td *appShowIfBusinessInsurance="mexicoBusinessInsurance">
+            {{ policy.commissionTotal | valueOrMoney:'money':policy.currencyCode }}
+        </td>
+
+
+
+      </tr>
+
+    </tbody>
+  </table>
+
+
+  <hr>
+</div>

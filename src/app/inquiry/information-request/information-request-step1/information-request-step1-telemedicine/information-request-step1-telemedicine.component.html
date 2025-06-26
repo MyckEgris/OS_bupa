@@ -1,0 +1,250 @@
+<section class="ig-informationrequest">
+  <form class="ig-requestdatos" [formGroup]="wizard.infoRequestForm">
+    <div class="col-md-12 ig-enviarcon">
+
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <h5> {{ 'INQUIRY.INFORMATION_REQUEST.STEP_1.TITLE_02_DESCRIPTION' | translate}} </h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <div class="alert alert-primary" role="alert">
+            {{ 'INQUIRY.INFORMATION_REQUEST.DATE_TYPE_01_MSG' | translate}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="showInputPolicyNumber">
+
+        <div class="col-md-12">
+          <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.INSURED' | translate}} </h5>
+          <small> {{ 'INQUIRY.INFORMATION_REQUEST.INSURED_DESCRIPTION' | translate}} </small>
+        </div>
+
+        <div class="col-md-5">
+          <div class="form-group">
+            <input class="form-control" id="policyNumber" type="text" formControlName="policyNumber" OnlyNumber="true"
+              placeholder="{{ 'INQUIRY.INFORMATION_REQUEST.INSURED_TOOLTIP' | translate}}" maxCharsAllowed="10">
+          </div>
+        </div>
+
+        <div class="col-lg-1 col-sm-2 col-6">
+          <button type="button" (click)="searchPolicyMembers()"
+            [ngClass]="{ 'ig-btncalendar btn' : true, 'disabled' :( 
+            !wizard.infoRequestForm.controls['policyNumber'].value || wizard.infoRequestForm.controls['policyNumber'].invalid) }">
+            <i class="material-icons">search</i>
+          </button>
+        </div>
+
+        <div class="col-md-12" *ngIf="wizard.infoRequestForm.controls['policyNumber'].errors 
+                          && (wizard.infoRequestForm.controls['policyNumber'].errors.isNaN 
+                          || wizard.infoRequestForm.controls['policyNumber'].errors.maxAmountExceeded)">
+          <small class="text-danger">
+            {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.NUMBER_NOT_VALID' | translate }}
+          </small>
+        </div>
+
+      </div>
+
+      <div class="row ig-resulsearchnone"
+        *ngIf="showMemberSelect && wizard.memberSearch && wizard.memberSearch.length === 0">
+        <h6>{{ 'CLAIMSUBMISSION.STEP1RESULTTITLETEXT' | translate}}</h6>
+        <small>{{ 'CLAIMSUBMISSION.STEP1RESULTTEXT' | translate}}</small>
+      </div>
+
+      <div class="row" *ngIf="showMemberSelect && wizard.memberSearch && wizard.memberSearch.length > 0">
+        <div class="col-md 12">
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-md-12">
+                <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.SUBTITLE1' | translate}} </h5>
+                <small> {{ 'INQUIRY.INFORMATION_REQUEST.SUBTITLE1_DESCRIPTION' | translate}} </small>
+              </div>
+
+              <div class="col-md-6" *ngFor="let member of wizard.memberSearch; let i = index">
+                <div class="ig-check">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio{{ i }}" name="selectedMember{{ i }}"
+                      class="custom-control-input" [checked]="member === wizard.member" (change)="selectMember(member)">
+                    <label class="custom-control-label" for="customRadio{{ i }}">{{ member.fullName }}
+                      ({{ member.dob | dateTranslate }})</label>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="row" *ngIf="showValidations && !wizard.member">
+              <div class="col-md-12">
+                <small class="text-danger">
+                  {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+                </small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row" *ngIf="wizard.subject">
+        <div class="col-md-6">
+          <div class="form-group">
+            <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.SUBJECT' | translate}} </h5>
+            <input class="form-control" id="SPECIALITY_CTRL" [value]="wizard.subject.text" type="text" disabled>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <h5 class="" for="inputText"> {{ 'INQUIRY.INFORMATION_REQUEST.SUBJECT' | translate}} </h5>
+            <app-tree-view-personalized [config]="config" [items]="listSubject" [value]="wizard.subject"
+              (selectedChange)="onSelectedChange($event)" (filterChange)="onFilterChange($event)"
+              (valueChange)="onValueChange($event)">
+            </app-tree-view-personalized>
+            <div class="col-md-12" *ngIf="showValidations && (!wizard.subject || !wizard.subject.value)">
+              <small class="text-danger" *ngIf="showValidations && (!wizard.subject || !wizard.subject.value)">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="row">
+        <div class="col-md-8" *ngIf="wizard.subject && wizard.subject.message">
+          <div class="ig-registrohelp">
+            <p [innerHTML]="wizard.subject.message"></p>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5>
+              {{'INQUIRY.INFORMATION_REQUEST.COUNTRY' | translate }}
+            </h5>
+            <small> {{ 'INQUIRY.INFORMATION_REQUEST.COUNTRY_DESCRIPTION' | translate}} </small>
+            <ng-select #countrySelect [items]="countries" [selectOnTab]="true" bindValue="" bindLabel="countryName"
+              [formControlName]="COUNTRY_CTRL" class="form-control "
+              [required]="getControl(COUNTRY_CTRL).errors?.required"
+              [placeholder]="getControl(COUNTRY_CTRL).value !== null && getControl(COUNTRY_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate ">
+            </ng-select>
+            <div class="col-md-12"
+              *ngIf="(showValidations && getControl(COUNTRY_CTRL).touched && getControl(COUNTRY_CTRL).invalid)">
+              <small class="text-danger">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <h5 class="" for="inputText">
+              {{ 'INQUIRY.INFORMATION_REQUEST.PHONE' | translate}}
+            </h5>
+            <small> {{ 'INQUIRY.INFORMATION_REQUEST.PHONE_DESCRIPTION' | translate}} </small>
+            <input class="form-control" id="PHONE_CTRL" [formControlName]="PHONE_CTRL"
+              placeholder="{{ 'INQUIRY.INFORMATION_REQUEST.PHONE_PH' | translate}}" appOnlyNumber="true" type="text"
+              maxCharsAllowed="40">
+            <div class="col-md-12"
+              *ngIf="(showValidations && getControl(PHONE_CTRL).touched && getControl(PHONE_CTRL).invalid)">
+              <small class="text-danger">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <h5>
+              {{'INQUIRY.INFORMATION_REQUEST.DATE' | translate }}
+            </h5>
+            <small> {{ 'INQUIRY.INFORMATION_REQUEST.DATE_DESCRIPTION' | translate}} </small>
+            <ng-select #appointmentSelect [items]="appointmentTypes" [selectOnTab]="true" [bindValue]=""
+              bindLabel="appointmentTypeDescription" [formControlName]="APPOINTMENT_CTRL" class="form-control "
+              [required]="getControl(APPOINTMENT_CTRL).errors?.required" (change)="handleAppointmentChange($event)"
+              [placeholder]="getControl(APPOINTMENT_CTRL).value !== null && getControl(APPOINTMENT_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate ">
+            </ng-select>
+            <div class="col-md-12"
+              *ngIf="(showValidations && getControl(APPOINTMENT_CTRL).touched && getControl(APPOINTMENT_CTRL).invalid)">
+              <small class="text-danger">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="row" *ngIf="showCalendar">
+        <div class="col-md-3">
+          <div class="form-group ig-date-picker">
+            <h5>
+              {{ 'INQUIRY.INFORMATION_REQUEST.DATE_DATE' | translate}}
+            </h5>
+            <app-custom-date-picker [formControlName]="DATE_CTRL" [dateValue]="selectedDate" [minDate]="minDate">
+            </app-custom-date-picker>
+          </div>
+          <div class="form-group">
+            <h5>
+              {{ 'INQUIRY.INFORMATION_REQUEST.DATE_TIME' | translate}}
+            </h5>
+            <ngb-timepicker [formControlName]="TIME_CTRL" [meridian]="true"></ngb-timepicker>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <h5>
+              {{'INQUIRY.INFORMATION_REQUEST.SPECIALITY' | translate }}
+            </h5>
+            <small> {{ 'INQUIRY.INFORMATION_REQUEST.SPECIALITY_DESCRIPTION' | translate}} </small>
+            <ng-select #dateSelect [items]="specialities" [selectOnTab]="true" [bindValue]=""
+              bindLabel="specialityDescription" [formControlName]="SPECIALITY_CTRL" class="form-control "
+              [required]="getControl(SPECIALITY_CTRL).errors?.required"
+              [placeholder]="getControl(SPECIALITY_CTRL).value !== null && getControl(SPECIALITY_CTRL).value !== '' ? '':'APP.SELECCIONA' | translate ">
+            </ng-select>
+            <div class="col-md-12"
+              *ngIf="(showValidations && getControl(SPECIALITY_CTRL).touched && getControl(SPECIALITY_CTRL).invalid)">
+              <small class="text-danger">
+                {{ 'INQUIRY.INFORMATION_REQUEST.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 offset-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <button style="width: 100%;" class="ig-principalsegundariobtn ig-botones" type="button"
+                (click)="clearForm()">
+                {{ 'INQUIRY.INFORMATION_REQUEST.CLEAR' | translate }} </button>
+            </div>
+            <div class="col-md-6">
+              <button style="width: 100%;" type="button" [disabled]="wizard.infoRequestForm.invalid"
+                [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : wizard.infoRequestForm.invalid  }"
+                (click)="next()"> {{ 'INQUIRY.INFORMATION_REQUEST.NEXT' | translate }} </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</section>

@@ -1,0 +1,8 @@
+<div class="bp-genero" [ngClass]="{ 'border-danger': !getControl(formControlNameCustom).value && showValidations }">
+  <ng-container *ngFor="let genre of wizard.genders$ | async">
+    <ng-container *ngIf="(genre.genderId !== 1) ? true: false">
+      <a [ngClass]="(genre.genderId === 2) ? isMaleCss: isFemenineCss"
+        (click)="onEventGender($event)"></a>
+    </ng-container>
+  </ng-container>
+</div>

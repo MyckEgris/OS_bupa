@@ -1,0 +1,84 @@
+<section class="bp-mainpolicy" *ngIf="wizard.enrollmentForm">
+  <article class="row" [formGroup]="wizard.enrollmentForm.get('policyApplicationPetitioner')">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="bp-itemtitle">
+            <div class="bp-titlenum"> {{ currentStep }} </div>
+            <h2 class="bp-titlepolicy"> {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PHYSICAL_TITLE' | translate }} </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <app-policy-enrollment-info></app-policy-enrollment-info>
+    </div>
+
+    <div class="col-md-12">
+      <div class="bp-itemcontsect">
+          <div class="row align-items-center">
+              <div class="col-md-4">
+                  <h4 class="bp-contentitle">
+                      {{ 'POLICY.POLICY_ENROLLMENT.STEP10.BANNER_TITLE' | translate }}
+                  </h4>
+              </div>
+              <div class="col">
+                  <div class="bp-itemsectpoli">
+                      <figure>
+                          <img src="assets/images/001-contract.svg" alt="">
+                      </figure>
+                      <p [innerHTML]="'POLICY.POLICY_ENROLLMENT.STEP10.BANNER_01' | translate"></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <div class="col-md-12" formGroupName="policyAppPhysicalOwnerPetitioner">
+      <div class="bp-itemcontsect2">
+        <div class="bg-sectmed">
+          <div class="row align-items-end">
+            <div class="col-md-12">
+              <p>
+                {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PHYSICAL_OWNER' | translate }}
+              </p>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <p class="bp-contentitle">
+                    {{ 'POLICY.POLICY_ENROLLMENT.STEP10.PHYSICAL_OWNER_NAME' | translate }}
+                  </p>
+                </div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control is-valid" id="name" formControlName="name">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 mt-5 p-0">
+          <div class="row">
+            <div class="col-md-4 offset-md-4">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnsecondary" type="button" (click)="back()">
+                    {{'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnprimary" type="button" (click)="next()">
+                    {{'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </article>
+</section>

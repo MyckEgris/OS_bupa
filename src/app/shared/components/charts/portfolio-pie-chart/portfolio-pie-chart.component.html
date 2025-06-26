@@ -1,0 +1,58 @@
+<div *ngIf="chartType == 'pie' ">
+    <dx-pie-chart
+        id="pie"
+        type="pie"
+        palette="Soft Pastel"
+        [dataSource]="portfolioByAgent">
+        <dxi-series argumentField="typePortfolio">
+            <dxo-label
+                [visible]="true" [indent]="30" [customizeText]="customizeText">
+                <dxo-format type="fixedPoint" [precision]="2" ></dxo-format>
+                <dxo-connector [visible]="true"></dxo-connector>
+            </dxo-label>
+        </dxi-series>
+        <dxo-legend [margin]="0" horizontalAlignment="right" verticalAlignment="top"></dxo-legend>
+        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                <dxo-format type="fixedPoint" [precision]="2" ></dxo-format>
+        </dxo-tooltip>
+    </dx-pie-chart>
+</div>
+
+<div *ngIf="chartType == 'doughnut' || !chartType">
+    <dx-pie-chart
+        id="pie"
+        type="doughnut"
+        palette="Soft Pastel"
+        [dataSource]="portfolioByAgent">
+        <dxi-series argumentField="typePortfolio">
+            <dxo-label
+                [visible]="true" [indent]="30" [customizeText]="customizeText">
+                <dxo-format type="fixedPoint" [precision]="2" ></dxo-format>
+                <dxo-connector [visible]="true"></dxo-connector>
+            </dxo-label>
+        </dxi-series>
+        <dxo-legend [margin]="0" horizontalAlignment="right" verticalAlignment="top"></dxo-legend>
+        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                <dxo-format type="fixedPoint" [precision]="2" ></dxo-format>
+        </dxo-tooltip>
+    </dx-pie-chart>
+</div>
+
+<div *ngIf="chartType == 'bar'">
+    <dx-chart
+        id="chart"
+        [dataSource]="portfolioByAgent"
+        palette="Soft Pastel">
+        <dxo-title 
+            text=""
+            subtitle="">
+        </dxo-title>
+        <dxo-common-series-settings 
+            argumentField="typePortfolio"
+            type="bar"
+            valueField="val"
+            [ignoreEmptyPoints]="true">
+        </dxo-common-series-settings>
+        <dxo-series-template nameField="typePortfolio"></dxo-series-template>
+    </dx-chart>
+</div>

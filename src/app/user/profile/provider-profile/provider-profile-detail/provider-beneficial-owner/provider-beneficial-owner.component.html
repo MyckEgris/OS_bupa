@@ -1,0 +1,111 @@
+<div class="col-md-12 p-0" *ngIf="this.wizard && this.wizard.providerProfileDetailInfo">
+  <div class="row p-0">
+    <div class="col-md-12 m-0 bp-mainpolicy">
+
+      <div class="row" *ngIf="this.showNewBeneficialOwnerForm">
+        <app-provider-beneficial-owner-data [EditBeneficialOwner]="this.editBeneficialOwner"
+          (newBeneficialOwner)="this.getNewOwner($event)">
+        </app-provider-beneficial-owner-data>
+      </div>
+
+      <br>
+
+      <div class="row">
+
+        <div class="col-md-12 left-content">
+          <h4 class="bp-contentitle">
+            {{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECTION2_TITLE' | translate }}
+          </h4>
+        </div>
+
+        <div class="col-md-12">
+          <p [innerHTML]="'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.DESCRIPTION' | translate"></p>
+        </div>
+
+        <div class="col-md-2 left-content">
+          <button class="bp-btn bp-btnprimary" type="button" (click)="this.addOrEditNewBeneficialOwner()">
+            {{ 'APP.BUTTON.NEW_BTN' | translate }}
+          </button>
+        </div>
+
+        <div class="col-md-12 p-0" *ngIf="this.wizard.benefitialOwnerList">
+          <div class="col-md-12" *ngFor="let item of this.wizard.benefitialOwnerList">
+
+            <div class="row bp-itemcontsect2 listsolicitudes m-0 mb-3 mt-3">
+  
+              <div class="col-md-11 p-0 d-flex align-items-center">
+                <ul>
+
+                  <li>
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.FIRST_NAME_LBL' | translate }}:</strong>
+                    {{item.firstName}}
+                  </li>
+
+                  <li>
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECOND_NAME_LBL' | translate }}:</strong>
+                    {{item.secondName}}
+                  </li>
+
+                  <li>
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.FIRST_SUR_NAME_LBL' | translate }}:</strong>
+                    {{item.firstSurname}}
+                  </li>
+
+                  <li>
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.SECOND_SUR_NAME_LBL' | translate }}:</strong>
+                    {{item.secondSurname}}
+                  </li>
+
+                  <li>
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.DATE_OF_BIRTH_LBL' | translate }}:</strong>
+                    {{item.dateOfBirth | dateTranslate: 'APP.DATE_FORMAT' }}
+                  </li>
+
+                  <li *ngIf="item.nacionality">
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.NATIONALITY_LBL' | translate }}:</strong>
+                    {{item.nacionality.nacionality}}
+                  </li>
+
+                  <li *ngIf="item.countryOfResidence">
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.COUNTRY_RESIDENCE_LBL' | translate }}:</strong>
+                    {{item.countryOfResidence.countryName}}
+                  </li>
+
+                  <li>
+                    <strong>{{ 'USER.PROFILEVIEW.PROVIDER_PROFILE_DETAIL.OWNERS.OWNERSHIP_LBL' | translate }}:</strong>
+                    {{item.ownershipSharePercentage}}
+                  </li>
+
+                </ul>
+              </div>
+  
+              <div class="col-md-1 p-0">
+                <button class="ig-botones  ig-principalbtn ig-providerbtn" type="button"
+                  (click)="this.addOrEditNewBeneficialOwner(item)">
+                  <i class="material-icons">
+                    edit
+                  </i>
+                </button>
+              </div>
+  
+            </div>
+  
+          </div>
+        </div>
+       
+
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-md-4 offset-md-8">
+          <button class="bp-btn bp-btnprimary" type="button" (click)="save()">
+            {{ 'APP.BUTTON.SAVE_BTN' | translate }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

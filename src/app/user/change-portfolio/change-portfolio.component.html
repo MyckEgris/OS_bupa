@@ -1,0 +1,66 @@
+<section class="bp-mainpolicy">
+  <div class="col-md-12">
+    <article class="row">
+      <div class="col-md-12">
+        <div class="ig-title mt-5">
+          <h5>{{ "USER.CHANGEPORTFOLIO.TITLE" | translate }}</h5>
+        </div>
+
+        <p>
+          {{ "USER.CHANGEPORTFOLIO.TEXT_ONE" | translate }}
+        </p>
+      </div>
+
+      <div class="col-md-12" *ngIf="(users$ | async)?.length === 0">
+        <div class="bp-alertform">
+          <div class="alert alert-danger" role="alert">
+            <i class="material-icons">info</i>
+            {{ "USER.CHANGEPORTFOLIO.MESSAGES.ROLES_NOT_FOUND" | translate }}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12 my-4">
+        <div class="row align-items-end">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="users">{{
+                "USER.CHANGEPORTFOLIO.SELECT_LABEL" | translate
+              }}</label>
+              <div *ngIf="users$ | async as users; else loading">
+                <select
+                  class="form-control"
+                  id="users"
+                  [(ngModel)]="userInRoleSelected">
+                  <option
+                    *ngFor="let userInRole of users"
+                    [ngValue]="userInRole">
+                    {{ userInRole.roleByBupaInsurance.bupaInsurance.name }}
+                    {{
+                      "USER.CHANGEPORTFOLIO.SELECT_DESCRIPTION"
+                        | translate
+                    }}
+                    {{ userInRole.agentNumber }}
+                  </option>
+                </select>
+              </div>
+              <ng-template #loading>
+                {{ "USER.CHANGEPORTFOLIO.MESSAGES.MSG_LOADING" | translate }}
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <button [ngClass]="{ 'ig-principalsegundariobtn ig-botones' : true, 'disabled' : isSelectedUser() }"
+              type="button"
+              (click)="executeChangePortfolio()"
+              [style.margin-top]="'30px'">
+              {{ "USER.CHANGEPORTFOLIO.BUTTON_LABEL" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,11 @@
+<div>
+  <div class="modal-body">
+    <div>
+      <app-search-benefits [inputPolicyId]="policyId" [inputMemberId]="memberId" [isModal]="true"
+        (close)="closeModal($event)"></app-search-benefits>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-sm" (click)="ok()">{{acceptText | translate}}</button>
+  </div>
+</div>

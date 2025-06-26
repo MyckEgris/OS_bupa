@@ -1,0 +1,66 @@
+<section class="nuevapolizabupa animated fadeInUp">
+  <article class="row">
+    <div class="limiter w-100">
+      <div class="container-table100">
+        <div class="wrap-table100 w-100">
+          <div class="table100 ver5 m-b-110">
+            <div class="table100-head">
+              <table>
+                <thead>
+                  <tr class="row100 head">
+                    <th class="cell100 column1">{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.STATUS' | translate }}</th>
+                    <th class="cell100 column2">{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.REQUEST' | translate }}</th>
+                    <th class="cell100 column3">{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.POLICY_ID' | translate }}</th>
+                    <th class="cell100 column4">{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.OWNER' | translate }}</th>
+                    <th class="cell100 column5">{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.CREATED_ON' | translate }}</th>
+                    <th class="cell100 column6">{{ 'POLICY.APPLICATION.POLICY_ENROLLMENT_VIEW.UPDATED_ON' | translate }}</th>
+                    <th class="cell100 column7"></th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+              <div class="table100-body js-pscroll">
+              <table>
+                <tbody>
+                  <tr class="row100 body" *ngFor="let policyApp of policyAplication.policyApplications">
+                    <td class="cell100 column1">{{'POLICY.APPLICATION.STATUS.' | concatenate: policyApp.status | replacespaces: '_' | uppercase | translate}}</td>
+                    <td class="cell100 column2">{{ policyApp.applicationId }}</td>
+
+                    <ng-container *ngIf="policyApp.policyId">
+                      <td class="cell100 column3">
+                        <a href="#" (click)="!!showPolicyDetail(policyApp.policyId)">{{policyApp.policyId}}</a>
+                      </td>
+                    </ng-container>  
+
+                    <!-- <ng-container *ngIf="policyApp.policyId && policyApp.process === 'ElectronicApplication'">
+                      <td class="cell100 column3">
+                        <a [routerLink]="['/policies/view-policy-information', policyApp.policyId]">{{policyApp.policyId}}</a>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="policyApp.policyId  && policyApp.process !== 'ElectronicApplication'">
+                      <td class="cell100 column3">
+                        {{policyApp.policyId}}
+                      </td>
+                    </ng-container> -->
+                    <ng-container *ngIf="!policyApp.policyId">
+                      <td class="cell100 column3"></td>
+                    </ng-container>
+                    <td class="cell100 column4">{{ policyApp.members[0].firstName }} {{ policyApp.members[0].lastName }}</td>
+                    <td class="cell100 column5">{{ policyApp.createdOn | dateTranslate: 'APP.DATE_TIME_FORMAT'}}</td>
+                    <td class="cell100 column6">{{ policyApp.updatedOn | dateTranslate: 'APP.DATE_TIME_FORMAT'}}</td>
+                    <td class="cell100 column7">
+                      <span class="material-icons" (click)="edit(policyApp.applicationId)" *ngIf="getStatusEdit(policyApp.process, policyApp.status, policyApp.policyId)">create</span>
+                      <!-- <span class="material-icons" (click)="uploadDocs(policyApp.applicationId)" *ngIf="getStatusUploadDocs(policyApp.process, policyApp.status)">backup</span>
+                      <span class="material-icons" (click)="capturePaymentInfo(policyApp.applicationId)" *ngIf="getStatusPaymentInfo(policyApp.process, policyApp.status)">payment</span> -->
+                      <span class="material-icons" (click)="downloadFile(policyApp.applicationGuid, policyApp.applicationId, policyApp.status)" *ngIf="getStatusDownloadDocs(policyApp.process, policyApp.status, policyApp.policyId)">picture_as_pdf</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

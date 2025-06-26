@@ -1,0 +1,34 @@
+<section class="bp-mainpolicy">
+  <div class="row align-items-center my-3">
+      <div class="col-md-8">
+          <div class="bp-itemtitle">
+              <!-- <div class="bp-titlenum">
+                  {{CURRENT_STEP}}
+              </div> -->
+              <h2 class="bp-titlepolicy">
+                {{ 'POLICY.POLICY_ENROLLMENT.STEP4.SUBTITLE' | translate }}
+              </h2>
+          </div>
+      </div>
+
+      <!-- <div class="col-md-4" *ngIf="isStepsValids()">
+        <app-breadcrumb-enrollment [currentStep]="CURRENT_STEP"
+          [lengthSection]="getTotalStep()"
+          [stepActive]="sectionActive">
+        </app-breadcrumb-enrollment>
+      </div>
+      <div class="col-md-4" *ngIf="sectionActive===5">
+        <app-breadcrumb-enrollment [currentStep]="CURRENT_STEP"
+          [lengthSection]="2"
+          [stepActive]="sectionActive">
+        </app-breadcrumb-enrollment>
+      </div> -->
+
+  </div>
+  <article class="row align-items-end bp-step4med">
+    <div class="col-md-12">
+      <app-policy-enrollment-info></app-policy-enrollment-info>
+    </div>
+    <router-outlet></router-outlet>
+</article>
+</section>

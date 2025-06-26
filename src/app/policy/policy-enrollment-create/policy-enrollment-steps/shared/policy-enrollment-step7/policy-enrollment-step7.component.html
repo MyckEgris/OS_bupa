@@ -1,0 +1,221 @@
+<section class="bp-mainpolicy">
+    <form [formGroup]="wizard.enrollmentForm" (ngSubmit)="next()">
+        <article class="row">
+
+            <div class="col-md-12">
+                <div class="bp-itemtitle">
+                    <!-- <div class="bp-titlenum">
+                        {{ currentStep }}
+                    </div> -->
+                    <h2 class="bp-titlepolicy">
+                        {{'POLICY.POLICY_ENROLLMENT.STEP7.SUBTITLE' | translate }}
+                    </h2>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <app-policy-enrollment-info></app-policy-enrollment-info>
+            </div>
+
+            <div class="col-md-12">
+                <div class="bp-itemcontsect2">
+                    <h4 class="bp-contentitle">
+                        {{'POLICY.POLICY_ENROLLMENT.STEP7.SUB_TITLE' | translate }}
+                    </h4>         
+                    <ng-container>
+                        <div class="col-md-12" class="form-group" [ngClass]="{'border-danger': !isQuestionValid && showMsgChecks }" formGroupName="{{FORM_GROUP_QUESTION}}">
+                            <p>
+                                {{'POLICY.POLICY_ENROLLMENT.STEP7.QUESTION' | translate }}
+                            </p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="question1"
+                                    value="true" name="question"
+                                    formControlName="question"
+                                    (change)="buildStepFormGroup()">
+                                <label class="form-check-label"
+                                    for="question1">{{'POLICY.POLICY_ENROLLMENT.STEP7.CHECK_YES' | translate }}
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="question2"
+                                    value="false" name="question"
+                                    formControlName="question"
+                                    (change)="removeStepFormGroup()">
+                                <label class="form-check-label"
+                                    for="question2">{{'POLICY.POLICY_ENROLLMENT.STEP7.CHECK_NO' | translate }}
+                                </label>
+                            </div>
+                        </div>                                        
+                    </ng-container>           
+                    <div class="bg-sectmed">
+                        <div class="row align-items-end">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <ng-container *ngIf="isFormGroupStepReady" formGroupName="policyApplicationOthersInsurance">
+                                        <div class="col-md-12" formGroupName="policyAppOtherInsurance">
+                                            <p>
+                                                {{'POLICY.POLICY_ENROLLMENT.STEP7.TITLE_ADITTIONAL_INFO' | translate }}
+                                            </p>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <ng-container *ngIf="isControlReady('companyName')">
+                                                        <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                                                            <label
+                                                                for="companyName">{{'POLICY.POLICY_ENROLLMENT.STEP7.COMPANY_NAME' | translate }}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="companyName"
+                                                                formControlName="companyName"
+                                                                [placeholder]="getControl('companyName').value !== null && getControl('companyName').value !== ''
+                                                                ? '': 'POLICY.POLICY_ENROLLMENT.STEP7.COMPANY_NAME_PHOLDER' | translate "
+                                                                [maxlength]="getValidatorValue('companyName', 'maxLength')"
+                                                                [pattern]="getValidatorValue('companyName', 'pattern')"
+                                                                [minlength]="getValidatorValue('companyName', 'minLength')"
+                                                                [required]="getControl('companyName').errors?.required">
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('companyName').errors?.pattern">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('companyName', 'pattern') | uppercase | translate}}
+                                                            </div>
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('companyName').errors?.maxlength">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('companyName', 'maxLength') | uppercase | translate}}
+                                                                {{getControl('companyName').errors?.maxlength.requiredLength}}
+                                                            </div>
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('companyName').errors?.minlength">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('companyName', 'minLength') | uppercase | translate}}
+                                                                {{getControl('companyName').errors?.minlength.requiredLength}}
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <ng-container *ngIf="isControlReady('policyNumber')">
+                                                        <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                                                            <label
+                                                                for="formGroupExampleInput">{{'POLICY.POLICY_ENROLLMENT.STEP7.POLICY_NUMBER' | translate }}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="policyNumber"
+                                                                formControlName="policyNumber"
+                                                                [placeholder]="getControl('policyNumber').value !== null && getControl('policyNumber').value !== ''
+                                                                ? '': 'POLICY.POLICY_ENROLLMENT.STEP7.POLICY_NUMBER_PHOLDER' | translate "
+                                                                [maxlength]="getValidatorValue('policyNumber', 'maxLength')"
+                                                                [pattern]="getValidatorValue('policyNumber', 'pattern')"
+                                                                [minlength]="getValidatorValue('policyNumber', 'minLength')"
+                                                                [required]="getControl('policyNumber').errors?.required">
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('policyNumber').errors?.pattern">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyNumber', 'pattern') | uppercase | translate}}
+                                                            </div>
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('policyNumber').errors?.maxlength">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyNumber', 'maxLength') | uppercase | translate}}
+                                                                {{getControl('policyNumber').errors?.maxlength.requiredLength}}
+                                                            </div>
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('policyNumber').errors?.minlength">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('policyNumber', 'minLength') | uppercase | translate}}
+                                                                {{getControl('policyNumber').errors?.minlength.requiredLength}}
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <ng-container *ngIf="isControlReady('renewalDate')">                                                    
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="formGroupExampleInput">{{'POLICY.POLICY_ENROLLMENT.STEP7.RENEWAL_DATE' | translate }}
+                                                            </label>
+                                                            <app-datepicker-wrapper formControlName="renewalDate"
+                                                                [hasErrors]="getControl('renewalDate').errors"
+                                                                [showValidations]="showValidations">
+                                                            </app-datepicker-wrapper>
+                                                            <small class="text-danger"
+                                                                *ngIf="getControl('renewalDate').errors?.invalidCoverageDate  && showValidations">
+                                                                {{'POLICY.POLICY_ENROLLMENT.STEP7.WRONG_DATE' | translate }}
+                                                            </small>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <ng-container *ngIf="isControlReady('deductibleValue')">                                                    
+                                                        <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                                                            <label
+                                                                for="formGroupExampleInput">{{'POLICY.POLICY_ENROLLMENT.STEP7.DEDUCTIBLE_VALUE' | translate }}
+                                                            </label>
+                                                            <input type="text" class="form-control" id="deductibleValue"
+                                                                formControlName="deductibleValue"
+                                                                [placeholder]="getControl('deductibleValue').value !== null && getControl('deductibleValue').value !== ''
+                                                                ? '': 'POLICY.POLICY_ENROLLMENT.STEP7.DEDUCTIBLE_VALUE_PHOLDER' | translate "
+                                                                [maxlength]="getValidatorValue('deductibleValue', 'maxLength')"
+                                                                [pattern]="getValidatorValue('deductibleValue', 'pattern')"
+                                                                [minlength]="getValidatorValue('deductibleValue', 'minLength')"
+                                                                [required]="getControl('deductibleValue').errors?.required">
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('deductibleValue').errors?.pattern">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('deductibleValue', 'pattern') | uppercase | translate}}
+                                                            </div>
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('deductibleValue').errors?.maxlength">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('deductibleValue', 'maxLength') | uppercase | translate}}
+                                                                {{getControl('deductibleValue').errors?.maxlength.requiredLength}}
+                                                            </div>
+                                                            <div class="invalid-feedback"
+                                                                *ngIf="getControl('deductibleValue').errors?.minlength">
+                                                                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('deductibleValue', 'minLength') | uppercase | translate}}
+                                                                {{getControl('deductibleValue').errors?.minlength.requiredLength}}
+                                                            </div>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-5 p-0" *ngIf="showMsgChecks && !isQuestionValid">
+                        <div class="bp-alertform">
+                            <div class="alert alert-danger" role="alert">
+                                <i class="material-icons">info</i>
+                                {{'POLICY.POLICY_ENROLLMENT.STEP7.WARNING_NOT_CHECK_SELECTED' | translate }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-5 p-0" *ngIf="showValidations && isFormGroupStepReady && !isFormValid()">
+                        <div class="bp-alertform">
+                            <div class="alert alert-danger" role="alert">
+                                <i class="material-icons">info</i>
+                                {{'POLICY.POLICY_ENROLLMENT.STEP7.WARNING_NOT_FILLS_COMPLETE' | translate }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-5 p-0">
+                        <div class="row">
+                            <div class="col-md-4 offset-md-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <button class="bp-btn bp-btnsecondary" (click)="back()">
+                                            {{'POLICY.POLICY_ENROLLMENT.BACK' | translate }}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="bp-btn bp-btnprimary" type="submit">
+                                            {{'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </form>
+</section>

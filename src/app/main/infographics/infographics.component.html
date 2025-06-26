@@ -1,0 +1,17 @@
+<article class="ig-hcliente">
+  <h5>  {{ welcomeMsg |concatenate:'.HOME.CMS_INFORMATION.CMS_TITTLE' | translate }}</h5>
+  <div class="row">
+      <div class="col-md-6" *ngFor="let content of contentInformation">
+        <a [routerLink]="" class="ig-hcard" (click)="onNavigate(content)">
+            <div class="ig-hover ">
+                <i class="material-icons animated bounce">link</i>
+            </div>
+            <img src="{{content.imageUrl}}" alt="" class="img-fluid">
+            <div class="ig-bodycard">
+                <p>{{ content.title }}</p>
+                <h6>{{content.description}} <br>{{content.description2}}</h6>
+            </div>
+        </a>
+    </div>
+  </div>  
+</article>

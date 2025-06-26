@@ -1,0 +1,211 @@
+<section class="bp-mainpolicy" *ngIf="wizard" #idSectionStep21>
+  <p>Hola Miguel</p>
+    <form [formGroup]="wizard.searchForm" (submit)="searchPoliciesByFilters()">
+
+        <article class="row no-gutters align-items-end justify-content-start">
+            <div class="col-md-12">
+                <div class="bp-itemcontsect2">
+
+                    <div class="row align-items-end justify-content-start">
+                        <div class="col-md-12">
+                            <p> {{ 'CLAIMFORM.STEP1TITLE' | translate}} </p>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start align-items-center">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <label for="policyOwnerCob">
+                                    {{'CLAIMFORM.STEP1SEARCHTYPE' | translate }}
+                                </label>
+
+                                <select class="form-control" id="policySearchType" formControlName="searchType">
+                                    <option value="" disabled selected>
+                                        {{ 'CLAIMFORM.SEARCH_TYPE.SELECT' | translate }}
+                                    </option>
+                                    <option *ngFor="let searchType of policySearchTypes" value="{{searchType.value}}">
+                                        {{ 'CLAIMFORM.SEARCH_TYPE.'| concatenate: searchType.value | uppercase |
+                                        translate }}
+                                    </option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3"
+                            *ngIf="wizard.searchForm.value.searchType === this.SEARCH_TYPE_POLICY_NAME">
+                            <div class="form-group">
+                                <label class="" for="inputText">
+                                    {{ 'CLAIMFORM.STEP1MEMBERNAME' | translate }}</label>
+                                <input type="text" class="form-control" id="inputText" formControlName="policyNames">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3"
+                            *ngIf="wizard.searchForm.value.searchType === this.SEARCH_TYPE_POLICY_NAME">
+                            <div class="form-group">
+                                <label class="" for="inputText">
+                                    {{ 'CLAIMFORM.STEP1MEMBERSURNAME' | translate }}</label>
+                                <input type="text" class="form-control" id="inputText"
+                                    formControlName="policyLastNames">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3" *ngIf="wizard.searchForm.value.searchType === this.SEARCH_TYPE_POLICY_ID">
+                            <div class="form-group">
+                                <label class="" for="inputText">
+                                    {{ 'CLAIMFORM.STEP1SEARCHTYPE_NUMBER' | translate }}</label>
+                                <input type="text" class="form-control" id="inputText" formControlName="policyId"
+                                    OnlyNumber="true">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3"
+                            *ngIf="wizard.searchForm.value.searchType === this.SEARCH_TYPE_POLICY_LEGACY">
+                            <div class="form-group">
+                                <label class="" for="inputText">
+                                    {{ 'CLAIMFORM.STEP1SEARCHTYPE_LEGACYNUMBER' | translate }}</label>
+                                <input type="text" class="form-control" id="inputText" formControlName="policyLegacy">
+                            </div>
+                        </div>
+
+                        <div class=" col-md-1">
+                            <button type="submit" class="ig-principalbtn ig-botones m-0"
+                                [disabled]="!this.getControl(this.SEARCH_TYPE_CTRL).value || this.getControl(this.POLICY_ID_CTRL).invalid || this.getControl(this.POLICY_LEGACY_CTRL).invalid
+                                || (this.getControl(this.SEARCH_TYPE_CTRL).value === this.SEARCH_TYPE_POLICY_NAME && (!this.getControl(this.POLICY_NAMES_CTRL).value && !this.getControl(this.POLICY_LAST_NAMES_CTRL).value))">
+                                <i class="material-icons">search</i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="row ig-resulsearchnone"
+                        *ngIf="wizard.policySearchResult && wizard.policySearchResult.length === 0">
+                        <h6>{{ 'CLAIMSUBMISSION.STEP1RESULTTITLETEXT' | translate}}</h6>
+                        <small>{{ 'CLAIMSUBMISSION.STEP1RESULTTEXT' | translate}}</small>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+
+        <article class="row" *ngIf="wizard.policySearchResult && wizard.policySearchResult.length > 0">
+            <div class="col-md-12">
+                <div class="bp-itemcontsect2">
+                    <div class="row">
+                        <div *ngIf="handleIsAgent && wizard.policySearchResult.length >= 2" class="col-md-6">
+                            <div class="form-group">
+                                <label> {{ 'CLAIMFORM.STEP1RESULTSEARCH' | translate}} </label>
+                                <select [(ngModel)]="policyHolder" formControlName="policyValue" class="form-control"
+                                    id="memeberList" (change)="selectPolicy()">
+                                    <option value="null" selected disabled>
+                                        {{ 'CLAIMFORM.SEARCH_TYPE.SELECT' | translate }} </option>
+                                    <option *ngFor="let policy of wizard.policySearchResult; let i = index"
+                                        [ngValue]="policy">
+                                        {{ policy.policyReference }} {{ policy.firstName }} {{ policy.middleName }}
+                                        {{ policy.lastName }}
+                                        <span *ngIf="policy.ownerDob">
+                                            ({{ policy.ownerDob | dateTranslate }})
+                                        </span>
+
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="policyOwnerCob">
+                                    {{'CLAIMFORM.STEP2GLOBALMEMBERS' | translate }}
+                                </label>
+                                <select [(ngModel)]="member" #memberList [ngModelOptions]="{standalone: true}"
+                                    class="form-control" id="memeberList" (change)="selectMember()">
+                                    <option value="null" disabled selected>
+                                        {{ 'CLAIMFORM.SEARCH_TYPE.SELECT' | translate }}
+                                    </option>
+                                    <ng-container *ngIf="wizard && wizard.policyHolder">
+                                        <option *ngFor="let member of wizard.policyHolder.members" [ngValue]="member">
+                                            {{ member.firstName }} {{ member.middleName }} {{ member.lastName }} -
+                                            {{member.dob | date:'dd-MM-yyyy'}}
+                                        </option>
+                                    </ng-container>
+
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </article>
+
+        <!-- <article class="row" *ngIf="this.wizard?.policyContact">
+            <div class="col-md-12">
+                <div class="bp-itemcontsect2">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p [innerHTML]="'CLAIMFORM.STEP1INFORMATIONMEMBER' | translate"></p>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-end">
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <label class="" for="inputText">
+                                    {{ 'CLAIMFORM.STEP1CONTACTNAME' | translate }}
+                                </label>
+
+                                <input type="text" class="form-control" id="inputTextName" formControlName="firstName"
+                                    value="{{ this.wizard.policyContact.firstName }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <label class="" for="inputText">
+                                    {{ 'CLAIMFORM.STEP1CONTACTSURNAME' | translate }}
+                                </label>
+
+                                <input type="text" class="form-control" id="inputTextSurName" formControlName="surName"
+                                    value="{{ this.wizard.policyContact.lastName }}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="" for="inputText">
+                                    {{ 'CLAIMFORM.STEP1EMAILMEMBER' | translate }}</label>
+                                <input type="text" class="form-control" id="inputTextMail" formControlName="mailMember"
+                                    value="{{ this.wizard.policyContact.email }}" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </article> -->
+
+        <article class="row align-items-center justify-content-center">
+
+            <div class="col-md-3 col-12">
+                <button type="button" class="ig-principalsegundariobtn ig-botones" (click)="cancel()">
+                    {{ 'CLAIMFORM.BTNS.CANCEL' | translate }}
+                </button>
+            </div>
+            <div class="col-md-3 col-12">
+                <button class="ig-botones ig-principalbtn" type="button" (click)="next()"
+                    [disabled]="!this.member ||  !this.wizard.policyHolder">
+                    {{ 'CLAIMFORM.BTNS.CONTINUE' | translate}}
+                </button>
+            </div>
+
+
+        </article>
+
+    </form>
+</section>

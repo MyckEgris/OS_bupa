@@ -1,0 +1,35 @@
+
+<section class="nuevapolizabupa mt-3 ml-3">
+    <article class="row">
+        <h2 class="bp-contentitle">{{ 'CLAIM_MENU.MENU.TITLE_H2' | translate }}</h2>
+        <p>{{ 'CLAIM_MENU.MENU.SUBTITLE_P' | translate }}</p>
+
+        <div class="row" *ngIf="createClaimForm && createClaimFormV3 && createClaimSubmission">
+
+            <div class="itemseleccion" [routerLink]="createClaimForm">
+                <figure><img src="assets/images/information.png" alt=""></figure>
+                <div class="contentitem">
+                    <h3 class="bp-contentitle">{{ 'CLAIM_MENU.MENU.SUBTITLE_CREATE_QUICKPAY' | translate }}</h3>
+                    <p>{{ 'CLAIM_MENU.QUICKPAY.P' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="itemseleccion" [routerLink]="createClaimFormV3">
+                <figure><img src="assets/images/information.png" alt=""></figure>
+                <div class="contentitem">
+                    <h3 class="bp-contentitle">{{ 'CLAIM_MENU.MENU.SUBTITLE_CREATE_QUICKPAY' | translate }}</h3>
+                    <p>{{ 'CLAIM_MENU.QUICKPAY.P' | translate }}</p>
+                </div>
+            </div>
+
+            <div class="itemseleccion" [routerLink]="createClaimSubmission">
+                <figure><img src="assets/images/information.png" alt=""></figure>
+                <div class="contentitem">
+                    <h3 class="bp-contentitle">{{ 'CLAIM_MENU.MENU.SUBTITLE_CREATE_MASSMNGT' | translate }}</h3>
+                    <p>{{ 'CLAIM_MENU.MASSMGNT.P' | translate }}</p>
+                </div>
+            </div>
+
+        </div>
+    </article>
+</section>

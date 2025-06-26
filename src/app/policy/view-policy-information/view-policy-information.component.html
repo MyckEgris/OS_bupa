@@ -1,0 +1,401 @@
+<script>
+  $('.dropdown-toggle').dropdown()
+</script>
+<section class="ig-validation">
+
+  <form [formGroup]="policyViewForm" (ngSubmit)="newFilterPolicies(policyViewForm.value)" novalidate
+    class="ig-searchpolconten ig-poliza">
+
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <div class="ig-title">
+          <h5 *ngIf="!isRoleEmployeeOrAdmin()"> {{'POLICY.VIEW_POLICY_DETAILS.'
+            | concatenate: title | uppercase | translate }} </h5>
+          <h5 *ngIf="isRoleEmployeeOrAdmin()"> {{'POLICY.VIEW_POLICY_DETAILS.TITLE_EMP' | translate }} </h5>
+          <p *ngIf="isRoleEmployeeOrAdmin()">{{ 'POLICY.VIEW_POLICY_DETAILS.PARAGRAPH_ROLE_EMPLOYEE' | translate }}</p>
+          <p *ngIf="isRoleEmployeeOrAdmin()">{{ 'POLICY.VIEW_POLICY_DETAILS.PARAGRAPH_ROLE_EMPLOYEE2' | translate }}</p>
+        </div>
+      </div>
+
+      <ng-container *ngIf="!isRoleEmployeeOrAdmin()">
+        <div class="col-md-2 text-right">
+          <button type="button" class="ig-botones ig-outlinebtn" id="{{ CRITERIA_POLICIES }}"
+            (click)="changeCriteriaFilterByQuickAccess(CRITERIA_POLICIES)">
+            <i class="material-icons"> list_alt </i>
+            {{ 'POLICY.VIEW_POLICY_DETAILS.POLICY' | translate }} </button>
+        </div>
+
+        <div class="col-md-2 text-right">
+          <button type="button" class="ig-botones ig-outlinebtn" id="{{ CRITERIA_NEW_BUSSINES }}"
+            (click)="changeCriteriaFilterByQuickAccess(CRITERIA_NEW_BUSSINES)">
+            <i class="material-icons">all_inbox</i>
+            {{ 'POLICY.VIEW_POLICY_DETAILS.NEW_BUSINESS' | translate }} </button>
+        </div>
+
+        <div class="col-md-2 text-right">
+          <button type="button" class="ig-botones ig-outlinebtn" id="{{ CRITERIA_RENEWALS }}"
+            (click)=changeCriteriaFilterByQuickAccess(CRITERIA_RENEWALS)>
+            <i class="material-icons"> restore </i>
+            {{ 'POLICY.VIEW_POLICY_DETAILS.RENEWALS' | translate }} </button>
+        </div>
+      </ng-container>
+    </div>
+    <br>
+
+    <div class="ig-searchpol">
+      <div class="row align-items-center">
+
+        <div class="col-lg-3 col-sm-4">
+          <div class="form-group">
+            <select class="custom-select form-control" id="policySearchType" formControlName="policySearchType">
+              <option *ngFor="let searchType of policySearchType" value="{{searchType.value}}">
+                {{'POLICY.VIEW_POLICY_DETAILS.SEARCH_TYPES.'| concatenate: searchType.value | uppercase | translate }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div *ngIf="CRITERIA_FILTER === CRITERIA_NEW_BUSSINES" class="col-lg-{{tamanoDates}} col-sm-4 animated fadeIn">
+          <div class="ig-filtrar">
+            <div class="input-group">
+              <app-custom-date-picker formControlName="receptionDateFrom" [minDate]="minDate"
+                [dateValue]="dateValueFrom"></app-custom-date-picker>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="CRITERIA_FILTER === CRITERIA_NEW_BUSSINES" class="col-lg-{{tamanoDates}} col-sm-4 animated fadeIn">
+          <div class="ig-filtrar">
+            <div class="input-group">
+              <app-custom-date-picker formControlName="receptionDateTo" [minDate]="minDateRange"
+                [isDisable]="isDisableReceptionDateTo" [dateValue]="dateValueTo"></app-custom-date-picker>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="CRITERIA_FILTER === CRITERIA_RENEWALS" class="col-lg-{{tamanoDates}} col-sm-4 animated fadeIn">
+          <div class="ig-filtrar">
+            <div class="input-group">
+              <app-custom-date-picker formControlName="renewalsDateFrom" [minDate]="minDate"
+                [dateValue]="dateValueFrom"></app-custom-date-picker>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="CRITERIA_FILTER === CRITERIA_RENEWALS" class="col-lg-{{tamanoDates}} col-sm-4 animated fadeIn">
+          <div class="ig-filtrar">
+            <div class="input-group">
+              <app-custom-date-picker formControlName="renewalsDateTo" [minDate]="minDateRange"
+                [isDisable]="isDisableReceptionDateTo" [dateValue]="dateValueTo"></app-custom-date-picker>
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="isRoleEmployeeOrAdmin()">
+          <div *ngIf="CRITERIA_FILTER === CRITERIA_POLICIES &&
+                        policyViewForm.value.policySearchType==policySearchType[1].value"
+            class="col-lg-7 col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <input id="policyId" formControlName="policyId" maxCharsAllowed="10" appOnlyNumber="true"
+                class="form-control" placeholder="{{ 'APP.NUMERO_POLIZA_PLACEHOLDER' | translate }}" type="text">
+            </div>
+          </div>
+
+          <div *ngIf="CRITERIA_FILTER === CRITERIA_POLICIES &&
+                      policyViewForm.value.policySearchType==policySearchType[2].value"
+            class="col-lg-7 col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <input id="policyLegacyID" formControlName="policyLegacyID" maxCharsAllowed="18"
+                class="form-control" placeholder="{{ 'POLICY.VIEW_POLICY_DETAILS.LEGACY_ID' | translate }}" type="text">
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="!isRoleEmployeeOrAdmin()">
+          <div *ngIf="CRITERIA_FILTER === CRITERIA_POLICIES &&
+                        policyViewForm.value.policySearchType==policySearchType[3].value"
+            class="col-lg-7 col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <input id="policyId" formControlName="policyId" maxCharsAllowed="10" appOnlyNumber="true"
+                class="form-control" placeholder="{{ 'APP.NUMERO_POLIZA_PLACEHOLDER' | translate }}" type="text">
+            </div>
+          </div>
+
+          <div *ngIf="CRITERIA_FILTER === CRITERIA_POLICIES &&
+                      policyViewForm.value.policySearchType==policySearchType[4].value"
+            class="col-lg-7 col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <input id="policyLegacyID" formControlName="policyLegacyID" maxCharsAllowed="18" 
+                class="form-control" placeholder="{{ 'POLICY.VIEW_POLICY_DETAILS.LEGACY_ID' | translate }}" type="text">
+            </div>
+          </div>
+
+          <div *ngIf="CRITERIA_FILTER === CRITERIA_POLICIES &&
+                      policyViewForm.value.policySearchType==policySearchType[6].value"
+            class="col-lg-4 col-sm-4 animated fadeIn">
+            <div class="form-group">
+              <input id="firstName" formControlName="firstName" class="form-control"
+                placeholder="{{ 'APP.NOMBRE' | translate }}" type="text">
+            </div>
+          </div>
+
+          <div *ngIf="CRITERIA_FILTER === CRITERIA_POLICIES &&
+                      policyViewForm.value.policySearchType==policySearchType[6].value"
+            class="col-lg-3 col-sm-4 animated fadeIn">
+            <div class="form-group">
+              <input id="lastName" formControlName="lastName" class="form-control"
+                placeholder="{{ 'APP.APELLIDO' | translate }}" type="text">
+            </div>
+          </div>
+
+          <div
+            *ngIf="isDiffGroupAdminAgentRole && ((CRITERIA_FILTER === CRITERIA_POLICIES && policyViewForm.value.policySearchType==policySearchType[7].value)
+                        || (CRITERIA_FILTER === CRITERIA_NEW_BUSSINES && policyViewForm.value.policySearchType==policySearchType[3].value)
+                        || (CRITERIA_FILTER === CRITERIA_RENEWALS && policyViewForm.value.policySearchType==policySearchType[2].value))"
+            class="col-lg-{{tamanoAgent}} col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <ng-select #agentSelect [items]="agentList" [selectOnTab]="true" bindValue="agentId"
+                bindLabel="companyName" formControlName="agent" class="form-control">
+              </ng-select>
+            </div>
+          </div>
+
+          <div *ngIf="(isDiffGroupAdminAgentRole && CRITERIA_FILTER === CRITERIA_POLICIES &&
+                        policyViewForm.value.policySearchType==policySearchType[1].value && showOptionSearchGroup)"
+            class="col-lg-2 col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <input type="radio" formControlName="businessType" value="{{SEARCH_TYPE_CASE_ALL_BOTH}}">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.BY_ALL_BOTH' | translate }}
+            </div>
+          </div>
+
+          <div *ngIf="(isDiffGroupAdminAgentRole && CRITERIA_FILTER === CRITERIA_POLICIES &&
+                        policyViewForm.value.policySearchType==policySearchType[1].value && showOptionSearchGroup)"
+            class="col-lg-3 col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <input type="radio" formControlName="businessType" value="{{SEARCH_TYPE_CASE_ALL_INDIVIDUAL}}">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.BY_ALL_POLICIES_INDIVIDUAL' | translate }}
+            </div>
+          </div>
+
+          <div *ngIf="(isDiffGroupAdminAgentRole && CRITERIA_FILTER === CRITERIA_POLICIES &&
+                        policyViewForm.value.policySearchType==policySearchType[1].value && showOptionSearchGroup)"
+            class="col-lg-2 col-sm-4  animated fadeIn">
+            <div class="form-group">
+              <input type="radio" formControlName="businessType" value="{{SEARCH_TYPE_CASE_ALL_GROUP}}">
+              {{ 'POLICY.VIEW_POLICY_DETAILS.BY_ALL_POLICIES_GROUP' | translate }}
+            </div>
+          </div>
+
+          <div *ngIf="(CRITERIA_FILTER !== CRITERIA_RENEWALS)
+                          && policyViewForm.value.policySearchType==policySearchType[2].value"
+            class="col-lg-{{sizeStatus}} col-sm-4 animated fadeIn" style="position: static; z-index: 9;">
+
+            <div class="dropdown">
+              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static"
+                aria-haspopup="true" aria-expanded="false">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.FILTER_BY_STATUS' | translate }}
+              </button>
+              <div class="dropdown-menu dropdown-menu-lg-right">
+                <div class="form-check" *ngFor="let status of policyStatusSearch">
+                  <input class="form-check-input" type="checkbox" value="{{status.value}}" id="{{status.value}}"
+                    class="" (change)="changeValueFilterStatus($event, status.value)">
+                  <label class="form-check-label" for="defaultCheck1">
+                    {{'POLICY.POLICYSTATUS.' | concatenate: status.value | uppercase | translate}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div [hidden]="true">
+          <input type="text" id="listStatusString" formControlName="status" class="form-control">
+        </div>
+
+        <ng-container *ngIf="!isRoleEmployeeOrAdmin()">
+          <div *ngIf="CRITERIA_FILTER === CRITERIA_POLICIES
+                        && policyViewForm.value.policySearchType==policySearchType[5].value"
+            class="col-lg-7 col-sm-4 animated fadeIn">
+            <div class="ig-filtrar">
+              <div class="input-group">
+                <app-custom-date-picker formControlName="ownerDOB" [minDate]="minDate" [maxDate]="maxDate"
+                  [dateValue]="dateValueOwner">
+                </app-custom-date-picker>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="col-lg-1 col-sm-2 col-6">
+          <button type="submit"
+            [disabled]="policyViewForm.invalid || policyViewForm.value.policySearchType==policySearchType[0]"
+            [ngClass]="{ 'ig-principalbtn ig-botones' : true, 'disabled' : policyViewForm.invalid || policyViewForm.value.policySearchType==policySearchType[0]  }"><i
+              class="material-icons">search</i></button>
+        </div>
+
+        <div class="col-lg-1 col-sm-2 col-6">
+          <button type="button" class="ig-principalsegundariobtn ig-botones btnclean" (click)="clearFields(true)"
+            data-toggle="tooltip" data-placement="top">
+            <i class="material-icons">
+              delete_sweep
+            </i>
+            <span class="tooltiptext"> {{ 'POLICY.VIEW_POLICY_DETAILS.CLEAN_FILTER' | translate }}</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ig-application ig-polizassear" *ngIf="searchProccess">
+
+      <div class="row align-items-center">
+
+
+        <div class="col-md-8">
+          <h5 class="ig-texthistorial">{{ 'POLICY.VIEW_POLICY_DETAILS.POLICY' | translate }}
+            <span> ({{ policies.count | valueOrMoney:'number':'' }}) </span></h5>
+        </div>
+
+
+        <div class="col-md-3 offset-md-1">
+          <div class="col-md-12" *ngIf="CRITERIA_FILTER === CRITERIA_RENEWALS && policies.data.length !== 0">
+            <button class="ig-botones ig-secundariobtn" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{ 'AGENT.COMMISSIONS.EXPORT' | translate }}
+              <i class="material-icons">insert_chart_outlined</i>
+              <div class="col-md-10 dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="downloadRenewalsExcel()">
+                  {{ 'AGENT.COMMISSIONS.XLS' | translate }}
+                </a>
+              </div>
+            </button>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div *ngIf="searchProccess">
+        <div class="ig-searchresul animated fadeIn" *ngIf="policies.data.length === 0 && searchProccess">
+          <h4>{{ 'APP.RESULTADO_BUSQUEDA' | translate }}</h4>
+          <div *ngIf="searchFiltered;then policyNotFound else policyLapsedNotFound"></div>
+          <p>{{ 'POLICY.APPLICATION.POLICY_APP_NOT_FOUND' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="ig-resultpolizaagent ig-resultados animated fadeInUp" *ngFor="let policy of policies.data">
+
+        <div class="ig-resultpolizacont">
+
+          <div class="row align-items-center">
+
+            <div class="col-md-3">
+              <h6 class="active-status ig-procesotext"
+                *ngIf="policy.policyStatusId !== 0 && policy.policyStatus !== ''">
+                {{'POLICY.POLICYSTATUS.' | concatenate: policy.policyStatus | replacespaces: '_' | uppercase |
+                translate}}
+              </h6>
+            </div>
+
+            <div class="col-md-5">
+              <h6>
+                {{ 'POLICY.VIEW_POLICY_DETAILS.PLAN' | translate }} {{ policy.planDescription }}
+              </h6>
+            </div>
+
+            <div class="col-md-3" *ngIf="policy.isGroupPolicy" style="padding-left:0px">
+              <h6 class="ig-grupo" [style.color]='policy.color' style="font-weight: 700;">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.GROUP' | translate }} {{ policy.groupId }} - {{ policy.groupName }}
+              </h6>
+            </div>
+
+            <div class="col-md-3 text-right">
+              <h6 class="ig-pais">
+                {{ policy.policyCountry }}
+              </h6>
+            </div>
+
+          </div>
+
+          <div class="row align-items-center">
+
+            <div class="col-md-3">
+              <h5>
+                {{ policy.members[0].firstName }} <br> {{ policy.members[0].middleName ? policy.members[0].middleName : '' }} <br *ngIf="policy.members[0].middleName">
+                {{ policy.members[0].lastName }}
+              </h5>
+              <p class="textosmall">
+                {{ policy.policyReference }}
+                <app-custom-popover *ngIf="policy.legacyNumber" [title]=""
+                  [content]="['POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.LEGACY_NUMBER', policy.legacyNumber, 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.POLICY_ID', policy.policyId.toString()]">
+                </app-custom-popover>
+              </p>
+            </div>
+
+            <div class="col-md-3">
+              <h4 class="ig-processvalor" *ngIf="policy.isGroupPolicy === 0">
+                {{ policy.currencyCode}} {{ policy.policyPremium | number:'1.2-2' }}
+              </h4>
+              <p class="textosmall" *ngIf="policy.isGroupPolicy === 0">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.MEMBERS.PRIME' | translate }}
+              </p>
+              <p class="textosmall">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.PAYMENT_TYPE' | translate }}:
+                {{ 'POLICY.VIEW_POLICY_DETAILS.MODE_OF_PAYMENT.' | concatenate:policy.modeOfPayment | uppercase | translate }}
+              </p>
+            </div>
+
+            <div class="col-md-5">
+              <div class="row align-items-center" *ngFor="let date of policy.policyDates">
+                <div class="col-md-8" *ngIf="(listDatesToShow.indexOf(date.policyDateId) > -1) && date.policyDateValue">
+                  <h6>
+                    {{ 'POLICY.VIEW_POLICY_DETAILS.'| concatenate: date.policyDateName | replacespaces: '_' | uppercase |
+                    translate}}
+                  </h6>
+                </div>
+                <div class="col-md-4 text-right"
+                  *ngIf="(listDatesToShow.indexOf(date.policyDateId) > -1) && date.policyDateValue">
+                  <h6>
+                    {{ date.policyDateValue | dateTranslate: 'APP.DATE_FORMAT'}}
+                  </h6>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-1">
+              <a class="ig-chevron" [routerLink]="['/policies/view-policy-information', policy.policyId]">
+                <i class="material-icons">chevron_right</i>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="ig-polizaagent" style="width:100%;">
+
+          <div class="row  align-items-center">
+            <div class="col-md-6">
+              <h6><span>{{ 'POLICY.VIEW_POLICY_DETAILS.AGENT' | translate }}:</span> {{ policy.agent.agentName }}</h6>
+            </div>
+            <div class="col-md-6" *ngIf="policy.receivedMethodId">
+              <h6><span>{{ 'POLICY.VIEW_POLICY_DETAILS.RECEIVED_METHOD' | translate }}:</span> {{  policy.receivedMethodId | receivedMethod | translate | uppercase}}</h6>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="collectionSize > PAGE_SIZE">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="PAGE_SIZE" [pageSize]="PAGE_SIZE"
+          [rotate]="true" [boundaryLinks]="true" (pageChange)="changePageOfPolicies($event);"></ngb-pagination>
+      </div>
+
+
+    </div>
+
+  </form>
+
+</section>

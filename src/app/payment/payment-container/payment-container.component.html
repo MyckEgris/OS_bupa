@@ -1,0 +1,89 @@
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="!inactivityPeriod()">
+
+  <section class="ig-validation">
+    <section class="ig-procesodepago">
+
+      <article class="">
+        <article class="col-md-12">
+          <div class="ig-procetilt">
+            <h4>{{ 'PAYMENTS.CONTAINER.PAYMENT_PROCESS' | translate }}</h4>
+            <br>
+          </div>
+          <div class="ig-proces-tabs">
+            <ul [ngClass]="{ 'nav nav-tabs':  !isMexico }" id="myTab" role="tablist">
+              <li class="nav-item" *ngIf="showCC && !isMexico" >
+                <a class="nav-link active" id="credito-tab" data-toggle="tab" href="#credito" role="tab"
+                  aria-controls="credito" aria-selected="true">{{ 'PAYMENTS.CONTAINER.CC' | translate }}</a>
+              </li>
+              <li class="nav-item" *ngIf="showCheque">
+                <a class="nav-link " id="cheque-tab" data-toggle="tab" href="#cheque" role="tab" aria-controls="cheque"
+                  aria-selected="false">{{ 'PAYMENTS.CONTAINER.CHEQUE' | translate }}</a>
+              </li>
+              <li class="nav-item" *ngIf="showWT">
+                <a class="nav-link" id="transferencia-tab" data-toggle="tab" href="#transferencia" role="tab"
+                  aria-controls="transferencia" aria-selected="false">{{ 'PAYMENTS.CONTAINER.WT' | translate }}</a>
+              </li>
+            </ul>
+            <div class="row">
+
+              <div class="tab-content col-lg-12 order-sm-2" *ngIf="showCC && policy && isMexico">
+                <div class="row">
+                  <article class="col-md-12">
+                    <app-payment-credit-card [policy]="policy"></app-payment-credit-card>
+                  </article>
+                </div>
+              </div>
+              
+              <div class="tab-content col-lg-12 order-sm-2" id="myTabContent">
+
+                <div class="tab-pane fade show active" *ngIf="showCC && policy && !isMexico" id="credito" role="tabpanel"
+                  aria-labelledby="credito-tab">
+                  <div class="row">
+                    <article class="col-md-12">
+                      <app-payment-credit-card [policy]="policy"></app-payment-credit-card>
+                    </article>
+                    <!--<article class="col-md-4">
+                      <app-payment-policy-info [policy]="policy"></app-payment-policy-info>
+                    </article>-->
+                  </div>
+                </div>
+
+                <div class="tab-pane" *ngIf="showCheque" id="cheque" role="tabpanel" aria-labelledby="cheque-tab">
+                  <div class="row">
+                    <article class="col-md-12">
+                      <app-payment-check [policy]="policy"></app-payment-check>
+                    </article>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" *ngIf="showWT" id="transferencia" role="tabpanel"
+                  aria-labelledby="transferencia-tab">
+                  <div class="row">
+                    <article class="col-md-12">
+                      3
+                    </article>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </article>
+      </article>
+    </section>
+  </section>
+</section>
+
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="inactivityPeriod()">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="ig-title">
+        <p style="font-weight: bold;"> {{ 'APP.MESSAGE.MEXICO_INACTIVITY' | translate }} </p>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</section>

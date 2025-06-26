@@ -1,0 +1,21 @@
+<div class="form-group">
+  <div class="row"
+    [ngClass]="{ 'border-danger': getControl(formControlNameCustom).invalid && showValidations }">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>{{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.CIVIL_STATUS' | translate }}</label>
+      </div>
+    </div>
+    <div class="col-md-6" *ngFor="let marital of wizard.listMaritalStatus$ | async; let i = index">
+      <div class="form-check form-check-inline"
+        *ngIf="(marital.maritalStatusId !== MARITAL_STATUS_UNKNOWN) ? true: false">
+        <input class="form-check-input" id="{{formControlNameCustom}}{{i}}" type="radio"
+          [value]="marital.maritalStatusId" name="{{formControlNameCustom}}"
+          [formControl]="getControl(formControlNameCustom)">
+        <label class="form-check-label" for="{{formControlNameCustom}}{{i}}">
+          {{'POLICY.POLICY_ENROLLMENT.MARITAL_STATUS.' | concatenate: marital.name | uppercase | translate}}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

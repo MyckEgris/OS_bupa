@@ -1,0 +1,104 @@
+<section class="ig-wizard animated fadeIn">
+    <div class="col-12">
+        <div class="row setup-content animated fadeIn">
+            <div class="col-md-12">
+
+                <div class="ig-title">
+                    <h5>{{ 'CLAIMS.UPDATE_CLAIM.TITLE' | translate }}</h5>
+                    <p [innerHTML]="'CLAIMS.UPDATE_CLAIM.INITIAL_TEXT' | translate "></p>
+                </div>
+
+                <h6>{{ 'CLAIMS.UPDATE_CLAIM.CLAIM_NUMBER' | translate }}</h6>
+                <p>{{ claim.claimNumber }}</p>
+
+
+                <h6>{{ 'CLAIMS.UPDATE_CLAIM.POLICY_NUMBER' | translate }}</h6>
+                <p>{{ claim.policy.policyId }}</p>
+
+                <h6>{{ 'CLAIMS.UPDATE_CLAIM.MEMBER' | translate }}</h6>
+                <p>{{ claim.member.firstName }} {{ claim.member.middleName }} {{ claim.member.lastName }}</p>
+
+                <h6>{{ 'CLAIMS.UPDATE_CLAIM.SERVICE' | translate }}</h6>
+                <p>{{ 'CLAIMS.UPDATE_CLAIM.INITIAL' | translate }}: {{ claim.serviceFrom | dateTranslate }} -
+                    {{ 'CLAIMS.UPDATE_CLAIM.FINAL' | translate }}: {{ claim.serviceTo | dateTranslate }}</p>
+
+                <div *ngIf="wizard.documents.length > 0">
+                    <h6>{{ 'CLAIMS.UPDATE_CLAIM.DOCUMENTS' | translate }}</h6>
+                    <p class="ig-files-scroll" #fileScroll><span *ngFor="let document of wizard.documents"
+                            [ngClass]="{ 'ig-document-loading' : document.loadingStatus === 'LOADING' }">
+                            {{ document.file.name }} - {{ getFileSize(document.file) }} <span
+                                *ngIf="document.loadingStatus === 'LOADING'">({{ document.progress }} %) </span><span
+                                *ngIf="document.loadingStatus === 'LOADED'"><i
+                                    class="fa fa-check-circle"></i></span><br>
+                        </span></p>
+                </div>
+
+                <div class="ig-upfile" [ngClass]="{ 'ig-file-dragging': dragging }" (dragover)="dragOver($event)"
+                    (drop)="dropFiles($event)" (dragleave)="dragLeave($event)">
+                    <div class="ig-upfileitem">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <p><i
+                                        class="material-icons">cloud_upload</i>{{ 'CLAIMSUBMISSION.STEP2FILESELECTED' | translate }}
+                                    {{ wizard.documents.length }} {{ 'CLAIMSUBMISSION.STEP2FILESDESC' | translate }}</p>
+                            </div>
+                            <div class="col-md-3 offset-md-3 text-right">
+                                <a class="btnclean" href=""
+                                    (click)="removeAllDocuments($event)">{{ 'CLAIMSUBMISSION.STEP2DELETEALLTEXT' | translate }}
+                                    <i class="material-icons">delete_sweep</i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ig-file-scroll">
+                        <div class="ig-file animated zoomIn" *ngFor="let document of wizard.documents">
+                            <div class="ig-textofile">
+                                <i class="fa" [ngClass]="document.icon"></i><br>
+                                {{ document.file.name }}
+                            </div>
+                            <div class="ig-icofile">
+                                <a href="" title="Eliminar" (click)="removeDocument(document, $event)"><i
+                                        class="material-icons">delete</i></a>
+                            </div>
+                            <div class="ig-filesize">{{ getFileSize(document.file) }}</div>
+                        </div>
+                    </div>
+                    <div class="ig-fileporcargar" [ngClass]="{ 'ig-file-loaded': wizard.documents.length > 0 }"
+                        (click)="showFileDialog()">
+                        <span class="ig-textofile">
+                            <span>{{ selectButton | translate }}</span>
+                            <span class="material-icons ig-attach-icon">attach_file</span>
+                        </span>
+                    </div>
+                </div>
+
+                <input type="file" #fileInput class="form-control" multiple="" (change)="manualSelectFiles($event)"
+                    accept="{{ allowedTypes }}">
+
+                <div class="ig-infosize">
+                    <p>{{ 'CLAIMSUBMISSION.STEP2TAMTEXT' | translate }} {{ maxFileSize }}MB.</p>
+                    <p>{{ 'CLAIMSUBMISSION.STEP2DESCTEXT' | translate }}</p>
+                    <p>{{ 'CLAIMS.UPDATE_CLAIM.ALLOWFILETEXT' | translate }}</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 offset-md-6">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <button class="ig-principalsegundariobtn ig-botones" type="button"
+                                    (click)="back()">{{ 'CLAIMS.AGENT.CANCEL' | translate }}</button>
+                            </div>
+
+                            <div class="col-md-6">
+                                <button class="ig-principalbtn ig-botones" type="button" (click)="submit()"
+                                    [disabled]="wizard.documents.length === 0">{{ 'CLAIMS.AGENT.SUBMIT' | translate }}</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

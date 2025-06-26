@@ -1,0 +1,74 @@
+<div class="bp-itemcontsect2">
+    <div class="row bp-itemcontsect3" *ngIf="canAddInteraction">
+        <div class="col-md-12">
+            <h5>{{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.TITLE' | translate }}</h5>
+            <label>
+                {{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.LEGEND' | translate }}
+            </label>
+        </div>
+        <div class="col-md-12">
+            <textarea class="bp-txtarea" name="" id="" cols="30" rows="10" [(ngModel)]="observation"></textarea>
+        </div>
+        <div class="col-md-12" *ngIf="!valid">
+          <small class="text-danger">
+            {{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.VALIDATE' | translate }}
+          </small>
+        </div>
+
+        <div class="col-12">
+            <div class="col-md-12">
+                <h6>{{ 'CLAIMSUBMISSION.STEP2TITLE01_02' | translate }}</h6>
+            </div>
+            <div class="ig-upfiled-items" ng-reflect-klass="ig-upfiled-items">
+                <div class="ig-file-scroll">
+                    <div class="row m-2">
+                        <div class="col-md-12" *ngFor="let document of documents">
+                            <div class="inline-text-icon" *ngIf="document.category === type1">
+                                <i class="fa" [ngClass]="document.icon"></i>
+                                <span class="text-list">
+                                    {{document.file.name}}
+                                    <div class="ig-icofile">
+                                        <a href="#" title="Eliminar" (click)="removeDocument(document, $event)">
+                                            <i class="material-icons">delete</i>
+                                        </a>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="upload">
+                        <app-upload [typeAttachment]="type1" [fileTypes]="'interactionsFileTypes'"></app-upload>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <button class="bp-btn bp-btnsecondary" (click)="clearInteractionForm()">{{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.CLEAR' | translate }}</button>
+        </div>
+
+        <div class="col-6">
+            <button class="bp-btn bp-btnprimary" (click)="submit()">{{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.SEND' | translate }}</button>
+        </div>
+    </div>
+
+    <div class="row bp-itemcontsect3" *ngIf="!canAddInteraction">
+        <div class="col-md-12">
+            <h6>{{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.NEW' | translate }}</h6>
+            <label>
+                {{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.NEWLEGEND' | translate }}
+            </label>
+        </div>
+        <div class="col-md-6 offset-md-3">
+            <button class="bp-btn bp-btnprimary" (click)="createChildInquiry()">{{ 'INQUIRY.INFORMATION_REQUEST.ADD_RESPONSE.CREATE' | translate }}</button>
+        </div>
+    </div>
+
+</div>

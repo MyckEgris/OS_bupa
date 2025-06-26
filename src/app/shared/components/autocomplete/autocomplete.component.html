@@ -1,0 +1,18 @@
+<div *ngIf="loaded">
+  <input #inputAutocomplete type="text" class="form-control" [value]="country.value" [placeholder]="inputPlaceholder"
+    (focus)="show();" (keyup)="onChange($event);" (keydown)="onChange($event);" appOnlyLetters="true" required>
+  <div *ngIf="showList" class="autocomplete">
+    <div class="autocomplete-close-container">
+      <span class="autocomplete-close" (click)="close();">X</span>
+    </div>
+    <ul>
+      <li *ngFor="let item of filteredItems" (click)="selectItem(item);">{{ item.value }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="progress" style="height: 38px;" *ngIf="!loaded">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+    Loading...
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<section class="bp-mainpolicy">
+  <form class="form-group" [formGroup]="wizard.enrollmentForm">
+    <div formGroupName = "{{STEP_NAME}}">
+
+      <article class="row" formGroupName="{{SECTION_NAME}}">
+
+        <div class="col-md-12">
+          <div class="row">
+
+            <div class="col-md-9">
+              <div class="bp-itemtitle">
+                <!-- <div class="bp-titlenum"> {{CURRENT_STEP}} </div> -->
+                <h2 class="bp-titlepolicy"> {{'POLICY.POLICY_ENROLLMENT.STEP9.SUBTITLE' | translate }} </h2>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-3" *ngIf = "f.question.value === 'true'">
+              <app-breadcrumb-enrollment [currentStep]="CURRENT_STEP"
+                  [lengthSection]="totalSectionByPetitionerType" [stepActive]="sectionActive">
+              </app-breadcrumb-enrollment>
+            </div> -->
+
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <app-policy-enrollment-info></app-policy-enrollment-info>
+        </div>
+
+        <div class="col-md-12">
+          <div class="bp-itemcontsect2">
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group" [ngClass]="{'border-danger': f.question.invalid && showValidations }">
+                  <p for="formGroupExampleInput"> {{'POLICY.POLICY_ENROLLMENT.STEP9.QUESTION' | translate }} </p>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="question" formControlName="question" id="question1" type="radio" value="true"
+                    (change)="handleCheck($event.target.value)">
+                    <label class="form-check-label" for="question1">{{'POLICY.POLICY_ENROLLMENT.STEP9.CHECK_YES' | translate }}</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" name="question" formControlName="question" id="question2" type="radio" value="false"
+                    (change)="handleCheck($event.target.value)">
+                    <label class="form-check-label" for="question2">{{'POLICY.POLICY_ENROLLMENT.STEP9.CHECK_NO' | translate }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf = "f.question.value === 'true'">
+              <div class="col-md-4">
+                <div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+                  <label for="exampleFormControlSelect1">
+                    {{ 'POLICY.POLICY_ENROLLMENT.STEP9.LBL_PETITIONER_TYPE' | translate }}
+                  </label>
+                  <ng-select #petitionerTypeSelect [items]="petitionerType" [selectOnTab]="true"
+                    bindValue="value" bindLabel="description" formControlName = "petitionerType"
+                    class="form-control" (change)="petitionerFilterChanged($event)">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+
+            <router-outlet></router-outlet>
+
+            <div class="col-md-12 mt-2" *ngIf="showValidations && currentFormGroup.invalid">
+              <div class="bp-alertform">
+                <div class="alert alert-danger" role="alert">
+                  <i class="material-icons">info</i>
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP2.INFO_INCOMPLETE' | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row" *ngIf = "f.petitionerType.value === ''">
+              <div class="col-md-4 offset-md-4">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <button class="bp-btn bp-btnsecondary" type="button" (click) = "back()"> {{ 'POLICY.POLICY_ENROLLMENT.BACK' | translate }} </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="bp-btn bp-btnprimary" type="button" (click) = "next()">{{ 'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate }}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </article>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,237 @@
+/*** wizzard  ***/
+.wizzard-container {
+  text-align: center;
+}
+
+.wizzard-steps {
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  display: block;
+  overflow-x: auto;
+  font-size: 1rem;
+  text-align: center;
+
+  .wizzard-step {
+    margin-bottom: 1rem;
+    display: inline-block;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: auto;
+    }
+
+    &:first-of-type .step-circle::before {
+      display: none;
+    }
+
+    &:last-of-type .step-content {
+      padding-right: 0;
+    }
+  }
+
+  .wizzard-step-content {
+    box-sizing: content-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+    text-align: center;
+    width: 10rem;
+    min-width: 10rem;
+    max-width: 10rem;
+
+    .step-text {
+      color: $color_grey-medium;
+      /*word-break: break-all;*/
+      margin-top: 0.625rem;
+      font-size: 0.85rem;
+    }
+  }
+
+  .step-circle {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: $color_universal-white;
+    border: 2px solid $color_universal-white;
+    border-radius: 100%;
+    background-color: rgba($color_navy, 0.5);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-weight: bold;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: -2px;
+      height: 2px;
+      transform: translate(-100%, -50%);
+      width: calc(10rem + 1rem - 2.25rem);
+      color: rgba($color_navy, 0.4);
+      background-color: currentColor;
+      -webkit-transform: translate(-100%, -50%);
+      -moz-transform: translate(-100%, -50%);
+      -ms-transform: translate(-100%, -50%);
+      -o-transform: translate(-100%, -50%);
+    }
+
+  }
+
+  /** step active **/
+  .step-active {
+    .step-circle {
+      color: $color_universal-white;
+      background-color: $color_cyan-active;
+      border-color: $color_universal-white;
+
+      &::before {
+        color: $color_navy;
+      }
+    }
+
+    .step-text {
+      color: $color_navy;
+    }
+
+  }
+
+  /** end step active **/
+  /** step error **/
+  .step-error {
+    .step-circle {
+      color: $color_universal-white;
+      background-color: $color_danger;
+      border-color: $color_universal-white;
+
+      &::before {
+        color: $color_danger;
+      }
+    }
+
+    .step-text {
+      color: $color_danger;
+    }
+  }
+
+  /** end step error **/
+  /** step success **/
+  .step-success {
+    .step-circle {
+      color: $color_universal-white;
+      background-color: $color_navy-active;
+      border-color: $color_universal-white;
+
+      &::before {
+        color: $color_navy-active;
+      }
+    }
+
+    .step-text {
+      color: $color_grey-dark;
+    }
+  }
+
+  /** end step success **/
+  /** step warning **/
+  .step-warning {
+    .step-circle {
+      color: $color_universal-black;
+      background-color: $color_warning;
+      border-color: $color_universal-white;
+
+      &::before {
+        color: $color_warning;
+      }
+    }
+
+    .step-text {
+      color: $color_grey-dark;
+    }
+  }
+  @media screen and (max-width:768px) {
+    .wizzard-step-content {
+      width: 5rem;
+      min-width: 5rem;
+      max-width: 5rem;
+    }
+  }
+  @media (min-width:768px) and (max-width:992px) {
+    .wizzard-step-content {
+      width: 6rem;
+      min-width: 6rem;
+      max-width: 6rem;
+    }
+
+    .step-circle::before {
+      width: calc(6rem + 1rem - 2.25rem);
+    }
+
+  }
+
+  @media screen and (max-width:992px) {
+    .wizzard-step-content {
+      width: 6rem;
+      min-width: 6rem;
+      max-width: 6rem;
+    }
+
+    .step-circle::before {
+      width: calc(6rem + 1rem - 2.25rem);
+    }
+
+  }
+
+  @media (min-width: 992px) and (max-width: 1024px) {
+    .wizzard-step-content {
+      width: 8rem;
+      min-width: 8rem;
+      max-width: 8rem;
+    }
+
+    .step-circle::before {
+      width: calc(8rem + 1rem - 2.25rem);
+    }
+
+  }
+
+  @media (min-width: 1024px) and (max-width: 1299px) {
+    .wizzard-step-content {
+      width: 10rem;
+      min-width: 10rem;
+      max-width: 10rem;
+    }
+
+    .step-circle::before {
+      width: calc(10rem + 1rem - 2.25rem);
+    }
+
+  }
+
+  @media screen and (min-width: 1400px) {
+    .wizzard-step-content {
+      width: 12rem;
+      min-width: 12rem;
+      max-width: 12rem;
+    }
+
+    .step-circle::before {
+      width: calc(12rem + 1rem - 2.25rem);
+    }
+
+  }
+}
+
+/** end step warning **/
+/*** end wizzard  ***/

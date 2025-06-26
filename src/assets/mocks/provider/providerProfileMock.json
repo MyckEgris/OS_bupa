@@ -1,0 +1,106 @@
+{
+    "providerKey": "MEX-RFC-OHA051017KE7-000002",
+    "accountName": "HOSPITAL ANGELES LOMAS",
+    "aliasForCheck": "Operadora de Hospitales Angeles SA de CV",
+    "languageKey": "e3a1dbf8-181f-e511-8105-c4346bac7ed4",
+    "principalLanguage": {
+        "languageKey": "e3a1dbf8-181f-e511-8105-c4346bac7ed4",
+        "languageName": "Spanish"
+    },
+    "documentTypeKey": "938da9ef-8bfa-e911-a814-000d3a253e09",
+    "documentType": {
+        "documentTypeKey": "938da9ef-8bfa-e911-a814-000d3a253e09",
+        "documentTypeName": "RFC"
+    },
+    "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+    "Country": {
+        "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+        "isoAlpha": "MEX",
+        "countryName": "Mexico",
+        "nationality": "Mexico"
+    },
+    "CityKey": "0b38d52a-da64-ea11-a811-000d3a227778",
+    "City": {
+        "cityKey": "0b38d52a-da64-ea11-a811-000d3a227778",
+        "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+        "cityName": "Huixquilucan de Degollado"
+    },
+    "StateKey": "647511f0-a35c-ea11-a811-000d3a227c3f",
+    "State": {
+        "StateKey": "647511f0-a35c-ea11-a811-000d3a227c3f",
+        "StateName": "Estado de México",
+        "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4"
+    },
+    "phone": "5555555",
+    "cellPhone": "5656565563",
+    "email": "pepe@hotmail.com",
+    "webSiteUrl": "",
+    "beneficialOwners": [
+        {
+            "firstName": "Juan",
+            "secondName": "Augusto",
+            "FirstSurname": "Perez",
+            "SecondSurname": "Lopez",
+            "DateOfBirth": "1961-06-04",
+            "NationalityCountryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+            "Nationality": {
+                "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+                "isoAlpha": "MEX",
+                "countryName": "Mexico",
+                "nationality": "Mexico"
+            },
+            "CountryOfResidenceKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+            "CountryOfResidence": {
+                "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+                "isoAlpha": "MEX",
+                "countryName": "Mexico",
+                "nationality": "Mexico"
+            },
+            "OwnershipSharePercentage": "50"
+        },
+        {
+            "firstName": "carlos",
+            "secondName": "andres",
+            "FirstSurname": "montoya",
+            "SecondSurname": "Lopez",
+            "DateOfBirth": "1961-06-04",
+            "NationalityCountryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+            "Nationality": {
+                "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+                "isoAlpha": "MEX",
+                "countryName": "Mexico",
+                "nationality": "Mexico"
+            },
+            "CountryOfResidenceKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+            "CountryOfResidence": {
+                "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+                "isoAlpha": "MEX",
+                "countryName": "Mexico",
+                "nationality": "Mexico"
+            },
+            "OwnershipSharePercentage": "50"
+        },
+        {
+            "firstName": "maria",
+            "secondName": "daniela",
+            "FirstSurname": "Perez",
+            "SecondSurname": "Lopez",
+            "DateOfBirth": "1961-06-04",
+            "NationalityCountryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+            "Nationality": {
+                "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+                "isoAlpha": "MEX",
+                "countryName": "Mexico",
+                "nationality": "Mexico"
+            },
+            "CountryOfResidenceKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+            "CountryOfResidence": {
+                "countryKey": "64b384a7-3ecf-e411-80ed-c4346bad32b4",
+                "isoAlpha": "MEX",
+                "countryName": "Mexico",
+                "nationality": "Mexico"
+            },
+            "OwnershipSharePercentage": "50"
+        }
+    ]
+}

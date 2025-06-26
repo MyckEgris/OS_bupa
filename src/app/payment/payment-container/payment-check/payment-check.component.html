@@ -1,0 +1,102 @@
+<div class="tab-pane fade show active" id="credito" role="tabpanel" aria-labelledby="credito-tab">
+    <div class="row">
+      <div class="col-md-8">
+        <form novalidate (ngSubmit)="payPolicy()" [formGroup]="paymentForm" >
+          <div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="firstName" class="">{{ 'PAYMENTS.CC.FIRST_NAME' | translate }} </label>
+                  <input id="firstName" class="form-control" placeholder="" type="text" formControlName="firstName">
+                  <small class="text-danger"
+                    *ngIf="(basicsControls.firstName.touched && basicsControls.firstName.invalid)">
+                    {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="surnameName" class="">{{ 'PAYMENTS.CC.LAST_NAME' | translate }} </label>
+                  <input id="surnameName" class="form-control" placeholder="" type="text" formControlName="surnameName">
+                  <small class="text-danger"
+                    *ngIf="(basicsControls.surnameName.touched && basicsControls.surnameName.invalid)">
+                    {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="numberCheck" class="">{{ 'PAYMENTS.CHECK.ACCOUNT_NUMBER' | translate }}</label>
+                  <input id="numberCheck" appOnlyNumber="true" formControlName="accountNumber" class="form-control"
+                    placeholder="" maxCharsAllowed="{{maxChars}}" type="text">
+                  <small class="text-danger"
+                    *ngIf="(basicsControls.accountNumber.touched && basicsControls.accountNumber.invalid)">
+                    {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="numberRoute" class="">{{ 'PAYMENTS.CHECK.ROUTE_NUMBER' | translate }}</label>
+                    <input id="numberRoute" appOnlyNumber="true" formControlName="routeNumber" class="form-control"
+                      placeholder="" maxCharsAllowed="{{maxRoute}}" type="text">
+                    <small class="text-danger"
+                      *ngIf="(basicsControls.routeNumber.touched && basicsControls.routeNumber.invalid)">
+                      {{ 'PAYMENTS.ERRORS.REQUIRED' | translate }}
+                    </small>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row">
+              <div class="col-md-6" *ngIf="policy">
+                <div class="form-group">
+                  <label for="amountToPay" class="">{{ 'PAYMENTS.CC.AMOUNT' | translate }}</label>
+                  <input id="amountToPay" formControlName="amountToPay" class="form-control" type="text"
+                    appCurrencyFormatter="$" appOnlyNumber="true">
+                  <small class="text-danger"
+                    *ngIf="basicsControls.amountToPay.touched && basicsControls.amountToPay.invalid">
+                    {{ 'PAYMENTS.ERRORS.AMOUNT_NOT_VALID' | translate }}
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="email" class="">
+                    {{ 'PAYMENTS.CC.OPTIONAL_EMAIL' | translate }}</label>
+                  <input id="email" class="form-control" type="text" formControlName="email">
+                  <small class="text-danger" *ngIf="(basicsControls.email.touched && basicsControls.email.invalid)">
+                    {{ 'PAYMENTS.ERRORS.EMAIL_NOT_VALID' | translate }}
+                  </small>
+                </div>
+                <div class="ig-processdetalle">
+                  {{ 'PAYMENTS.CC.EMAIL_DISCLAIMER' | translate }}
+                </div>
+              </div>
+              <br>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <a class="btn btnpagar" (click)="goToBack()" style="cursor: pointer;">
+                  {{ 'PAYMENTS.CC.CANCEL' | translate }}</a>
+              </div>
+              <div class="col-md-4">
+                <button type='submit' class="btn btnpagar"> {{ 'PAYMENTS.CC.PAY' | translate }} <i
+                    class="material-icons">keyboard_arrow_right</i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br>
+      </div>
+      <div class="col-md-4">
+        <app-payment-policy-info [policy]="policy"></app-payment-policy-info>
+      </div>
+    </div>
+  </div>

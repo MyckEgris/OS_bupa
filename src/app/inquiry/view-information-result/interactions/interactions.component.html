@@ -1,0 +1,25 @@
+<div class="bp-itemcontsect2 ">
+  <div class="row interaction-content">
+    <div class="col-md-12">
+      <h5>{{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.TITLE' | translate }}</h5>
+    </div>
+    <div class="col-md-12" *ngIf="inquiryId && interactions && interactions.length > 0">
+      <div class="row">
+        <div class="col-12 bp-itemcontsect3" *ngFor="let interactionItem of interactions">
+          <app-interactions-item [item]="interactionItem"></app-interactions-item>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="!inquiryId || !interactions || interactions.length === 0">
+      {{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.NOT_DATA' | translate }}
+    </div>
+
+  </div>
+  <br>
+  <div *ngIf="collectionSize > 0">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="interactionsPage" [maxSize]="5"
+      [pageSize]="interactionsPageSize" [rotate]="true" [boundaryLinks]="true" (pageChange)="getInteractions($event);">
+    </ngb-pagination>
+  </div>
+
+</div>

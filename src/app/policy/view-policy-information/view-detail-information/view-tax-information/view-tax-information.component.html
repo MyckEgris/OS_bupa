@@ -1,0 +1,177 @@
+<div class="ig-polidetaleinfo">
+  <h3>
+    {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.TAX_INFORMATION.TITLE' | translate }}
+  </h3>
+</div>
+
+<div class="ig-resultpolizacont">
+  <!-- <section class="ig-requestpre setup-content animated fadeIn" id="tax_data"> -->
+  <section class="setup-content animated fadeIn" id="tax_data">
+    <form autocomplete="off"  [formGroup]="forma" (ngSubmit)="updateData()">
+
+      <div class="row">
+        <div class="col-md-5">        
+          <div class="row">
+            <div class="col-md-6" style="margin-top: 20px">
+              <input #inputFile 
+                    type="file"
+                    style="display:none"
+                    (change)="sendFile($event)"/>
+
+              <button type="button" 
+                      class="ig-principalbtn ig-botones"                       
+                      (click)="executeClickInputFile()">
+                {{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.BUTTONS.UPLOAD_FILE' | translate }}
+              </button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <label> {{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.REGIME' | translate }} </label>
+              <p><small><mark>* {{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.MESSAGES.MORE_THAN_ONE_TAX_REGIME' | translate }}</mark></small></p>
+              <br>
+              <div class="col-md-12">
+                <div class="form-group">                  
+                  <select class="custom-select form-control"                             
+                          formControlName="regimenId"
+                          [attr.disabled]="disableregimens ? '' : null"
+                          (change)="setCfdis($event.target.value)">
+                      <option value="" disabled selected>
+                          {{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.PLACEHOLDER.REGIME' | translate }} 
+                      </option>
+                      <option *ngFor="let regimen of regimes" [value]="regimen.regimenTypeId">
+                          {{ regimen.regimenName | translate }}
+                      </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="col-md-12">
+              <label> {{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.USO_CFDI' | translate }} </label>
+              <br>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select class="custom-select form-control"                                                     
+                          formControlName = "cfdiId"
+                          [attr.disabled]="disableCfdis ? '' : null"
+                          (change)="setEnableSaveButton()"
+                          #usoCFDI> 
+                    <option value="" disabled selected>
+                      {{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.PLACEHOLDER.USO_CFDI' | translate }} 
+                    </option>
+                    <option *ngFor="let cfdi of cfdiList" [value]="cfdi.usoCFDIId">
+                      {{ cfdi.name | translate}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>  
+
+        </div>
+
+        <div class="col-md-5">
+
+          <div class="form-group" formGroupName="individualData" *ngIf="!hideLegalEntity">
+            <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.NAME' | translate }}</label>
+                <div class="col-10">
+                  <input type="text"
+                        class="form-control"                        
+                        formControlName="firstName"
+                        [attr.disabled]="true">                                       
+                </div>
+                          
+            <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.LAST_NAME' | translate }}</label>
+                <div class="col-10">
+                  <input type="text"
+                         class="form-control"                         
+                         formControlName="lastName"
+                         [attr.disabled]="true">                  
+                </div>
+  
+            <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.MATERNAL_NAME' | translate }}</label>
+                <div class="col-10">
+                  <input type="text"
+                         class="form-control"                         
+                         formControlName="maternalName"
+                         [attr.disabled]="true">                                                             
+                </div>
+          </div>
+
+          <label class="col-12 col-form-label" *ngIf="hideLegalEntity">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.COMPANY_NAME' | translate }}</label>
+              <div class="col-10" *ngIf="hideLegalEntity">
+                <input type="text"
+                       class="form-control"                       
+                       formControlName="companyName"
+                       [attr.disabled]="true">                
+              </div>
+          
+          <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.POSTAL_CODE' | translate }}</label>
+              <div class="col-10">    
+                  <input type="text"
+                        class="form-control"                        
+                        formControlName="cp"                   
+                        [attr.disabled]="true">                  
+              </div>            
+
+          <!-- <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.ADDRESS' | translate }}</label>
+              <div class="col-10">    
+                  <input type="text"
+                        class="form-control"                        
+                        formControlName="address"                   
+                        [attr.disabled]="true">                  
+              </div>             -->
+          
+          <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.STREET' | translate }}</label>
+              <div class="col-10">    
+                  <input type="text"
+                        class="form-control"                        
+                        formControlName="street"                   
+                        [attr.disabled]="true">                  
+              </div>            
+
+          <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.INTERIOR' | translate }}</label>
+              <div class="col-10">    
+                  <input type="text"
+                        class="form-control"                        
+                        formControlName="interior"                   
+                        [attr.disabled]="true">                  
+              </div>            
+
+          <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.EXTERIOR' | translate }}</label>
+              <div class="col-10">    
+                  <input type="text"
+                        class="form-control"                        
+                        formControlName="exterior"                   
+                        [attr.disabled]="true">                  
+              </div>            
+
+          <label class="col-12 col-form-label">{{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.CONTROLS.INPUT.LABELS.RFC' | translate }}</label>
+              <div class="col-10">    
+                  <input type="text"
+                        class="form-control"                        
+                        formControlName="rfc"                   
+                        [attr.disabled]="true">                  
+              </div>            
+          
+          <div class="form-group">                
+                <div class="col-6">
+                  <button type="submit" [disabled]="clickCFDI" class="ig-principalsegundariobtn ig-botones">                                 
+                    {{ 'POLICY.VIEW_POLICY_DETAILS.TAX_INFORMATION.FORM.BUTTONS.SAVE_INFORMATION' | translate }}
+                  </button>    
+                </div>          
+          </div>
+
+        </div>
+
+      </div>      
+
+    </form>    
+    <app-faq-tax-information></app-faq-tax-information>
+        
+  </section>
+</div>

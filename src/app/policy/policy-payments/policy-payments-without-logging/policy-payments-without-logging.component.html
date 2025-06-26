@@ -1,0 +1,101 @@
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="!inactivityPeriod()">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ig-title">
+        <h5>{{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.TITLE' | translate }}</h5>
+        <p> {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.DESCRIPTION' | translate }} </p>
+        <p> {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.DESCRIPTION_1' | translate }} </p>
+        <p> {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.DESCRIPTION_2' | translate }} </p>
+      </div>
+      <div class="ig-registrohelp">
+        <p [innerHTML]=" 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.HELP_LINK' | translate"></p>
+      </div>
+      <div class="ig-title">
+        <label for=""><b>{{'IMPORTANT_ANNOUNCEMENT.TITLE' | translate}}: </b></label><p [innerHTML]="'IMPORTANT_ANNOUNCEMENT.MESSAGE' | translate"></p><p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 offset-md-3">
+    <form [formGroup]="policyPaymentLoggin" (ngSubmit)="validateForm()" novalidate class="ig-pagosesionform">
+      <h5> {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.POLICY_NUMBER' | translate }} </h5>
+      <p>{{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.POLICY_NUMBER_DESCRIPTION' | translate }}</p>
+        <div class="form-group" formGroupName="basics">
+          <input type="number" class="form-control" formControlName="policyId" id="inputPoliza"
+          placeholder="{{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.POLICY_NUMBER_EXAMPLE' | translate }} " maxCharsAllowed="10">
+
+          <div *ngIf="basicsControls.policyId.touched && basicsControls.policyId.invalid">
+            <small class="text-danger"
+              *ngIf="basicsControls.policyId.errors && basicsControls.policyId.errors.required">
+             {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+            </small>
+            <small class="text-danger"
+              *ngIf="basicsControls.policyId.errors && (basicsControls.policyId.errors.isNaN || basicsControls.policyId.errors.maxAmountExceeded)">
+             {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.ERROR.ERROR_MESSAGE.NUMBER_NOT_VALID' | translate }}
+            </small>
+          </div>
+
+        </div>
+      <h5> {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.DOB' | translate }} </h5>
+      <p>{{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.DOB_DESCRIPTION' | translate }}</p>
+        <div class="form-group" formGroupName="basics">
+          <div class="form-group ig-date-picker">
+            <app-custom-date-picker formControlName="dob" [isDisableOnlyInput]="isDisableOnlyInput" [minDate]="dateMinDOB" [maxDate]="dateMaxDOB"></app-custom-date-picker>
+
+            <div *ngIf="basicsControls.dob.touched && basicsControls.dob.invalid">
+              <small class="text-danger"
+                *ngIf="basicsControls.dob.errors && basicsControls.dob.errors.required">
+               {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+              </small>
+              <small class="text-danger"
+                *ngIf="basicsControls.dob.errors && (basicsControls.dob.errors.isNaN)">
+               {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.ERROR.ERROR_MESSAGE.DATE_NOT_VALID' | translate }}
+              </small>
+            </div>
+          </div>
+        </div>
+      <div class="ig-captcha" formGroupName="basics">
+        <re-captcha formControlName="captcha"
+            required
+            siteKey="{{captchaSiteKey}}"
+            lang="{{languaje}}"
+            (resolved)="resolved($event)">
+        </re-captcha>
+        <small class="text-danger"
+          *ngIf="(basicsControls.captcha.touched && basicsControls.captcha.invalid)">
+          {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.ERROR.ERROR_MESSAGE.REQUIRED_FIELD' | translate }}
+        </small>
+      </div>
+
+      <div class="ig-botonespago">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-lg-6">
+                <button (click)="cancel()" class="btn btn-primary btncancel btn-lg" type="button">
+                  {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.CANCEL' | translate }}
+                </button>
+              </div>
+
+              <div class="col-lg-6">
+                <button type="submit" [disabled]="policyPaymentLoggin.invalid"
+                  [ngClass]="{ 'btn btn-primary btnconti btn-lg' : true, 'disabled' : policyPaymentLoggin.invalid  }">
+                  {{ 'PAYMENTS.PAYMENT_WITHOUT_LOGGIN.CONTINUE' | translate }} </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<section class="ig-pagosesion ig-wizard ig-wizardregistro animated fadeIn" *ngIf="inactivityPeriod()">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="ig-title">
+        <p style="font-weight: bold;"> {{ 'APP.MESSAGE.MEXICO_INACTIVITY' | translate }} </p>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</section>

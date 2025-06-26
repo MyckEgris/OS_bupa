@@ -1,0 +1,14 @@
+<div class="form-group" [ngClass]="{ 'was-validated' : showValidations}">
+  <label for="policyOwnerGenre">
+    {{'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.GENERO' | translate }}
+  </label>
+  <ng-select #genderSelect 
+    [items]="wizard.genders$ | translateObservableListGender | async" 
+    [selectOnTab]="true"
+    bindValue="genderId" 
+    bindLabel="name" 
+    [formControl]="getControl(formControlNameCustom)"
+    class="form-control" 
+    [placeholder]="getControl(formControlNameCustom).value !== null && getControl(formControlNameCustom).value !== '' ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate">
+  </ng-select>
+</div>

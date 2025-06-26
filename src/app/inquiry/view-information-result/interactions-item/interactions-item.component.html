@@ -1,0 +1,95 @@
+<div class="row bp-chat bp-negrilla" *ngIf="item && item.interationByCustomer">
+  <div class="col-md-2 p-0">
+    <strong>{{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.ITEM.DATE' | translate }}</strong><br>
+    <label>{{ item.createdOn | dateTranslate }}</label>
+    <label>{{ item.createdOn | date:'shortTime' }}</label>
+  </div>
+
+  <div class="col-md-8 ">
+    <div class="bp-respuesta">
+      <div class="row">
+        <div class="col-md-12">
+          <div [innerHtml]="item.observation"></div>
+        </div>
+      </div>
+      <div class="row bp-documents-view">
+        <div class="col-12">
+          <div class="" (click)="toggleSlideAttachments();">
+            {{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.ITEM.ATTACHMENT' | translate }}<i
+              class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="ig-detallereclamo" id="ig-detallereclamo-{{item.interationId}}" *ngIf="item.documents">
+            <div *ngIf="item.documents && item.documents.length === 0">
+              <small>{{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.ITEM.NOT_DATA' | translate }}</small>
+            </div>
+            <div class="row" *ngIf="item.documents && item.documents.length > 0">
+              <div class="col-12" *ngFor="let document of item.documents">
+                <a href="#" (click)="downloadDocument(document, $event)">{{ document.fileName}} </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-2 text-center">
+    <span class="interaction-item-icon"><i aria-hidden="true"
+        class="fa fa-user-circle-o interaction-item-icon"></i></span><br>
+    <div>{{ user }}</div>
+  </div>
+</div>
+
+
+
+
+<div class="row bp-chat bp-negrilla p-0" *ngIf="item && !item.interationByCustomer">
+  <div class="col-md-2 p-0 text-center">
+    <span class="interaction-item-icon"><i aria-hidden="true"
+        class="fa fa-user-circle interaction-item-icon"></i></span><br>
+    <div>{{ item.owingUser.name }}</div>
+  </div>
+  <div class="col-md-8 ">
+    <div class="bp-respuesta">
+      <div class="row">
+        <div class="col-md-12">
+          <div [innerHtml]="item.observation"></div>
+        </div>
+
+      </div>
+      <div class="row bp-documents-view">
+        <div class="col-12">
+          <div class="" (click)="toggleSlideAttachments();">
+            {{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.ITEM.ATTACHMENT' | translate }}<i
+              class="material-icons">keyboard_arrow_down</i>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="ig-detallereclamo" id="ig-detallereclamo-{{item.interationId}}" *ngIf="item.documents">
+            <div *ngIf="item.documents && item.documents.length === 0">
+              <small>{{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.ITEM.NOT_DATA' | translate }}</small>
+            </div>
+            <div class="row" *ngIf="item.documents && item.documents.length > 0">
+              <div class="col-12" *ngFor="let document of item.documents">
+                <a href="#" (click)="downloadDocument(document, $event)">{{ document.fileName}} </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="col-md-2">
+    <strong>{{ 'INQUIRY.INFORMATION_REQUEST.INTERACTIONS.ITEM.DATE' | translate }}</strong><br>
+    <label>{{ item.createdOn | dateTranslate }}</label>
+    <label>{{ item.createdOn | date:'shortTime' }}</label>
+  </div>
+</div>

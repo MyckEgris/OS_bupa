@@ -1,0 +1,16 @@
+{
+    "firstName": null,
+    "id": "jtrujillot@intergrupo.com",
+    "lastName": null,
+    "name": null,
+    "userAgreementVersionsDto": [
+        {
+            "agreementId": 1,
+            "agreementVersionId": 2,
+            "createDate": "2018-08-10T14:13:35.713",
+            "dateAccepted": null,
+            "isAccepted": false,
+            "refuseNumber": 1
+        }
+    ]
+}

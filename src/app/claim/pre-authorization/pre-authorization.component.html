@@ -1,0 +1,33 @@
+<section class="ig-wizard ig-wizarsolicitud animated fadeIn">
+  <article *ngIf="true">
+    <div class="col-md-4" >
+      <div class="ig-volver">
+        <a class="ig-secundariobtn ig-botones" (click)="goToSearch();">
+          <i class="material-icons">arrow_back</i>{{ 'CLAIMS.PRE_AUTHORIZATION.GO_TO_SEARCH_PRE_AUTHORIZATION' | translate }}
+        </a>
+      </div>
+    </div>
+  </article>
+  <br>
+  <article>
+    <div class="col-md-12">
+      <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 1 ? 'btn-primary' : 'btn-defaul'">1</span>
+            <p>{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.TITLE' | translate}}</p>
+          </div>
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 2 ? 'btn-primary' : 'btn-defaul'">2</span>
+            <p>{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_2.TITLE' | translate}}</p>
+          </div>
+          <div class="stepwizard-step">
+            <span class="btn btn-circle" [ngClass]="currentStep === 3 ? 'btn-primary' : 'btn-defaul'">3</span>
+            <p>{{ 'CLAIMS.PRE_AUTHORIZATION.STEP_3.TITLE' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </article>
+</section>

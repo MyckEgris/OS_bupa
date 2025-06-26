@@ -1,0 +1,281 @@
+<div class="bp-mainpolicy">
+  <form [formGroup]="wizard.enrollmentForm">
+    <div formGroupName="{{STEP_NAME}}">
+      <div class="bp-itemcontsect2 bp-aviso" formGroupName="{{SECTION_NAME}}">
+        <div class="row">
+          <div class="col-md-4">
+            <h4 class="bp-contentitle">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.HEAD4' | translate }}
+            </h4>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.PARAGRAPH1' | translate }}
+            </p>
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.PARAGRAPH2' | translate }}
+            </p>
+
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.PARAGRAPH3' | translate }}
+            </p>
+
+            <p>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.PARAGRAPH4' | translate }}
+            </p>
+          </div>
+          <div class="col-md-4">
+
+            <div class="form-group" [ngClass]="{ 'was-validated' : getControl(PROMOTER_KEY).invalid && showErrorMsg }">
+              <label>{{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.PROMOTER_KEY' | translate}}</label>
+              <input type="text" class="form-control" formControlName="{{PROMOTER_KEY}}" [placeholder]="getControl(PROMOTER_KEY).value !== null && getControl(PROMOTER_KEY).value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.STEP8.PROMOTER_KEY_EX' | translate "
+                [required]="getControl(PROMOTER_KEY).hasError('required')"
+                [pattern]="getValidatorValue(PROMOTER_KEY, 'pattern')" [ngClass]="{'is-invalid': getControl(PROMOTER_KEY).invalid && showErrorMsg ,
+                'is-valid': getControl(PROMOTER_KEY).valid && showErrorMsg }">
+
+              <div class="invalid-feedback" *ngIf="getControl(PROMOTER_KEY).hasError('pattern')">
+                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(PROMOTER_KEY, 'pattern') | uppercase | translate}}
+              </div>
+              <div class="invalid-feedback" *ngIf="getControl(PROMOTER_KEY).hasError('maxlength')">
+                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(PROMOTER_KEY, 'maxLength') | uppercase | translate}}
+                {{getControl(PROMOTER_KEY).errors?.maxlength.requiredLength}}
+              </div>
+              <div class="invalid-feedback" *ngIf="getControl(PROMOTER_KEY).hasError('minlength')">
+                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(PROMOTER_KEY, 'minLength') | uppercase | translate}}
+                {{getControl(PROMOTER_KEY).errors?.minlength.requiredLength}}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="{{EMAIL_CONSENTS}}">
+                {{'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.EMAIL' | translate}}
+              </label>
+              <input type="text" class="form-control" formControlName="{{EMAIL_CONSENTS}}" [placeholder]="getControl(EMAIL_CONSENTS).value !== null && getControl(EMAIL_CONSENTS).value !== ''
+                ? '': 'POLICY.POLICY_ENROLLMENT.INFO_CONTACT.PH_EMAIL' | translate "
+                [required]="getControl(EMAIL_CONSENTS).errors?.required"
+                [maxLength]="getValidatorValue(EMAIL_CONSENTS, 'maxLength')"
+                [minlength]="getValidatorValue(EMAIL_CONSENTS, 'minlength')"
+                [pattern]="getValidatorValue(EMAIL_CONSENTS, 'pattern')" [ngClass]="{'is-invalid': getControl(EMAIL_CONSENTS).invalid && showErrorMsg ,
+                'is-valid': getControl(EMAIL_CONSENTS).valid && showErrorMsg }">
+
+              <div class="invalid-feedback" *ngIf="getControl(EMAIL_CONSENTS).errors?.invalidEmail">
+                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(EMAIL_CONSENTS, 'emailPatternValidator') | uppercase | translate}}
+              </div>
+              <div class="invalid-feedback" *ngIf="getControl(EMAIL_CONSENTS).errors?.maxlength">
+                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(EMAIL_CONSENTS, 'maxLength') | uppercase | translate}}
+                {{getControl(EMAIL_CONSENTS).errors?.maxlength.requiredLength}}
+              </div>
+              <div class="invalid-feedback" *ngIf="getControl(EMAIL_CONSENTS).errors?.minlength">
+                {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage(EMAIL_CONSENTS, 'minLength') | uppercase | translate}}
+                {{getControl(EMAIL_CONSENTS).errors?.minlength.requiredLength}}
+              </div>
+            </div>
+
+
+            <div class="col-md-12 mt-5" [ngClass]="{'border-danger': !getControl(RECOGNITION_AND_AUTHORIZATION_FOR_AGENT).value && showErrorMsg }">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="{{RECOGNITION_AND_AUTHORIZATION_FOR_AGENT}}"
+                  formControlName="{{RECOGNITION_AND_AUTHORIZATION_FOR_AGENT}}">
+                <label class="form-check-label" for="{{RECOGNITION_AND_AUTHORIZATION_FOR_AGENT}}">
+                  {{ 'POLICY.POLICY_ENROLLMENT.STEP8.RECOGNITION_AND_AUTH' | translate }}
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4">
+            <h4 class="bp-contentitle">
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.HEAD4_2' | translate }}
+            </h4>
+
+            <div class="form-group" [ngClass]="{ 'was-validated' : showErrorMsg}">
+              <label for="interviewTypeId"> {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.LBL_OWNER_PETITIONER' | translate }} </label>
+              <ng-select #interviewTypeIdSelect [items]="INTERVIEW_TYPE" [selectOnTab]="true"
+                bindValue="id" bindLabel="description" formControlName="interviewTypeId"
+                [required]="getControl('interviewTypeId').errors?.required" class="form-control " [placeholder]="getControl('interviewTypeId').value !== null && getControl('interviewTypeId').value !== ''
+                                      ? '':'POLICY.POLICY_ENROLLMENT.SELECT' | translate ">
+              </ng-select>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label for="previousVisitDate">{{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.LBL_DATE_PREVIOUS_VISIT' | translate }} </label>
+                  <app-datepicker-wrapper formControlName="previousVisitDate"
+                    [hasErrors]="getControl('previousVisitDate').errors" [showValidations]="showErrorMsg">
+                  </app-datepicker-wrapper>
+                  <small class="text-danger" *ngIf="wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('previousVisitDate').invalid
+                                                        && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('previousVisitDate').touched
+                                                        && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('previousVisitDate').errors?.invalidAdultAge
+                                                        && showErrorMsg">
+                    {{'POLICY.POLICY_ENROLLMENT.STEP2.SECTION_01.OWNER_DOB_CONSTRAINT_1' | translate }}
+                  </small>
+                  <small class="text-danger" *ngIf="wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('previousVisitDate').invalid
+                                                          && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('previousVisitDate').touched
+                                                          && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('previousVisitDate').errors?.invalidAgeRangePolicy
+                                                          && showErrorMsg">
+                    {{'POLICY.POLICY_ENROLLMENT.STEP2.SECTION_01.OWNER_DOB_CONSTRAINT_2' | translate }}
+                  </small>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label for="currentVisitDate">{{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.LBL_DATE_CURRENT_VISIT' | translate }} </label>
+                  <app-datepicker-wrapper formControlName="currentVisitDate" [minDate]="minDateCurrentVisitDate"
+                    [hasErrors]="getControl('currentVisitDate').errors" [showValidations]="showErrorMsg">
+                  </app-datepicker-wrapper>
+                  <small class="text-danger" *ngIf="wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('currentVisitDate').invalid
+                                                        && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('currentVisitDate').touched
+                                                        && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('currentVisitDate').errors?.invalidAdultAge
+                                                        && showErrorMsg">
+                    {{'POLICY.POLICY_ENROLLMENT.STEP2.SECTION_01.OWNER_DOB_CONSTRAINT_1' | translate }}
+                  </small>
+                  <small class="text-danger" *ngIf="wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('currentVisitDate').invalid
+                                                          && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('currentVisitDate').touched
+                                                          && wizard.enrollmentForm.get(STEP_NAME).get(SECTION_NAME).get('currentVisitDate').errors?.invalidAgeRangePolicy
+                                                          && showErrorMsg">
+                    {{'POLICY.POLICY_ENROLLMENT.STEP2.SECTION_01.OWNER_DOB_CONSTRAINT_2' | translate }}
+                  </small>
+                </div>
+
+
+              </div>
+            </div>
+            <br>
+            <h6>
+              {{ 'POLICY.POLICY_ENROLLMENT.STEP8.SECTION_04.HEAD6' | translate }}
+            </h6>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="firstName">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.FIRST_NAME' | translate }}</label>
+                  <input type="text" class="form-control" formControlName="firstName" [placeholder]="getControl('firstName').value !== null && getControl('firstName').value !== ''
+                    ? '': 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_NAME' | translate "
+                    [required]="getControl('firstName').errors?.required"
+                    [maxLength]="getValidatorValue('firstName', 'maxLength')"
+                    [minlength]="getValidatorValue('firstName', 'minlength')"
+                    [pattern]="getValidatorValue('firstName', 'pattern')" [ngClass]="{'is-invalid': getControl('firstName').invalid && showErrorMsg ,
+                    'is-valid': getControl('firstName').valid && showErrorMsg }">
+
+                  <div class="invalid-feedback" *ngIf="getControl('firstName').errors?.invalidEmail">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('firstName', 'emailPatternValidator') | uppercase | translate}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('firstName').errors?.maxlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('firstName', 'maxLength') | uppercase | translate}}
+                    {{getControl('firstName').errors?.maxlength.requiredLength}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('firstName').errors?.minlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('firstName', 'minLength') | uppercase | translate}}
+                    {{getControl('firstName').errors?.minlength.requiredLength}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="paternalLastName">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.SURNAME' | translate }}</label>
+                  <input type="text" class="form-control" formControlName="paternalLastName" [placeholder]="getControl('paternalLastName').value !== null && getControl('paternalLastName').value !== ''
+                    ? '': 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_FATHER_LAST_NAME' | translate "
+                    [required]="getControl('paternalLastName').errors?.required"
+                    [maxLength]="getValidatorValue('paternalLastName', 'maxLength')"
+                    [minlength]="getValidatorValue('paternalLastName', 'minlength')"
+                    [pattern]="getValidatorValue('paternalLastName', 'pattern')" [ngClass]="{'is-invalid': getControl('paternalLastName').invalid && showErrorMsg ,
+                    'is-valid': getControl('paternalLastName').valid && showErrorMsg }">
+
+                  <div class="invalid-feedback" *ngIf="getControl('paternalLastName').errors?.invalidEmail">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('paternalLastName', 'emailPatternValidator') | uppercase | translate}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('paternalLastName').errors?.maxlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('paternalLastName', 'maxLength') | uppercase | translate}}
+                    {{getControl('paternalLastName').errors?.maxlength.requiredLength}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('paternalLastName').errors?.minlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('paternalLastName', 'minLength') | uppercase | translate}}
+                    {{getControl('paternalLastName').errors?.minlength.requiredLength}}
+                  </div>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="middleName">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.LBL_MIDDLE_NAME' | translate }}</label>
+                  <input type="text" class="form-control" formControlName="middleName" [placeholder]="getControl('middleName').value !== null && getControl('middleName').value !== ''
+                    ? '': 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_MIDDLE_NAME' | translate "
+                    [required]="getControl('middleName').errors?.required"
+                    [maxLength]="getValidatorValue('middleName', 'maxLength')"
+                    [minlength]="getValidatorValue('middleName', 'minlength')"
+                    [pattern]="getValidatorValue('middleName', 'pattern')" [ngClass]="{'is-invalid': getControl('middleName').invalid && showErrorMsg ,
+                    'is-valid': getControl('middleName').valid && showErrorMsg }">
+
+                  <div class="invalid-feedback" *ngIf="getControl('middleName').errors?.invalidEmail">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('middleName', 'emailPatternValidator') | uppercase | translate}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('middleName').errors?.maxlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('middleName', 'maxLength') | uppercase | translate}}
+                    {{getControl('middleName').errors?.maxlength.requiredLength}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('middleName').errors?.minlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('middleName', 'minLength') | uppercase | translate}}
+                    {{getControl('middleName').errors?.minlength.requiredLength}}
+                  </div>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="maternalLastName">{{ 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.SURNAME_MOTHER' | translate }}</label>
+                  <input type="text" class="form-control" formControlName="maternalLastName" [placeholder]="getControl('maternalLastName').value !== null && getControl('maternalLastName').value !== ''
+                    ? '': 'POLICY.POLICY_ENROLLMENT.INFO_PERSONAL.PH_MOTHER_LAST_NAME' | translate "
+                    [required]="getControl('maternalLastName').errors?.required"
+                    [maxLength]="getValidatorValue('maternalLastName', 'maxLength')"
+                    [minlength]="getValidatorValue('maternalLastName', 'minlength')"
+                    [pattern]="getValidatorValue('maternalLastName', 'pattern')" [ngClass]="{'is-invalid': getControl('maternalLastName').invalid && showErrorMsg ,
+                    'is-valid': getControl('maternalLastName').valid && showErrorMsg }">
+
+                  <div class="invalid-feedback" *ngIf="getControl('maternalLastName').errors?.invalidEmail">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('maternalLastName', 'emailPatternValidator') | uppercase | translate}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('maternalLastName').errors?.maxlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('maternalLastName', 'maxLength') | uppercase | translate}}
+                    {{getControl('maternalLastName').errors?.maxlength.requiredLength}}
+                  </div>
+                  <div class="invalid-feedback" *ngIf="getControl('maternalLastName').errors?.minlength">
+                    {{ 'APP.MESSAGE.' | concatenate: getValidatorMessage('maternalLastName', 'minLength') | uppercase | translate}}
+                    {{getControl('maternalLastName').errors?.minlength.requiredLength}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 p-0">
+          <div class="bp-alertform"
+            *ngIf="showErrorMsg && getFormGroup().invalid">
+            <div class="alert alert-danger" role="alert">
+              <i class="material-icons">info</i>
+              {{'POLICY.POLICY_ENROLLMENT.STEP8.INFORMATION_INCOMPLETE' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 p-0 mt-5">
+          <div class="row">
+            <div class="col-md-4 offset-md-4">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnsecondary" (click)="back()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.BACK' | translate">
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button class="bp-btn bp-btnprimary" (click)="next()"
+                    [innerHtml]="'POLICY.POLICY_ENROLLMENT.SAVE_CONTINUE' | translate ">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

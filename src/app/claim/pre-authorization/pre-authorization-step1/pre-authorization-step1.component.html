@@ -1,0 +1,182 @@
+<section class="ig-requestpre">
+  <div class="col-md-12" *ngIf="this.wizard">
+    <form [formGroup]="wizard.preAuthForm">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12 ig-formulario">
+
+              <div class="row" formGroupName="memberInformation">
+                <div class="col-md-12">
+
+                  <div class="row align-items-center" *ngIf="isProvider">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="" for="inputText">
+                          {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.ASSOCIATED_PROVIDERS' | translate }}
+                        </label>
+                        <ng-select #providersSelect class="form-control" formControlName="provider" bindLabel="name"
+                          baindValue="id" [items]="wizard.lstAssociatedProvider" autofocus [attr.required]="isProvider"
+                          (change)="handleProviderChange($event)">
+                        </ng-select>
+                        <small class="text-danger" *ngIf="(isFieldValid('memberInformation', 'provider'))
+                                    || ((getControl('memberInformation', 'provider').errors?.required ||
+                                          getControl('memberInformation', 'provider').value === '')
+                                              && showValidations
+                                              && isProvider)">
+                          {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-center" *ngIf="showInputPolicyNumber">
+
+                    <div class="col-md-12">
+                      <label class="" for="inputText">
+                        {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.POLICY_NUMBER' | translate }}
+                      </label>
+                      <app-custom-popover [title]="" [content]="[]"
+                        [template]="['APP.LEGACY_POLICY_HTML_INFO_01'|translate,'APP.LEGACY_POLICY_HTML_INFO_02'|translate,'APP.LEGACY_POLICY_HTML_INFO_03'|translate,'APP.LEGACY_POLICY_HTML_INFO_04'|translate]"
+                        *ngIf="isProvider">
+                      </app-custom-popover>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <select class="custom-select form-control" id="policySearchType" formControlName="searchType">
+                          <option value="" disabled selected>
+                            {{ 'POLICY.VIEW_POLICY_DETAILS.SEARCH_TYPES.SELECT' | translate }} </option>
+                          <option *ngFor="let searchType of policySearchTypes" value="{{searchType.value}}">
+                            {{'POLICY.VIEW_POLICY_DETAILS.SEARCH_TYPES.'| concatenate: searchType.value | uppercase | translate }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <input class="form-control" id="policyNumber" formControlName="policyNumber"
+                          placeholder="{{ policyInputPlaceHolder | translate}}" type="text" OnlyNumber="true"
+                          maxCharsAllowed="15"
+                          [ngClass]="{disabled: !this.getControl(this.MEMBER_INFORMATION,this.SEARCH_TYPE_CTRL).value}">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-1 col-sm-2 col-6">
+                      <button type="button" class="ig-principalbtn ig-botones" (click)="searchPolicyDetail()"
+                        [disabled]="!this.getControl(this.MEMBER_INFORMATION, this.SEARCH_TYPE_CTRL).value || !this.getControl(this.MEMBER_INFORMATION,this.POLICY_NUMBER).value">
+                        <i class="material-icons">search</i></button>
+                    </div>
+
+                    <div class="col-md-3 offset-3">
+                      <small class="text-danger"
+                        *ngIf="(isFieldValid(this.MEMBER_INFORMATION,this.POLICY_NUMBER)
+                                && getControl(this.MEMBER_INFORMATION,this.POLICY_NUMBER).errors?.required)
+                                || (getControl(this.MEMBER_INFORMATION,this.POLICY_NUMBER).errors?.required && showValidations)">
+                        {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                      </small>
+                      <small class="text-danger" *ngIf="isFieldValid('memberInformation', 'policyNumber')
+                                && getControl(this.MEMBER_INFORMATION,this.POLICY_NUMBER).errors?.maxAmountExceeded">
+                        {{ 'APP.MESSAGE.NUMBER_NOT_VALID' | translate }}
+                      </small>
+                    </div>
+
+                  </div>
+
+                  <div class="row ig-resulsearchnone"
+                    *ngIf="wizard.memberSearch && wizard.memberSearch.length === 0 && !isAmexicoProviderWithPolicyOfMexico">
+                    <h6>{{ 'CLAIMSUBMISSION.STEP1RESULTTITLETEXT' | translate}}</h6>
+                    <small>{{ 'CLAIMSUBMISSION.STEP1RESULTTEXT' | translate}}</small>
+                  </div>
+
+                  <div class="row ig-resulsearchnone"
+                    *ngIf="isAmexicoProviderWithPolicyOfMexico">
+                    <h6>{{ 'CLAIMS.PRE_AUTHORIZATION.MESSAGE.NOTIFICATION_MEX_TITLE' | translate}}</h6>
+                    <small>{{ 'CLAIMS.PRE_AUTHORIZATION.MESSAGE.NOTIFICATION_MEX_BODY' | translate}}</small>
+                  </div>
+
+                  <!-- <div class="row align-items-center" *ngIf="!showInputPolicyNumber">
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label class="" for="inputText">
+                          {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.POLICY_NUMBER' | translate }}
+                        </label>
+                        <h5> {{ getControl(this.MEMBER_INFORMATION,this.POLICY_NUMBER).value }} </h5>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <div class="row align-items-center">
+                    <div class="col-md-12">
+                      <div class="form-group animated fadeInUp">
+                        <div class="row">
+                          <div class="col-md-12" *ngIf="getControl('memberInformation', 'policyNumber').value">
+                            <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.MEMBER' | translate }}
+                            </label>
+                          </div>
+                          <div class="col-md-6" *ngFor="let member of wizard.memberSearch; let i = index">
+                            <div class="ig-check">
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio{{ i }}" name="selectedMember{{ i }}"
+                                  class="custom-control-input" [checked]="member === wizard.member"
+                                  (change)="selectMember(member)">
+                                <label class="custom-control-label" for="customRadio{{ i }}">{{ member.fullName }}
+                                  ({{ member.dob | dateTranslate }})</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row"
+                          *ngIf="!(wizard.member) && getControl('memberInformation', 'policyNumber').value">
+                          <small class="text-danger">
+                            {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="" for="inputText"> {{ 'CLAIMS.PRE_AUTHORIZATION.STEP_1.COUNTRY' | translate }}
+                        </label>
+                        <select id="inputState" class="form-control" formControlName="country" autofocus required>
+                          <option value="" disabled selected>
+                            {{ 'POLICY.APPLICATION.STEP1.PRODUCT_INFORMATION.SELECT_COUNTRY' | translate }} </option>
+                          <option *ngFor="let coun of countries" [ngValue]="coun">
+                            {{ coun.countryName }}
+                          </option>
+                        </select>
+                        <small class="text-danger" *ngIf="(isFieldValid('memberInformation', 'country'))
+                               || (getControl('memberInformation', 'country').errors?.required && showValidations)">
+                          {{ 'APP.MESSAGE.REQUIRED_FIELD' | translate }}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <app-info-providers *ngIf="!isAmexicoProviderWithPolicyOfMexico" [showValidations]="showValidations"></app-info-providers>
+
+              <app-info-insured-contact *ngIf="!isAmexicoProviderWithPolicyOfMexico" [showValidations]="showValidations"></app-info-insured-contact>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="col-md-3 offset-md-9 p-0">
+            <button type="button" class="ig-principalbtn ig-botones" (click)="next()" [disabled]="isAmexicoProviderWithPolicyOfMexico">
+              {{ 'CLAIMS.PRE_AUTHORIZATION.NEXT' | translate }} </button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</section>

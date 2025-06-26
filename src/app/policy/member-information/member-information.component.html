@@ -1,0 +1,238 @@
+<section class="ig-validation">
+  <article class="">
+    <form [formGroup]="searchPolicyForm" novalidate class="ig-searchpolconten">
+
+      <div class="col-md-12">
+        <div class="ig-title">
+          <h5>{{ 'POLICY.VIEW_MEMBERS_INFORMATION.TITLE' | translate }}</h5>
+        </div>
+        <div class="ig-searchpol">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <div class="col-md-12">
+                <label for="" style="color: transparent;">
+                  Texto
+                </label>
+              </div>
+              <div class="form-group">
+                <select class="custom-select form-control" formControlName="searchCriteria">
+                  <option value="0">{{ 'POLICY.VIEW_MEMBERS_INFORMATION.SEARCH_BY.DEPENDENT_COVERAGE' | translate }}
+                  </option>
+                  <option value="1">{{ 'POLICY.VIEW_MEMBERS_INFORMATION.SEARCH_BY.DOB' | translate }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="searchPolicyForm.value.searchCriteria == '0'">
+              <div class="col-md-12 p-0">
+                <label for="">
+                  {{ 'POLICY.VIEW_MEMBERS_INFORMATION.LABEL_DATE' | translate }}
+                </label>
+              </div>
+              <div class="row align-items-center">
+
+                <div class="col-md-5">
+                  <div class="input-group">
+                    <app-custom-date-picker formControlName="initialDate" [dateValue]="initialDate">
+                    </app-custom-date-picker>
+                  </div>
+                </div>
+
+                <div class="col-md-5">
+                  <div class="input-group">
+                    <app-custom-date-picker formControlName="finalDate" [minDate]="initialDate" [dateValue]="finalDate">
+                    </app-custom-date-picker>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <button type="button" class="ig-botones ig-principalbtn"
+                    (click)="searchPoliciesByDependantCoverage(1)"><i class="material-icons">search</i></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              <div class="row align-items-center" *ngIf="searchPolicyForm.value.searchCriteria == '1'">
+                <div class="col-md-12">
+                  <label for="">
+                    {{ 'POLICY.VIEW_MEMBERS_INFORMATION.LABEL_DATE' | translate }}
+                  </label>
+                </div>
+                <div class="col-md-10">
+                  <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-display="static"
+                      aria-haspopup="true" aria-expanded="false">
+                      {{ 'POLICY.VIEW_MEMBERS_INFORMATION.SEARCH_BY.MONTH' | translate }}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-lg-right" id="months">
+                      <div class="form-check" *ngFor="let month of monthsOfYear">
+                        <input class="form-check-input" type="checkbox" value="{{month.name}}" id="month-{{month.id}}"
+                          class="" (change)="changeValueFilterStatus($event, month.id)" style="margin-right: 10px;">
+                        <label class="form-check-label" for="defaultCheck1" style="cursor: pointer;">
+                          {{month.name | translate}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <button type="button" class="ig-botones ig-principalbtn" (click)="searchPoliciesByBirthDate(1)"><i
+                      class="material-icons">search</i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ig-searchresul" *ngIf="policyResponse.count === 0">
+          <h4>{{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.NO_RESULT_TITLE' | translate }}</h4>
+          <p>{{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.NO_RESULT_MESSAGE' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="ig-payment ig-polizassear" *ngIf="policyResponse.count > 0">
+        <div class="col-md-12">
+
+          <div class="ig-resultados">
+
+            <div class="ig-titulotabs">
+              <h6> {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.POLICIES_COUNT' | translate }}
+                <span>({{ policyResponse.count }})</span></h6>
+            </div>
+
+            <br>
+            <div class="ig-resultpolizaagent" *ngFor="let policy of policyResponse.data">
+              <div class="ig-resultpolizacont">
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="ig-aseguser">
+                      <h6>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <p class="textosmall">
+                              {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.POLICY_REFERENCE' | translate }}:
+                              {{ policy.policyReference }} <app-custom-popover [title]=""
+                                [content]="['POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.LEGACY_NUMBER', policy.legacyNumber]">
+                              </app-custom-popover>
+                            </p>
+                          </div>
+                        </div>
+                      </h6>
+                    </div>
+                  </div>
+                  <div class="col-md-3 text-right">
+                    <div class="ig-aseguser">
+                      <h6>
+                        {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.COUNTRY' | translate }}:
+                        {{ policy.policyCountry }}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="ig-member2">
+                  <div class="row align-items-center">
+
+                    <div class="col-md-3 border-right">
+                      <div class="ig-aseguser">
+                        <h6>
+                          {{ policy.firstName }} {{ policy.middleName }} <br>
+                          {{ policy.lastName }}
+                        </h6>
+                        <p class="textosmall">
+                          {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.POLICY_HOLDER' | translate }}
+                        </p>
+                      </div>
+                      <br>
+                      <div class="ig-aseguser" *ngFor="let date of policy.policyDates">
+                        <h6 class="ig-processvalor" *ngIf="date.policyDateId === 101">
+                          {{ date.policyDateValue | dateTranslate }}
+                        </h6>
+                        <p class="textosmall" *ngIf="date.policyDateId === 101">
+                          {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.RENEWAL_DATE' | translate }}
+                        </p>
+                      </div>
+                      <br>
+                      <div class="" *ngIf="policy.groupId > 0">
+                        <h6>
+                          {{ policy.groupName }}
+                        </h6>
+
+                        <p class="textosmall">
+                          {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.GROUP' | translate }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-8 border-right">
+                      <div class="row" *ngFor="let member of policy.members">
+                        <div class="col-md-4">
+                          <h6>
+                            {{ member.firstName }} {{ member.lastName }}
+                          </h6>
+                          <p class="textosmall">
+                            {{ 'POLICY.RELATIONTYPE.' | concatenate:member.relationType | uppercase | translate }}
+                          </p>
+                        </div>
+                        <div class="col-md-4">
+                          <h6 class="ig-processvalor">
+                            {{ member.dob | dateTranslate }}
+                          </h6>
+                          <p class="textosmall">
+                            {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.BIRTH_DATE' | translate }}
+                          </p>
+                        </div>
+                        <div class="col-md-4">
+                          <h6>
+                            {{ member.dob | calculateAge }}
+                            {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.YEARS' | translate }}
+                          </h6>
+                          <p class="textosmall">
+                            {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.AGE' | translate }}
+                          </p>
+                        </div>
+
+                      </div>
+
+                      <hr>
+
+                    </div>
+
+
+
+                    <div class="col-md-1 text-center">
+                      <a a class="ig-chevron" [routerLink]="['/policies/member-information', policy.policyId]">
+                        <i class="material-icons" style="font-size: 40px">chevron_right</i>
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="ig-polizaagent" style="width:100%;">
+
+                <div class="ig-titulotabs2">
+                  <h6> {{ 'POLICY.VIEW_MEMBERS_INFORMATION.RESULT.GRID.AGENT' | translate }}: <span>
+                      {{ policy.agent.agentName }} - {{ policy.agent.agentId }}</span></h6>
+                </div>
+
+              </div>
+              <hr>
+            </div>
+            <br>
+
+
+            <div *ngIf="policyResponse.count > 0">
+              <ngb-pagination [collectionSize]="policyResponse.count" [(page)]="page" [maxSize]="10" [pageSize]="10"
+                [rotate]="true" [boundaryLinks]="true" (pageChange)="searchPaginate($event);"></ngb-pagination>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </article>
+</section>

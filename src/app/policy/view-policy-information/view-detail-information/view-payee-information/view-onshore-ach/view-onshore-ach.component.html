@@ -1,0 +1,48 @@
+<div class="row no-gutters align-items-start justify-content-between">
+  <div class="col-md-12 mt-4">
+      <h6 class="mb-2"><strong>{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.TITLE' | translate }}</strong> </h6>
+  </div>
+
+  <div class="col-md-3">
+      <div class="form-group">
+          <label for="exampleFormControlSelect1"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.OWNER' | translate }} </label>
+          <p class="font-weight-normal">{{ payeeInformation.accountName }}</p>
+      </div>
+  </div>
+
+  <!-- <div class="col-md-2">
+      <div class="form-group">
+          <label for="exampleFormControlSelect1"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.ACCOUNT_TYPE' | translate }} </label>
+          <p class="font-weight-normal">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.ACCOUNT_TYPES.' | concatenate:payeeInformation.bankAccountType | uppercase | translate }}</p>
+      </div>
+  </div> -->
+
+  <div class="col-md-2">
+      <div class="form-group">
+          <label for="exampleFormControlSelect1"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.ACCOUNT_NUMBER' | translate }} </label>
+          <p class="font-weight-normal">{{ payeeInformation.accountNumber }}</p>
+      </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"> {{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.ACCOUNT_CLABE' | translate }} </label>
+        <p class="font-weight-normal">{{ payeeInformation.clabe }}</p>
+    </div>
+</div>
+
+  <div class="col-md-3" *ngIf="payeeInformation.beneficiaryBank">
+      <div class="form-group">
+          <label for="exampleFormControlSelect1">{{ 'POLICY.VIEW_POLICY_DETAILS.TABS.CLAIMS_PAYMENT_METHOD.FIELDS.BANK_NAME' | translate }} </label>
+          <p class="font-weight-normal">{{ payeeInformation.beneficiaryBank }}</p>
+      </div>
+  </div>
+
+  <div class="col-md-2" *ngIf="currencyFormat != null">
+      <div class="form-group mr-2">
+          <label for="exampleFormControlSelect1"> {{ 'CLAIMFORM.CURRENCY_TYPE.SELECT_CURRENCY' | translate }} </label>
+          <p class="font-weight-normal">{{ currencyFormat }}</p>
+      </div>
+  </div>
+
+</div>

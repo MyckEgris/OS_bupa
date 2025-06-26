@@ -1,0 +1,234 @@
+@charset "UTF-8";
+body {
+  margin: 0; }
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+hr {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible; }
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+a {
+  background-color: transparent; }
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted; }
+
+b,
+strong {
+  font-weight: bolder; }
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+small {
+  font-size: 80%; }
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sub {
+  bottom: -0.25em; }
+
+sup {
+  top: -0.5em; }
+
+img {
+  border-style: none; }
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0; }
+
+button,
+input {
+  overflow: visible; }
+
+button,
+select {
+  text-transform: none; }
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; }
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0; }
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText; }
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em; }
+
+legend {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal; }
+
+progress {
+  vertical-align: baseline; }
+
+textarea {
+  overflow: auto; }
+
+[type="checkbox"],
+[type="radio"] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0; }
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px; }
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit; }
+
+details {
+  display: block; }
+
+summary {
+  display: list-item; }
+
+template {
+  display: none; }
+
+[hidden] {
+  display: none; }
+
+@font-face {
+  font-family: "FontAwesome";
+  src: url("assets/fonts/fontawesome-webfont.eot?") format("eot"), url("assets/fonts/fontawesome-webfont.woff2?") format("woff2"), url("assets/fonts/fontawesome-webfont.woff?") format("woff"), url("assets/fonts/fontawesome-webfont.ttf?") format("truetype"), url("assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular") format("svg"); }
+
+@font-face {
+  font-family: "icomoon";
+  src: url("assets/fonts/icomoon.eot?yfzdh6") format("eot"), url("assets/fonts/icomoon.woff?yfzdh6") format("woff"), url("assets/fonts/icomoon.ttf?yfzdh6") format("truetype"), url("assets/fonts/icomoon.svg?yfzdh6#icomoon") format("svg"); }
+
+.icon-paintbrush:before {
+  content: "\e900";
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+html {
+  height: 100%; }
+
+body {
+  height: 100%;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: #333333;
+  margin: 0 auto;
+  overflow-x: hidden; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+  word-wrap: break-word; }
+
+a {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: #009ee0; }
+
+.btnprincipal {
+  background-color: #009ee0;
+  padding: 23px 20px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-weight: 300;
+  width: 260px;
+  margin-top: 40px;
+  display: block; }
+
+
+.ig-textterminos h3 {
+  margin: 20px 0;
+  font-weight: 700; }
+
+.ig-textterminos h5, .ig-textterminos h6 {
+  font-weight: 600;
+  margin: 0;
+  padding: 0; }
+
+.ig-textterminos p {
+  text-align: justify; }
+
+
+.up {
+  position:fixed;
+  bottom:10px;
+  right:20px;
+  display:flex;
+  align-content:center;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:white;
+  text-decoration: none;
+  background-color: #009ee0;
+  border-radius: 20px;
+  padding: 6px 20px;
+ }
